@@ -6410,6 +6410,7 @@ a.mytooltip {
 .user-profile .setpos {
     top: -47px;
     right: -3px
+    
 }
 
 .user-profile .profile-img {
@@ -6417,6 +6418,7 @@ a.mytooltip {
     margin: 0 auto;
     padding: 10px 0 5px 0;
     border-radius: 100%
+    
 }
 
 .user-profile .profile-img img {

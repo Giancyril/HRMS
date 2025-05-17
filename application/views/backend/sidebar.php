@@ -6,7 +6,7 @@
                         $id = $this->session->userdata('user_login_id');
                         $basicinfo = $this->employee_model->GetBasic($id); 
                         ?>                
-                <div class="user-profile">
+                <div class="user-profile" style="margin-top: 20px;">
                     <!-- User profile image -->
                     <div class="profile-img"> <img src="<?php echo base_url(); ?>assets/images/users/<?php echo $basicinfo->em_image ?>" alt="user" />
                         
