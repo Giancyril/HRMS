@@ -200,6 +200,34 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
+        .relative {
+  position: relative;
+  display: flex; /* Enable flexbox for alignment */
+  align-items: center; /* Vertically align items in the center */
+}
+
+.absolute {
+  position: absolute;
+  top: 50%; /* Position the top at the vertical center of the parent */
+  transform: translateY(-50%); /* Adjust vertical position to truly center */
+  right: 0;
+}
+
+.form-control {
+  /* Your existing form-control styles */
+  flex-grow: 1; /* Allow the input to take up available space */
+}
+
+#sendLoginOtp {
+  font-weight: bold;
+}
+
+.swal2-confirm.swal2-styled {
+  background-color: #007bff !important;
+  color: white !important;
+  border: 1px solid #007bff !important; /* Set border color to match background */
+}
     </style>
 </head>
 
@@ -236,12 +264,25 @@
                     <img src="<?php echo base_url(); ?>assets/images/logo-icon1.png" alt="Home" />
                 </a>
 
-                <div class="relative">
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
-                    <div class="absolute right-0 mt-2">
-                        <a href="#" id="sendLoginOtp" class="text-sm text-blue-500" style="padding-left: 250px;">Send OTP</a>
-                    </div>
-                </div>
+               <div class="login_content" style="text-align: center;">
+  <h2 style="
+    font: normal 25px Helvetica, Arial, sans-serif;
+    letter-spacing: 0.1 em;
+    line-height: 20px;
+    margin: 5px 0 40px; /* Reduced top and bottom margin */
+    color: #555555; /* Darker gray color */
+    display: inline-block; /* To control width relative to text */
+    vertical-align: bottom; /* Align text above the line */
+  ">
+    Log in your Account
+  </h2>
+</div>
+                <div class="relative" style="margin-bottom: 1rem;">
+  <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
+  <div class="absolute">
+    <a href="#" id="sendLoginOtp" class="text-sm text-blue-500">Send OTP</a>
+  </div>
+</div>
 
                 <div id="otp-div" class="form-group hidden">
                     <input type="text" name="otp" id="otp" class="form-control" placeholder="OTP Code" minlength="6" maxlength="6" pattern="\d{6}" required>
@@ -260,7 +301,7 @@
                 </div>
 
                 <div class="form-group text-center m-t-20" style="margin-top: 40px;">
-                    <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit">
+                    <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit" style="border-radius: 5px;">
                         Log In
                     </button>
                 </div>
@@ -282,28 +323,43 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        $(document).ready(function() {
-            $('#sendLoginOtp').click(function(e) {
-                e.preventDefault();
-                const email = $('#email').val();
+       $(document).ready(function() {
+            // Initially hide the OTP input field
+            $('#otp-div').hide();
 
-                if (!email) {
-                    return Swal.fire('Error', 'Please enter your email first.', 'warning');
-                }
+            $('#sendLoginOtp').click(function(e) {
+                e.preventDefault();
+                const email = $('#email').val();
 
-                $('#loadingOverlay').fadeIn(); // Show the loader
+                if (!email) {
+                    return Swal.fire('Error', 'Please enter your email first.', 'warning');
+                }
 
-                $.post('send_login_otp.php', { email: email }, function(res) {
-                    $('#loadingOverlay').fadeOut(); // Hide the loader
-                    if (res === 'success') {
-                        $('#otp-div').show();
-                        Swal.fire('Success', 'OTP sent to your email.', 'success');
-                    } else {
-                        Swal.fire('Error', res, 'error');
-                    }
-                });
-            });
-        });
+                $('#loadingOverlay').fadeIn(); // Show the loader
+
+                $.post('send_login_otp.php', { email: email }, function(res) {
+                    $('#loadingOverlay').fadeOut(); // Hide the loader
+                    if (res === 'success') {
+                        // Show the OTP input field
+                        $('#otp-div').show();
+                        // Show the success modal and attach a callback to the 'OK' button
+                        Swal.fire({
+                            title: 'Check Your Email',
+                            text: 'A verification code has been successfully sent to your email.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // The OTP input field is already visible due to the 'success' block
+                                console.log('OK button clicked on success modal');
+                            }
+                        });
+                    } else {
+                        Swal.fire('Error', res, 'error');
+                    }
+                });
+            });
+        });
     </script>
     <script src="<?php echo base_url(); ?>assets/js/script.js"></script>
 

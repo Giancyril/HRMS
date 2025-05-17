@@ -9886,6 +9886,7 @@ ul.collapse.in {
 }
 button.btn.btn-info.btn-lg.btn-logino {
     padding: .75rem 1.5rem;
+    border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
     font-family: serif;

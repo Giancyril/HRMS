@@ -92,6 +92,8 @@
                     <img src="<?php echo base_url(); ?>assets/images/logo-icon1.png" alt="Home" />
                 </a>
 
+                <h1>Log in your Account</h1>
+
                 <div class="form-group m-t-40">
                     <input class="form-control" name="email" value="<?php if (isset($_COOKIE['email'])) {
                         echo $_COOKIE['email'];
@@ -110,7 +112,7 @@
                 </div>
 
                 <div class="form-group text-center m-t-20">
-                    <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit">
+                    <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit" style="border-radius: 5px;">
                         Log In
                     </button>
                 </div>

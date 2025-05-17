@@ -60,10 +60,10 @@ date_default_timezone_set('Asia/Dhaka');
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?php echo base_url(); ?>"><b>
-                        <img src="<?php echo base_url();?>assets/images/hricn.png" alt="DRI" class="DRI-logo" style="width:50px;"/>
+                        <img src="<?php echo base_url();?>assets/images/hricn.png" alt="DRI" class="DRI-logo" style="width:50px;margin-bottom: 8px;"/>
                         </b>
                         <!-- Logo text --><span>
-                         <img src="<?php echo base_url(); ?>assets/images/<?php echo $settingsvalue->sitelogo; ?>" alt="homepage" class="dark-logo" height="60px" width="100px" />
+                         <img src="<?php echo base_url(); ?>assets/images/<?php echo $settingsvalue->sitelogo; ?>" alt="homepage" class="dark-logo" height="100px" width="100px" style="margin-top: 3px;" />
                          <!-- Light Logo text -->    
                          </span> </a>
                 </div>
@@ -102,7 +102,7 @@ date_default_timezone_set('Asia/Dhaka');
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>assets/images/users/<?php echo $basicinfo->em_image; ?>" alt="Genit" class="profile-pic" style="height:40px;width:40px;border-radius:50px" /></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>assets/images/users/<?php echo $basicinfo->em_image; ?>" alt="Genit" class="profile-pic" style="height:40px;width:40px;border-radius:50px;margin-top:10px;" /></a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">
                                 <ul class="dropdown-user">
                                     <li>

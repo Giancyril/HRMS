@@ -150,15 +150,15 @@
                     </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card card-inverse card-info">
-                           <div class="box bg-info text-center">
+                        <div class="card card-inverse card-success">
+                            <div class="box text-center">
                              <h1 class="font-light text-white">
                              <?php
-                             $this->db->from("pay_salary");
+                             $this->db->from("emp_salary");
                                 echo $this->db->count_all_results();
                                ?>
                               </h1>
-                           <h6 class="text-white">Payslip Reports</h6>
+                           <h6 class="text-white">Unpaid Payslips</h6>
                          </div>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Running Project/s</h4>
+                                <h4 class="card-title">Running Project</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive" style="height:600px;overflow-y:scroll">
@@ -211,7 +211,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">To Do list</h4>
                                 <h6 class="card-subtitle">List of your next task to complete</h6>
-                                <div class="to-do-widget m-t-20" style="height:550px;overflow-y:scroll">
+                                <div class="to-do-widget m-t-20" style="height:572px;overflow-y:scroll">
                                             <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
                                                <?php foreach($todolist as $value): ?>
                                                 <li class="list-group-item" data-role="task">
