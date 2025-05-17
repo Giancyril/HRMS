@@ -15,12 +15,7 @@
             </div>
             
             <div class="container-fluid"> 
-                <div class="row m-b-10"> 
-                    <div class="col-12">
-<!--                        <button type="button" class="btn btn-info"><i class="fa fa-plus"></i><a data-toggle="modal" data-target="#TypeModal" data-whatever="@getbootstrap" class="text-white TypeModal"><i class="" aria-hidden="true"></i> Add Payroll </a></button>-->
-                        <button type="button" class="btn btn-primary"><i class="fa fa-bars"></i><a href="<?php echo base_url(); ?>Payroll/Generate_salary" class="text-white"><i class="" aria-hidden="true"></i>  Generate Payroll</a></button>
-                    </div>
-                </div> 
+                
                 <div class="row">
                     <div class="col-12">
 
