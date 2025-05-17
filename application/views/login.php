@@ -221,6 +221,7 @@
 
 #sendLoginOtp {
   font-weight: bold;
+  margin-left: -10px;
 }
 
 .swal2-confirm.swal2-styled {
@@ -280,7 +281,7 @@
                 <div class="relative" style="margin-bottom: 1rem;">
   <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
   <div class="absolute">
-    <a href="#" id="sendLoginOtp" class="text-sm text-blue-500">Send OTP</a>
+    <a href="#" id="sendLoginOtp" class="text-sm text-blue-500" style="margin-right: 5px;">Send OTP</a>
   </div>
 </div>
 
@@ -300,8 +301,8 @@
                                                                         } ?>" type="password" required placeholder="Password">
                 </div>
 
-                <div class="form-group text-center m-t-20" style="margin-top: 40px;">
-                    <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit" style="border-radius: 5px;">
+                <div class="form-group text-center m-t-20" style="margin-top: 30px;border-radius: 5px;">
+                    <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit">
                         Log In
                     </button>
                 </div>
