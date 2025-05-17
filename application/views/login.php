@@ -113,7 +113,7 @@
     .loader div {
         width: 8%;
         height: 24%;
-        background: rgb(11, 11, 104);
+        background: rgb(0, 123, 255);
         position: absolute;
         left: 50%;
         top: 30%;
@@ -267,7 +267,7 @@
 
                <div class="login_content" style="text-align: center;">
   <h3 style="
-    font: normal 25px Helvetica, Arial, sans-serif;
+    font: normal 20px Helvetica, Arial, sans-serif;
     letter-spacing: 0.05em; 
     line-height: 20px;
     margin: 5px 0 40px;
