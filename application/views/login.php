@@ -266,17 +266,15 @@
                 </a>
 
                <div class="login_content" style="text-align: center;">
-  <h2 style="
+  <h3 style="
     font: normal 25px Helvetica, Arial, sans-serif;
-    letter-spacing: 0.1 em;
+    letter-spacing: 0.05em; 
     line-height: 20px;
-    margin: 5px 0 40px; /* Reduced top and bottom margin */
-    color: #555555; /* Darker gray color */
-    display: inline-block; /* To control width relative to text */
-    vertical-align: bottom; /* Align text above the line */
+    margin: 5px 0 40px;
+    color: #555555;
   ">
     Log in your Account
-  </h2>
+  </h3>
 </div>
                 <div class="relative" style="margin-bottom: 1rem;">
   <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
