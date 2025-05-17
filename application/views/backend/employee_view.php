@@ -112,9 +112,9 @@
                                                         <label>User Type </label>
                                                         <select name="role" class="form-control custom-select" required >
 				                                            <option value="<?php echo $basic->em_role; ?>"><?php echo $basic->em_role; ?></option>
-                                                            <option value="HR">HR</option>
+                                                            <option value="HR-MANAGER">HR-MANAGER</option>
                                                             <option value="EMPLOYEE">Employee</option>
-                                                            <option value="ADMIN">Super Admin</option>
+                                                            <option value="ADMIN">Admin</option>
                                                         </select>
                                                     </div>
                                                     <?php } ?>

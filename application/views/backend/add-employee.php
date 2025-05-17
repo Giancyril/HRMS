@@ -73,9 +73,9 @@
                                         <label>Role </label>
                                         <select name="role" class="form-control custom-select" required>
                                             <option>Select Role</option>
-                                            <option value="ADMIN">ADMIN</option>
+                                            <option value="HR-MANAGER">HR-MANAGER</option>
                                             <option value="EMPLOYEE">Employee</option>
-                                            <option value="SUPER ADMIN">Super Admin</option>
+                                            <option value="ADMIN">Admin</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-3 m-t-20">
