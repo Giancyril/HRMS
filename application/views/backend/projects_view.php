@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="modal-footer">
                                        <input type="hidden" name="proid" value="<?php echo $details->id; ?>">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        
                                         <button type="submit" <?php if($this->session->userdata('user_type')=='EMPLOYEE'){ ?> disabled <?php } ?> class="btn btn-success">Submit</button>
                                     </div>
                                     </form>

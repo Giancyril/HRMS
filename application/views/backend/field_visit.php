@@ -178,14 +178,7 @@
     });
 </script>
 
-<div class="row">
-    <div class="col-md-12">
-        <ul>
-            <li>When you edit the applied forms from the edit button, don't forget to reauthorize approving the info.</li>
-            <li>Once you give the final approval and confirm final closing, the attendance will be permanently updated.</li>
-        </ul>
-    </div>
-</div>
+
 <div class="modal fade" id="appmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content ">
