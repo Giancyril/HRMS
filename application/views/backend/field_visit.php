@@ -5,7 +5,7 @@
 <div class="message"></div>
 <div class="row page-titles">
    <div class="col-md-5 align-self-center">
-      <h3 class="text-themecolor"><i class="fa fa-briefcase"></i> Application
+      <h3 class="text-themecolor">Field Visit
       </h3>
    </div>
    <div class="col-md-7 align-self-center">
@@ -34,7 +34,7 @@
    <div class="col-12">
       <div class="card card-outline-info">
          <div class="card-header">
-            <h4 class="m-b-0 text-white"> Application List                        
+            <h4 class="m-b-0 text-white"> Field Visit Requests                       
             </h4>
          </div>
          <div class="card-body">
