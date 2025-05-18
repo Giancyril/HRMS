@@ -101,14 +101,6 @@
                     </ul>
                 </li>
 
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Attendance </span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php echo base_url(); ?>attendance/Attendance">Attendance List </a></li>
-                        <li><a href="<?php echo base_url(); ?>attendance/Save_Attendance">Add Attendance </a></li>
-                        <li><a href="<?php echo base_url(); ?>attendance/Attendance_Report">Attendance Report </a></li>
-                    </ul>
-                </li>
-
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-off"></i><span class="hide-menu">Leave </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>leave/Holidays"> Holiday </a></li>
@@ -118,13 +110,7 @@
                         <li><a href="<?php echo base_url(); ?>leave/Leave_report"> Report </a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-briefcase-check"></i><span class="hide-menu">Project </span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php echo base_url(); ?>Projects/All_Projects">Projects </a></li>
-                        <li><a href="<?php echo base_url(); ?>Projects/All_Tasks"> Task List </a></li>
-                        <li><a href="<?php echo base_url(); ?>Projects/Field_visit"> Field Visit</a></li>
-                    </ul>
-                </li>
+               
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Payroll </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Payroll/Salary_List"> Payroll List </a></li>
@@ -132,7 +118,7 @@
                         <li><a href="<?php echo base_url(); ?>Payroll/Payslip_Report"> Payslip Report</a></li>
                     </ul>
                 </li>
-                <li> <a href="<?php echo base_url()?>notice/All_notice" ><i class="mdi mdi-clipboard"></i><span class="hide-menu">Notice <span class="hide-menu"></a></li>
+                
                 <li> <a href="<?php echo base_url(); ?>settings/Settings" ><i class="mdi mdi-settings"></i><span class="hide-menu">Settings <span class="hide-menu"></a></li>
                 <?php } ?>
             </ul>

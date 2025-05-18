@@ -4,7 +4,7 @@
     <div class="message"></div>
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-themecolor">Leave Types</h3>
+            <h3 class="text-themecolor">Leave Type</h3>
         </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
@@ -20,7 +20,7 @@
             <div class="col-12">
                 <div class="card card-outline-info">
                     <div class="card-header">
-                        <h4 class="m-b-0 text-white"> Leave Sheet </h4>
+                        <h4 class="m-b-0 text-white"> Leave Sheet List</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive ">
