@@ -4,7 +4,7 @@
             <div class="message"></div>
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Dashboard</h3>
+                    <h3 class="text-themecolor"><i class="fa fa-tasks" style="color:#1976d2"></i>&nbsp Dashboard</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -88,9 +88,9 @@
                                <div class="round align-self-center round-success"><i class="ti-money"></i></div> <div class="m-l-10 align-self-center">
                                      <h3 class="m-b-0">
                                        <?php
-                                        $this->db->from("emp_salary");
+                                        $this->db->from("pay_salary");
                                          echo $this->db->count_all_results();
-                                        ?> Payslips 
+                                        ?> Payslip
                                       </h3>
                                   <a href="<?php echo base_url('payroll/salary_list'); ?>" class="text-muted m-b-0">View Details</a> </div>
                               </div>
@@ -151,28 +151,17 @@
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card card-inverse card-success">
-                         <div class="box text-center">
+                            <div class="box text-center">
                              <h1 class="font-light text-white">
-                              <?php
-                              // 1. Get total number of employees
-                               $this->db->from("employee"); // Replace "employees" with your actual employee table name
-                               $total_employees = $this->db->count_all_results();
-
-                              // 2. Get number of generated payslips
-                               $this->db->from("pay_salary");
-                               $generated_payslips = $this->db->count_all_results();
-
-                              // 3. Calculate payslips pending
-                               $payslips_pending = $total_employees - $generated_payslips;
-
-                              // 4. Display the result
-                               echo $payslips_pending;
-                            ?>
-                         </h1>
-                     <h6 class="text-white">Payslips Pending</h6>
-                   </div>
-                 </div>  
-               </div>
+                             <?php
+                             $this->db->from("emp_salary");
+                                echo $this->db->count_all_results();
+                               ?>
+                              </h1>
+                           <h6 class="text-white">Unpaid Payslips</h6>
+                         </div>
+                        </div>
+                    </div>
                     <!-- Column -->
                 </div>
                 <!-- ============================================================== -->

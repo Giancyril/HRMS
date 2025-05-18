@@ -9,7 +9,7 @@ $this->load->view('backend/sidebar');
   </div>
   <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-      <h3 class="text-themecolor">Payroll View
+      <h3 class="text-themecolor"><i class="fa fa-money"></i> Payroll View
       </h3>
     </div>
     <div class="col-md-7 align-self-center">
@@ -34,7 +34,16 @@ $this->load->view('backend/sidebar');
             </i> Add Payroll 
           </a>
         </button> -->
-       
+        <button type="button" class="btn btn-primary">
+          <i class="fa fa-bars">
+          </i>
+          <a href="<?php
+                   echo base_url();
+                   ?>Payroll/Salary_Type" class="text-white">
+            <i class="" aria-hidden="true">
+            </i>   Salary Types
+          </a>
+        </button>
       </div>
     </div> 
     <div class="row">

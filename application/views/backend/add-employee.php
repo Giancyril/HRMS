@@ -6,7 +6,7 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Employee</h3>
+                    <h3 class="text-themecolor"><i class="fa fa-university" aria-hidden="true"></i> Employee</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -73,9 +73,9 @@
                                         <label>Role </label>
                                         <select name="role" class="form-control custom-select" required>
                                             <option>Select Role</option>
-                                            <option value="HR-MANAGER">HR-MANAGER</option>
+                                            <option value="ADMIN">ADMIN</option>
                                             <option value="EMPLOYEE">Employee</option>
-                                            <option value="ADMIN">Admin</option>
+                                            <option value="SUPER ADMIN">Super Admin</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-3 m-t-20">
