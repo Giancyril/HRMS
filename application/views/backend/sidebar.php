@@ -78,8 +78,8 @@
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Payroll </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Payroll/Salary_List"> Payroll List </a></li>
-                        <li><a href="<?php echo base_url(); ?>Payroll/Payslip_Report"> Payslip Report</a></li>
                         <li><a href="<?php echo base_url(); ?>Payroll/Generate_salary"> Generate Payslip</a></li>
+                        <li><a href="<?php echo base_url(); ?>Payroll/Payslip_Report"> Payslip Report</a></li>
                     </ul>
                 </li>
                 <li> <a href="<?php echo base_url()?>notice/All_notice" ><i class="mdi mdi-clipboard"></i><span class="hide-menu">Notice <span class="hide-menu"></a></li>
@@ -114,6 +114,7 @@
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Payroll </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Payroll/Salary_List"> Payroll List </a></li>
+                        <li><a href="<?php echo base_url(); ?>Payroll/Salary_type"> Salary Type</a></li>
                         
                         <li><a href="<?php echo base_url(); ?>Payroll/Payslip_Report"> Payslip Report</a></li>
                     </ul>
