@@ -22,10 +22,10 @@
                             <div id="tabs">
                             <ul class="nav nav-tabs profile-tab" role="tablist">
                                 <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab">  Project View </a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Projects tasks </a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#office" role="tab">Office tasks </a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Projects Tasks </a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#office" role="tab">Office Tasks </a> </li>
                                 <!--<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#field" role="tab">Field tasks </a> </li>-->
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#education" role="tab"> Projects files</a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#education" role="tab"> Projects Files</a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#experience" role="tab"> Notes </a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#expenses" role="tab"> Expenses</a> </li>
 
@@ -40,18 +40,7 @@
                             <div class="card-body">
                                 <center class="m-t-30"> 
                                     <!--progress bar-->
-                                    <div class="container">
-
-                                    <div class="progress blue">
-                                    <span class="progress-left">
-                                        <span class="progress-bar"></span>
-                                    </span>
-                                    <span class="progress-right">
-                                        <span class="progress-bar"></span>
-                                    </span>
-                                    <div class="progress-value">50%</div>
-                                    </div>
-                                    </div>                            
+                                                           
                                     <!--end progress-->                                   
                                     <h4 class="card-title m-t-10"><?php echo $details->pro_name; ?></h4>
                                 </center>
@@ -172,7 +161,7 @@
 			                        		<h3 class="card-title">Office tasks</h3>
                         <span class="pull-right">
                         <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>  
-                        <a data-toggle="modal" data-target="#tasksmodel" data-whatever="@getbootstrap" class="text-white btn btn-info"> Add Tasks</a></span> <?php } ?>                    
+                        <a data-toggle="modal" data-target="#tasksmodel" data-whatever="@getbootstrap" class="text-white btn btn-info" style="margin-bottom: 20px;"> Add Tasks</a></span> <?php } ?>                    
                     <div class="table-responsive " id="">
                         <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -220,8 +209,8 @@
                                         
                                     <?php } else { ?>
                                     <td class="jsgrid-align-center ">
-                                        <a href="#" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light taskmodal" data-id="<?php echo $value->id ?>"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a onclick="alert('Are you sure, you want to delete this?')" href="#" title="Delete" class="btn btn-sm btn-info waves-effect waves-light TasksDelet" data-id="<?php echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
+                                        
+                                        <a onclick="alert('Are you sure, you want to delete this?')" href="#" title="Delete" class="btn btn-sm btn-danger waves-effect waves-light TasksDelet" data-id="<?php echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                     <?php } ?>
                                 </tr>
@@ -285,7 +274,7 @@
                                     <?php } else { ?>
                                     <td class="jsgrid-align-center ">
                                         <a href="#" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light taskmodal" data-id="<?php echo $value->id ?>"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a onclick="alert('Are you sure, you want to delete this?')" href="#" title="Delete" class="btn btn-sm btn-info waves-effect waves-light TasksDelet" data-id="<?php echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
+                                        <a onclick="alert('Are you sure, you want to delete this?')" href="#" title="Delete" class="btn btn-sm btn-danger waves-effect waves-light TasksDelet" data-id="<?php echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                     <?php } ?>
                                 </tr>
@@ -329,7 +318,7 @@
                                     
                                     <td class="jsgrid-align-center ">
                                        <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
-                                        <a href="#" title="Delete" class="btn btn-sm btn-info waves-effect waves-light filedelet" data-id="<?php echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
+                                        <a href="#" title="Delete" class="btn btn-sm btn-danger waves-effect waves-light filedelet" data-id="<?php echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
                                         <?php } ?>
                                     </td>
                                 </tr>
@@ -380,7 +369,7 @@
                                 <tr>
                                     <th>Note title</th>
                                     <th>Assigned users </th>
-                                    <th>Status </th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <!-- <tfoot>
@@ -396,7 +385,7 @@
                                     <td><?php echo substr($value->details,0,60).'...'; ?></td>
                                     <td><img src="<?php echo base_url(); ?>assets/images/users/<?php echo $value->em_image ?>" height="40px" width="40px" style="border-radius:50px" alt=""></td>
                                     <td class="jsgrid-align-center ">
-                                        <a href="#" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light notes" data-id="<?php echo $value->id ?>"><i class="fa fa-pencil-square-o"></i></a>
+                                        
                                         <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                         <a href="#" title="Delete" class="btn btn-sm btn-danger waves-effect waves-light notesdelet" data-id="<?php echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
                                         <?php } ?>
@@ -445,7 +434,7 @@
                                     <th>Assigned users </th>
                                     <th>Date </th>
                                     <th>Amount </th>
-                                    <th>Status </th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <!-- <tfoot>
@@ -467,7 +456,7 @@
                                     <td><?php echo $value->amount ?></td>
                                     <td class="jsgrid-align-center ">
                                        <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
-                                        <a href="#" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light expenses" data-id="<?php echo $value->id ?>"><i class="fa fa-pencil-square-o"></i></a>
+                                        
                                         <a href="#" onclick="confirm('Are you sure to delete this value?')" title="Delete" class="btn btn-sm btn-danger waves-effect waves-light exdelet" data-id="<?php echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
                                         <?php } ?>
                                     </td>

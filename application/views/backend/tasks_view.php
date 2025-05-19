@@ -73,7 +73,7 @@
 <!--                                                <td class="jsgrid-align-center ">
                                                     <a href="#" title="Edit" class="btn btn-sm btn-info waves-effect waves-light taskmodal" data-id="<?php #echo $value->id ?>"><i class="fa fa-pencil-square-o"></i></a>
                                                     <a onclick="alert('Are you sure, you want to delete this?')" href="#" title="Delete" class="btn btn-sm btn-info waves-effect waves-light TasksDelet" data-id="<?php #echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
-                                                </td>-->
+                                                </td>
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -144,8 +144,8 @@
                                                 <label for="radio_1">Complete</label>
                                                 <input name="status" type="radio" id="radio_2" data-value="Logistic" class="type" value="running">
                                                 <label for="radio_2">Running</label>
-                                                <input name="status" type="radio" id="radio_3" data-value="Logistic" class="type" value="cancel">
-                                                <label for="radio_3">Cancel</label>
+                                                <input name="status" type="radio" id="radio_3" data-value="Logistic" class="type" value="upcoming">
+                                                <label for="radio_3">Upcoming</label>
                                             </div>                                             
                                               <div class="form-group row">
                                                <label class="control-label col-md-3">Type: </label>

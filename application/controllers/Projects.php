@@ -632,22 +632,47 @@ class Projects extends CI_Controller
 	}
 
 	public function TasksDeletByid()
-	{
-		if ($this->session->userdata('user_login_access') != False) {
-			$id = $this->input->get('id');
+{
+    if ($this->session->userdata('user_login_access') != False) {
+        $id = $this->input->get('id');
 
-			$imgvalue = $this->project_model->GetTasksValue($id);
-			if (!empty($imgvalue->id)) {
-				unlink("./assets/images/projects/$imgvalue->image");
-				$success = $this->project_model->DeletPro($id);
-				$success = $this->project_model->DeletAssignuser($id);
-				echo 'Success Deletd';
-			}
-			#echo "Successfully Deletd";
-		} else {
-			redirect(base_url(), 'refresh');
-		}
-	}
+        $imgvalue = $this->project_model->GetTasksValue($id);
+
+        if (!empty($imgvalue->id)) {
+            if (isset($imgvalue->image) && !empty($imgvalue->image)) {
+                $filePath = "./assets/images/projects/" . $imgvalue->image;
+                if (is_file($filePath)) {
+                    if (unlink($filePath)) {
+                        $success = $this->project_model->DeletPro($id);
+                        $success = $this->project_model->DeletAssignuser($id);
+                        echo 'Success Deletd';
+                    } else {
+                        echo 'Error deleting image file.';
+                        log_message('error', 'Error deleting image file: ' . $filePath);
+                        $success = $this->project_model->DeletPro($id);
+                        $success = $this->project_model->DeletAssignuser($id);
+                        echo 'Success Deletd'; // Still attempt to delete project data
+                    }
+                } else {
+                    echo 'Image file not found.';
+                    log_message('warning', 'Image file not found: ' . $filePath);
+                    $success = $this->project_model->DeletPro($id);
+                    $success = $this->project_model->DeletAssignuser($id);
+                    echo 'Success Deletd'; // Still attempt to delete project data
+                }
+            } else {
+                // No image associated or invalid image data
+                $success = $this->project_model->DeletPro($id);
+                $success = $this->project_model->DeletAssignuser($id);
+                echo 'Success Deletd';
+            }
+        } else {
+            echo 'Task not found.'; // Or handle the case where the task ID is invalid
+        }
+    } else {
+        redirect(base_url(), 'refresh');
+    }
+}
 	public function FileDeletById()
 	{
 		if ($this->session->userdata('user_login_access') != False) {
