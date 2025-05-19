@@ -305,7 +305,7 @@
                     </button>
                 </div>
                  <div class="text-center mt-3">
-    <a href="<?php echo base_url('landingpage.php'); ?>" style="color: #3b82f6; font-weight: 500; text-decoration: none;">Go to Website</a>
+    <a href="<?php echo base_url('homepage.php'); ?>" style="color: #3b82f6; font-weight: 500; text-decoration: none;">Go to Website</a>
 </div>
             </form>
         </div>

@@ -111,6 +111,13 @@
                     </ul>
                 </li>
                
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-briefcase-check"></i><span class="hide-menu">Project </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="<?php echo base_url(); ?>Projects/All_Projects">Projects </a></li>
+                        <li><a href="<?php echo base_url(); ?>Projects/All_Tasks"> Task List </a></li>
+                    </ul>
+                </li>
+
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Payroll </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Payroll/Salary_List"> Payroll List </a></li>

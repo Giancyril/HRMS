@@ -9,7 +9,7 @@
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active"><i class="fa fa-university" aria-hidden="true"></i> Payroll</li>
+                        <li class="breadcrumb-item active">Payroll</li>
                     </ol>
                 </div>
             </div>
@@ -250,10 +250,10 @@ var y = d.getFullYear();
                         );
                     $(win.document.body).find( 'div img' )
                         .addClass( 'header-img' )
-                        .css( 'width', '300px' );
+                        .css( 'width', '90px' );
                     $(win.document.body).find( 'h1' )
                         .addClass( 'header' )
-                        .css( 'font-size', '25px' );
+                        .css( 'font-size', '20px' );
 
                     $(win.document.body).find( 'table thead' )
                         .addClass( 'compact' )

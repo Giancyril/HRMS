@@ -28,7 +28,7 @@
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#bank" role="tab" style="font-size: 14px;"> Bank Account</a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#document" role="tab" style="font-size: 14px;"> Document</a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#salary" role="tab" style="font-size: 14px;"> Salary</a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#leave" role="tab" style="font-size: 14px;"> Leave</a> </li>
+                                
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#social" role="tab" style="font-size: 14px;"> Social Media</a> </li>
                                 
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#password" role="tab" style="font-size: 14px;"> Change Password</a> </li>
@@ -200,7 +200,7 @@
                                 <div class="tab-pane" id="profile" role="tabpanel">
                                     <div class="card">
 				                        <div class="card-body">
-			                        		<h3 class="card-title">Permanent Contact Information</h3>
+			                        		<h3 class="col-md-12">Permanent Contact Information</h3>
 			                                <form class="row" action="Parmanent_Address" method="post" enctype="multipart/form-data">
 			                                    <div class="form-group col-md-12 m-t-5">
 			                                        <label>Address</label>
@@ -218,7 +218,7 @@
 			                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="emid" value="<?php echo $basic->em_id ?>">
                                                     <input type="hidden" name="id" value="<?php if(!empty($permanent->id)) echo $permanent->id  ?>">                                                    
-			                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+			                                        <button type="submit" class="btn btn-success" style="margin-bottom: 40px;"> <i class="fa fa-check"></i> Save</button>
 			                                    </div>
 			                                   		                                    
 			                                    </form>
@@ -482,74 +482,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="leave" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-6">
-			                        <div class="card">
-			                            <div class="card-body">
-			                                <h4 class="card-title"> Leave</h4>
-                                            <form action="Assign_leave" method="post" enctype="multipart/form-data">
-                                                <div class="form-group">
-                                                <label class="">Leave Type</label>                                 
-                                                 <select name="type_id"  class="select2 form-control custom-select" style="width: 100%" id="" required>
-                                                  <option value="">Select Here...</option>
-                                                   <?php foreach($leavetypes as $value): ?>
-                                                    <option value="<?php echo $value->type_id ?>"><?php echo $value->name ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>          
-                                                </div>
-			                                 <div class="form-group">
-			                                    	<label>Day</label>
-			                                    	<input type="number" name="noday" class="form-control form-control-line noday" placeholder="Leave Day" required> 
-			                                 </div>
-
-                                                <div class="form-group">
-                                                <label class="">Year</label>                                 <select name="year" class="select2 form-control custom-select" style="width: 100%" id="" required>
-                                                 <option value="">Select Here...</option>
-                                                  <?php 
-                                                   for ($x = 2016; $x < 3000; $x++){
-                                                    echo '<option value='.$x.'>'.$x.'</option>';            
-                                                   }
-                                                    ?>
-                                                </select>          
-                                                </div>
-                                                                
-                                            <div class="form-group">
-                                                <div class="col-sm-12">
-                                                    <input type="hidden" name="em_id" value="<?php echo $basic->em_id; ?>">                                                  
-                                                    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Submit</button>
-                                                </div>
-                                            </div>                                                                             
-                                            </form>
-			                            </div>
-			                        </div>                                          
-                                    </div>
-                                    <div class="col-md-6">
-			                        <div class="card">
-			                            <div class="card-body">
-			                                <h4 class="card-title"> Leave / <?php echo date('Y') ?></h4>
-                                            <table class="display nowrap table table-hover table-striped table-bordered" width="50%">
-                                                <thead>
-                                                   <tr class="m-t-50">
-                                                    <th>Type</th>
-                                                    <th>Dayout / Day</th>       
-                                                   </tr>
-                                                </thead>
-                                                <tbody>
-                                                   <?php foreach($Leaveinfo as $value): ?>
-                                                    <tr>
-                                                        <td><?php echo $value->name; ?></td>
-                                                        <td><?php echo $value->total_day; ?>/<?php echo $value->day; ?></td>
-                                                    </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
-			                            </div>
-			                        </div>                                     
-                                    </div>
-                                  
-                                </div>
-                                </div>
+                            
                                 <div class="tab-pane" id="password1" role="tabpanel">
                                     <div class="card-body">
 				                                <form class="row" action="Reset_Password_Hr" method="post" enctype="multipart/form-data">
@@ -604,7 +537,7 @@
 				                                <form class="row" action="Reset_Password" method="post" enctype="multipart/form-data">
 				                                    <div class="form-group col-md-6 m-t-20">
 				                                        <label>Old Password</label>
-				                                        <input type="text" class="form-control" name="old" value="" placeholder="old password" required minlength="6"> 
+				                                        <input type="text" class="form-control" name="old" value="" placeholder=" " required minlength="6"> 
 				                                    </div>
 				                                    <div class="form-group col-md-6 m-t-20">
 				                                        <label>Password</label>

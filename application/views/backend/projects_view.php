@@ -4,7 +4,7 @@
                     <div class="message"></div>
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor"><i class="fa fa-archive" aria-hidden="true"></i> Projects</h3>
+                    <h3 class="text-themecolor">Projects</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -28,7 +28,7 @@
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#education" role="tab"> Projects files</a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#experience" role="tab"> Notes </a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#expenses" role="tab"> Expenses</a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#logid" role="tab"> Logistic</a> </li>
+
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
