@@ -48,6 +48,9 @@
         border-radius: 6px;
         padding: 10px 12px;
         font-size: 15px;
+        /* flex-grow: 1; - This was related to the "Send OTP" flexbox,
+                           it's generally harmless for form-control but
+                           can be removed if no longer needed for any layout */
     }
 
     .form-group {
@@ -81,176 +84,15 @@
         margin-bottom: 15px;
     }
 
-    #loadingOverlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        background-color: rgba(225, 225, 225, 0.5);
+    .swal2-confirm.swal2-styled {
+        background-color: #007bff !important;
+        color: white !important;
+        border: 1px solid #007bff !important;
     }
-
-    .loader {
-        /* Explicitly set position and centering */
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 54px;
-        height: 54px;
-        border-radius: 10px;
-        /* Temporary background to visualize the loader container */
-        /* background-color: yellow; */
-        display: flex; /* To potentially center the bars if needed */
-        justify-content: center;
-        align-items: center;
-    }
-
-    .loader div {
-        width: 8%;
-        height: 24%;
-        background: rgb(0, 123, 255);
-        position: absolute;
-        left: 50%;
-        top: 30%;
-        opacity: 0;
-        border-radius: 50px;
-        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-        animation: fade458 1s linear infinite;
-    }
-
-    @keyframes fade458 {
-        from {
-            opacity: 1;
-        }
-
-        to {
-            opacity: 0.25;
-        }
-    }
-
-        .loader .bar1 {
-            transform: rotate(0deg) translate(0, -130%);
-            animation-delay: 0s;
-        }
-
-        .loader .bar2 {
-            transform: rotate(30deg) translate(0, -130%);
-            animation-delay: -1.1s;
-        }
-
-        .loader .bar3 {
-            transform: rotate(60deg) translate(0, -130%);
-            animation-delay: -1s;
-        }
-
-        .loader .bar4 {
-            transform: rotate(90deg) translate(0, -130%);
-            animation-delay: -0.9s;
-        }
-
-        .loader .bar5 {
-            transform: rotate(120deg) translate(0, -130%);
-            animation-delay: -0.8s;
-        }
-
-        .loader .bar6 {
-            transform: rotate(150deg) translate(0, -130%);
-            animation-delay: -0.7s;
-        }
-
-        .loader .bar7 {
-            transform: rotate(180deg) translate(0, -130%);
-            animation-delay: -0.6s;
-        }
-
-        .loader .bar8 {
-            transform: rotate(210deg) translate(0, -130%);
-            animation-delay: -0.5s;
-        }
-
-        .loader .bar9 {
-            transform: rotate(240deg) translate(0, -130%);
-            animation-delay: -0.4s;
-        }
-
-        .loader .bar10 {
-            transform: rotate(270deg) translate(0, -130%);
-            animation-delay: -0.3s;
-        }
-
-        .loader .bar11 {
-            transform: rotate(300deg) translate(0, -130%);
-            animation-delay: -0.2s;
-        }
-
-        .loader .bar12 {
-            transform: rotate(330deg) translate(0, -130%);
-            animation-delay: -0.1s;
-        }
-
-        #otp-verification {
-            display: none;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .relative {
-  position: relative;
-  display: flex; /* Enable flexbox for alignment */
-  align-items: center; /* Vertically align items in the center */
-}
-
-.absolute {
-  position: absolute;
-  top: 50%; /* Position the top at the vertical center of the parent */
-  transform: translateY(-50%); /* Adjust vertical position to truly center */
-  right: 0;
-}
-
-.form-control {
-  /* Your existing form-control styles */
-  flex-grow: 1; /* Allow the input to take up available space */
-}
-
-#sendLoginOtp {
-  font-weight: bold;
-  margin-left: -10px;
-}
-
-.swal2-confirm.swal2-styled {
-  background-color: #007bff !important;
-  color: white !important;
-  border: 1px solid #007bff !important; /* Set border color to match background */
-}
     </style>
 </head>
 
 <body>
-
-    <div id="loadingOverlay">
-        <div class="loader">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-            <div class="bar4"></div>
-            <div class="bar5"></div>
-            <div class="bar6"></div>
-            <div class="bar7"></div>
-            <div class="bar8"></div>
-            <div class="bar9"></div>
-            <div class="bar10"></div>
-            <div class="bar11"></div>
-            <div class="bar12"></div>
-        </div>
-    </div>
-
 
     <div class="login-box card">
         <div class="card-body loginpage">
@@ -265,38 +107,26 @@
                     <img src="<?php echo base_url(); ?>assets/images/logo-icon1.png" alt="Home" />
                 </a>
 
-               <div class="login_content" style="text-align: center;">
-  <h3 style="
-    font: normal 20px Helvetica, Arial, sans-serif;
-    letter-spacing: 0.05em; 
-    line-height: 20px;
-    margin: 5px 0 40px;
-    color: #555555;
-  ">
-    Log in your Account
-  </h3>
-</div>
-                <div class="relative" style="margin-bottom: 1rem;">
-  <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
-  <div class="absolute">
-    <a href="#" id="sendLoginOtp" class="text-sm text-blue-500" style="margin-right: 5px;">Send OTP</a>
-  </div>
-</div>
-
-                <div id="otp-div" class="form-group hidden">
-                    <input type="text" name="otp" id="otp" class="form-control" placeholder="OTP Code" minlength="6" maxlength="6" pattern="\d{6}" required>
+                <div class="login_content" style="text-align: center;">
+                    <h3 style="
+                        font: normal 20px Helvetica, Arial, sans-serif;
+                        letter-spacing: 0.05em; 
+                        line-height: 20px;
+                        margin: 5px 0 40px;
+                        color: #555555;
+                    ">
+                        Log in your Account
+                    </h3>
                 </div>
 
-                <div class="form-group">
-                    <input class="form-control" name="email" value="<?php if (isset($_COOKIE['email'])) {
-                                                                        echo $_COOKIE['email'];
-                                                                    } ?>" type="text" required placeholder="Username">
+                <div class="form-group"> 
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Username" required>
                 </div>
 
                 <div class="form-group">
                     <input class="form-control" name="password" value="<?php if (isset($_COOKIE['password'])) {
-                                                                            echo $_COOKIE['password'];
-                                                                        } ?>" type="password" required placeholder="Password">
+                                                                                echo $_COOKIE['password'];
+                                                                            } ?>" type="password" required placeholder="Password">
                 </div>
 
                 <div class="form-group text-center m-t-20" style="margin-top: 30px;border-radius: 5px;">
@@ -304,9 +134,9 @@
                         Log In
                     </button>
                 </div>
-                 <div class="text-center mt-3">
-    <a href="<?php echo base_url('homepage.php'); ?>" style="color: #3b82f6; font-weight: 500; text-decoration: none;">Go to Website</a>
-</div>
+                <div class="text-center mt-3">
+                    <a href="<?php echo base_url('homepage.php'); ?>" style="color: #3b82f6; font-weight: 500; text-decoration: none;">Go to Website</a>
+                </div>
             </form>
         </div>
     </div>
@@ -324,45 +154,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-       $(document).ready(function() {
-            // Initially hide the OTP input field
-            $('#otp-div').hide();
-
-            $('#sendLoginOtp').click(function(e) {
-                e.preventDefault();
-                const email = $('#email').val();
-
-                if (!email) {
-                    return Swal.fire('Error', 'Please enter your email first.', 'warning');
-                }
-
-                $('#loadingOverlay').fadeIn(); // Show the loader
-
-                $.post('send_login_otp.php', { email: email }, function(res) {
-                    $('#loadingOverlay').fadeOut(); // Hide the loader
-                    if (res === 'success') {
-                        // Show the OTP input field
-                        $('#otp-div').show();
-                        // Show the success modal and attach a callback to the 'OK' button
-                        Swal.fire({
-                            title: 'Check Your Email',
-                            text: 'A verification code has been successfully sent to your email.',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // The OTP input field is already visible due to the 'success' block
-                                console.log('OK button clicked on success modal');
-                            }
-                        });
-                    } else {
-                        Swal.fire('Error', res, 'error');
-                    }
-                });
-            });
-        });
-    </script>
     <script src="<?php echo base_url(); ?>assets/js/script.js"></script>
 
 </body>
