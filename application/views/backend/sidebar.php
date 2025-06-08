@@ -83,6 +83,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <!--<li><a href="<?php #echo base_url(); ?>Payroll/Salary_Type"> Payroll Type </a></li>-->
                                 <li><a href="<?php echo base_url(); ?>Payroll/Salary_List"> Payroll List </a></li>
+                                <li><a href="<?php echo base_url(); ?>Payroll/Salary_type"> Salary Type</a></li>
                                 <li><a href="<?php echo base_url(); ?>Payroll/Generate_salary"> Generate Payslip</a></li>
                                 <li><a href="<?php echo base_url(); ?>Payroll/Payslip_Report"> Payslip Report</a></li>
                             </ul>

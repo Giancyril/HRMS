@@ -3,7 +3,7 @@
          <div class="page-wrapper">
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor"><i class="fa fa-university" aria-hidden="true"></i> Inactive Employee</h3>
+                    <h3 class="text-themecolor">Inactive Employee</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -19,7 +19,7 @@
                     <div class="col-12">
                         <div class="card card-outline-info">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white"><i class="fa fa-user-o" aria-hidden="true"></i> Employee List</h4>
+                                <h4 class="m-b-0 text-white">Employee List</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive ">
