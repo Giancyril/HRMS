@@ -535,15 +535,15 @@
                                 <div class="tab-pane" id="password" role="tabpanel">
                                     <div class="card-body">
 				                                <form class="row" action="Reset_Password" method="post" enctype="multipart/form-data">
-				                                    <div class="form-group col-md-6 m-t-20">
+				                                    <div class="form-group col-md-12 m-t-20">
 				                                        <label>Old Password</label>
 				                                        <input type="text" class="form-control" name="old" value="" placeholder=" " required minlength="6"> 
 				                                    </div>
-				                                    <div class="form-group col-md-6 m-t-20">
-				                                        <label>Password</label>
+				                                    <div class="form-group col-md-12 m-t-20">
+				                                        <label>New Password</label>
 				                                        <input type="text" class="form-control" name="new1" value="" required minlength="6"> 
 				                                    </div>
-				                                    <div class="form-group col-md-6 m-t-20">
+				                                    <div class="form-group col-md-12 m-t-20">
 				                                        <label>Confirm Password</label>
 				                                        <input type="text" id="" name="new2" class="form-control " required minlength="6"> 
 				                                    </div>
