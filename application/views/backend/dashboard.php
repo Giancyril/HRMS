@@ -221,7 +221,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">To Do list</h4>
-                                <h6 class="card-subtitle">List of your next task to complete</h6>
+                                <h6 class="card-subtitle">List of your task to complete</h6>
                                 <div class="to-do-widget m-t-20" style="height:572px;overflow-y:scroll">
                                             <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
                                                <?php foreach($todolist as $value): ?>

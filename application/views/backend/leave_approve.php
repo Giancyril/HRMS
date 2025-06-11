@@ -304,30 +304,31 @@
         });
         </script>
 <script>
-  $(".Status").on("click", function(event){
-      event.preventDefault();
-      // console.log($(this).attr('data-value'));
-      $.ajax({
-          url: "approveLeaveStatus",
-          type:"POST",
-          data:
-          {
-              'employeeId': $(this).attr('data-employeeId'),
-              'lid': $(this).attr('data-id'),
-              'lvalue': $(this).attr('data-value'),
-              'duration': $(this).attr('data-duration'),
-              'type': $(this).attr('data-type')
-          },
-          success: function(response) {
-            // console.log(response);
-            $(".message").fadeIn('fast').delay(30000).fadeOut('fast').html(response);
-            window.setTimeout(function(){location.reload()}, 30000);
-          },
-          error: function(response) {
-            //console.error();
-          }
-      });
-  });           
+ $(".Status").on("click", function(event){
+     event.preventDefault();
+     $.ajax({
+         url: "approveLeaveStatus",
+         type:"POST",
+         data:
+         {
+             'employeeId': $(this).attr('data-employeeId'),
+             'lid': $(this).attr('data-id'),
+             'lvalue': $(this).attr('data-value'),
+             'duration': $(this).attr('data-duration'),
+             'type': $(this).attr('data-type')
+         },
+         success: function(response) {
+           $(".message").fadeIn('fast').html(response); // Display message
+           window.setTimeout(function(){
+               $(".message").fadeOut('fast'); // Fade out message
+               location.reload(); // Then reload
+           }, 1000); 
+         },
+         error: function(response) {
+           //console.error();
+         }
+     });
+ });           
 </script>
 
 <script type="text/javascript">
