@@ -111,13 +111,14 @@
                                            <?php if($value->leave_status =='Approve'){ ?>
                                            
                                              <?php } elseif($value->leave_status =='Not Approve'){ ?>
+                                                <a href="" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light leaveapp" data-id="<?php echo $value->id; ?>" ><i class="fa fa-pencil-square-o"></i></a>
                                             <a href="" title="Edit" class="btn btn-sm btn-success waves-effect waves-light Status" data-employeeId=<?php echo $value->em_id; ?>  data-id="<?php echo $value->id; ?>" data-value="Approve" data-duration="<?php echo $value->leave_duration; ?>" data-type="<?php echo $value->typeid; ?>">Approve</a>       
                                             <a href="" title="Edit" class="btn btn-sm btn-danger waves-effect waves-light  Status" data-id = "<?php echo $value->id; ?>" data-value="Rejected" >Reject</a>
-                                            <br> 
+                                             
 
                                             <?php } elseif($value->leave_status =='Rejected'){ ?>
                                             <?php } ?>
-                                            <a href="" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light leaveapp" data-id="<?php echo $value->id; ?>" ><i class="fa fa-pencil-square-o"></i></a>
+                                            
                                             
                                         </td>
                                         <?php } ?>
@@ -303,30 +304,31 @@
         });
         </script>
 <script>
-  $(".Status").on("click", function(event){
-      event.preventDefault();
-      // console.log($(this).attr('data-value'));
-      $.ajax({
-          url: "approveLeaveStatus",
-          type:"POST",
-          data:
-          {
-              'employeeId': $(this).attr('data-employeeId'),
-              'lid': $(this).attr('data-id'),
-              'lvalue': $(this).attr('data-value'),
-              'duration': $(this).attr('data-duration'),
-              'type': $(this).attr('data-type')
-          },
-          success: function(response) {
-            // console.log(response);
-            $(".message").fadeIn('fast').delay(30000).fadeOut('fast').html(response);
-            window.setTimeout(function(){location.reload()}, 30000);
-          },
-          error: function(response) {
-            //console.error();
-          }
-      });
-  });           
+ $(".Status").on("click", function(event){
+     event.preventDefault();
+     $.ajax({
+         url: "approveLeaveStatus",
+         type:"POST",
+         data:
+         {
+             'employeeId': $(this).attr('data-employeeId'),
+             'lid': $(this).attr('data-id'),
+             'lvalue': $(this).attr('data-value'),
+             'duration': $(this).attr('data-duration'),
+             'type': $(this).attr('data-type')
+         },
+         success: function(response) {
+           $(".message").fadeIn('fast').html(response); // Display message
+           window.setTimeout(function(){
+               $(".message").fadeOut('fast'); // Fade out message
+               location.reload(); // Then reload
+           }, 1000); 
+         },
+         error: function(response) {
+           //console.error();
+         }
+     });
+ });           
 </script>
 
 <script type="text/javascript">
