@@ -1,59 +1,33 @@
-            </div>
-
-    
-
-        </div>
+</div>
 
     </div>
+</div>
 
 
-    <!-- Bootstrap tether Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
     <script src="<?php echo base_url(); ?>assets/js/jquery.slimscroll.js"></script>
-    <!--Wave Effects -->
     <script src="<?php echo base_url(); ?>assets/js/waves.js"></script>
-    <!--Menu sidebar -->
     <script src="<?php echo base_url(); ?>assets/js/sidebarmenu.js"></script>
-    <!--stickey kit -->
     <script src="<?php echo base_url(); ?>assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <!--Custom JavaScript -->
     <script src="<?php echo base_url(); ?>assets/js/custom.min.js"></script>
 
-    <!-- ============================================================== -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-    <!-- ============================================================== -->
-    <!--sparkline JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-    <!--morris JavaScript -->
     <script src="<?php echo base_url(); ?>assets/plugins/raphael/raphael-min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/morrisjs/morris.js"></script>
-    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-
-
-    <!-- CHART COMMENTED....UNCOMMENT WHEN DONE -->
-    <!-- <script src="<?php echo base_url(); ?>assets/js/dashboard1.js"></script> -->
-
-
-
-
+    <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>    
     
- <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>  
-   
     <script src="<?php echo base_url(); ?>assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 
-    <!-- Editable -->
     <script src="<?php echo base_url(); ?>assets/plugins/jsgrid/db.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/jsgrid/dist/jsgrid.min.js"></script>
-    <!-- This is data table -->
-
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/multiselect/js/jquery.multi-select.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <!-- start - This is for export functionality only -->
     <script src="<?php echo base_url(); ?>assets/export/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/export/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/export/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
@@ -62,13 +36,10 @@
     <script src="<?php echo base_url(); ?>assets/export/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/export/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 
-   
-    <!-- Clock Plugin JavaScript -->
-    <script src="<?php echo base_url(); ?>assets/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>                        
-    <!-- Date range Plugin JavaScript -->
+    
+    <script src="<?php echo base_url(); ?>assets/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>                                
     <script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>     
-    <!-- end - This is for export functionality only -->
+    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>    
     <script src="<?php echo base_url(); ?>assets/plugins/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
@@ -76,9 +47,6 @@
     
 
 
-
-    <!-- CALENDAR -->
-    <!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/calendar/jquery-ui.min.js"></script> -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/calendar/dist/fullcalendar.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/calendar/dist/cal-init.js"></script>
 
@@ -87,12 +55,12 @@
             $('.mydatetimepicker').datepicker({
             format: "mm-yyyy",
             viewMode: "years", 
-            minViewMode: "months"   
+            minViewMode: "months"  
             });
         });
         $(function () {
             $('.mydatetimepickerFull').datepicker({
-            format: "yyyy-mm-dd"   
+            format: "yyyy-mm-dd"  
             });
         });
     </script>      
@@ -146,7 +114,7 @@
     jQuery('#datepicker-autoclose').datepicker({
         autoclose: true,
         todayHighlight: true
-    });        
+    });         
     $('#example23').DataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -175,7 +143,6 @@
         e.stopPropagation();
         input.clockpicker('show').clockpicker('toggleView', 'minutes');
     });
-
 
 
     
@@ -208,7 +175,7 @@ $('form').each(function() {
             cache: false,
             timeout: 600000,
             success: function (response) {
-                console.log(response);            
+                console.log(response);           
                 $(".message").fadeIn('fast').delay(3000).fadeOut('fast').html(response);
                 $('form').trigger("reset");
                 window.setTimeout(function(){location.reload()},3000);
@@ -224,6 +191,115 @@ $('form').each(function() {
     </script>     
 
     <script src="<?php echo base_url(); ?>assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('attendanceChart').getContext('2d');
+    const apiUrl = '<?php echo base_url(); ?>attendance/getAttendanceChartData';
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error fetching attendance data:', data.error);
+                return;
+            }
+
+            if (!Array.isArray(data) || data.length === 0) {
+                console.warn('No attendance data available for the chart.');
+                // Display a message on the canvas if no data
+                ctx.font = '20px Arial';
+                ctx.fillStyle = 'white';
+                ctx.textAlign = 'center';
+                ctx.fillText('No attendance data available for chart.', ctx.canvas.width / 2, ctx.canvas.height / 2);
+                return;
+            }
+
+            const labels = data.map(item => item.full_name);
+            const totalHours = data.map(item => item.total_seconds / 3600);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Working Hours',
+                        data: totalHours,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    backgroundColor: 'white', // This will set the chart background color
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Total Working Hours',
+                                color: 'rgba(73, 80, 87, 1)'
+                            },
+                            ticks: {
+                                color: 'rgba(82, 98, 107, 1)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.2)'
+                            }
+                        },
+                        x: {
+                           title: {
+                             display: true,
+                             text: 'Employee Name',
+                             color: 'rgba(73, 80, 87, 1)',
+                             padding: { top: 20 } // Add this line
+                        },
+                          ticks: {
+                            color: 'rgba(82, 98, 107, 1)'
+                        },
+                          grid: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                      }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: 'rgba(73, 80, 87, 1)',
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y.toFixed(2) + ' hours';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error loading attendance chart data:', error);
+            const errorMessage = 'Failed to load attendance chart data.';
+            ctx.font = '20px Arial';
+            ctx.fillStyle = 'red';
+            ctx.textAlign = 'center';
+            ctx.fillText(errorMessage, ctx.canvas.width / 2, ctx.canvas.height / 2);
+        });
+});
+</script>
 </body>
 
 </html>

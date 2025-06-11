@@ -13,13 +13,8 @@
                     </ol>
                 </div>
             </div>
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Row -->
                 <div class="row">
-                    <!-- Column -->
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
@@ -27,18 +22,16 @@
                                     <div class="round align-self-center round-primary"><i class="ti-user"></i></div>
                                     <div class="m-l-10 align-self-center">
                                         <h3 class="m-b-0">
-                                    <?php 
-                                        $this->db->where('status','ACTIVE');
-                                        $this->db->from("employee");
-                                        echo $this->db->count_all_results();
-                                    ?>  Employees</h3>
+                                        <?php 
+                                            $this->db->where('status','ACTIVE');
+                                            $this->db->from("employee");
+                                            echo $this->db->count_all_results();
+                                        ?> Employees</h3>
                                         <a href="<?php echo base_url(); ?>employee/Employees" class="text-muted m-b-0">View Details</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
-                    <!-- Column -->
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
@@ -46,11 +39,11 @@
                                     <div class="round align-self-center round-info"><i class="ti-file"></i></div>
                                     <div class="m-l-10 align-self-center">
                                         <h3 class="m-b-0">
-                                             <?php 
-                                                    $this->db->where('leave_status','Approve');
-                                                    $this->db->from("emp_leave");
-                                                    echo $this->db->count_all_results();
-                                                ?> Leaves
+                                                      <?php 
+                                                            $this->db->where('leave_status','Approve');
+                                                            $this->db->from("emp_leave");
+                                                            echo $this->db->count_all_results();
+                                                        ?> Leaves
                                         </h3>
                                         <a href="<?php echo base_url(); ?>leave/Application" class="text-muted m-b-0">View Details</a>
                                         </div>
@@ -58,8 +51,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
-                    <!-- Column -->
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
@@ -67,7 +58,7 @@
                                     <div class="round align-self-center round-danger"><i class="ti-calendar"></i></div>
                                     <div class="m-l-10 align-self-center">
                                         <h3 class="m-b-0"> 
-                                         <?php 
+                                           <?php 
                                                 $this->db->where('pro_status','running');
                                                 $this->db->from("project");
                                                 echo $this->db->count_all_results();
@@ -79,31 +70,24 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
-                    <!-- Column -->
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
-                         <div class="card-body">
-                             <div class="d-flex flex-row">
-                               <div class="round align-self-center round-success"><i class="ti-money"></i></div> <div class="m-l-10 align-self-center">
-                                     <h3 class="m-b-0">
-                                       <?php
-                                        $this->db->from("emp_salary");
-                                         echo $this->db->count_all_results();
-                                        ?> Payslips 
-                                      </h3>
-                                  <a href="<?php echo base_url('payroll/salary_list'); ?>" class="text-muted m-b-0">View Details</a> </div>
-                              </div>
-                         </div>
+                           <div class="card-body">
+                                   <div class="d-flex flex-row">
+                                       <div class="round align-self-center round-success"><i class="ti-money"></i></div> <div class="m-l-10 align-self-center">
+                                               <h3 class="m-b-0">
+                                                   <?php
+                                                    $this->db->from("emp_salary");
+                                                     echo $this->db->count_all_results();
+                                                    ?> Payslips 
+                                               </h3>
+                                           <a href="<?php echo base_url('payroll/salary_list'); ?>" class="text-muted m-b-0">View Details</a> </div>
+                                   </div>
+                           </div>
                         </div>
                     </div>
-                    <!-- Column -->
-                </div>
-                <!-- Row -->
-                <!-- Row -->
-                
+                    </div>
                 <div class="row ">
-                    <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card card-inverse card-info">
                             <div class="box bg-primary text-center">
@@ -118,73 +102,81 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card card-info card-inverse">
                             <div class="box text-center">
                                 <h1 class="font-light text-white">
-                                             <?php 
-                                                    $this->db->where('leave_status','Not Approve');
-                                                    $this->db->from("emp_leave");
-                                                    echo $this->db->count_all_results();
-                                                ?> 
+                                                      <?php 
+                                                            $this->db->where('leave_status','Not Approve');
+                                                            $this->db->from("emp_leave");
+                                                            echo $this->db->count_all_results();
+                                                        ?> 
                                 </h1>
                                 <h6 class="text-white">Pending Leave Application</h6>
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card card-inverse card-danger">
                             <div class="box text-center">
                                 <h1 class="font-light text-white">
-                                     <?php 
-                                            $this->db->where('pro_status','upcoming');
-                                            $this->db->from("project");
-                                            echo $this->db->count_all_results();
-                                        ?> 
+                                           <?php 
+                                                $this->db->where('pro_status','upcoming');
+                                                $this->db->from("project");
+                                                echo $this->db->count_all_results();
+                                            ?> 
                                 </h1>
                                 <h6 class="text-white">Upcoming Project</h6>
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card card-inverse card-success">
-                         <div class="box text-center">
-                             <h1 class="font-light text-white">
-                              <?php
-                              // 1. Get total number of employees
-                               $this->db->from("employee"); // Replace "employees" with your actual employee table name
-                               $total_employees = $this->db->count_all_results();
+                           <div class="box text-center">
+                                   <h1 class="font-light text-white">
+                                    <?php
+                                    // 1. Get total number of employees
+                                       $this->db->from("employee"); // Replace "employees" with your actual employee table name
+                                       $total_employees = $this->db->count_all_results();
 
-                              // 2. Get number of generated payslips
-                               $this->db->from("pay_salary");
-                               $generated_payslips = $this->db->count_all_results();
+                                    // 2. Get number of generated payslips
+                                       $this->db->from("pay_salary");
+                                       $generated_payslips = $this->db->count_all_results();
 
-                              // 3. Calculate payslips pending
-                               $payslips_pending = $total_employees - $generated_payslips;
+                                    // 3. Calculate payslips pending
+                                       $payslips_pending = $total_employees - $generated_payslips;
 
-                              // 4. Display the result
-                               echo $payslips_pending;
-                            ?>
-                         </h1>
-                     <h6 class="text-white">Payslips Pending</h6>
-                   </div>
-                 </div>  
-               </div>
-                    <!-- Column -->
+                                    // 4. Display the result
+                                       echo $payslips_pending;
+                                    ?>
+                                </h1>
+                               <h6 class="text-white">Payslips Pending</h6>
+                           </div> 
+                        </div>
+                    </div>
+                    </div>
+                </div> 
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body" style="background-color: white; color: black;">
+                                <h4 class="card-title">Employee Attendance Chart</h4>
+                                <div style="height: 400px;"> <canvas id="attendanceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- ============================================================== -->
-            </div> 
+            </div>
             <div class="container-fluid">
                 <?php $notice = $this->notice_model->GetNoticelimit(); 
                 $running = $this->dashboard_model->GetRunningProject(); 
                 $userid = $this->session->userdata('user_login_id');
-                $todolist = $this->dashboard_model->GettodoInfo($userid);                 
-                $holiday = $this->dashboard_model->GetHolidayInfo();                 
+                $todolist = $this->dashboard_model->GettodoInfo($userid);                
+                $holiday = $this->dashboard_model->GetHolidayInfo();                
                 ?>
-                <!-- Row -->
                 <div class="row">
                     
                     <div class="col-md-8">
@@ -212,53 +204,51 @@
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
-                                </div>                                
+                                </div>                                        
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">To Do list</h4>
                                 <h6 class="card-subtitle">List of your task to complete</h6>
                                 <div class="to-do-widget m-t-20" style="height:572px;overflow-y:scroll">
-                                            <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
-                                               <?php foreach($todolist as $value): ?>
-                                                <li class="list-group-item" data-role="task">
-                                                   <?php if($value->value == '1'){ ?>
-                                                    <div class="checkbox checkbox-info">
-                                                        <input class="to-do" data-id="<?php echo $value->id?>" data-value="0" type="checkbox" id="<?php echo $value->id?>" >
-                                                        <label for="<?php echo $value->id?>"><span><?php echo $value->to_dodata; ?></span></label>
-                                                    </div>
-                                                    <?php } else { ?>
-                                                    <div class="checkbox checkbox-info">
-                                                        <input class="to-do" data-id="<?php echo $value->id?>" data-value="1" type="checkbox" id="<?php echo $value->id?>" checked>
-                                                        <label class="task-done" for="<?php echo $value->id?>"><span><?php echo $value->to_dodata; ?></span></label>
-                                                    </div> 
-                                                    <?php } ?>                                                   
-                                                </li>
+                                                <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
+                                                   <?php foreach($todolist as $value): ?>
+                                                    <li class="list-group-item" data-role="task">
+                                                       <?php if($value->value == '1'){ ?>
+                                                        <div class="checkbox checkbox-info">
+                                                            <input class="to-do" data-id="<?php echo $value->id?>" data-value="0" type="checkbox" id="<?php echo $value->id?>" >
+                                                            <label for="<?php echo $value->id?>"><span><?php echo $value->to_dodata; ?></span></label>
+                                                        </div>
+                                                        <?php } else { ?>
+                                                        <div class="checkbox checkbox-info">
+                                                            <input class="to-do" data-id="<?php echo $value->id?>" data-value="1" type="checkbox" id="<?php echo $value->id?>" checked>
+                                                            <label class="task-done" for="<?php echo $value->id?>"><span><?php echo $value->to_dodata; ?></span></label>
+                                                        </div> 
+                                                        <?php } ?>                                                 
+                                                    </li>
 
-                                                <?php endforeach; ?>
-                                            </ul>                                    
+                                                    <?php endforeach; ?>
+                                                </ul>                                        
                                 </div>
                                 <div class="new-todo">
-                                   <form method="post" action="add_todo" enctype="multipart/form-data" id="add_todo" >
-                                    <div class="input-group">
-                                        <input type="text" name="todo_data" class="form-control" style="border: 1px solid #fff !IMPORTANT;" placeholder="Add a new task...">
-                                        <span class="input-group-btn">
-                                        <input type="hidden" name="userid" value="<?php echo $this->session->userdata('user_login_id'); ?>">
-                                        <button type="submit" class="btn btn-success todo-submit"><i class="fa fa-plus"></i></button>
-                                        </span> 
-                                    </div>
-                                    </form>
-                                </div>                                
+                                       <form method="post" action="add_todo" enctype="multipart/form-data" id="add_todo" >
+                                        <div class="input-group">
+                                            <input type="text" name="todo_data" class="form-control" style="border: 1px solid #fff !IMPORTANT;" placeholder="Add a new task...">
+                                            <span class="input-group-btn">
+                                            <input type="hidden" name="userid" value="<?php echo $this->session->userdata('user_login_id'); ?>">
+                                            <button type="submit" class="btn btn-success todo-submit"><i class="fa fa-plus"></i></button>
+                                            </span> 
+                                        </div>
+                                        </form>
+                                </div>                                        
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Row -->
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="card">
@@ -294,7 +284,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    Holidays
+                                        Holidays
                                 </h4>
                             </div>
                             <div class="card-body">
@@ -304,15 +294,15 @@
                                             <tr>
                                                 <th>Holiday Name</th>
                                                 <th>Date</th>
-                                            </tr>                                           
+                                            </tr>                                            
                                        </thead>
                                        <tbody>
-                                          <?php foreach($holiday as $value): ?>
-                                           <tr style="background-color:#e3f0f7">
-                                               <td><?php echo $value->holiday_name ?></td>
-                                               <td><?php echo $value->from_date; ?></td>
-                                           </tr>
-                                           <?php endforeach ?>
+                                            <?php foreach($holiday as $value): ?>
+                                               <tr style="background-color:#e3f0f7">
+                                                   <td><?php echo $value->holiday_name ?></td>
+                                                   <td><?php echo $value->from_date; ?></td>
+                                               </tr>
+                                            <?php endforeach ?>
                                        </tbody> 
                                     </table>
                                 </div>
@@ -324,23 +314,23 @@
                 
                 
 <script>
-  $(".to-do").on("click", function(){
-      //console.log($(this).attr('data-value'));
-      $.ajax({
-          url: "Update_Todo",
-          type:"POST",
-          data:
-          {
-          'toid': $(this).attr('data-id'),         
-          'tovalue': $(this).attr('data-value'),
-          },
-          success: function(response) {
-              location.reload();
-          },
-          error: function(response) {
-            console.error();
-          }
-      });
-  });			
-</script>                                               
+ $(".to-do").on("click", function(){
+     //console.log($(this).attr('data-value'));
+     $.ajax({
+         url: "Update_Todo",
+         type:"POST",
+         data:
+         {
+         'toid': $(this).attr('data-id'),         
+         'tovalue': $(this).attr('data-value'),
+         },
+         success: function(response) {
+             location.reload();
+         },
+         error: function(response) {
+           console.error();
+         }
+     });
+ });           
+</script>                                     
 <?php $this->load->view('backend/footer'); ?>

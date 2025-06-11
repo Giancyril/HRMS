@@ -273,9 +273,33 @@ class Attendance extends CI_Controller
             else {
 
             }
-        }
-         echo "Successfully Updated"; 
+         }
+          echo "Successfully Updated"; 
         }
 
+    // NEW FUNCTION TO FETCH ATTENDANCE DATA FOR CHART
+    public function getAttendanceChartData() {
+        if ($this->session->userdata('user_login_access') != False) {
+            $start_date = $this->input->get('start_date');
+            $end_date = $this->input->get('end_date');
+
+            // If dates are not provided, default to the last 30 days
+            if (empty($start_date)) {
+                $start_date = date('Y-m-d', strtotime('-30 days'));
+            }
+            if (empty($end_date)) {
+                $end_date = date('Y-m-d');
+            }
+
+            $attendance_data = $this->attendance_model->getMonthlyAttendanceSummary($start_date, $end_date);
+            echo json_encode($attendance_data);
+        } else {
+            echo json_encode(['error' => 'Unauthorized access']);
+        }
+    }
 }
-?>
+
+
+
+
+
