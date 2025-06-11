@@ -302,4 +302,3 @@ class Attendance extends CI_Controller
 
 
 
-
