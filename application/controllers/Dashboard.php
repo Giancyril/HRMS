@@ -13,6 +13,7 @@ class Dashboard extends CI_Controller {
         $this->load->model('settings_model');    
         $this->load->model('notice_model');    
         $this->load->model('project_model');    
+        $this->load->model('organization_model');
         $this->load->model('leave_model');    
     }
     
@@ -76,5 +77,30 @@ class Dashboard extends CI_Controller {
 			echo $message;			
 		}
 	}    
+    public function getDepartmentChartData() {
+        if ($this->session->userdata('user_login_access') != False) {
+            $data = $this->organization_model->getDepartmentsWithEmployeeCount();
+            $this->output
+                 ->set_content_type('application/json')
+                 ->set_output(json_encode($data));
+        } else {
+            redirect(base_url() , 'refresh');
+        }
+    }
+
+    /**
+     * Fetches designation data with employee counts for chart display.
+     * Returns JSON data.
+     */
+    public function getDesignationChartData() {
+        if ($this->session->userdata('user_login_access') != False) {
+            $data = $this->organization_model->getDesignationsWithEmployeeCount();
+            $this->output
+                 ->set_content_type('application/json')
+                 ->set_output(json_encode($data));
+        } else {
+            redirect(base_url() , 'refresh');
+        }
+    }
     
 }
