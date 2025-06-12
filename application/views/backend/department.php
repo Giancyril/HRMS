@@ -43,8 +43,8 @@
                                             <!--/row-->
                                         </div>
                                         <div class="form-actions">
-                                            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                                            <button type="button" class="btn btn-danger">Cancel</button>
+                                            <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
+                                            <a href="<?php echo base_url();?>organization/Department" class="btn btn-danger">Cancel</a>
                                         </div>
                                     </form>
                             </div>
@@ -76,8 +76,8 @@
                                             <!--/row-->
                                         </div>
                                         <div class="form-actions">
-                                            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                                            <button type="button" class="btn btn-danger">Cancel</button>
+                                            <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
+                                            <a href="<?php echo base_url();?>organization/Department" class="btn btn-danger">Cancel</a>
                                         </div>
                                     </form>
                             </div>
