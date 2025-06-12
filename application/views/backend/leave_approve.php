@@ -111,8 +111,8 @@
                                            <?php if($value->leave_status =='Approve'){ ?>
                                            
                                              <?php } elseif($value->leave_status =='Not Approve'){ ?>
-                                                <a href="" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light leaveapp" data-id="<?php echo $value->id; ?>" ><i class="fa fa-pencil-square-o"></i></a>
-                                            <a href="" title="Edit" class="btn btn-sm btn-success waves-effect waves-light Status" data-employeeId=<?php echo $value->em_id; ?>  data-id="<?php echo $value->id; ?>" data-value="Approve" data-duration="<?php echo $value->leave_duration; ?>" data-type="<?php echo $value->typeid; ?>">Approve</a>       
+                                                <a href="" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light leaveapp" data-id="<?php echo $value->id; ?>" ><i class="fa fa-pencil-square-o"></i></a> 
+                                            <a href="" title="Edit" class="btn btn-sm btn-info waves-effect waves-light Status" data-employeeId=<?php echo $value->em_id; ?>  data-id="<?php echo $value->id; ?>" data-value="Approve" data-duration="<?php echo $value->leave_duration; ?>" data-type="<?php echo $value->typeid; ?>">Approve</a>       
                                             <a href="" title="Edit" class="btn btn-sm btn-danger waves-effect waves-light  Status" data-id = "<?php echo $value->id; ?>" data-value="Rejected" >Reject</a>
                                              
 
@@ -242,7 +242,7 @@
                             <div class="modal-footer">
                                 <input type="hidden" name="id" class="form-control" id="recipient-name1" required> 
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-info">Submit</button>
                             </div>
                             </form>
                         </div>

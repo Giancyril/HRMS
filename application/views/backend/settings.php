@@ -98,7 +98,7 @@
                                         <div class="form-group clearfix">
                                             <div class="col-md-9 col-md-offset-3">
                                                 <input type="hidden" name="id" value="<?php echo $settingsvalue->id; ?>"/>
-                                                <button type="submit" name="submit" id="btnSubmit" class="btn btn-success">Submit</button>
+                                                <button type="submit" name="submit" id="btnSubmit" class="btn btn-info">Submit</button>
                                                 <span class="flashmessage"><?php echo $this->session->flashdata('feedback'); ?></span>
                                             </div>
                                         </div>

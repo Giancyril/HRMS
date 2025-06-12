@@ -58,12 +58,14 @@
                                                 <td><?php echo $value->signin_time; ?></td>
                                                 <td><?php echo $value->signout_time; ?></td>
                                                 <td><?php echo $value->Hours; ?></td>
-                                                <td class="jsgrid-align-center ">
-                                                <?php if($value->signout_time == '00:00:00') { ?>
-                                                    <a href="Save_Attendance?A=<?php echo $value->id; ?>" title="Edit" class="btn btn-sm btn-info waves-effect waves-light" data-value="Approve" >Sign Out</a><br>                           
-                                                <?php } ?>
-                                                    <a href="Save_Attendance?A=<?php echo $value->id; ?>" title="Edit" class="btn btn-sm btn-info waves-effect waves-light" data-value="Approve" ><i class="fa fa-pencil-square-o"></i></a>
-                                                </td>
+                                               <td class="jsgrid-align-center ">
+                                                 <a href="Save_Attendance?A=<?php echo $value->id; ?>" title="Edit" class="btn btn-sm btn-info waves-effect waves-light" data-value="Approve" ><i class="fa fa-pencil-square-o"></i></a>
+    
+                                                  <?php if($value->signout_time == '00:00:00') { ?>
+                                                     &nbsp; 
+                                                 <a href="Save_Attendance?A=<?php echo $value->id; ?>" title="Sign Out" class="btn btn-sm btn-info waves-effect waves-light" data-value="Approve" >Sign Out</a>
+                                                  <?php } ?> 
+                                               </td>
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>

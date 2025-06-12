@@ -40,7 +40,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3 form-group">
-                                        <input type="submit" class="btn btn-success" value="Submit" name="submit" id="getAtdReport">
+                                        <input type="submit" class="btn btn-info" value="Submit" name="submit" id="getAtdReport">
                                     </div>
                                 </form>
                             </div>

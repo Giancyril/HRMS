@@ -30,7 +30,7 @@
                                         <input type="hidden" name="emid" value=""> 
                                         <input type="hidden" name="id" value=""> 
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-info">Submit</button>
                                     </div>
                                     </form>
                                 </div>
@@ -68,7 +68,7 @@
                                         <input type="hidden" name="emid" value=""> 
                                         <input type="hidden" name="id" value=""> 
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-info">Submit</button>
                                     </div>
                                     </form>
                                 </div>

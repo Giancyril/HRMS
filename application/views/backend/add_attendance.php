@@ -68,7 +68,7 @@
                                     <div class="modal-footer">
                                     <input type="hidden" name="id" value="<?php if(!empty($attval->id)){ echo  $attval->id;} ?>" class="form-control" id="recipient-name1">                                       
                                         
-                                        <button type="submit" id="attendanceUpdate" class="btn btn-success">Submit</button>
+                                        <button type="submit" id="attendanceUpdate" class="btn btn-info">Submit</button>
                                     </div>
                                     </form>
                             </div>

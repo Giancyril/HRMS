@@ -104,7 +104,7 @@
                                     <div class="modal-footer">
                                     <input type="hidden" name="eid" value="" class="form-control" id="recipient-name1">                                       
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-info">Submit</button>
                                     </div>
                                     </form>
                                 </div>
@@ -138,7 +138,7 @@
                                     <div class="modal-footer">
                                     <input type="hidden" name="eid" value="" class="form-control" id="recipient-name1">                                       
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-info">Submit</button>
                                     </div>
                                     </form>
                                 </div>

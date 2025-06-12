@@ -239,7 +239,7 @@
                                             <input type="text" name="todo_data" class="form-control" style="border: 1px solid #fff !IMPORTANT;" placeholder="Add a new task...">
                                             <span class="input-group-btn">
                                             <input type="hidden" name="userid" value="<?php echo $this->session->userdata('user_login_id'); ?>">
-                                            <button type="submit" class="btn btn-success todo-submit"><i class="fa fa-plus"></i></button>
+                                            <button type="submit" class="btn btn-info todo-submit"><i class="fa fa-plus"></i></button>
                                             </span> 
                                         </div>
                                         </form>
@@ -284,7 +284,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                        Holidays
+                                        Upcoming Dates
                                 </h4>
                             </div>
                             <div class="card-body">
@@ -298,7 +298,7 @@
                                        </thead>
                                        <tbody>
                                             <?php foreach($holiday as $value): ?>
-                                               <tr style="background-color:#e3f0f7">
+                                               <tr>
                                                    <td><?php echo $value->holiday_name ?></td>
                                                    <td><?php echo $value->from_date; ?></td>
                                                </tr>

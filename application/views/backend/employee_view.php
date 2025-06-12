@@ -186,7 +186,7 @@
                         
 				                                    <div class="form-actions col-md-12">
                                                         <input type="hidden" name="emid" value="<?php echo $basic->em_id; ?>">
-				                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+				                                        <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
 				                                        <button type="button" class="btn btn-danger">Cancel</button>
 				                                    </div>
 				                               
@@ -218,7 +218,7 @@
 			                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="emid" value="<?php echo $basic->em_id ?>">
                                                     <input type="hidden" name="id" value="<?php if(!empty($permanent->id)) echo $permanent->id  ?>">                                                    
-			                                        <button type="submit" class="btn btn-success" style="margin-bottom: 40px;"> <i class="fa fa-check"></i> Save</button>
+			                                        <button type="submit" class="btn btn-info" style="margin-bottom: 40px;"> <i class="fa fa-check"></i> Save</button>
 			                                    </div>
 			                                   		                                    
 			                                    </form>
@@ -244,7 +244,7 @@
 			                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="emid" value="<?php echo $basic->em_id ?>">
                                                     <input type="hidden" name="id" value="<?php if(!empty($present->id)) echo $present->id  ?>">
-			                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+			                                        <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
 			                                    </div>
 			                                    
 			                                </form>
@@ -321,7 +321,7 @@
 			                                  
 			                                    <div class="form-actions col-md-6">
                                                     <input type="hidden" name="emid" value="<?php echo $basic->em_id; ?>">
-			                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+			                                        <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
 			                                    </div>
 			                                    
 			                                </form>
@@ -361,7 +361,7 @@
                                     <td class="jsgrid-align-center ">
                                        
                                         <a href="#" title="Edit" class="btn btn-sm btn-info waves-effect waves-light experience" data-id="<?php echo $value->id ?>"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a onclick="confirm('Are you sure, you want to delete this?')" href="#" title="Delete" class="btn btn-sm btn-info waves-effect waves-light deletexp" data-id="<?php echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
+                                        <a onclick="confirm('Are you sure, you want to delete this?')" href="#" title="Delete" class="btn btn-sm btn-danger waves-effect waves-light deletexp" data-id="<?php echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
                                         
                                     </td>
                                 </tr>
@@ -391,7 +391,7 @@
 			                                 
 		                                    	<div class="form-actions col-md-12">
                                                     <input type="hidden" name="emid" value="<?php echo $basic->em_id; ?>">                                                
-		                                    	    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+		                                    	    <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
 		                                    	</div>
 		                                    	
 			                                </form>
@@ -425,7 +425,7 @@
 			                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="emid" value="<?php echo $basic->em_id; ?>">
                                                     <input type="hidden" name="id" value="<?php if(!empty($bankinfo->id)) echo $bankinfo->id  ?>">
-			                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+			                                        <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
 			                                    </div>
 			                                </form>
 					                    </div>
@@ -475,7 +475,7 @@
                                             <div class="form-group">
                                                 <div class="col-sm-12">
                                                     <input type="hidden" name="em_id" value="<?php echo $basic->em_id; ?>">                                                   
-                                                    <button type="submit" class="btn btn-success">Add File</button>
+                                                    <button type="submit" class="btn btn-info">Add File</button>
                                                 </div>
                                             </div>
                                            
@@ -497,7 +497,7 @@
 				                                    
 				                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="emid" value="<?php echo $basic->em_id; ?>">                                                   
-				                                        <button type="submit" class="btn btn-success pull-right"> <i class="fa fa-check"></i> Save</button>
+				                                        <button type="submit" class="btn btn-info pull-right"> <i class="fa fa-check"></i> Save</button>
 				                                    </div>
 				                                    
 				                                </form>
@@ -526,7 +526,7 @@
 				                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="emid" value="<?php echo $basic->em_id; ?>">                                                   
                                                     <input type="hidden" name="id" value="<?php if(!empty($socialmedia->id)) echo $socialmedia->id ?>">                                                   
-				                                        <button type="submit" class="btn btn-success pull-right"> <i class="fa fa-check"></i> Save</button>
+				                                        <button type="submit" class="btn btn-info pull-right"> <i class="fa fa-check"></i> Save</button>
 				                                    </div>
 				                                  
 				                                </form>
@@ -549,7 +549,7 @@
 				                                    </div>
 				                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="emid" value="<?php echo $basic->em_id; ?>">                                                   
-				                                        <button type="submit" class="btn btn-success pull-right"> <i class="fa fa-check"></i> Save</button>
+				                                        <button type="submit" class="btn btn-info pull-right"> <i class="fa fa-check"></i> Save</button>
 				                                    </div>
 				                                </form>
                                     </div>
@@ -629,7 +629,7 @@
                                                     <?php if(!empty($salaryvalue->de_id)){ ?>
                                                     <input type="hidden" name="did" value="<?php echo $salaryvalue->de_id; ?>">
                                                     <?php } ?>                                                   
-                                                    <button  type="submit" style="float: right" class="btn btn-success">Add Salary</button>
+                                                    <button  type="submit" style="float: right" class="btn btn-info">Add Salary</button>
                                                 </div>
                                                 
                                             </div>                                                		                                    

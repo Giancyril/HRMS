@@ -82,7 +82,7 @@
                                                 <td><?php echo $individual_info->paid_date; ?></td>
                                                 <td><?php echo $individual_info->status; ?></td>
                                                 <td class="jsgrid-align-center ">
-                                                    <a href="<?php echo base_url(); ?>payroll/invoice?Id=<?php echo $individual_info->pay_id; ?>&em=<?php echo $individual_info->emp_id; ?>" title="Edit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-print"></i></a>
+                                                    <a href="<?php echo base_url(); ?>payroll/invoice?Id=<?php echo $individual_info->pay_id; ?>&em=<?php echo $individual_info->emp_id; ?>" title="Edit" class="btn btn-sm btn-info waves-effect waves-light"><i class="fa fa-print"></i></a>
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>
@@ -155,7 +155,7 @@
                                     <input type="hidden" name="aid" value="" class="form-control" id="recipient-name1">                                       
                                     <input type="hidden" name="did" value="" class="form-control" id="recipient-name1">                                       
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-info">Submit</button>
                                     </div>
                                     </form>
                                 </div>

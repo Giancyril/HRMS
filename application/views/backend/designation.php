@@ -43,7 +43,7 @@
                                     <!--/row-->
                                 </div>
                                 <div class="form-actions">
-                                    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                                    <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
                                     <button type="button" class="btn btn-danger">Cancel</button>
                                 </div>
                             </form>
@@ -76,7 +76,7 @@
                                     <!--/row-->
                                 </div>
                                 <div class="form-actions">
-                                    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                                    <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
                                     <button type="button" class="btn btn-danger">Cancel</button>
                                 </div>
                             </form>

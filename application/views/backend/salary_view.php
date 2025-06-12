@@ -74,7 +74,7 @@ $this->load->view('backend/sidebar');
                     </div>
                   </div> 
                     <div class="form-group col-md-3">
-                    <button style="float:left;margin-top:23px" type="submit" id="BtnSubmit" class="btn btn-success">Submit</button>          
+                    <button style="float:left;margin-top:23px" type="submit" id="BtnSubmit" class="btn btn-info">Submit</button>          
                      </div>
                                 </form>
                             </div>
@@ -325,7 +325,7 @@ $this->load->view('backend/sidebar');
               <input type="hidden" name="loan_id" value="" class="form-control" id="loanID">                                      
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close
               </button>
-              <button type="submit" class="btn btn-success">Submit
+              <button type="submit" class="btn btn-info">Submit
               </button>
             </div>
           </form>

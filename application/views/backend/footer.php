@@ -46,7 +46,6 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/multiselect/js/jquery.multi-select.js"></script>
     
 
-
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/calendar/dist/fullcalendar.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/calendar/dist/cal-init.js"></script>
 
@@ -144,7 +143,6 @@
         input.clockpicker('show').clockpicker('toggleView', 'minutes');
     });
 
-
     
     $(function() {
     $('#datetimepicker2').datetimepicker({
@@ -193,111 +191,121 @@ $('form').each(function() {
     <script src="<?php echo base_url(); ?>assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 
     <script>
+// Check if the element exists before trying to get its context
 document.addEventListener('DOMContentLoaded', function() {
-    const ctx = document.getElementById('attendanceChart').getContext('2d');
-    const apiUrl = '<?php echo base_url(); ?>attendance/getAttendanceChartData';
+    const canvasElement = document.getElementById('attendanceChart'); // Get the canvas element first
+    
+    if (canvasElement) { // Only proceed if the canvas element exists
+        const ctx = canvasElement.getContext('2d');
+        const apiUrl = '<?php echo base_url(); ?>attendance/getAttendanceChartData';
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                console.error('Error fetching attendance data:', data.error);
-                return;
-            }
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error fetching attendance data:', data.error);
+                    return;
+                }
 
-            if (!Array.isArray(data) || data.length === 0) {
-                console.warn('No attendance data available for the chart.');
-                // Display a message on the canvas if no data
-                ctx.font = '20px Arial';
-                ctx.fillStyle = 'white';
-                ctx.textAlign = 'center';
-                ctx.fillText('No attendance data available for chart.', ctx.canvas.width / 2, ctx.canvas.height / 2);
-                return;
-            }
+                if (!Array.isArray(data) || data.length === 0) {
+                    console.warn('No attendance data available for the chart.');
+                    // Display a message on the canvas if no data
+                    ctx.font = '20px Arial';
+                    ctx.fillStyle = 'white'; // Keep text white as per your original code
+                    ctx.textAlign = 'center';
+                    ctx.fillText('No attendance data available for chart.', ctx.canvas.width / 2, ctx.canvas.height / 2);
+                    return;
+                }
 
-            const labels = data.map(item => item.full_name);
-            const totalHours = data.map(item => item.total_seconds / 3600);
+                const labels = data.map(item => item.full_name);
+                const totalHours = data.map(item => item.total_seconds / 3600);
 
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Total Working Hours',
-                        data: totalHours,
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1.5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    backgroundColor: 'white', // This will set the chart background color
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Total Working Hours',
-                                color: 'rgba(73, 80, 87, 1)'
-                            },
-                            ticks: {
-                                color: 'rgba(82, 98, 107, 1)'
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.2)'
-                            }
-                        },
-                        x: {
-                           title: {
-                             display: true,
-                             text: 'Employee Name',
-                             color: 'rgba(73, 80, 87, 1)',
-                             padding: { top: 20 } // Add this line
-                        },
-                          ticks: {
-                            color: 'rgba(82, 98, 107, 1)'
-                        },
-                          grid: {
-                            color: 'rgba(255, 255, 255, 0.2)'
-                        }
-                      }
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Total Working Hours',
+                            data: totalHours,
+                            backgroundColor: 'rgba(0, 169, 224, 1)', // Original blue
+                            // color: 'rgba(0, 169, 224, 1)', // 'color' is not a valid Chart.js dataset property
+                            hoverBackgroundColor: 'rgba(0, 120, 160, 1)', // Darker shade for hover
+                            borderColor: 'rgba(0, 169, 224, 1)', // Keeping border color consistent
+                            borderWidth: 1.5
+                        }]
                     },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                            labels: {
-                                color: 'rgba(73, 80, 87, 1)',
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        // backgroundColor: 'white', // This sets the entire chart's *canvas* background, not the plot area
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Total Working Hours',
+                                    color: 'rgba(73, 80, 87, 1)'
+                                },
+                                ticks: {
+                                    color: 'rgba(82, 98, 107, 1)'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.2)' // Light grid lines
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Employee Name',
+                                    color: 'rgba(73, 80, 87, 1)',
+                                    padding: { top: 20 }
+                                },
+                                ticks: {
+                                    color: 'rgba(82, 98, 107, 1)'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.2)' // Light grid lines
+                                }
                             }
                         },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    color: 'rgba(73, 80, 87, 1)',
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y.toFixed(2) + ' hours';
+                                        }
+                                        return label;
                                     }
-                                    if (context.parsed.y !== null) {
-                                        label += context.parsed.y.toFixed(2) + ' hours';
-                                    }
-                                    return label;
                                 }
                             }
                         }
                     }
-                }
+                });
+            })
+            .catch(error => {
+                console.error('Error loading attendance chart data:', error);
+                const errorMessage = 'Failed to load attendance chart data.';
+                ctx.font = '20px Arial';
+                ctx.fillStyle = 'red';
+                ctx.textAlign = 'center';
+                ctx.fillText(errorMessage, ctx.canvas.width / 2, ctx.canvas.height / 2);
             });
-        })
-        .catch(error => {
-            console.error('Error loading attendance chart data:', error);
-            const errorMessage = 'Failed to load attendance chart data.';
-            ctx.font = '20px Arial';
-            ctx.fillStyle = 'red';
-            ctx.textAlign = 'center';
-            ctx.fillText(errorMessage, ctx.canvas.width / 2, ctx.canvas.height / 2);
-        });
+    } else {
+        // Optional: Log a message if the canvas element is not found on this page
+        console.log('Canvas element with ID "attendanceChart" not found on this page. Skipping chart initialization.');
+    }
 });
 </script>
 </body>
