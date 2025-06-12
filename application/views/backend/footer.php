@@ -228,8 +228,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             label: 'Total Working Hours',
                             data: totalHours,
                             backgroundColor: 'rgba(0, 169, 224, 1)', // Original blue
-                            // color: 'rgba(0, 169, 224, 1)', // 'color' is not a valid Chart.js dataset property
-                            hoverBackgroundColor: 'rgba(0, 120, 160, 1)', // Darker shade for hover
+                            color: 'rgba(0, 169, 224, 1)', // 'color' is not a valid Chart.js dataset property
+                            hoverBackgroundColor: 'rgba(0, 169, 224, 1)', // Darker shade for hover
                             borderColor: 'rgba(0, 169, 224, 1)', // Keeping border color consistent
                             borderWidth: 1.5
                         }]
