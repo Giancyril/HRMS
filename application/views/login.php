@@ -5,21 +5,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HR-ERP</title>
+    <title>Optima HR</title>
 
     <script src="tailwind.config.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/custom.css">
     <link href="<?php echo base_url(); ?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
 
+    <link rel="icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/x-icon">
+
     <style>
     body {
-        background-color: #f0f2f5;
+        /* Using Montserrat as the base font */
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(115deg, #62cff4,rgb(52, 109, 242));
         margin: 0;
         min-height: 100vh;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
@@ -38,27 +47,26 @@
     }
 
     .card-body img {
-        width: 80px;
-        height: 80px;
+        width: 230px;
+        height: 230px;
         display: block;
-        margin: 0 auto 30px auto;
+        margin: 0 auto 2px auto;
     }
 
     .form-control {
         border-radius: 6px;
         padding: 10px 12px;
         font-size: 15px;
-        /* flex-grow: 1; - This was related to the "Send OTP" flexbox,
-                           it's generally harmless for form-control but
-                           can be removed if no longer needed for any layout */
+        font-family: 'Montserrat', sans-serif; 
     }
+    /* Add to your <style> block */
+.form-control:focus {
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Subtle blue glow */
+    outline: none; /* Remove default outline */
+}
 
     .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-check {
-        margin-top: 15px;
         margin-bottom: 20px;
     }
 
@@ -69,6 +77,8 @@
         padding: 12px;
         font-size: 16px;
         border-radius: 6px;
+        font-family: 'Montserrat', sans-serif; 
+        font-weight: 500;
         transition: background 0.3s ease;
     }
 
@@ -103,23 +113,11 @@
             <?php } ?>
 
             <form class="form-horizontal form-material" method="post" id="loginform" action="login/Login_Auth">
-                <a href="javascript:void(0)" class="text-center db" style="margin-bottom: 30px;">
-                    <img src="<?php echo base_url(); ?>assets/images/logo-icon1.png" alt="Home" />
+                <a href="javascript:void(0)" class="text-center db">
+                    <img src="<?php echo base_url(); ?>assets/images/optima-logo.png" alt="Home" />
                 </a>
 
-                <div class="login_content" style="text-align: center;">
-                    <h3 style="
-                        font: normal 20px Helvetica, Arial, sans-serif;
-                        letter-spacing: 0.05em; 
-                        line-height: 20px;
-                        margin: 5px 0 40px;
-                        color: #555555;
-                    ">
-                        Log in your Account
-                    </h3>
-                </div>
-
-                <div class="form-group"> 
+                <div class="form-group">
                     <input type="text" name="email" id="email" class="form-control" placeholder="Username" required>
                 </div>
 
@@ -135,7 +133,7 @@
                     </button>
                 </div>
                 <div class="text-center mt-3">
-                    <a href="<?php echo base_url('homepage.php'); ?>" style="color: #3b82f6; font-weight: 500; text-decoration: none;">Go to Website</a>
+                    <a href="<?php echo base_url('homepage.php'); ?>" style="color: #3b82f6; font-weight: 500; text-decoration: none;">Visit Homepage</a>
                 </div>
             </form>
         </div>
