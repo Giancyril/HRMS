@@ -72,31 +72,21 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
-                           <div class="card-body">
-                                        <div class="d-flex flex-row">
-                                            <div class="round align-self-center round-success"><i class="ti-money"></i></div> <div class="m-l-10 align-self-center">
-                                                    <h3 class="m-b-0">
-                                                        <?php
-                                                        // 1. Get total number of employees
-                                                            $this->db->from("employee"); // Replace "employees" with your actual employee table name
-                                                            $total_employees = $this->db->count_all_results();
-
-                                                        // 2. Get number of generated payslips
-                                                            $this->db->from("pay_salary");
-                                                            $generated_payslips = $this->db->count_all_results();
-
-                                                        // 3. Calculate payslips pending
-                                                            $payslips_pending = $total_employees - $generated_payslips;
-
-                                                        // 4. Display the result
-                                                            echo $payslips_pending;
-                                                        ?> Payslips
-                                                    </h3>
-                                                    <a href="<?php echo base_url('payroll/salary_list'); ?>" class="text-muted m-b-0">View Details</a> </div>
-                                        </div>
-                           </div>
+                         <div class="card-body">
+                             <div class="d-flex flex-row">
+                               <div class="round align-self-center round-success"><i class="ti-money"></i></div> <div class="m-l-10 align-self-center">
+                                     <h3 class="m-b-0">
+                                       <?php
+                                        $this->db->from("pay_salary");
+                                         echo $this->db->count_all_results();
+                                        ?> Payslips 
+                                      </h3>
+                                  <a href="<?php echo base_url('payroll/salary_list'); ?>" class="text-muted m-b-0">View Details</a> </div>
+                              </div>
+                         </div>
                         </div>
                     </div>
+                    <!-- Column -->
                 </div>
                 <div class="row ">
                     <div class="col-md-6 col-lg-3 col-xlg-3">
