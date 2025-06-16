@@ -85,7 +85,7 @@
                                 <input type="text" name="leaveday" class="form-control" id="recipient-name1" value="">
                             </div>
                             <div class="form-group">
-                                <label class="control-label">status</label>
+                                <label class="control-label">Status</label>
                                 <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="status" required>
                                     <option value="">Select Here</option>
                                     <option value="1">Active</option>

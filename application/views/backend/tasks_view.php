@@ -73,7 +73,7 @@
 <!--                                                <td class="jsgrid-align-center ">
                                                     <a href="#" title="Edit" class="btn btn-sm btn-info waves-effect waves-light taskmodal" data-id="<?php #echo $value->id ?>"><i class="fa fa-pencil-square-o"></i></a>
                                                     <a onclick="alert('Are you sure, you want to delete this?')" href="#" title="Delete" class="btn btn-sm btn-info waves-effect waves-light TasksDelet" data-id="<?php #echo $value->id ?>"><i class="fa fa-trash-o"></i></a>
-                                                </td>
+                                                </td>-->
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -104,8 +104,8 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label class="control-label col-md-3">Project Date</label>
-                                                <input type="text" value="" name="prostart" class="form-control col-md-4" id="recipient-name1" readonly>
-                                                <input type="text" value="" name="proend" class="form-control col-md-4" id="recipient-name1" readonly>
+                                                <input type="text" value="" name="prostart" class="form-control col-md-4" id="proStartDate" readonly>
+                                                <input type="text" value="" name="proend" class="form-control col-md-4" id="proEndDate" readonly>
                                             </div>                                              
                                              <div class="form-group row">
                                                 <label class="control-label col-md-3">Assign To</label>
@@ -158,7 +158,7 @@
                                     <div class="modal-footer">
                                         <input type="hidden" name="id" class="form-control" id="recipient-name1">                                       
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-info">Submit</button>
+                                        <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                     </form>
                                 </div>
@@ -188,26 +188,53 @@
 </script>
 <script type="text/javascript">
                                         $(document).ready(function () {
-                                            $(".proid").click(function (e) {
-                                                e.preventDefault(e);
-                                                // Get the record's ID via attribute  
-                                                var iid = $(this).val();
-                                                console.log(iid);
-                                                $('#tasksModalform').trigger("reset");
-                                                $('#tasksmodel').modal('show');
-                                                $.ajax({
-                                                    url: 'projectbyId?id=' + iid,
-                                                    method: 'GET',
-                                                    data: '',
-                                                    dataType: 'json',
-                                                }).done(function (response) {
-                                                    console.log(response);
-                                                    // Populate the form fields with the data returned from server
-													$('#tasksModalform').find('[name="prostart"]').val(response.provalue.pro_start_date).end();
-                                                    $('#tasksModalform').find('[name="proend"]').val(response.provalue.pro_end_date).end();
-												});
-                                            });
-                                        });
+    // *** CRITICAL FIX 1: Change .click() to .change() ***
+    $(".proid").change(function (e) {
+        // e.preventDefault(e); // *** FIX 2: Removed this line. It's generally not needed for a <select>'s change event
+                              // and can sometimes prevent the dropdown from visually updating.
+
+        // Get the selected project's ID. This line is correct.
+        var iid = $(this).val();
+        console.log("Selected Project ID: " + iid); // Make console output more informative
+
+        // *** CRITICAL FIX 3: Removed these lines as they were causing unintended behavior ***
+        // $('#tasksModalform').trigger("reset"); // This was resetting the entire form when a project was chosen.
+        // $('#tasksmodel').modal('show');       // This modal ID was wrong (#exampleModal is correct)
+                                                // and it's unnecessary to show a modal that's already open.
+
+        $.ajax({
+            url: 'projectbyId?id=' + iid, // Ensure this URL is correct and accessible from the browser.
+            method: 'GET',
+            data: '',
+            dataType: 'json',
+        }).done(function (response) {
+            console.log("AJAX Response for Project ID " + iid + ":", response);
+            
+            // *** IMPORTANT: Add checks for response data to prevent errors ***
+            if (response && response.provalue) {
+                // Populate the form fields with the data returned from the server
+                $('#tasksModalform').find('[name="prostart"]').val(response.provalue.pro_start_date);
+                $('#tasksModalform').find('[name="proend"]').val(response.provalue.pro_end_date);
+
+                // If you are using a library like Select2 (indicated by "select2" class),
+                // sometimes you need to explicitly tell it to update its display after setting the value programmatically.
+                // If it's a plain <select>, the visual update is usually automatic after a selection.
+                // Uncomment the line below ONLY IF you are using Select2 and the visual update is still an issue.
+                // $(this).trigger('change.select2'); // Assumes $(this) refers to the .proid element
+            } else {
+                console.warn("Project details not found or invalid response for ID: " + iid, response);
+                // Optionally clear the date fields if no valid project data is returned
+                $('#tasksModalform').find('[name="prostart"]').val('');
+                $('#tasksModalform').find('[name="proend"]').val('');
+            }
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX Error fetching project details for ID " + iid + ":", textStatus, errorThrown, jqXHR);
+            // Optionally clear the date fields on AJAX failure
+            $('#tasksModalform').find('[name="prostart"]').val('');
+            $('#tasksModalform').find('[name="proend"]').val('');
+        });
+    });
+});
 </script>
                                        <script type="text/javascript">
                                         $(document).ready(function () {
