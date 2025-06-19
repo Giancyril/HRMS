@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Email </label>
-                                        <input type="email" id="example-email2" name="email" class="form-control" placeholder="email@mail.com" minlength="7" required > 
+                                        <input type="email" id="example-email2" name="email" class="form-control" placeholder="email@gmail.com" minlength="7" required > 
                                     </div><!--
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Password </label>
@@ -140,7 +140,7 @@
                                         <input type="file" name="image_url" class="form-control" value=""> 
                                     </div>
                                     <div class="form-actions col-md-12">
-                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                                        <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
                                         <button type="button" class="btn btn-danger">Cancel</button>
                                     </div>
                                 </form>

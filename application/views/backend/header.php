@@ -108,7 +108,7 @@ date_default_timezone_set('Asia/Dhaka');
                                     <li><a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($basicinfo->em_id); ?>"><i class="ti-user"></i> My Profile</a></li>
                                     <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                     
-                                    <li><a href="<?php echo base_url(); ?>settings/Settings"><i class="ti-settings"></i> Account Setting</a></li>
+                                    <li><a href="<?php echo base_url(); ?>settings/Settings"><i class="ti-settings"></i> Settings</a></li>
                                     <?php } ?>
                                     <li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>

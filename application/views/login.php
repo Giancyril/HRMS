@@ -47,8 +47,8 @@
     }
 
     .card-body img {
-        width: 210px;
-        height: 210px;
+        width: 180px;
+        height: 180px;
         display: block;
         margin: 0 auto 2px auto;
     }
