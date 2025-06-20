@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $savedOTP = isset($_SESSION['otp']) ? $_SESSION['otp'] : '';
             $savedEmail = isset($_SESSION['otp_email']) ? $_SESSION['otp_email'] : '';
             $savedTimestamp = isset($_SESSION['otp_timestamp']) ? $_SESSION['otp_timestamp'] : 0;
-            $enteredEmail = isset($_POST['otp_email']) ? $_POST['otp_email'] : '';
+            $enteredEmail = isset($_POST['email']) ? $_POST['email'] : ''; // Corrected to match JS POST parameter
 
             if ($enteredOTP == $savedOTP && $enteredEmail == $savedEmail) {
                 // Check if the timestamp is within 5 minutes (300 seconds)
