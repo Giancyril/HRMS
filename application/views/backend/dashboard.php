@@ -74,7 +74,7 @@
                         <div class="card">
                          <div class="card-body">
                              <div class="d-flex flex-row">
-                               <div class="round align-self-center round-success"><i class="ti-money"></i></div> <div class="m-l-10 align-self-center">
+                               <div class="round align-self-center round-warning"><i class="ti-money"></i></div> <div class="m-l-10 align-self-center">
                                      <h3 class="m-b-0">
                                        <?php
                                         $this->db->from("pay_salary");
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card card-inverse card-success">
+                        <div class="card card-inverse card-warning">
                            <div class="box text-center">
                                             <h1 class="font-light text-white">
                                             <?php
