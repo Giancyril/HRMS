@@ -97,7 +97,7 @@
                                     <div class="modal-footer">
                                        <input type="hidden" name="proid" value="<?php echo $details->id; ?>">
                                         
-                                        <button type="submit" <?php if($this->session->userdata('user_type')=='EMPLOYEE'){ ?> disabled <?php } ?> class="btn btn-success">Submit</button>
+                                        <button type="submit" <?php if($this->session->userdata('user_type')=='EMPLOYEE'){ ?> disabled <?php } ?> class="btn btn-info">Submit</button>
                                     </div>
                                     </form>
 				                        </div>
@@ -352,7 +352,7 @@
 			                                    </div>
 			                                    <div class="form-actions col-md-6">
                                                     <input type="hidden" name="proid" value="<?php echo $details->id; ?>">
-			                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+			                                        <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
 			                                        <button type="button" class="btn btn-danger">Cancel</button>
 			                                    </div>
 			                                </form>
