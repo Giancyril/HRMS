@@ -33,7 +33,7 @@
                         <div class="card card-body">
                             <div class="row">
                                 <div class="col-md-4 col-xs-6 col-sm-6">
-                                    <img src="<?php echo base_url();?>assets/images/hrinv.png" style=" width:180px; margin-right: 10px;" />
+                                    <img src="<?php echo base_url();?>assets/images/hrpayroll.png" style=" width:180px; margin-right: 10px;" />
                                 </div>
                                 <div class="col-md-8 col-xs-6 col-sm-6 text-left payslip_address">
                                     <p>

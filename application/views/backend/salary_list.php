@@ -246,7 +246,7 @@ var y = d.getFullYear();
                         .css( 'background-position', 'left top' )
                         .css( 'height', '100px' )
                         .prepend(
-                            '<img src="<?php echo base_url()?>assets/images/hrinv.png" style="position:absolute;background-size:30%; top:0; left:0;" />'
+                            '<img src="<?php echo base_url()?>assets/images/hrpayroll.png" style="position:absolute;background-size:30%; top:0; left:0;" />'
                         );
                     $(win.document.body).find( 'div img' )
                         .addClass( 'header-img' )
