@@ -4,7 +4,7 @@
             <div class="message"></div>
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor"><i class="fa fa-map-o"></i> Logistice Support List</h3>
+                    <h3 class="text-themecolor"> Logistice Support List</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">

@@ -82,7 +82,6 @@
                         <li><a href="<?php echo base_url(); ?>Payroll/Payslip_Report"> Payslip Report</a></li>
                     </ul>
                 </li>
-                
                 <li> <a href="<?php echo base_url()?>notice/All_notice" ><i class="mdi mdi-clipboard"></i><span class="hide-menu">Notice <span class="hide-menu"></a></li>
                 <li> <a href="<?php echo base_url(); ?>settings/Settings" ><i class="mdi mdi-settings"></i><span class="hide-menu">Settings <span class="hide-menu"></a></li>
 
@@ -127,6 +126,14 @@
                         <li><a href="<?php echo base_url(); ?>Payroll/Payslip_Report"> Payslip Report</a></li>
                     </ul>
                 </li>
+                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-grid"></i><span class="hide-menu">Assets </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="<?php echo base_url(); ?>Logistice/All_Assets"> Asset List </a></li>
+                                <li><a href="<?php echo base_url(); ?>Logistice/Assets_Category"> Assets Category </a></li>
+                                <!--<li><a href="<?php #echo base_url(); ?>Logistice/View"> Logistic Support List </a></li>-->
+                                <li><a href="<?php echo base_url(); ?>Logistice/logistic_support"> Logistic Support </a></li>
+                            </ul>
+                        </li>
                 
                 <li> <a href="<?php echo base_url(); ?>settings/Settings" ><i class="mdi mdi-settings"></i><span class="hide-menu">Settings <span class="hide-menu"></a></li>
                 <?php } ?>

@@ -4,7 +4,7 @@
             <div class="message"></div>
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor"><i class="fa fa-th-large"></i> Assets</h3>
+                    <h3 class="text-themecolor"> Assets</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -78,7 +78,7 @@
                                         <select name="cattype" class="form-control custom-select" required>
                                             <option>Select Category</option>
                                             <option value="ASSETS">Assets</option>
-                                            <option value="LOGISTIC">Logistice</option>
+                                            <option value="LOGISTIC">Logistic</option>
                                         </select>
                                         </div>
                                         <div class="form-group">
@@ -90,7 +90,7 @@
                                     <div class="modal-footer">
                                     <input type="hidden" name="catid" value="" class="form-control" id="recipient-name1">                                       
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-info">Submit</button>
                                     </div>
                                     </form>
                                 </div>
