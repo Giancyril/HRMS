@@ -9,7 +9,7 @@
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active"><i class="fa fa-bars" aria-hidden="true"></i> Logistice Support </li>
+                        <li class="breadcrumb-item active">Logistice Support </li>
                     </ol>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content ">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" id="exampleModalLabel1"><i class="fa fa-map-o"></i> Add Logistice </h4>
+                                        <h4 class="modal-title" id="exampleModalLabel1">Add Logistice </h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <form method="post" action="Add_Logistic_Support" id="logisticsform" enctype="multipart/form-data">
