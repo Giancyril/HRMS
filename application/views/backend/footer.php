@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.warn('No attendance data available for the chart.');
                 // Display a message on the canvas if no data
                 ctx.font = '20px Arial';
-                ctx.fillStyle = 'white';
+                ctx.fillStyle = 'black'; // Changed to black for visibility on white background
                 ctx.textAlign = 'center';
                 ctx.fillText('No attendance data available for chart.', ctx.canvas.width / 2, ctx.canvas.height / 2);
                 return;
@@ -234,19 +234,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     datasets: [{
                         label: 'Total Working Hours',
                         data: totalHours,
-                        backgroundColor: 'rgba(0, 169, 224, 1)', 
-                            color: 'rgba(0, 169, 224, 1)',
-                            hoverBackgroundColor: 'rgba(0, 169, 224, 1)', 
-                            color: 'rgba(0, 169, 224, 1)',
-                            hoverBackgroundColor: 'rgba(0, 169, 224, 1)', 
-                            borderColor: 'rgba(0, 169, 224, 1)',
+                        backgroundColor: 'rgba(0, 169, 224, 1)',
+                        borderColor: 'rgba(0, 169, 224, 1)',
                         borderWidth: 1.5
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    backgroundColor: 'white', // This will set the chart background color
+                    backgroundColor: 'white',
                     scales: {
                         y: {
                             beginAtZero: true,
@@ -259,23 +255,29 @@ document.addEventListener('DOMContentLoaded', function() {
                                 color: 'rgba(82, 98, 107, 1)'
                             },
                             grid: {
-                                color: 'rgba(255, 255, 255, 0.2)'
+                                // Keep horizontal grid lines for Y-axis, but make them lighter
+                                color: 'rgba(0, 0, 0, 0.1)', // Lighter color for horizontal grid lines
+                                drawBorder: false, // Do not draw the axis line itself
+                                drawOnChartArea: true, // Draw grid lines on the chart area
+                                drawTicks: false // Do not draw tick marks extending from the grid line
                             }
                         },
                         x: {
-                           title: {
-                             display: true,
-                             text: 'Employee Name',
-                             color: 'rgba(73, 80, 87, 1)',
-                             padding: { top: 20 } // Add this line
-                        },
-                          ticks: {
-                            color: 'rgba(82, 98, 107, 1)'
-                        },
-                          grid: {
-                            color: 'rgba(255, 255, 255, 0.2)'
+                            title: {
+                                display: true,
+                                text: 'Employee Name',
+                                color: 'rgba(73, 80, 87, 1)',
+                                padding: { top: 20 }
+                            },
+                            ticks: {
+                                color: 'rgba(82, 98, 107, 1)'
+                            },
+                            grid: {
+                                // Remove vertical grid lines for X-axis
+                                display: false, // This hides the vertical grid lines
+                                drawBorder: false // Ensure no border is drawn for the axis line
+                            }
                         }
-                      }
                     },
                     plugins: {
                         legend: {
@@ -344,7 +346,7 @@ $(document).ready(function() {
                                 label: 'Ontime', // Label for ontime data
                                 data: ontimeData,
                                 // Using the color from the "Monthly Attendance Overview" chart
-                                backgroundColor: 'rgba(75, 192, 192, 0.8)', // Lighter teal/turquoise for ontime
+                                backgroundColor: 'rgba(75, 192, 192, 0.8)' , // Lighter teal/turquoise for ontime
                                 borderColor: 'rgba(75, 192, 192, 1)',
                                 borderWidth: 1
                             },
@@ -410,195 +412,205 @@ $(document).ready(function() {
 });
 
     // Chart: Employees by Department
-    const departmentCanvasElement = document.getElementById('departmentChart');
-    if (departmentCanvasElement) {
-        const ctxDepartment = departmentCanvasElement.getContext('2d');
-        const departmentApiUrl = '<?php echo base_url(); ?>dashboard/getDepartmentChartData';
+const departmentCanvasElement = document.getElementById('departmentChart');
+if (departmentCanvasElement) {
+    const ctxDepartment = departmentCanvasElement.getContext('2d');
+    const departmentApiUrl = '<?php echo base_url(); ?>dashboard/getDepartmentChartData';
 
-        fetch(departmentApiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if (!Array.isArray(data) || data.length === 0) {
-                    console.warn('No department data available for the chart.');
-                    ctxDepartment.font = '20px Arial';
-                    ctxDepartment.fillStyle = 'black';
-                    ctxDepartment.textAlign = 'center';
-                    ctxDepartment.fillText('No department data available for chart.', ctxDepartment.canvas.width / 2, ctxDepartment.canvas.height / 2);
-                    return;
-                }
+    fetch(departmentApiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (!Array.isArray(data) || data.length === 0) {
+                console.warn('No department data available for the chart.');
+                ctxDepartment.font = '20px Arial';
+                ctxDepartment.fillStyle = 'black';
+                ctxDepartment.textAlign = 'center';
+                ctxDepartment.fillText('No department data available for chart.', ctxDepartment.canvas.width / 2, ctxDepartment.canvas.height / 2);
+                return;
+            }
 
-                // Filter data to only include departments with at least one employee
-                const filteredData = data.filter(item => item.employee_count > 0);
+            // Filter data to only include departments with at least one employee
+            const filteredData = data.filter(item => item.employee_count > 0);
 
-                if (filteredData.length === 0) {
-                    console.warn('No departments with employees found for the chart.');
-                    ctxDepartment.font = '20px Arial';
-                    ctxDepartment.fillStyle = 'black';
-                    ctxDepartment.textAlign = 'center';
-                    ctxDepartment.fillText('No departments with employees to display.', ctxDepartment.canvas.width / 2, ctxDepartment.canvas.height / 2);
-                    return;
-                }
+            if (filteredData.length === 0) {
+                console.warn('No departments with employees found for the chart.');
+                ctxDepartment.font = '20px Arial';
+                ctxDepartment.fillStyle = 'black';
+                ctxDepartment.textAlign = 'center';
+                ctxDepartment.fillText('No departments with employees to display.', ctxDepartment.canvas.width / 2, ctxDepartment.canvas.height / 2);
+                return;
+            }
 
-                const labels = filteredData.map(item => item.department_name);
-                const employeeCounts = filteredData.map(item => item.employee_count);
+            const labels = filteredData.map(item => item.department_name);
+            const employeeCounts = filteredData.map(item => item.employee_count);
 
-                new Chart(ctxDepartment, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Number of Employees',
-                            data: employeeCounts,
-                            backgroundColor: 'rgba(0, 169, 224, 1)', 
-                            color: 'rgba(0, 169, 224, 1)',
-                            hoverBackgroundColor: 'rgba(0, 169, 224, 1)', 
-                            color: 'rgba(0, 169, 224, 1)',
-                            hoverBackgroundColor: 'rgba(0, 169, 224, 1)', 
-                            borderColor: 'rgba(0, 169, 224, 1)',
-                            borderWidth: 1.5
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Number of Employees',
-                                    color: 'rgba(73, 80, 87, 1)'
-                                },
-                                ticks: {
-                                    color: 'rgba(82, 98, 107, 1)',
-                                    stepSize: 1
-                                },
-                                grid: {
-                                    color: 'rgba(0, 0, 0, 0.1)'
-                                }
+            new Chart(ctxDepartment, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Employees',
+                        // Changed bar color to a shade of purple
+                        backgroundColor:  'rgba(153, 102, 255, 1)', // Purple shade
+                        borderColor: 'rgba(153, 102, 255, 0.8)',
+                        borderWidth: 1.5,
+                        data: employeeCounts
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Employees',
+                                color: 'rgba(73, 80, 87, 1)'
                             },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Department',
-                                    color: 'rgba(73, 80, 87, 1)',
-                                    padding: { top: 20 }
-                                },
-                                ticks: {
-                                    color: 'rgba(82, 98, 107, 1)',
-                                    maxRotation: 0,
-                                    minRotation: 0,
-                                    autoSkip: false
-                                }
+                            ticks: {
+                                color: 'rgba(82, 98, 107, 1)',
+                                stepSize: 1
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)',
+                                drawBorder: false,
+                                drawOnChartArea: true,
+                                drawTicks: false
                             }
                         },
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    color: 'rgba(73, 80, 87, 1)'
-                                }
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Department',
+                                color: 'rgba(73, 80, 87, 1)',
+                                padding: { top: 20 }
+                            },
+                            ticks: {
+                                color: 'rgba(82, 98, 107, 1)',
+                                maxRotation: 0,
+                                minRotation: 0,
+                                autoSkip: false
+                            },
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(73, 80, 87, 1)'
                             }
                         }
                     }
-                });
-            })
-            .catch(error => console.error('Error fetching department chart data:', error));
-    }
-
-    // Chart: Employees by Designation
-    const designationCanvasElement = document.getElementById('designationChart');
-    if (designationCanvasElement) {
-        const ctxDesignation = designationCanvasElement.getContext('2d');
-        const designationApiUrl = '<?php echo base_url(); ?>dashboard/getDesignationChartData';
-
-        fetch(designationApiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if (!Array.isArray(data) || data.length === 0) {
-                    console.warn('No designation data available for the chart.');
-                    ctxDesignation.font = '20px Arial';
-                    ctxDesignation.fillStyle = 'black';
-                    ctxDesignation.textAlign = 'center';
-                    ctxDesignation.fillText('No designation data available for chart.', ctxDesignation.canvas.width / 2, ctxDesignation.canvas.height / 2);
-                    return;
                 }
+            });
+        })
+        .catch(error => console.error('Error fetching department chart data:', error));
+}
 
-                // Filter data to only include designations with at least one employee
-                const filteredData = data.filter(item => item.employee_count > 0);
+   // Chart: Employees by Designation
+const designationCanvasElement = document.getElementById('designationChart');
+if (designationCanvasElement) {
+    const ctxDesignation = designationCanvasElement.getContext('2d');
+    const designationApiUrl = '<?php echo base_url(); ?>dashboard/getDesignationChartData';
 
-                if (filteredData.length === 0) {
-                    console.warn('No designations with employees found for the chart.');
-                    ctxDesignation.font = '20px Arial';
-                    ctxDesignation.fillStyle = 'black';
-                    ctxDesignation.textAlign = 'center';
-                    ctxDesignation.fillText('No designations with employees to display.', ctxDesignation.canvas.width / 2, ctxDesignation.canvas.height / 2);
-                    return;
-                }
+    fetch(designationApiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (!Array.isArray(data) || data.length === 0) {
+                console.warn('No designation data available for the chart.');
+                ctxDesignation.font = '20px Arial';
+                ctxDesignation.fillStyle = 'black'; // Changed to black for visibility on white background
+                ctxDesignation.textAlign = 'center';
+                ctxDesignation.fillText('No designation data available for chart.', ctxDesignation.canvas.width / 2, ctxDesignation.canvas.height / 2);
+                return;
+            }
 
-                const labels = filteredData.map(item => item.designation_name);
-                const employeeCounts = filteredData.map(item => item.employee_count);
+            // Filter data to only include designations with at least one employee
+            const filteredData = data.filter(item => item.employee_count > 0);
 
-                new Chart(ctxDesignation, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Number of Employees',
-                            data: employeeCounts,
-                            backgroundColor: 'rgba(0, 169, 224, 1)', 
-                            color: 'rgba(0, 169, 224, 1)',
-                            hoverBackgroundColor: 'rgba(0, 169, 224, 1)', 
-                            color: 'rgba(0, 169, 224, 1)',
-                            hoverBackgroundColor: 'rgba(0, 169, 224, 1)', 
-                            borderColor: 'rgba(0, 169, 224, 1)',
-                            borderWidth: 1.5
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Number of Employees',
-                                    color: 'rgba(73, 80, 87, 1)'
-                                },
-                                ticks: {
-                                    color: 'rgba(82, 98, 107, 1)',
-                                    stepSize: 1
-                                },
-                                grid: {
-                                    color: 'rgba(0, 0, 0, 0.1)'
-                                }
+            if (filteredData.length === 0) {
+                console.warn('No designations with employees found for the chart.');
+                ctxDesignation.font = '20px Arial';
+                ctxDesignation.fillStyle = 'black'; // Changed to black for visibility on white background
+                ctxDesignation.textAlign = 'center';
+                ctxDesignation.fillText('No designations with employees to display.', ctxDesignation.canvas.width / 2, ctxDesignation.canvas.height / 2);
+                return;
+            }
+
+            const labels = filteredData.map(item => item.designation_name);
+            const employeeCounts = filteredData.map(item => item.employee_count);
+
+            new Chart(ctxDesignation, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Employees',
+                        data: employeeCounts,
+                        // Changed bar color to a distinct Forest Green
+                        backgroundColor: 'rgba(34, 139, 34, 0.8)', // Forest Green with opacity
+                        borderColor: 'rgba(34, 139, 34, 1)',      // Solid Forest Green for border
+                        borderWidth: 1.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Employees',
+                                color: 'rgba(73, 80, 87, 1)'
                             },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Designation',
-                                    color: 'rgba(73, 80, 87, 1)',
-                                    padding: { top: 20 }
-                                },
-                                ticks: {
-                                    color: 'rgba(82, 98, 107, 1)',
-                                    maxRotation: 0,
-                                    minRotation: 0,
-                                    autoSkip: false
-                                }
+                            ticks: {
+                                color: 'rgba(82, 98, 107, 1)',
+                                stepSize: 1 // Ensure ticks are integers if counts are integers
+                            },
+                            grid: {
+                                // Keep horizontal grid lines for Y-axis, but make them lighter
+                                color: 'rgba(0, 0, 0, 0.1)', // Lighter color for horizontal grid lines
+                                drawBorder: false, // Do not draw the axis line itself
+                                drawOnChartArea: true, // Draw grid lines on the chart area
+                                drawTicks: false // Do not draw tick marks extending from the grid line
                             }
                         },
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    color: 'rgba(73, 80, 87, 1)'
-                                }
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Designation',
+                                color: 'rgba(73, 80, 87, 1)',
+                                padding: { top: 20 }
+                            },
+                            ticks: {
+                                color: 'rgba(82, 98, 107, 1)',
+                                maxRotation: 0,
+                                minRotation: 0,
+                                autoSkip: false // Prevent skipping labels if space allows
+                            },
+                            grid: {
+                                // Remove vertical grid lines for X-axis
+                                display: false, // This hides the vertical grid lines
+                                drawBorder: false // Ensure no border is drawn for the axis line
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(73, 80, 87, 1)'
                             }
                         }
                     }
-                });
-            })
-            .catch(error => console.error('Error fetching designation chart data:', error));
-    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching designation chart data:', error));
+}
 });
 </script>
