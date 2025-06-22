@@ -115,6 +115,7 @@
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Projects/All_Projects">Projects </a></li>
                         <li><a href="<?php echo base_url(); ?>Projects/All_Tasks"> Task List </a></li>
+                        <li><a href="<?php echo base_url(); ?>Projects/Field_visit"> Field Visit</a></li>
                     </ul>
                 </li>
 

@@ -416,7 +416,7 @@
 		                                    	<div class="form-actions col-md-12">
                                                     <input type="hidden" name="id" value="">
                                                     <input type="hidden" name="proid" value="<?php echo $details->id; ?>">
-		                                    	    <button <?php if($this->session->userdata('user_type')=='EMPLOYEE'){ ?> disabled <?php } ?> type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+		                                    	    <button <?php if($this->session->userdata('user_type')=='EMPLOYEE'){ ?> disabled <?php } ?> type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
 		                                    	    <button type="button" class="btn btn-danger">Cancel</button>
 		                                    	</div>
 			                                </form>
@@ -495,7 +495,7 @@
 			                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="id" value="">                                                
                                                     <input type="hidden" name="proid" value="<?php echo $details->id; ?>">                                                
-			                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+			                                        <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
 			                                        <button type="button" class="btn btn-danger">Cancel</button>
 			                                    </div>
 			                                </form>
