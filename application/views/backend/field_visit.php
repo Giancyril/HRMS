@@ -111,11 +111,15 @@
 
                            <?php } elseif($value->status =='Not Approve'){ ?>
 
+                           <a href="" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light fieldAuthEdit" data-id="<?php echo $value->id; ?>" >
+                            <i class="fa fa-pencil-square-o"></i>
+                           </a>   
+
                            <a href="" title="Edit" class="btn btn-sm btn-info waves-effect waves-light Status " data-id="<?php echo $value->id; ?>" data-value="Approved" data-duration="<?php echo $value->total_days; ?>">Approved
                            </a>
-                           <br>
+                           
 
-                           <a href="" title="Edit" class="btn btn-sm btn-info waves-effect waves-light  Status" data-id = "<?php echo $value->id; ?>" data-value="Rejected" >Reject
+                           <a href="" title="Edit" class="btn btn-sm btn-danger waves-effect waves-light  Status" data-id = "<?php echo $value->id; ?>" data-value="Rejected" >Reject
                            </a>
                            <br>
 
@@ -123,9 +127,7 @@
 
                            <?php } ?>
 
-                           <a href="" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light fieldAuthEdit" data-id="<?php echo $value->id; ?>" >
-                            <i class="fa fa-pencil-square-o"></i>
-                           </a>
+                           
                            
                            <?php if ($value->attendance_updated !== 'done' AND $value->status == 'Approved'): ?>
                                <a href="" id="closeAndUpdateFieldVisit" data-confirm="Are you sure want to close his field visit and update the attendance?" title="Mark as done" class="btn btn-sm btn-info waves-effect waves-light" data-id="<?php echo $value->id; ?>" data-employeeID="<?php echo $value->em_code; ?>">
@@ -253,7 +255,7 @@
               <input type="hidden" name="fid">
                <button type="button" class="btn btn-danger" data-dismiss="modal">Close
                </button>
-               <button type="submit" class="btn btn-success">Submit
+               <button type="submit" class="btn btn-info">Submit
                </button>
             </div>
          </form>
