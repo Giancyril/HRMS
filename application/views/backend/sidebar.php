@@ -141,7 +141,7 @@
                                 <li><a href="<?php echo base_url(); ?>Logistice/logistic_support"> Logistic Support </a></li>
                             </ul>
                         </li>
-                
+
                 <li> <a href="<?php echo base_url(); ?>settings/Settings" ><i class="mdi mdi-settings"></i><span class="hide-menu">Settings <span class="hide-menu"></a></li>
                 <?php } ?>
             </ul>

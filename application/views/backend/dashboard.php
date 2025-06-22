@@ -316,8 +316,8 @@
             <h4 class="card-title">Monthly Attendance Report
                 <select id="attendanceYear" class="form-control pull-right" style="width: 120px;">
                     <?php $currentYear = date('Y'); ?>
-                    <?php for ($y = $currentYear; $y >= 2025; $y--): // Based on image_1da8aa.png showing 2019 as a selectable year ?>
-                        <option value="<?php echo $y; ?>" <?php echo ($y == 2019) ? 'selected' : ''; ?>>
+                    <?php for ($y = $currentYear; $y >= 2020; $y--):  ?>
+                        <option value="<?php echo $y; ?>" <?php echo ($y == 2025) ? 'selected' : ''; ?>>
                             <?php echo $y; ?>
                         </option>
                     <?php endfor; ?>
