@@ -4,7 +4,7 @@
             <div class="message"></div>
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor"><i class="fa fa-money"></i> Loan Installment</h3>
+                    <h3 class="text-themecolor"> Loan Installment</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -17,7 +17,6 @@
                 <div class="row m-b-10"> 
                     <div class="col-12">
                         <button type="button" class="btn btn-info"><i class="fa fa-plus"></i><a data-toggle="modal" data-target="#loanmodel" data-whatever="@getbootstrap" class="text-white"><i class="" aria-hidden="true"></i> Add Loan Installment </a></button>
-                        <button type="button" class="btn btn-primary"><i class="fa fa-bars"></i><a href="<?php echo base_url(); ?>Loan/installment" class="text-white"><i class="" aria-hidden="true"></i>  Loan List</a></button>
                     </div>
                 </div>
                 <div class="row">
@@ -130,7 +129,7 @@
                                        <input type="hidden" name="loanid" value="">
                                        <input type="hidden" name="id" value="">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-info">Submit</button>
                                     </div>
                                     </form>
                                 </div>
