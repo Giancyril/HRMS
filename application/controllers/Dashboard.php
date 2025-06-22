@@ -102,5 +102,9 @@ class Dashboard extends CI_Controller {
             redirect(base_url() , 'refresh');
         }
     }
+    // New method for Privacy Policy
+    public function privacy_policy() {
+        $this->load->view('backend/privacy_policy'); // Loads the new view file
+    }
     
 }
