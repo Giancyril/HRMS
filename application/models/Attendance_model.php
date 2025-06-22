@@ -118,4 +118,20 @@ class Attendance_model extends CI_Model
         $query = $this->db->query($sql);
         return $query->result();
     }
+
+    // In your attendance_model.php
+public function get_monthly_attendance_summary($year = null) {
+    if ($year === null) {
+        $year = date('Y'); // Default to current year if not provided
+    }
+
+    $this->db->select("DATE_FORMAT(atten_date, '%b') as month,
+                       SUM(CASE WHEN status = 'A' THEN 1 ELSE 0 END) as ontime,
+                       SUM(CASE WHEN status = 'E' THEN 1 ELSE 0 END) as late"); // Assuming 'A' for ontime/present and 'E' for late/excused based on Add_Attendance logic
+    $this->db->where("YEAR(atten_date)", $year);
+    $this->db->group_by("MONTH(atten_date)");
+    $this->db->order_by("MONTH(atten_date)", "ASC");
+    $query = $this->db->get('attendance'); // Assuming 'attendance' is your table name
+    return $query->result();
+}
 }

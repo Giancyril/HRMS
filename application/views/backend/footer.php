@@ -1,7 +1,7 @@
  </div>
 
     <footer class="footer">
-                © <?php echo date("Y"); ?> Optima HR. All rights reserved.
+                © <?php echo date("Y"); ?> Optima HR.
                 <span class="float-right">
                     <a href="YOUR_FACEBOOK_URL" class="text-muted m-r-10"><i class="fa fa-facebook"></i></a>
                     <a href="YOUR_TWITTER_URL" class="text-muted m-r-10"><i class="fa fa-twitter"></i></a>
@@ -311,6 +311,103 @@ document.addEventListener('DOMContentLoaded', function() {
             ctx.textAlign = 'center';
             ctx.fillText(errorMessage, ctx.canvas.width / 2, ctx.canvas.height / 2);
         });
+
+$(document).ready(function() {
+    var monthlyAttendanceChart; // Variable to hold the chart instance
+
+    function loadMonthlyAttendanceChart(year) {
+        // Destroy existing chart if it exists to prevent multiple charts on updates
+        if (monthlyAttendanceChart) {
+            monthlyAttendanceChart.destroy();
+        }
+
+        $.ajax({
+            url: '<?php echo base_url("attendance/getMonthlyAttendanceData"); ?>', // Call the controller function
+            type: 'GET',
+            dataType: 'json',
+            data: { year: year }, // Pass the selected year to the backend
+            success: function(data) {
+                console.log("Attendance Data Received:", data); // Debug: Check data structure
+
+                // Prepare labels and data for the chart
+                const labels = data.map(item => item.month); // e.g., ["Jan", "Feb", ...]
+                const ontimeData = data.map(item => parseInt(item.ontime)); // Ensure numbers for calculation
+                const lateData = data.map(item => parseInt(item.late)); // Ensure numbers for calculation
+
+                const ctx = document.getElementById('monthlyAttendanceChart').getContext('2d');
+                monthlyAttendanceChart = new Chart(ctx, {
+                    type: 'bar', // Bar chart type
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Ontime', // Label for ontime data
+                                data: ontimeData,
+                                // Using the color from the "Monthly Attendance Overview" chart
+                                backgroundColor: 'rgba(75, 192, 192, 0.8)', // Lighter teal/turquoise for ontime
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Late', // Label for late data
+                                data: lateData,
+                                // Using the color from the "Monthly Attendance Overview" chart
+                                backgroundColor: 'rgba(255, 99, 132, 0.8)', // Pink/Red for late
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, // Important for custom height/width
+                        scales: {
+                            x: {
+                                stacked: true, // Make bars stacked on the x-axis, as seen in image_1e0a27.png
+                                title: {
+                                    display: true,
+                                    text: 'Month' // Label for x-axis
+                                }
+                            },
+                            y: {
+                                stacked: true, // Make bars stacked on the y-axis, as seen in image_1e0a27.png
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Number of Days' // Label for y-axis
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Monthly Attendance Overview' // Chart title
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top' // Position legend at the top, as seen in image_1e0a27.png
+                            }
+                        }
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching monthly attendance data:", status, error, xhr.responseText);
+                // Display the specific error message as seen in image_1e06de.png
+                $('#monthlyAttendanceChart').parent().html('<p class="text-danger">Failed to load attendance chart. Please try again.</p>');
+            }
+        });
+    }
+
+    // Initial load of the chart for the default selected year (e.g., 2019 as shown in image_1da8aa.png)
+    loadMonthlyAttendanceChart($('#attendanceYear').val());
+
+    // Event listener for year change
+    $('#attendanceYear').on('change', function() {
+        var selectedYear = $(this).val();
+        loadMonthlyAttendanceChart(selectedYear);
+    });
+});
 
     // Chart: Employees by Department
     const departmentCanvasElement = document.getElementById('departmentChart');

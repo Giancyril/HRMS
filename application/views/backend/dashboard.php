@@ -311,6 +311,23 @@
                         </div>
                     </div>
                 </div>
+               <div class="col-lg-12">
+    <div class="card"> <div class="card-body" style="background-color: white; color: black;">
+            <h4 class="card-title">Monthly Attendance Report
+                <select id="attendanceYear" class="form-control pull-right" style="width: 120px;">
+                    <?php $currentYear = date('Y'); ?>
+                    <?php for ($y = $currentYear; $y >= 2019; $y--): // Based on image_1da8aa.png showing 2019 as a selectable year ?>
+                        <option value="<?php echo $y; ?>" <?php echo ($y == 2019) ? 'selected' : ''; ?>>
+                            <?php echo $y; ?>
+                        </option>
+                    <?php endfor; ?>
+                </select>
+            </h4>
+            <div style="height: 350px;"> <canvas id="monthlyAttendanceChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12"> <div class="card">
                             <div class="card-body">

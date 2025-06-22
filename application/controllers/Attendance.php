@@ -297,6 +297,19 @@ class Attendance extends CI_Controller
             echo json_encode(['error' => 'Unauthorized access']);
         }
     }
+    public function getMonthlyAttendanceData() {
+    // Set content type to JSON
+    header('Content-Type: application/json');
+
+    // Get the year from the AJAX request
+    $year = $this->input->get('year'); // Assuming frontend sends 'year' via GET
+
+    // Get data from model, passing the year
+    $data = $this->attendance_model->get_monthly_attendance_summary($year);
+
+    // Output JSON
+    echo json_encode($data);
+}
 }
 
 
