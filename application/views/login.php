@@ -19,6 +19,8 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfmgb/xmNOfQVZkgEoXZrRe8JGYaKcMHT7kcdSTFqNFF5wocNrUoVsEaOB+fbKhtKl8JqazQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -51,11 +53,13 @@
             margin: 0 auto 2px auto;
         }
 
+        /* Adjust padding to accommodate icon on the right */
         .form-control {
             border-radius: 6px;
-            padding: 10px 12px;
+            padding: 10px 40px 10px 12px; /* Top, Right (for icon), Bottom, Left (original padding) */
             font-size: 15px;
             font-family: 'Montserrat', sans-serif;
+            position: relative;
         }
 
         .form-control:focus {
@@ -66,6 +70,24 @@
 
         .form-group {
             margin-bottom: 20px;
+            position: relative; /* Essential for positioning icons inside */
+        }
+
+        /* Icon Styling - Placed on the right */
+        .form-group .form-control-feedback {
+            position: absolute;
+            top: 50%;
+            right: 15px; 
+            transform: translateY(-50%);
+            color: #007bff; 
+            pointer-events: none; 
+            z-index: 2;
+        }
+
+        .form-group .form-control-feedback i {
+            font-size: 20px; 
+            line-height: 1;
+            vertical-align: middle;
         }
 
         .btn-login {
@@ -87,17 +109,13 @@
         /* The original flash message div - hide it by default now that SweetAlert handles display */
         .message {
             display: none;
-            /* Hide this div, SweetAlert will show the message */
         }
 
         /* SweetAlert2 Customizations */
         .swal2-popup.square-modal {
             width: 320px;
-            /* Adjust width to make it more square */
             height: auto;
-            /* Height will adjust to content */
             border-radius: 8px;
-            /* Maintain slight border radius for aesthetics */
         }
 
         .swal2-title {
@@ -105,25 +123,24 @@
             font-weight: 500;
             font-size: 1.25rem;
             color: #333;
-            text-align: center; /* Center the title */
-            padding-bottom: 1em; /* Increased padding below title */
-            margin-bottom: 1em; /* Space for the border-bottom */
-            border-bottom: 3px solid #e9ecef; /* The separator line! */
+            text-align: center;
+            padding-bottom: 1em;
+            margin-bottom: 1em;
+            border-bottom: 3px solid #e9ecef;
         }
 
         .swal2-html-container {
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             color: #555;
-            text-align: center; /* Center the text */
-            padding-top: 1em; /* Padding above the text, after the line */
-            padding-bottom: 1.5em; /* Padding below the text, before the button */
+            text-align: center;
+            padding-top: 1em;
+            padding-bottom: 1.5em;
         }
 
         .swal2-actions {
             margin-top: 0;
-            /* Ensure no extra margin from SweetAlert defaults */
-            padding-bottom: 0.5em; /* Padding below the button to the bottom of the modal */
+            padding-bottom: 0.5em;
         }
 
         .swal2-confirm.swal2-styled {
@@ -137,7 +154,7 @@
         }
 
         .swal2-confirm.swal2-styled:hover {
-            background-color: #0056b3  !important;
+            background-color: #0056b3 !important;
         }
     </style>
 </head>
@@ -159,12 +176,12 @@
 
                 <div class="form-group">
                     <input type="text" name="email" id="email" class="form-control" placeholder="Username" required>
+                    <span class="form-control-feedback"><i class="fa fa-user"></i></span>
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" name="password" value="<?php if (isset($_COOKIE['password'])) {
-                                                                            echo $_COOKIE['password'];
-                                                                        } ?>" type="password" required placeholder="Password">
+                    <input class="form-control" name="password" value="<?php if (isset($_COOKIE['password'])) { echo $_COOKIE['password']; } ?>" type="password" required placeholder="Password">
+                    <span class="form-control-feedback"><i class="fa fa-lock"></i></span>
                 </div>
 
                 <div class="form-group text-center m-t-20" style="margin-top: 30px;border-radius: 5px;">
