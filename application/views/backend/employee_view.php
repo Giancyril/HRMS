@@ -556,90 +556,159 @@
                                 </div>
 
                                 <div class="tab-pane" id="salary" role="tabpanel">
-                                    <div class="card">
-				                        <div class="card-body">
-			                        		<h3 class="card-title">Basic Salary</h3>
-			                                <form action="Add_Salary" method="post" enctype="multipart/form-data">
-                                           <div class="row">
-                                            <div class="form-group col-md-6 m-t-5">
-                                                <label class="control-label">Salary Type</label>
-                                                <select class="form-control  custom-select" data-placeholder="Choose a Category" tabindex="1" name="typeid" required>
-                                                <!-- <option selected>Choose Type...</option> -->
-                                                   <?php if(empty($salaryvalue->salary_type)){ ?>
-                                                    <?php } else { ?>
-                                                    <option value="<?php echo $salaryvalue->id; ?>"><?php echo $salaryvalue->salary_type; ?></option>                         <?php } ?>                                      
-                                                   <?php foreach($typevalue as $value): ?>
-                                                    <option value="<?php echo $value->id; ?>"><?php echo $value->salary_type; ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div> 
-			                                    <div class="form-group col-md-6 m-t-5">
-			                                        <label>Total Salary</label>
-			                                        <input type="text" name="total" class="form-control form-control-line total" placeholder="Total Salary" value="<?php if(!empty($salaryvalue->total)) echo $salaryvalue->total ?>" minlength="3" required> 
-			                                    </div>
-                                                </div>
-                                                 
-			                                    <h3 class="card-title">Addition</h3>
-			                                    <div class="row">
-			                                    <div class="form-group col-md-6 m-t-5">
-			                                        <label>Basic</label>
-			                                        <input type="text" name="basic"  class="form-control form-control-line basic" placeholder="Basic..." value="<?php if(!empty($salaryvalue->basic)) echo $salaryvalue->basic ?>" > 
-			                                    </div> 
-			                                    <div class="form-group col-md-6 m-t-5">
-			                                        <label>House Rent</label>
-			                                        <input type="text" name="houserent"  class="form-control form-control-line houserent" placeholder="House Rent..." value="<?php if(!empty($salaryvalue->house_rent)) echo $salaryvalue->house_rent ?>" > 
-			                                    </div> 
-			                                    <div class="form-group col-md-6 m-t-5">
-			                                        <label>Medical</label>
-			                                        <input type="text" name="medical"  class="form-control form-control-line medical" placeholder="Medical..." value="<?php if(!empty($salaryvalue->medical)) echo $salaryvalue->medical ?>" > 
-			                                    </div> 
-			                                    <div class="form-group col-md-6 m-t-5">
-			                                        <label>Conveyance</label>
-			                                        <input type="text" name="conveyance" class="form-control form-control-line conveyance" placeholder="Conveyance..." value="<?php if(!empty($salaryvalue->conveyance)) echo $salaryvalue->conveyance ?>" > 
-			                                    </div>
-                                                </div>
-                                                
-			                                    <h3 class="card-title">Deduction</h3>
-			                                    <div class="row">
-			                                    <div class="form-group col-md-6 m-t-5">
-			                                        <label>Insurance</label>
-			                                        <input type="text" name="bima"  class="form-control form-control-line" placeholder="Insurance" value="<?php if(!empty($salaryvalue->bima)) echo $salaryvalue->bima ?>"> 
-			                                    </div>
-			                                    <div class="form-group col-md-6 m-t-5">
-			                                        <label>Tax</label>
-			                                        <input type="text" name="tax"  class="form-control form-control-line" placeholder="Tax" value="<?php if(!empty($salaryvalue->tax)) echo $salaryvalue->tax ?>" > 
-			                                    </div>
-			                                    <div class="form-group col-md-6 m-t-5">
-			                                        <label>Provident Fund</label>
-			                                        <input type="text" name="provident"  class="form-control form-control-line" placeholder="Provident..." value="<?php if(!empty($salaryvalue->provident_fund)) echo $salaryvalue->provident_fund ?>"> 
-			                                    </div>
-			                                    <div class="form-group col-md-6 m-t-5">
-			                                        <label>Others</label>
-			                                        <input type="text" name="others"  class="form-control form-control-line" placeholder="others..." value="<?php if(!empty($salaryvalue->others)) echo $salaryvalue->others ?>"> 
-			                                    </div>
-                                                </div>
-                                                
-                                            <div class="form-group">
-                                                <div class="col-sm-12">
-                                                    <input type="hidden" name="emid" value="<?php echo $basic->em_id; ?>"> 
-                                                    <?php if(!empty($salaryvalue->salary_id)){ ?>    
-                                                    <input type="hidden" name="sid" value="<?php echo $salaryvalue->salary_id; ?>">                                               <?php } ?> 
-                                                    <?php if(!empty($salaryvalue->addi_id)){ ?>    
-                                                    <input type="hidden" name="aid" value="<?php echo $salaryvalue->addi_id; ?>">                                                  <?php } ?> 
-                                                    <?php if(!empty($salaryvalue->de_id)){ ?>
-                                                    <input type="hidden" name="did" value="<?php echo $salaryvalue->de_id; ?>">
-                                                    <?php } ?>                                                   
-                                                    <button  type="submit" style="float: right" class="btn btn-info">Add Salary</button>
-                                                </div>
-                                                
-                                            </div>                                                		                                    
-			                                    </form>
-				                        </div>
-                                    </div>
-                                </div>                                
-                            </div>
+    <div class="card">
+        <div class="card-body">
+            <?php
+            // Get the logged-in user's type (role) from the session, as used in your sidebar.
+            $loggedInUserType = $this->session->userdata('user_type');
+
+            // Determine if the logged-in user can edit the salary.
+            // Based on your sidebar, 'ADMIN' and 'HR-MANAGER' would have edit access.
+            // The 'else' block will handle the 'EMPLOYEE' role, showing a read-only view.
+            $canEditSalary = ($loggedInUserType == 'ADMIN' || $loggedInUserType == 'HR-MANAGER');
+
+            if ($canEditSalary) {
+                // This block is for ADMIN and HR-MANAGER (Editable View - your original form)
+            ?>
+                <h3 class="card-title">Basic Salary</h3>
+                <form action="Add_Salary" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="form-group col-md-6 m-t-5">
+                            <label class="control-label">Salary Type</label>
+                            <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="typeid" required>
+                                <?php if(empty($salaryvalue->salary_type)){ ?>
+                                <option value="">Select Salary Type</option> <?php } else { ?>
+                                <option value="<?php echo $salaryvalue->type_id; ?>" selected><?php echo $salaryvalue->salary_type; ?></option>
+                                <?php } ?>
+                                <?php foreach($typevalue as $value): ?>
+                                <option value="<?php echo $value->id; ?>"><?php echo $value->salary_type; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Total Salary</label>
+                            <input type="text" name="total" class="form-control form-control-line total" placeholder="Total Salary" value="<?php if(!empty($salaryvalue->total)) echo $salaryvalue->total ?>" minlength="3" required>
                         </div>
                     </div>
+
+                    <h3 class="card-title">Addition</h3>
+                    <div class="row">
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Basic</label>
+                            <input type="text" name="basic" class="form-control form-control-line basic" placeholder="Basic..." value="<?php if(!empty($salaryvalue->basic)) echo $salaryvalue->basic ?>" >
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>House Rent</label>
+                            <input type="text" name="houserent" class="form-control form-control-line houserent" placeholder="House Rent..." value="<?php if(!empty($salaryvalue->house_rent)) echo $salaryvalue->house_rent ?>" >
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Medical</label>
+                            <input type="text" name="medical" class="form-control form-control-line medical" placeholder="Medical..." value="<?php if(!empty($salaryvalue->medical)) echo $salaryvalue->medical ?>" >
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Conveyance</label>
+                            <input type="text" name="conveyance" class="form-control form-control-line conveyance" placeholder="Conveyance..." value="<?php if(!empty($salaryvalue->conveyance)) echo $salaryvalue->conveyance ?>" >
+                        </div>
+                    </div>
+
+                    <h3 class="card-title">Deduction</h3>
+                    <div class="row">
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Insurance</label>
+                            <input type="text" name="bima" class="form-control form-control-line" placeholder="Insurance" value="<?php if(!empty($salaryvalue->bima)) echo $salaryvalue->bima ?>">
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Tax</label>
+                            <input type="text" name="tax" class="form-control form-control-line" placeholder="Tax" value="<?php if(!empty($salaryvalue->tax)) echo $salaryvalue->tax ?>" >
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Provident Fund</label>
+                            <input type="text" name="provident" class="form-control form-control-line" placeholder="Provident..." value="<?php if(!empty($salaryvalue->provident_fund)) echo $salaryvalue->provident_fund ?>">
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Others</label>
+                            <input type="text" name="others" class="form-control form-control-line" placeholder="others..." value="<?php if(!empty($salaryvalue->others)) echo $salaryvalue->others ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="hidden" name="emid" value="<?php echo $basic->em_id; ?>">
+                            <?php if(!empty($salaryvalue->salary_id)){ ?>
+                            <input type="hidden" name="sid" value="<?php echo $salaryvalue->salary_id; ?>">
+                            <?php } ?>
+                            <?php if(!empty($salaryvalue->addi_id)){ ?>
+                            <input type="hidden" name="aid" value="<?php echo $salaryvalue->addi_id; ?>">
+                            <?php } ?>
+                            <?php if(!empty($salaryvalue->de_id)){ ?>
+                            <input type="hidden" name="did" value="<?php echo $salaryvalue->de_id; ?>">
+                            <?php } ?>
+                            <input type="hidden" name="typeid" value="<?php echo isset($salaryvalue->type_id) ? $salaryvalue->type_id : ''; ?>">
+                            <button type="submit" style="float: right" class="btn btn-info">Save</button>
+                        </div>
+                    </div>
+                </form>
+            <?php
+            } else {
+                // This block is for EMPLOYEE (Read-Only View)
+            ?>
+                <h3 class="card-title">Salary Information</h3>
+                <form> <div class="row">
+                        <div class="form-group col-md-6 m-t-5">
+                            <label class="control-label">Salary Type</label>
+                            <input type="text" class="form-control form-control-line" value="<?php echo isset($salaryvalue->salary_type) ? $salaryvalue->salary_type : 'N/A'; ?>" readonly>
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Total Salary</label>
+                            <input type="text" class="form-control form-control-line" value="<?php echo isset($salaryvalue->total) ? $salaryvalue->total : 'N/A'; ?>" readonly>
+                        </div>
+                    </div>
+
+                    <h3 class="card-title">Addition</h3>
+                    <div class="row">
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Basic</label>
+                            <input type="text" class="form-control form-control-line" value="<?php echo isset($salaryvalue->basic) ? $salaryvalue->basic : 'N/A'; ?>" readonly>
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>House Rent</label>
+                            <input type="text" class="form-control form-control-line" value="<?php echo isset($salaryvalue->house_rent) ? $salaryvalue->house_rent : 'N/A'; ?>" readonly>
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Medical</label>
+                            <input type="text" class="form-control form-control-line" value="<?php echo isset($salaryvalue->medical) ? $salaryvalue->medical : 'N/A'; ?>" readonly>
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Conveyance</label>
+                            <input type="text" class="form-control form-control-line" value="<?php echo isset($salaryvalue->conveyance) ? $salaryvalue->conveyance : 'N/A'; ?>" readonly>
+                        </div>
+                    </div>
+
+                    <h3 class="card-title">Deduction</h3>
+                    <div class="row">
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Insurance</label>
+                            <input type="text" class="form-control form-control-line" value="<?php echo isset($salaryvalue->bima) ? $salaryvalue->bima : 'N/A'; ?>" readonly>
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Tax</label>
+                            <input type="text" class="form-control form-control-line" value="<?php echo isset($salaryvalue->tax) ? $salaryvalue->tax : 'N/A'; ?>" readonly>
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Provident Fund</label>
+                            <input type="text" class="form-control form-control-line" value="<?php echo isset($salaryvalue->provident_fund) ? $salaryvalue->provident_fund : 'N/A'; ?>" readonly>
+                        </div>
+                        <div class="form-group col-md-6 m-t-5">
+                            <label>Others</label>
+                            <input type="text" class="form-control form-control-line" value="<?php echo isset($salaryvalue->others) ? $salaryvalue->others : 'N/A'; ?>" readonly>
+                        </div>
+                    </div>
+                </form>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+ </div>
                     <!-- Column -->
                 </div>
           <script type="text/javascript">
