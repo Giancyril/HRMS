@@ -222,11 +222,12 @@
 			                                    </div>
 			                                   		                                    
 			                                    </form>
+                                                <hr>
 			                                    
 			                                    <div class="">
 			                        				<h3 class="col-md-12">Present Contact Information</h3>
 			                                    </div>
-			                                    <hr>
+			                                    
 			                                <form class="row" action="Present_Address" method="post" enctype="multipart/form-data">			                                    
 			                                    <div class="form-group col-md-12 m-t-5">
 			                                        <label>Address</label>

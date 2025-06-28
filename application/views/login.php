@@ -79,13 +79,13 @@
             top: 50%;
             right: 15px; 
             transform: translateY(-50%);
-            color: #007bff; 
+            color: #6c757d; 
             pointer-events: none; 
             z-index: 2;
         }
 
         .form-group .form-control-feedback i {
-            font-size: 20px; 
+            font-size: 18px; 
             line-height: 1;
             vertical-align: middle;
         }
@@ -113,7 +113,7 @@
 
         /* SweetAlert2 Customizations */
         .swal2-popup.square-modal {
-            width: 320px;
+            width: 300px;
             height: auto;
             border-radius: 8px;
         }
@@ -190,7 +190,7 @@
                     </button>
                 </div>
                 <div class="text-center mt-3">
-                    <a href="<?php echo base_url('homepage.php'); ?>" style="color: #3b82f6; font-weight: 500; text-decoration: none;">Visit Homepage</a>
+                    <a href="<?php echo base_url('homepage.php'); ?>" style="color: #2C5C8E; font-weight: 550; text-decoration: none;">Visit Homepage</a>
                 </div>
             </form>
         </div>
