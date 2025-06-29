@@ -6,7 +6,7 @@
     <title>Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind.config.js"></script>
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
@@ -101,7 +101,7 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/script.js"></script>
+<script src="assets/js/script.js"></script>
 
 <!-- Add the password match validation and enabling password inputs -->
 <script>

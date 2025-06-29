@@ -159,21 +159,6 @@
             background-color: #0056b3 !important;
         }
 
-        .signup-link {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
-        .signup-link a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 
