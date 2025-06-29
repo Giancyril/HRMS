@@ -56,7 +56,8 @@
         /* Adjust padding to accommodate icon on the right */
         .form-control {
             border-radius: 6px;
-            padding: 10px 40px 10px 12px; /* Top, Right (for icon), Bottom, Left (original padding) */
+            padding: 10px 40px 10px 12px;
+            /* Top, Right (for icon), Bottom, Left (original padding) */
             font-size: 15px;
             font-family: 'Montserrat', sans-serif;
             position: relative;
@@ -70,22 +71,23 @@
 
         .form-group {
             margin-bottom: 20px;
-            position: relative; /* Essential for positioning icons inside */
+            position: relative;
+            /* Essential for positioning icons inside */
         }
 
         /* Icon Styling - Placed on the right */
         .form-group .form-control-feedback {
             position: absolute;
             top: 50%;
-            right: 15px; 
+            right: 15px;
             transform: translateY(-50%);
-            color: #6c757d; 
-            pointer-events: none; 
+            color: #6c757d;
+            pointer-events: none;
             z-index: 2;
         }
 
         .form-group .form-control-feedback i {
-            font-size: 18px; 
+            font-size: 18px;
             line-height: 1;
             vertical-align: middle;
         }
@@ -156,6 +158,22 @@
         .swal2-confirm.swal2-styled:hover {
             background-color: #0056b3 !important;
         }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -164,12 +182,13 @@
     <div class="login-box card">
         <div class="card-body loginpage">
             <?php if (!empty($this->session->flashdata('feedback'))) { ?>
-                <div class="message" id="flashMessageContainer">
-                    <strong>Notice: </strong><?php echo $this->session->flashdata('feedback') ?>
-                </div>
+            <div class="message" id="flashMessageContainer">
+                <strong>Notice: </strong><?php echo $this->session->flashdata('feedback') ?>
+            </div>
             <?php } ?>
 
-            <form class="form-horizontal form-material" method="post" id="loginform" action="<?php echo base_url(); ?>login/Login_Auth">
+            <form class="form-horizontal form-material" method="post" id="loginform"
+                action="<?php echo base_url(); ?>login/Login_Auth">
                 <a href="javascript:void(0)" class="text-center db">
                     <img src="<?php echo base_url(); ?>assets/images/optima-logo.png" alt="Home" />
                 </a>
@@ -180,7 +199,9 @@
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" name="password" value="<?php if (isset($_COOKIE['password'])) { echo $_COOKIE['password']; } ?>" type="password" required placeholder="Password">
+                    <input class="form-control" name="password"
+                        value="<?php if (isset($_COOKIE['password'])) { echo $_COOKIE['password']; } ?>"
+                        type="password" required placeholder="Password">
                     <span class="form-control-feedback"><i class="fa fa-lock"></i></span>
                 </div>
 
@@ -189,8 +210,12 @@
                         Log In
                     </button>
                 </div>
+                <div class="signup-link">
+                    Don't have an account? <a href="<?php echo base_url('register_view'); ?>">Sign here</a>
+                </div>
                 <div class="text-center mt-3">
-                    <a href="<?php echo base_url('homepage.php'); ?>" style="color: #2C5C8E; font-weight: 550; text-decoration: none;">Visit Homepage</a>
+                    <a href="<?php echo base_url('homepage.php'); ?>"
+                        style="color: #2C5C8E; font-weight: 550; text-decoration: none;">Visit Homepage</a>
                 </div>
             </form>
         </div>
@@ -264,8 +289,8 @@
                         popup: 'square-modal', // Apply the custom class for square size
                     },
                     allowOutsideClick: false, // Prevents closing by clicking outside
-                    allowEscapeKey: false,   // Prevents closing by pressing Escape key
-                    allowEnterKey: true,     // Allows closing by pressing Enter key on the button
+                    allowEscapeKey: false, // Prevents closing by pressing Escape key
+                    allowEnterKey: true, // Allows closing by pressing Enter key on the button
                 });
 
                 // Hide the original flash message container AFTER processing

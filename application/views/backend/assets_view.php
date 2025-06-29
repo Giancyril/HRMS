@@ -16,7 +16,7 @@
             <div class="container-fluid">
                 <div class="row m-b-10"> 
                     <div class="col-12">
-                        <button type="button" class="btn btn-info"><i class="fa fa-plus"></i><a data-toggle="modal" data-target="#assetsmodel" data-whatever="@getbootstrap" class="text-white"><i class="" aria-hidden="true"></i> Add Assets </a></button>
+                        <button type="button" class="btn btn-info"><i class="fa fa-plus"></i><a data-toggle="modal" data-target="#assetsmodel" data-whatever="@getbootstrap" class="text-white"><i class="" aria-hidden="true"></i> Add Asset </a></button>
                     </div>
                 </div>
                 <div class="row">
@@ -108,15 +108,15 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label">Assets Brand</label>
+                                                <label class="control-label">Asset Brand</label>
                                                 <input type="text" name="brand" value="" class="form-control" id="recipient-name1">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label">Assets Model</label>
+                                                <label class="control-label">Asset Model</label>
                                                 <input type="text" name="model" value="" class="form-control" id="recipient-name1">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label">Assets Code</label>
+                                                <label class="control-label">Asset Code</label>
                                                 <input type="text" name="code" value="" class="form-control" id="recipient-name1 ">
                                             </div>                                                   
                                                </div>
