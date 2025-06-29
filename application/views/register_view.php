@@ -6,7 +6,7 @@
     <title>Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind.config.js"></script>
-    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
