@@ -305,7 +305,7 @@
                         <div class="card">
                             <div class="card-body" style="background-color: white; color: black;">
                                 <h4 class="card-title">Employee Attendance Chart</h4>
-                                <div style="height: 400px;"> <canvas id="attendanceChart"></canvas>
+                                <div style="height: 350px;"> <canvas id="attendanceChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -332,7 +332,7 @@
                     <div class="col-lg-12 col-md-12"> <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Employees by Department</h4>
-                                <div style="height: 450px;"> <canvas id="departmentChart"></canvas>
+                                <div style="height: 350px;"> <canvas id="departmentChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -341,7 +341,7 @@
                 <div class="row"> <div class="col-lg-12 col-md-12"> <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Employees by Designation</h4>
-                                <div style="height: 450px;"> <canvas id="designationChart"></canvas>
+                                <div style="height: 350px;"> <canvas id="designationChart"></canvas>
                                 </div>
                             </div>
                         </div>

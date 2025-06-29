@@ -234,8 +234,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     datasets: [{
                         label: 'Total Working Hours',
                         data: totalHours,
-                        backgroundColor: 'rgba(0, 169, 224, 1)',
-                        borderColor: 'rgba(0, 169, 224, 1)',
+                        backgroundColor: 'rgba(33, 150, 243, 0.8)',
+                        borderColor: 'rgba(33, 150, 243, 0.8)',
                         borderWidth: 1.5
                     }]
                 },
@@ -346,8 +346,8 @@ $(document).ready(function() {
                                 label: 'Ontime', // Label for ontime data
                                 data: ontimeData,
                                 // Using the color from the "Monthly Attendance Overview" chart
-                                backgroundColor: 'rgba(75, 192, 192, 0.8)' , // Lighter teal/turquoise for ontime
-                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(90, 180, 250, 0.8)' , // Lighter teal/turquoise for ontime
+                                borderColor: 'rgba(90, 180, 250, 0.8)',
                                 borderWidth: 1
                             },
                             {
@@ -451,8 +451,8 @@ if (departmentCanvasElement) {
                     datasets: [{
                         label: 'Number of Employees',
                         // Changed bar color to a shade of purple
-                        backgroundColor:  'rgba(153, 102, 255, 1)', // Purple shade
-                        borderColor: 'rgba(153, 102, 255, 0.8)',
+                        backgroundColor: 'rgba(98, 207, 244, 0.8)', 
+                        borderColor: 'rgba(98, 207, 244, 0.8)',
                         borderWidth: 1.5,
                         data: employeeCounts
                     }]
@@ -552,8 +552,8 @@ if (designationCanvasElement) {
                         label: 'Number of Employees',
                         data: employeeCounts,
                         // Changed bar color to a distinct Forest Green
-                        backgroundColor: 'rgba(34, 139, 34, 0.8)', // Forest Green with opacity
-                        borderColor: 'rgba(34, 139, 34, 1)',      // Solid Forest Green for border
+                        backgroundColor: 'rgba(33, 150, 243, 0.8)',
+                        borderColor: 'rgba(33, 150, 243, 0.8)',     // Solid Forest Green for border
                         borderWidth: 1.5
                     }]
                 },
