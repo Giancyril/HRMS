@@ -183,7 +183,7 @@
 .icon-social-github,
 .icon-social-gplus,
 .icon-social-reddit,
-.icon-social-skype,
+.icon-social-instagram,
 .icon-social-dribbble,
 .icon-social-behance,
 .icon-social-foursqare,
@@ -725,7 +725,7 @@
 .icon-social-reddit:before {
   content: "\e60e";
 }
-.icon-social-skype:before {
+.icon-social-instagram:before {
   content: "\e60f";
 }
 .icon-social-dribbble:before {

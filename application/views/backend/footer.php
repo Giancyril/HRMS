@@ -1,15 +1,18 @@
  </div>
 
     <footer class="footer">
-                © <?php echo date("Y"); ?> Optima HR.
-                <span class="float-right">
-                    <a href="YOUR_FACEBOOK_URL" class="text-muted m-r-10"><i class="fa fa-facebook"></i></a>
-                    <a href="YOUR_TWITTER_URL" class="text-muted m-r-10"><i class="fa fa-twitter"></i></a>
-                     <a href="YOUR_GOOGLE_URL" class="text-muted m-r-10"><i class="fa fa-google"></i></a>
-                    <a href="YOUR_INSTAGRAM_URL" class="text-muted m-r-10"><i class="fa fa-instagram"></i></a>
-                    <a href="<?php echo base_url(); ?>dashboard/privacy_policy" class="text-muted">Privacy Policy</a>
-                </span>
-            </footer>
+    © <?php echo date("Y"); ?> Optima HR.
+
+    <span class="m-l-10"> <a href="YOUR_FACEBOOK_URL" class="text-muted m-r-10"><i class="fa fa-facebook"></i></a>
+        <a href="YOUR_TWITTER_URL" class="text-muted m-r-10"><i class="fa fa-twitter"></i></a>
+        <a href="YOUR_GOOGLE_URL" class="text-muted m-r-10"><i class="fa fa-google"></i></a>
+        <a href="YOUR_INSTAGRAM_URL" class="text-muted m-r-10"><i class="fa fa-instagram"></i></a>
+    </span>
+
+    <span class="float-right">
+        <a href="<?php echo base_url(); ?>dashboard/privacy_policy" class="text-muted">Privacy Policy</a>
+    </span>
+</footer>
 
         </div>
 </div>

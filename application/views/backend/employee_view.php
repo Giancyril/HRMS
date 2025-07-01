@@ -63,9 +63,9 @@
                                 <h6><?php echo $basic->em_phone; ?></h6> 
                                 <small class="text-muted p-t-30 db">Social Profile</small>
                                 <br/>
-                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->skype_id)) echo $socialmedia->facebook ?>" target="_blank"><i class="fa fa-facebook"></i></a>
-                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->skype_id)) echo $socialmedia->twitter ?>" target="_blank"><i class="fa fa-twitter"></i></a>
-                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->skype_id)) echo $socialmedia->skype_id ?>" target="_blank"><i class="fa fa-skype"></i></a>
+                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->facebook)) echo $socialmedia->facebook ?>" target="_blank"><i class="fa fa-facebook"></i></a>
+                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->twitter)) echo $socialmedia->twitter ?>" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->instagram)) echo $socialmedia->instagram ?>" target="_blank"><i class="fa fa-instagram"></i></a>
                                 <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->google_Plus)) echo $socialmedia->google_Plus ?>" target="_blank"><i class="fa fa-google"></i></a>
                             </div>
                         </div>                                                    
@@ -516,12 +516,12 @@
 				                                        <input type="text" class="form-control" name="twitter" value="<?php if(!empty($socialmedia->twitter)) echo $socialmedia->twitter ?>" > 
 				                                    </div>
 				                                    <div class="form-group col-md-6 m-t-20">
-				                                        <label>Google +</label>
+				                                        <label>Google</label>
 				                                        <input type="text" id="" name="google"  class="form-control " value="<?php if(!empty($socialmedia->google_plus)) echo $socialmedia->google_plus ?>"> 
 				                                    </div>
 				                                    <div class="form-group col-md-6 m-t-20">
-				                                        <label>Skype</label>
-				                                        <input type="text" id="" name="skype"  class="form-control " value="<?php if(!empty($socialmedia->skype_id)) echo $socialmedia->skype_id ?>"> 
+				                                        <label>Instagram</label>
+				                                        <input type="text" id="" name="instagram"  class="form-control " value="<?php if(!empty($socialmedia->instagram)) echo $socialmedia->instagram ?>"> 
 				                                    </div>
 				                               
 				                                    <div class="form-actions col-md-12">

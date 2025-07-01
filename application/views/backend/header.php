@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-date_default_timezone_set('Asia/Dhaka');
+date_default_timezone_set('Asia/Manila');
 ?>
 <head>
     <meta charset="utf-8">

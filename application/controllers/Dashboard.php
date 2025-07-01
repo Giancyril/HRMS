@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller {
 
 	    function __construct() {
         parent::__construct();
-        date_default_timezone_set('Asia/Dhaka');
+        date_default_timezone_set('Asia/Manila');
         $this->load->database();
         $this->load->model('login_model');
         $this->load->model('dashboard_model'); 

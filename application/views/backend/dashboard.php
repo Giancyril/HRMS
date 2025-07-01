@@ -13,7 +13,64 @@
                     </ol>
                 </div>
             </div>
-            <div class="container-fluid">
+             <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-outline-info">
+                <div class="card-body">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="m-l-0">
+                            <h3 class="m-b-0">Welcome Back, <?php echo $this->session->userdata('name'); ?>
+                                <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($this->session->userdata('user_login_id')); ?>" class="text-muted">&nbsp;<i class="fa fa-pencil"></i></a>
+                            </h3>
+                            <?php
+                            $session_user_identifier = $this->session->userdata('user_login_id'); // Get the identifier from the session
+
+
+                            $employee_data = null; // Initialize employee_data to null
+
+                            if (!empty($session_user_identifier)) {
+                                // Start building the query
+                                // Only selecting em_joining_date, first_name, and last_name
+                                $this->db->select('em_joining_date, first_name, last_name');
+
+                                // Determine which column to use for filtering: 'id' (numeric) or 'em_id' (alphanumeric)
+                                if (is_numeric($session_user_identifier) && (int)$session_user_identifier > 0) {
+                                    // If it's a positive number, assume it's the 'id' column
+                                    $this->db->where('id', $session_user_identifier);
+                                } else {
+                                    // Otherwise, assume it's the 'em_id' column
+                                    $this->db->where('em_id', $session_user_identifier);
+                                }
+
+                                // Execute the query
+                                $employee_query_result = $this->db->get('employee');
+
+                                if ($employee_query_result->num_rows() > 0) {
+                                    $employee_data = $employee_query_result->row();
+                                }
+                            }
+
+                            $joining_date = 'N/A';
+
+                            if ($employee_data) {
+                                // Format the joining date to 'd M Y' (e.g., '16 May 2025')
+                                $joining_date = date('d M Y', strtotime($employee_data->em_joining_date));
+
+                                // --- DEBUGGING STEP (Uncomment to see the name of the employee whose data was fetched) ---
+                                // echo "<p style='color: blue;'>Debug: Fetched Employee Name: " . $employee_data->first_name . " " . $employee_data->last_name . "</p>";
+                                // --- END DEBUGGING ---
+                            }
+                            ?>
+                            <h6 class="text-muted m-b-0">Joined on: <?php echo $joining_date; ?></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+               <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
