@@ -17,12 +17,12 @@
                 <li class="nav-devider"></li>
                 <li> <a href="<?php echo base_url(); ?>" ><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard </span></a></li>
                 <?php if($this->session->userdata('user_type') == 'EMPLOYEE'){ ?>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Employee </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Employee </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li> <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($basicinfo->em_id); ?>" aria-expanded="false"><span class="hide-menu">View Profile </span></a> </li>
                 </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-rocket"></i><span class="hide-menu">Leave </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-off"></i><span class="hide-menu">Leave </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>leave/Holidays"> Holiday </a></li>
                         <li><a href="<?php echo base_url(); ?>leave/EmApplication"> Leave Application </a></li>
@@ -35,7 +35,7 @@
                         <li><a href="<?php echo base_url(); ?>Projects/All_Tasks"> Task List </a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Payroll </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-credit-card"></i><span class="hide-menu">Payroll </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Payroll/Payslip_Report"> Payslip Report</a></li>
                     </ul>
@@ -98,7 +98,7 @@
 
 
 <?php } else { ?>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-building-o"></i><span class="hide-menu">Organization </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-domain"></i><span class="hide-menu">Organization </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url();?>organization/Department">Department </a></li>
                         <li><a href="<?php echo base_url();?>organization/Designation">Designation</a></li>
@@ -136,7 +136,7 @@
                     </ul>
                 </li>
 
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-wallet"></i><span class="hide-menu">Payroll </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-credit-card"></i><span class="hide-menu">Payroll </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Payroll/Salary_List"> Payroll List </a></li>
                         <li><a href="<?php echo base_url(); ?>Payroll/Salary_type"> Salary Type</a></li>
@@ -153,7 +153,7 @@
                             </ul>
                         </li>
                         
-                <li> <a href="<?php echo base_url(); ?>dashboard/analytics_view" ><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reports <span class="hide-menu"></a></li>
+                <li> <a href="<?php echo base_url(); ?>dashboard/analytics_view" ><i class="mdi mdi-poll"></i><span class="hide-menu">Reports <span class="hide-menu"></a></li>
                 <li> <a href="<?php echo base_url(); ?>settings/Settings" ><i class="mdi mdi-settings"></i><span class="hide-menu">Settings <span class="hide-menu"></a></li>
                 
                 <?php } ?>
