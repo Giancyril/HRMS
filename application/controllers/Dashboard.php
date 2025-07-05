@@ -106,5 +106,8 @@ class Dashboard extends CI_Controller {
     public function privacy_policy() {
         $this->load->view('backend/privacy_policy'); // Loads the new view file
     }
+    public function analytics_view() {
+        $this->load->view('backend/analytics_view'); // Loads the new view file
+    }
     
 }

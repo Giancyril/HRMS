@@ -63,10 +63,10 @@
                                 <h6><?php echo $basic->em_phone; ?></h6> 
                                 <small class="text-muted p-t-30 db">Social Profile</small>
                                 <br/>
-                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->facebook)) echo $socialmedia->facebook ?>" target="_blank"><i class="fa fa-facebook"></i></a>
-                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->twitter)) echo $socialmedia->twitter ?>" target="_blank"><i class="fa fa-twitter"></i></a>
-                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->instagram)) echo $socialmedia->instagram ?>" target="_blank"><i class="fa fa-instagram"></i></a>
-                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->google_Plus)) echo $socialmedia->google_Plus ?>" target="_blank"><i class="fa fa-google"></i></a>
+                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->facebook)) echo $socialmedia->facebook ?>" target="_blank"><i class="fab fa-facebook"></i></a>
+                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->twitter)) echo $socialmedia->twitter ?>" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->instagram)) echo $socialmedia->instagram ?>" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->google_Plus)) echo $socialmedia->google_Plus ?>" target="_blank"><i class="fab fa-google"></i></a>
                             </div>
                         </div>                                                    
                                                 </div>
