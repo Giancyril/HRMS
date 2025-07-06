@@ -1,19 +1,7 @@
 <?php $this->load->view('backend/header'); ?>
 <?php $this->load->view('backend/sidebar'); ?>
 
-<style>
-    /* Style for your main content container */
-.container-fluid {
-    /* Existing styles */
-    padding-right: 30px; /* Adjust this value as needed, typically 15px-30px */
-}
 
-/* Or if the issue is with the page-wrapper itself */
-.page-wrapper {
-    /* Existing styles */
-    padding-right: 30px; /* Adjust this value as needed */
-}
-</style>
 <div class="page-wrapper">
     <div class="message"></div>
 
@@ -29,13 +17,14 @@
         </div>
     </div>
 
-    <div class="container-fluid"> <div class="row">
+    <div class="container-fluid" style="padding-right: 30px;">
+        <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body" style="background-color: white; color: black;">
                         <h4 class="card-title">Employee Attendance Chart</h4>
-                        <div style="height: 350px; overflow-x: auto; position: relative;">
-                            <canvas id="attendanceChart" style="width: 100%; height: 100%;"></canvas>
+                        <div style="overflow-x: auto; max-height: 400px; padding-bottom: 15px;">
+                            <canvas id="attendanceChart" style="height: 300px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -56,8 +45,8 @@
                                 <?php endfor; ?>
                             </select>
                         </h4>
-                        <div style="height: 350px; overflow-x: auto; position: relative;">
-                            <canvas id="monthlyAttendanceChart" style="width: 100%; height: 100%;"></canvas>
+                        <div style="height: 400px;">
+                            <canvas id="monthlyAttendanceChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -69,8 +58,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Employees by Department</h4>
-                        <div style="height: 350px; overflow-x: auto; position: relative;">
-                            <canvas id="departmentChart" style="width: 100%; height: 100%;"></canvas>
+                        <div style="overflow-x: auto; max-height: 400px; padding-bottom: 15px;">
+                            <canvas id="departmentChart" style="height: 300px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -82,8 +71,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Employees by Designation</h4>
-                        <div style="height: 350px; overflow-x: auto; position: relative;">
-                            <canvas id="designationChart" style="width: 100%; height: 100%;"></canvas>
+                        <div style="overflow-x: auto; max-height: 400px; padding-bottom: 15px;">
+                            <canvas id="designationChart" style="height: 300px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -113,11 +102,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const parentDiv = attendanceCanvasElement.parentElement;
                     if (parentDiv) {
                         parentDiv.innerHTML = '<p class="text-danger text-center" style="padding-top: 150px;">Error: ' + data.error + '</p>';
-                    } else {
-                        ctx.font = '20px Arial';
-                        ctx.fillStyle = 'red';
-                        ctx.textAlign = 'center';
-                        ctx.fillText('Error: ' + data.error, ctx.canvas.width / 2, ctx.canvas.height / 2);
                     }
                     return;
                 }
@@ -127,11 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const parentDiv = attendanceCanvasElement.parentElement;
                     if (parentDiv) {
                         parentDiv.innerHTML = '<p class="text-center" style="padding-top: 150px; color: black;">No attendance data available for chart.</p>';
-                    } else {
-                        ctx.font = '20px Arial';
-                        ctx.fillStyle = 'black';
-                        ctx.textAlign = 'center';
-                        ctx.fillText('No attendance data available for chart.', ctx.canvas.width / 2, ctx.canvas.height / 2);
                     }
                     return;
                 }
@@ -140,16 +119,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 const totalHours = data.map(item => item.total_seconds / 3600);
 
                 // Dynamic Canvas Width Calculation for Attendance Chart
-                // Adjusted multiplier for potentially wider bars
-                const minContentWidth = labels.length * 170; // Increased from 70 to 120
-                const paddingRight = 80;
-                const totalRequiredWidth = minContentWidth + paddingRight;
+                const baseWidthPerBar = 150; // Adjust this value based on desired bar width + spacing
+                const minChartContentWidth = labels.length * baseWidthPerBar;
 
-                const containerWidth = attendanceCanvasElement.parentElement.offsetWidth;
-                const finalCanvasWidth = Math.max(containerWidth, totalRequiredWidth);
+                // Get the width of the immediate parent container (the one with overflow-x: auto)
+                const parentContainer = attendanceCanvasElement.parentElement;
+                // Use clientWidth for the actual inner width of the element, excluding scrollbars
+                const parentWidth = parentContainer ? parentContainer.clientWidth : (window.innerWidth * 0.9); // Fallback to 90% of window if parent not found
 
+                // Set canvas width: either the required content width or the parent's full width, whichever is greater
+                const finalCanvasWidth = Math.max(minChartContentWidth, parentWidth);
                 attendanceCanvasElement.style.width = `${finalCanvasWidth}px`;
-                attendanceCanvasElement.style.height = `350px`; // Fixed height from HTML wrapper
+                attendanceCanvasElement.style.height = `300px`; // Ensure height is applied
 
                 new Chart(ctx, {
                     type: 'bar',
@@ -164,8 +145,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         }]
                     },
                     options: {
-                        responsive: false,           // IMPORTANT: Disable responsiveness for scrolling
-                        maintainAspectRatio: false,  // IMPORTANT: Disable aspect ratio
+                        responsive: false,           // Keep false for horizontal scroll
+                        maintainAspectRatio: false,  // Keep false for horizontal scroll
                         scales: {
                             y: {
                                 beginAtZero: true,
@@ -193,14 +174,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 },
                                 ticks: {
                                     color: 'rgba(82, 98, 107, 1)',
-                                    maxRotation: 0,
+                                    maxRotation: 45, // Allow some rotation for long labels
                                     minRotation: 0,
-                                    autoSkip: false
-                                     // Display all labels, rely on scroll
+                                    autoSkip: false // Display all labels, rely on scroll
                                 },
-                                font: {
-        size: 10 // Experiment with smaller sizes if needed
-    },
                                 grid: {
                                     display: false,
                                     drawBorder: false
@@ -239,11 +216,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const parentDiv = attendanceCanvasElement.parentElement;
                 if (parentDiv) {
                     parentDiv.innerHTML = `<p class="text-danger text-center" style="padding-top: 150px;">${errorMessage}</p>`;
-                } else {
-                    ctx.font = '20px Arial';
-                    ctx.fillStyle = 'red';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(errorMessage, ctx.canvas.width / 2, ctx.canvas.height / 2);
                 }
             });
     } else {
@@ -254,7 +226,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var monthlyAttendanceChartInstance; // Variable to hold the chart instance
 
     function loadMonthlyAttendanceChart(year) {
-        // Destroy existing chart if it exists to prevent multiple charts on updates
         if (monthlyAttendanceChartInstance) {
             monthlyAttendanceChartInstance.destroy();
         }
@@ -262,6 +233,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const monthlyAttendanceCanvas = document.getElementById('monthlyAttendanceChart');
         if (!monthlyAttendanceCanvas) {
             console.warn("Canvas element 'monthlyAttendanceChart' not found. Monthly attendance chart will not be rendered.");
+            const parentDiv = document.querySelector('#monthlyAttendanceChart').parentElement;
+            if (parentDiv) {
+                parentDiv.innerHTML = '<p class="text-danger text-center" style="padding-top: 150px;">Error: Chart canvas not found.</p>';
+            }
             return;
         }
         const ctxMonthly = monthlyAttendanceCanvas.getContext('2d');
@@ -271,54 +246,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         $.ajax({
-            url: '<?php echo base_url("attendance/getMonthlyAttendanceData"); ?>', // Call the controller function
+            url: '<?php echo base_url("attendance/getMonthlyAttendanceData"); ?>',
             type: 'GET',
             dataType: 'json',
-            data: { year: year }, // Pass the selected year to the backend
+            data: { year: year },
             success: function(data) {
                 console.log("Monthly Attendance Data Received:", data);
 
                 if (!Array.isArray(data) || data.length === 0) {
                     console.warn('No monthly attendance data available for the chart for year ' + year);
-                    const parentDiv = $(monthlyAttendanceCanvas).parent();
-                    if (parentDiv.length) {
-                        parentDiv.html('<p class="text-center" style="padding-top: 150px; color: black;">No monthly attendance data available for chart for ' + year + '.</p>');
-                    } else {
-                        ctxMonthly.font = '20px Arial';
-                        ctxMonthly.fillStyle = 'black';
-                        ctxMonthly.textAlign = 'center';
-                        ctxMonthly.fillText('No monthly attendance data available for chart for ' + year + '.', monthlyAttendanceCanvas.width / 2, monthlyAttendanceCanvas.height / 2);
+                    const parentDivForMessage = monthlyAttendanceCanvas.parentElement;
+                    if (parentDivForMessage) {
+                        parentDivForMessage.innerHTML = '<p class="text-center" style="padding-top: 150px; color: black;">No monthly attendance data available for chart for ' + year + '.</p>';
                     }
                     return;
                 }
 
-                // Prepare labels and data for the chart
-                const labels = data.map(item => item.month); // e.g., ["Jan", "Feb", ...]
+                const labels = data.map(item => item.month);
                 const ontimeData = data.map(item => parseInt(item.ontime));
                 const lateData = data.map(item => parseInt(item.late));
 
-                // Dynamic Canvas Width Calculation for Monthly Attendance Chart
-                // Adjusted multiplier for potentially wider bars
-                const minContentWidth = labels.length * 120; // Increased from 70 to 120
-                const paddingRight = 80;
-                const totalRequiredWidth = minContentWidth + paddingRight;
-
-                const containerWidth = monthlyAttendanceCanvas.parentElement.offsetWidth;
-                const finalCanvasWidth = Math.max(containerWidth, totalRequiredWidth);
-
-                monthlyAttendanceCanvas.style.width = `${finalCanvasWidth}px`;
-                monthlyAttendanceCanvas.style.height = `350px`;
+                // FOR MONTHLY CHART: Let Chart.js handle responsiveness for fixed 12 months
+                // No explicit width setting on canvas for this chart to allow responsiveness
+                // monthlyAttendanceCanvas.style.width = `100%`; // REMOVED
 
                 monthlyAttendanceChartInstance = new Chart(ctxMonthly, {
-                    type: 'bar', // Bar chart type
+                    type: 'bar',
                     data: {
                         labels: labels,
                         datasets: [
                             {
                                 label: 'Ontime',
                                 data: ontimeData,
-                                backgroundColor: 'rgba(90, 180, 250, 0.8)',
-                                borderColor: 'rgba(90, 180, 250, 0.8)',
+                                backgroundColor: 'rgba(90, 213, 250, 0.86)',
+                                borderColor: 'rgba(90, 213, 250, 0.86)',
                                 borderWidth: 1
                             },
                             {
@@ -331,8 +292,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         ]
                     },
                     options: {
-                        responsive: false, // IMPORTANT: Disable responsiveness for scrolling
-                        maintainAspectRatio: false, // Important for custom height/width
+                        responsive: true,            // Set to true for fitting to page width
+                        maintainAspectRatio: false,  // false can be useful to control height independently
                         scales: {
                             x: {
                                 stacked: true,
@@ -341,9 +302,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                     text: 'Month'
                                 },
                                 ticks: {
-                                    autoSkip: false,
+                                    autoSkip: true, // Let Chart.js auto-skip if labels overlap
                                     maxRotation: 0,
-                                    minRotation: 0
+                                    minRotation: 0,
                                 }
                             },
                             y: {
@@ -370,11 +331,9 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             error: function(xhr, status, error) {
                 console.error("Error fetching monthly attendance data:", status, error, xhr.responseText);
-                const parentDiv = $(monthlyAttendanceCanvas).parent();
-                if (parentDiv.length) {
-                    parentDiv.html('<p class="text-danger">Failed to load monthly attendance chart. Please try again.</p>');
-                } else {
-                    console.error("Could not find parent div for monthlyAttendanceChart to display error message.");
+                const parentDivForMessage = monthlyAttendanceCanvas.parentElement;
+                if (parentDivForMessage) {
+                    parentDivForMessage.innerHTML = '<p class="text-danger">Failed to load monthly attendance chart. Please try again.</p>';
                 }
             }
         });
@@ -409,11 +368,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const parentDiv = departmentCanvasElement.parentElement;
                     if (parentDiv) {
                         parentDiv.innerHTML = '<p class="text-center" style="padding-top: 150px; color: black;">No department data available for chart.</p>';
-                    } else {
-                        ctxDepartment.font = '20px Arial';
-                        ctxDepartment.fillStyle = 'black';
-                        ctxDepartment.textAlign = 'center';
-                        ctxDepartment.fillText('No department data available for chart.', ctxDepartment.canvas.width / 2, ctxDepartment.canvas.height / 2);
                     }
                     return;
                 }
@@ -425,11 +379,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const parentDiv = departmentCanvasElement.parentElement;
                     if (parentDiv) {
                         parentDiv.innerHTML = '<p class="text-center" style="padding-top: 150px; color: black;">No departments with employees to display.</p>';
-                    } else {
-                        ctxDepartment.font = '20px Arial';
-                        ctxDepartment.fillStyle = 'black';
-                        ctxDepartment.textAlign = 'center';
-                        ctxDepartment.fillText('No departments with employees to display.', ctxDepartment.canvas.width / 2, ctxDepartment.canvas.height / 2);
                     }
                     return;
                 }
@@ -438,16 +387,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const employeeCounts = filteredData.map(item => item.employee_count);
 
                 // Dynamic Canvas Width Calculation for Department Chart
-                // Adjusted multiplier for potentially wider bars
-                const minContentWidth = labels.length * 170; // Increased from 70 to 120
-                const paddingRight = 80;
-                const totalRequiredWidth = minContentWidth + paddingRight;
+                const baseWidthPerDepartment = 180; // Adjust for department name length
+                const minChartContentWidth = labels.length * baseWidthPerDepartment;
 
-                const containerWidth = departmentCanvasElement.parentElement.offsetWidth;
-                const finalCanvasWidth = Math.max(containerWidth, totalRequiredWidth);
+                const parentContainer = departmentCanvasElement.parentElement;
+                const parentWidth = parentContainer ? parentContainer.clientWidth : (window.innerWidth * 0.9);
 
+                const finalCanvasWidth = Math.max(minChartContentWidth, parentWidth);
                 departmentCanvasElement.style.width = `${finalCanvasWidth}px`;
-                departmentCanvasElement.style.height = `350px`;
+                departmentCanvasElement.style.height = `300px`;
 
                 new Chart(ctxDepartment, {
                     type: 'bar',
@@ -455,15 +403,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         labels: labels,
                         datasets: [{
                             label: 'Number of Employees',
-                            backgroundColor: 'rgba(98, 207, 244, 0.8)',
-                            borderColor: 'rgba(98, 207, 244, 0.8)',
+                            backgroundColor: 'rgba(90, 186, 245, 0.69)',
+                            borderColor: 'rgba(90, 186, 245, 0.69)',
                             borderWidth: 1.5,
                             data: employeeCounts
                         }]
                     },
                     options: {
-                        responsive: false,           // IMPORTANT: Disable responsiveness for scrolling
-                        maintainAspectRatio: false,  // IMPORTANT: Disable aspect ratio
+                        responsive: false,
+                        maintainAspectRatio: false,
                         scales: {
                             y: {
                                 beginAtZero: true,
@@ -492,13 +440,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 },
                                 ticks: {
                                     color: 'rgba(82, 98, 107, 1)',
-                                    maxRotation: 0,
+                                    maxRotation: 45, // Allow some rotation
                                     minRotation: 0,
                                     autoSkip: false // Display all labels, rely on scroll
                                 },
-                                font: {
-        size: 10 // Experiment with smaller sizes if needed
-    },
                                 grid: {
                                     display: false,
                                     drawBorder: false
@@ -521,11 +466,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const parentDiv = departmentCanvasElement.parentElement;
                 if (parentDiv) {
                     parentDiv.innerHTML = `<p class="text-danger text-center" style="padding-top: 150px;">${errorMessage}</p>`;
-                } else {
-                    ctxDepartment.font = '20px Arial';
-                    ctxDepartment.fillStyle = 'red';
-                    ctxDepartment.textAlign = 'center';
-                    ctxDepartment.fillText(errorMessage, ctxDepartment.canvas.width / 2, ctxDepartment.canvas.height / 2);
                 }
             });
     } else {
@@ -551,11 +491,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const parentDiv = designationCanvasElement.parentElement;
                     if (parentDiv) {
                         parentDiv.innerHTML = '<p class="text-center" style="padding-top: 150px; color: black;">No designation data available for chart.</p>';
-                    } else {
-                        ctxDesignation.font = '20px Arial';
-                        ctxDesignation.fillStyle = 'black';
-                        ctxDesignation.textAlign = 'center';
-                        ctxDesignation.fillText('No designation data available for chart.', ctxDesignation.canvas.width / 2, ctxDesignation.canvas.height / 2);
                     }
                     return;
                 }
@@ -567,11 +502,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const parentDiv = designationCanvasElement.parentElement;
                     if (parentDiv) {
                         parentDiv.innerHTML = '<p class="text-center" style="padding-top: 150px; color: black;">No designations with employees to display.</p>';
-                    } else {
-                        ctxDesignation.font = '20px Arial';
-                        ctxDesignation.fillStyle = 'black';
-                        ctxDesignation.textAlign = 'center';
-                        ctxDesignation.fillText('No designations with employees to display.', ctxDesignation.canvas.width / 2, ctxDesignation.canvas.height / 2);
                     }
                     return;
                 }
@@ -580,16 +510,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const employeeCounts = filteredData.map(item => item.employee_count);
 
                 // Dynamic Canvas Width Calculation for Designation Chart
-                // Adjusted multiplier for potentially wider bars
-                const minContentWidth = labels.length * 170; // Increased from 70 to 120
-                const paddingRight = 80;
-                const totalRequiredWidth = minContentWidth + paddingRight;
+                const baseWidthPerDesignation = 200; // Increased multiplier for potentially longer designation names
+                const minChartContentWidth = labels.length * baseWidthPerDesignation;
 
-                const containerWidth = designationCanvasElement.parentElement.offsetWidth;
-                const finalCanvasWidth = Math.max(containerWidth, totalRequiredWidth);
+                const parentContainer = designationCanvasElement.parentElement;
+                const parentWidth = parentContainer ? parentContainer.clientWidth : (window.innerWidth * 0.9);
 
+                const finalCanvasWidth = Math.max(minChartContentWidth, parentWidth);
                 designationCanvasElement.style.width = `${finalCanvasWidth}px`;
-                designationCanvasElement.style.height = `350px`;
+                designationCanvasElement.style.height = `300px`;
 
                 new Chart(ctxDesignation, {
                     type: 'bar',
@@ -604,8 +533,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         }]
                     },
                     options: {
-                        responsive: false,           // IMPORTANT: Disable responsiveness for scrolling
-                        maintainAspectRatio: false,  // IMPORTANT: Disable aspect ratio
+                        responsive: false,
+                        maintainAspectRatio: false,
                         scales: {
                             y: {
                                 beginAtZero: true,
@@ -634,13 +563,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 },
                                 ticks: {
                                     color: 'rgba(82, 98, 107, 1)',
-                                    maxRotation: 0,
+                                    maxRotation: 45, // Allow some rotation
                                     minRotation: 0,
                                     autoSkip: false // Display all labels, rely on scroll
                                 },
-                                font: {
-        size: 10 // Experiment with smaller sizes if needed
-    },
                                 grid: {
                                     display: false,
                                     drawBorder: false
@@ -663,11 +589,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const parentDiv = designationCanvasElement.parentElement;
                 if (parentDiv) {
                     parentDiv.innerHTML = `<p class="text-danger text-center" style="padding-top: 150px;">${errorMessage}</p>`;
-                } else {
-                    ctxDesignation.font = '20px Arial';
-                    ctxDesignation.fillStyle = 'red';
-                    ctxDesignation.textAlign = 'center';
-                    ctxDesignation.fillText(errorMessage, ctxDesignation.canvas.width / 2, ctxDesignation.canvas.height / 2);
                 }
             });
     } else {

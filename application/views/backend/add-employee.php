@@ -127,13 +127,15 @@
                                         <input type="email" id="example-email2" name="email" class="form-control" placeholder="email@mail.com" minlength="7" required > 
                                     </div>
                                     <div class="form-group col-md-3 m-t-20">
-                                        <label>Password </label>
-                                        <input type="text" name="password" class="form-control" value="" placeholder="**********"> 
-                                    </div>
-                                    <div class="form-group col-md-3 m-t-20">
-                                        <label>Confirm Password </label>
-                                        <input type="text" name="confirm" class="form-control" value="" placeholder="**********"> 
-                                    </div>
+    <label>Password </label>
+    <!-- Changed type to "password" to mask input -->
+    <input type="password" name="password" class="form-control" value="" placeholder="**********" required>
+</div>
+<div class="form-group col-md-3 m-t-20">
+    <label>Confirm Password </label>
+    <!-- Changed type to "password" to mask input -->
+    <input type="password" name="confirm_password" class="form-control" value="" placeholder="**********" required>
+</div>
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Image </label>
                                         <input type="file" name="image_url" class="form-control" value=""> 

@@ -460,7 +460,7 @@ class Employee extends CI_Controller {
         $facebook = $this->input->post('facebook');
         $twitter = $this->input->post('twitter');
         $google = $this->input->post('google');
-        $instagram = $this->input->post('instagram');
+        $skype = $this->input->post('skype');
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters();
         $this->form_validation->set_rules('facebook', 'company_name', 'trim|xss_clean');
@@ -474,7 +474,7 @@ class Employee extends CI_Controller {
                     'facebook' => $facebook,
                     'twitter' => $twitter,
                     'google_plus' => $google,
-                    'instagram' => $instagram
+                    'skype_id' => $skype
                 );
             if(empty($id)){
                 $success = $this->employee_model->Insert_Media($data);
