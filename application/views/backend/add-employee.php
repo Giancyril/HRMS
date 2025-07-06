@@ -22,7 +22,6 @@
                 <div class="row m-b-10"> 
                     <div class="col-12">
                         
-                        
                     </div>
                 </div>
                <div class="row">
@@ -125,8 +124,8 @@
                                     </div>
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Email </label>
-                                        <input type="email" id="example-email2" name="email" class="form-control" placeholder="email@gmail.com" minlength="7" required > 
-                                    </div><!--
+                                        <input type="email" id="example-email2" name="email" class="form-control" placeholder="email@mail.com" minlength="7" required > 
+                                    </div>
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Password </label>
                                         <input type="text" name="password" class="form-control" value="" placeholder="**********"> 
@@ -134,13 +133,13 @@
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Confirm Password </label>
                                         <input type="text" name="confirm" class="form-control" value="" placeholder="**********"> 
-                                    </div>-->
+                                    </div>
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Image </label>
                                         <input type="file" name="image_url" class="form-control" value=""> 
                                     </div>
                                     <div class="form-actions col-md-12">
-                                        <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
+                                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
                                         <button type="button" class="btn btn-danger">Cancel</button>
                                     </div>
                                 </form>
