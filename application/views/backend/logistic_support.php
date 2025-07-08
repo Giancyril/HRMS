@@ -158,7 +158,7 @@
                                             </div>-->
                                             <div class="form-group">
                                                 <label class="control-label">Remarks</label>
-                                                <textarea class="form-control col-md-8" name="remarks" id="message-text1"></textarea>
+                                                <input type="text" name="remarks" class="form-control" id="message-text1" value="">
                                             </div>                                            
                                         </div>
                                         </div>
@@ -245,7 +245,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">Remarks</label>
-                                                <textarea class="form-control col-md-8" name="remarks" id="message-text1"></textarea>
+                                                <input type="text" name="remarks" class="form-control" id="message-text1" value="">
                                             </div>                                            
                                         </div>
                                         </div>
