@@ -18,51 +18,62 @@
         <div class="col-lg-12">
             <div class="card card-outline-info">
                 <div class="card-body">
+                    <?php
+                    // --- START OF OPTIMIZED DATA FETCHING (unchanged) ---
+                    $session_user_identifier = $this->session->userdata('user_login_id');
+                    $employee_data = null;
+
+                    if (!empty($session_user_identifier)) {
+                        $this->db->select('em_joining_date, first_name, last_name, em_image, des_name, dep_name'); // Ensure em_joining_date is selected
+                        $this->db->join('designation', 'designation.id = employee.des_id', 'left');
+                        $this->db->join('department', 'department.id = employee.dep_id', 'left');
+
+                        if (is_numeric($session_user_identifier) && (int)$session_user_identifier > 0) {
+                            $this->db->where('employee.id', $session_user_identifier);
+                        } else {
+                            $this->db->where('employee.em_id', $session_user_identifier);
+                        }
+
+                        $employee_query_result = $this->db->get('employee');
+
+                        if ($employee_query_result->num_rows() > 0) {
+                            $employee_data = $employee_query_result->row();
+                        }
+                    }
+
+                    $user_image_path = base_url() . 'assets/images/users/default_user.png';
+                    $joining_date = 'N/A'; // Re-initialize for display
+                    $designation_name = 'N/A';
+                    $department_name = 'N/A';
+
+                    if ($employee_data) {
+                        if (!empty($employee_data->em_image)) {
+                            if (file_exists('./assets/images/users/' . $employee_data->em_image)) {
+                                $user_image_path = base_url() . 'assets/images/users/' . $employee_data->em_image;
+                            }
+                        }
+                        $joining_date = date('d M Y', strtotime($employee_data->em_joining_date)); // Ensure date is formatted
+                        if (isset($employee_data->des_name) && !empty($employee_data->des_name)) {
+                            $designation_name = $employee_data->des_name;
+                        }
+                        if (isset($employee_data->dep_name) && !empty($employee_data->dep_name)) {
+                            $department_name = $employee_data->dep_name;
+                        }
+                    }
+                    // --- END OF OPTIMIZED DATA FETCHING ---
+                    ?>
+
                     <div class="d-flex flex-row align-items-center">
-                        <div class="m-l-0">
-                            <h3 class="m-b-0">Welcome Back, <?php echo $this->session->userdata('name'); ?>
+                        <div class="round-img mr-3">
+                            <img src="<?php echo $user_image_path; ?>" alt="user" width="60" height="60" class="img-circle">
+                        </div>
+                        <div class="m-l-4">
+                            <h4 class="m-t-0 m-b-0">
+                                Welcome Back, <?php echo $this->session->userdata('name'); ?>
                                 <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($this->session->userdata('user_login_id')); ?>" class="text-muted">&nbsp;<i class="fa fa-pencil"></i></a>
-                            </h3>
-                            <?php
-                            $session_user_identifier = $this->session->userdata('user_login_id'); // Get the identifier from the session
-
-
-                            $employee_data = null; // Initialize employee_data to null
-
-                            if (!empty($session_user_identifier)) {
-                                // Start building the query
-                                // Only selecting em_joining_date, first_name, and last_name
-                                $this->db->select('em_joining_date, first_name, last_name');
-
-                                // Determine which column to use for filtering: 'id' (numeric) or 'em_id' (alphanumeric)
-                                if (is_numeric($session_user_identifier) && (int)$session_user_identifier > 0) {
-                                    // If it's a positive number, assume it's the 'id' column
-                                    $this->db->where('id', $session_user_identifier);
-                                } else {
-                                    // Otherwise, assume it's the 'em_id' column
-                                    $this->db->where('em_id', $session_user_identifier);
-                                }
-
-                                // Execute the query
-                                $employee_query_result = $this->db->get('employee');
-
-                                if ($employee_query_result->num_rows() > 0) {
-                                    $employee_data = $employee_query_result->row();
-                                }
-                            }
-
-                            $joining_date = 'N/A';
-
-                            if ($employee_data) {
-                                // Format the joining date to 'd M Y' (e.g., '16 May 2025')
-                                $joining_date = date('d M Y', strtotime($employee_data->em_joining_date));
-
-                                // --- DEBUGGING STEP (Uncomment to see the name of the employee whose data was fetched) ---
-                                // echo "<p style='color: blue;'>Debug: Fetched Employee Name: " . $employee_data->first_name . " " . $employee_data->last_name . "</p>";
-                                // --- END DEBUGGING ---
-                            }
-                            ?>
-                            <h6 class="text-muted m-b-0">Joined on: <?php echo $joining_date; ?></h6>
+                            </h4>
+                            <h6 class="text-muted m-t-5 m-b-0"><?php echo $designation_name; ?></h6>
+                            
                         </div>
                     </div>
                 </div>

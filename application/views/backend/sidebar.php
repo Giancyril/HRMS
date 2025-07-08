@@ -4,14 +4,7 @@
         $id = $this->session->userdata('user_login_id');
         $basicinfo = $this->employee_model->GetBasic($id);
         ?>
-        <div class="user-profile" style="margin-top: 20px;">
-            <div class="profile-img"> <img src="<?php echo base_url(); ?>assets/images/users/<?php echo $basicinfo->em_image ?>" alt="user" />
-            </div>
-
-            <div class="profile-text">
-                <h5><?php echo $basicinfo->first_name.' '.$basicinfo->last_name; ?></h5>
-            </div>
-        </div>
+        
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="nav-devider"></li>
