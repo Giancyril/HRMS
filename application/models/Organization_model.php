@@ -5,7 +5,7 @@ class Organization_model extends CI_Model{
 
     function __construct(){
         parent::__construct();
-
+        $this->load->database(); // Ensure database is loaded in the constructor
     }
 
     public function depselect(){
@@ -16,15 +16,18 @@ class Organization_model extends CI_Model{
 
     public function Add_Department($data){
         $this->db->insert('department',$data);
+        return $this->db->insert_id(); // Return the ID of the newly inserted row
     }
 
     public function department_delete($dep_id){
         $this->db->delete('department',array('id' => $dep_id ));
+        return $this->db->affected_rows() > 0; // Return true if row was affected
     }
 
     public function department_edit($dep){
-        $sql    = "SELECT * FROM `department` WHERE `id`='$dep'";
-        $query  = $this->db->query($sql);
+        // Using Active Record for consistency and better readability
+        $this->db->where('id', $dep);
+        $query = $this->db->get('department');
         $result = $query->row();
         return $result;
     }
@@ -32,27 +35,46 @@ class Organization_model extends CI_Model{
     public function Update_Department($id, $data){
         $this->db->where('id',$id);
         $this->db->update('department',$data);
+        return $this->db->affected_rows() > 0; // Return true if row was affected
     }
 
     public function Add_Designation($data){
         $this->db->insert('designation',$data);
+        return $this->db->insert_id(); // Return the ID of the newly inserted row
     }
 
     public function designation_delete($des_id){
         $this->db->delete('designation',array('id'=> $des_id));
+        return $this->db->affected_rows() > 0; // Return true if row was affected
     }
 
     public function designation_edit($des){
-        $sql    = "SELECT * FROM `designation` WHERE `id`='$des'";
-        $query  = $this->db->query($sql);
-        $result = $query->row();
+        // Using Active Record for consistency
+        $this->db->where('id', $des);
+        $query = $this->db->get('designation');
+        $result = $query->row(); // Returns an object, which json_encode handles well
         return $result;
     }
 
-    public function Update_Designation($id, $data){
-        $this->db->where('id',$id);
-        $this->db->update('designation',$data);
+    // Renamed to avoid confusion with designation_edit if both are intended for similar purpose.
+    // This method is identical to designation_edit and getDesignationById.
+    // Keeping it as getDesignationById for clarity based on previous discussion,
+    // and removing the duplicate Update_Designation.
+    public function getDesignationById($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('designation'); // Assuming 'designation' is your table name
+        if ($query->num_rows() > 0) {
+            return $query->row(); // Return a single row object
+        }
+        return false;
     }
+
+    public function Update_Designation($id, $data){
+        $this->db->where('id', $id);
+        $this->db->update('designation', $data); // Assuming 'designation' is your table name
+        return $this->db->affected_rows() > 0; // Return true if row was affected
+    }
+
 
     public function desselect(){
         $query = $this->db->get('designation');
@@ -60,7 +82,7 @@ class Organization_model extends CI_Model{
         return $result;
     }
 
-   // --- New functions for charts ---
+    // --- New functions for charts ---
 
     /**
      * Fetches the count of employees per department.
@@ -77,6 +99,7 @@ class Organization_model extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+
 
     /**
      * Fetches the count of employees per designation.
