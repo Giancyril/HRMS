@@ -72,7 +72,7 @@
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content ">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" id="exampleModalLabel1">Add Tasks</h4>
+                                        <h4 class="modal-title" id="exampleModalLabel1">Add Task</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <form method="post" action="Add_Tasks" id="tasksModalform" enctype="multipart/form-data">
@@ -137,7 +137,7 @@
                                     <div class="modal-footer">
                                         <input type="hidden" name="id" class="form-control" id="recipient-name1">                                       
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="submit" <?php if($this->session->userdata('user_type')=='EMPLOYEE'){ ?> disabled <?php } ?> class="btn btn-success">Submit</button>
+                                        <button type="submit" <?php if($this->session->userdata('user_type')=='EMPLOYEE'){ ?> disabled <?php } ?> class="btn btn-info">Submit</button>
                                     </div>
                                     </form>
                                 </div>

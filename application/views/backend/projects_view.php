@@ -161,7 +161,7 @@
 			                        		<h3 class="card-title">Office tasks</h3>
                         <span class="pull-right">
                         <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>  
-                        <a data-toggle="modal" data-target="#tasksmodel" data-whatever="@getbootstrap" class="text-white btn btn-info" style="margin-bottom: 20px;"> Add Tasks</a></span> <?php } ?>                    
+                        <a data-toggle="modal" data-target="#tasksmodel" data-whatever="@getbootstrap" class="text-white btn btn-info" style="margin-bottom: 20px;"> Add Task</a></span> <?php } ?>                    
                     <div class="table-responsive " id="">
                         <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>

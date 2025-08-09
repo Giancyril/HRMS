@@ -15,6 +15,7 @@ class Dashboard extends CI_Controller {
         $this->load->model('project_model');    
         $this->load->model('organization_model');
         $this->load->model('leave_model');    
+        $this->load->model('training_model'); 
     }
     
 	public function index()
@@ -109,5 +110,6 @@ class Dashboard extends CI_Controller {
     public function analytics_view() {
         $this->load->view('backend/analytics_view'); // Loads the new view file
     }
+        // In your Dashboard.php controller
     
 }
