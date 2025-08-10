@@ -294,5 +294,20 @@
     public function DeletDisiplinary($id){
       $this->db->delete('desciplinary',array('id'=> $id));
   }        
+  public function get_all_employees()
+    {
+        // Select all records from the 'employee' table
+        $query = $this->db->get('employee');
+
+        // Check if any rows were returned
+        if ($query->num_rows() > 0) {
+            // Return the result as an array of objects
+            return $query->result();
+        } else {
+            // Return an empty array if no employees are found
+            return [];
+        }
+    }
+
     }
 ?>

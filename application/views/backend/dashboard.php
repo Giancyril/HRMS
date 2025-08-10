@@ -142,7 +142,7 @@
                         <div class="card">
                          <div class="card-body">
                              <div class="d-flex flex-row">
-                               <div class="round align-self-center round-warning"><i class="ti-money"></i></div> <div class="m-l-10 align-self-center">
+                               <div class="round align-self-center round-megna"><i class="ti-money"></i></div> <div class="m-l-10 align-self-center">
                                      <h3 class="m-b-0">
                                        <?php
                                         $this->db->from("pay_salary");
@@ -158,51 +158,51 @@
                 </div>
                 <div class="row ">
                     <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card card-inverse card-info">
-                            <div class="box bg-primary text-center">
-                                <h1 class="font-light text-white">
+                        <div class="card card-inverse ">
+                            <div class="box text-center">
+                                <h1 class="font-light text-black">
                                     <?php
                                         $this->db->where('status','INACTIVE');
                                         $this->db->from("employee");
                                         echo $this->db->count_all_results();
                                     ?>
                                 </h1>
-                                <h6 class="text-white">Former Employees</h6>
+                                <h6 class=" text-black">Former Employees</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card card-info card-inverse">
+                        <div class="card card-inverse">
                             <div class="box text-center">
-                                <h1 class="font-light text-white">
+                                <h1 class="font-light text-black">
                                                 <?php
                                                     $this->db->where('leave_status','Not Approve');
                                                     $this->db->from("emp_leave");
                                                     echo $this->db->count_all_results();
                                                 ?>
                                 </h1>
-                                <h6 class="text-white">Pending Leave Application</h6>
+                                <h6 class="text-black">Pending Leave Application</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card card-inverse card-danger">
+                        <div class="card card-inverse">
                             <div class="box text-center">
-                                <h1 class="font-light text-white">
+                                <h1 class="font-light text-black">
                                                 <?php
                                                     $this->db->where('pro_status','upcoming');
                                                     $this->db->from("project");
                                                     echo $this->db->count_all_results();
                                                 ?>
                                 </h1>
-                                <h6 class="text-white">Upcoming Project</h6>
+                                <h6 class="text-black">Upcoming Project</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card card-inverse card-warning">
+                        <div class="card card-inverse ">
                            <div class="box text-center">
-                                            <h1 class="font-light text-white">
+                                            <h1 class="font-light text-black">
                                             <?php
                                             // 1. Get total number of employees
                                                 $this->db->from("employee"); // Replace "employees" with your actual employee table name
@@ -219,7 +219,7 @@
                                                 echo $payslips_pending;
                                             ?>
                                             </h1>
-                                            <h6 class="text-white">Payslips Pending</h6>
+                                            <h6 class="text-black">Payslips Pending</h6>
                            </div>
                         </div>
                     </div>

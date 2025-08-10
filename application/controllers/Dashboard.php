@@ -15,7 +15,7 @@ class Dashboard extends CI_Controller {
         $this->load->model('project_model');    
         $this->load->model('organization_model');
         $this->load->model('leave_model');    
-        $this->load->model('training_model'); 
+
     }
     
 	public function index()

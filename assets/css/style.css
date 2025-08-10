@@ -612,7 +612,7 @@ html body .bg-white {
 }
 
 .round.round-warning {
-    background: #ffb22b
+    background: #00897b
 }
 
 .round.round-danger {
@@ -625,6 +625,9 @@ html body .bg-white {
 
 .round.round-primary {
     background: #5c4ac7
+}
+.round.round-megna {
+    background: #00897b
 }
 
 .label {
