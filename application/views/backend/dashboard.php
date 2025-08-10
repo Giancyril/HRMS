@@ -1,162 +1,148 @@
 <?php $this->load->view('backend/header'); ?>
 <?php $this->load->view('backend/sidebar'); ?>
-        <div class="page-wrapper">
-            <div class="message"></div>
-            <div class="row page-titles">
-                <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Dashboard</h3>
-                </div>
-                <div class="col-md-7 align-self-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard</li>
-                    </ol>
-                </div>
-            </div>
-             <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card card-outline-info">
-                <div class="card-body">
-                    <?php
-                    // --- START OF OPTIMIZED DATA FETCHING (unchanged) ---
-                    $session_user_identifier = $this->session->userdata('user_login_id');
-                    $employee_data = null;
-
-                    if (!empty($session_user_identifier)) {
-                        $this->db->select('em_joining_date, first_name, last_name, em_image, des_name, dep_name'); // Ensure em_joining_date is selected
-                        $this->db->join('designation', 'designation.id = employee.des_id', 'left');
-                        $this->db->join('department', 'department.id = employee.dep_id', 'left');
-
-                        if (is_numeric($session_user_identifier) && (int)$session_user_identifier > 0) {
-                            $this->db->where('employee.id', $session_user_identifier);
-                        } else {
-                            $this->db->where('employee.em_id', $session_user_identifier);
-                        }
-
-                        $employee_query_result = $this->db->get('employee');
-
-                        if ($employee_query_result->num_rows() > 0) {
-                            $employee_data = $employee_query_result->row();
-                        }
-                    }
-
-                    $user_image_path = base_url() . 'assets/images/users/default_user.png';
-                    $joining_date = 'N/A'; // Re-initialize for display
-                    $designation_name = 'N/A';
-                    $department_name = 'N/A';
-
-                    if ($employee_data) {
-                        if (!empty($employee_data->em_image)) {
-                            if (file_exists('./assets/images/users/' . $employee_data->em_image)) {
-                                $user_image_path = base_url() . 'assets/images/users/' . $employee_data->em_image;
-                            }
-                        }
-                        $joining_date = date('d M Y', strtotime($employee_data->em_joining_date)); // Ensure date is formatted
-                        if (isset($employee_data->des_name) && !empty($employee_data->des_name)) {
-                            $designation_name = $employee_data->des_name;
-                        }
-                        if (isset($employee_data->dep_name) && !empty($employee_data->dep_name)) {
-                            $department_name = $employee_data->dep_name;
-                        }
-                    }
-                    // --- END OF OPTIMIZED DATA FETCHING ---
-                    ?>
-
-                    <div class="d-flex flex-row align-items-center">
-                        <div class="round-img mr-3">
-                            <img src="<?php echo $user_image_path; ?>" alt="user" width="60" height="60" class="img-circle">
-                        </div>
-                        <div class="m-l-4">
-                            <h4 class="m-t-0 m-b-0">
-                                Welcome Back, <?php echo $this->session->userdata('name'); ?>
-                                <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($this->session->userdata('user_login_id')); ?>" class="text-muted">&nbsp;<i class="fa fa-pencil"></i></a>
-                            </h4>
-                            <h6 class="text-muted m-t-5 m-b-0"><?php echo $designation_name; ?></h6>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="page-wrapper">
+    <div class="message"></div>
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Dashboard</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
         </div>
     </div>
-</div>
-               <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <div class="round align-self-center round-primary"><i class="ti-user"></i></div>
-                                    <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0">
-                                        <?php
-                                            $this->db->where('status','ACTIVE');
-                                            $this->db->from("employee");
-                                            echo $this->db->count_all_results();
-                                        ?> Employees</h3>
-                                        <a href="<?php echo base_url(); ?>employee/Employees" class="text-muted m-b-0">View Details</a></div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="container-fluid">
+        <!-- Start of combined card -->
+        <div class="card card-outline-info">
+            <div class="card-body">
+                <?php
+                // --- START OF OPTIMIZED DATA FETCHING (unchanged) ---
+                $session_user_identifier = $this->session->userdata('user_login_id');
+                $employee_data = null;
+
+                if (!empty($session_user_identifier)) {
+                    $this->db->select('em_joining_date, first_name, last_name, em_image, des_name, dep_name'); // Ensure em_joining_date is selected
+                    $this->db->join('designation', 'designation.id = employee.des_id', 'left');
+                    $this->db->join('department', 'department.id = employee.dep_id', 'left');
+
+                    if (is_numeric($session_user_identifier) && (int)$session_user_identifier > 0) {
+                        $this->db->where('employee.id', $session_user_identifier);
+                        
+                    } else {
+                        $this->db->where('employee.em_id', $session_user_identifier);
+                    }
+
+                    $employee_query_result = $this->db->get('employee');
+
+                    if ($employee_query_result->num_rows() > 0) {
+                        $employee_data = $employee_query_result->row();
+                    }
+                }
+
+                $user_image_path = base_url() . 'assets/images/users/default_user.png';
+                $designation_name = 'N/A';
+                if ($employee_data) {
+                    if (!empty($employee_data->em_image)) {
+                        if (file_exists('./assets/images/users/' . $employee_data->em_image)) {
+                            $user_image_path = base_url() . 'assets/images/users/' . $employee_data->em_image;
+                        }
+                    }
+                    if (isset($employee_data->des_name) && !empty($employee_data->des_name)) {
+                        $designation_name = $employee_data->des_name;
+                    }
+                }
+                // --- END OF OPTIMIZED DATA FETCHING ---
+                ?>
+
+                <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="round-img mr-3">
+                        <img src="<?php echo $user_image_path; ?>" alt="user" width="60" height="60" class="img-circle">
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <div class="round align-self-center round-info"><i class="ti-file"></i></div>
-                                    <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0">
-                                            <?php
-                                                $this->db->where('leave_status','Approve');
-                                                $this->db->from("emp_leave");
-                                                echo $this->db->count_all_results();
-                                            ?> Leaves
-                                        </h3>
-                                        <a href="<?php echo base_url(); ?>leave/Application" class="text-muted m-b-0">View Details</a>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="m-l-4">
+                        <h4 class="m-t-0 m-b-0">
+                            Welcome Back, <?php echo $this->session->userdata('name'); ?>
+                            <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($this->session->userdata('user_login_id')); ?>" class="text-muted">&nbsp;<i class="fa fa-pencil"></i></a>
+                        </h4>
+                        <h6 class="text-muted m-t-5 m-b-0"><?php echo $designation_name; ?></h6>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <div class="round align-self-center round-danger"><i class="ti-calendar"></i></div>
-                                    <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0">
-                                            <?php
-                                                $this->db->where('pro_status','running');
-                                                $this->db->from("project");
-                                                echo $this->db->count_all_results();
-                                            ?> Projects
-                                        </h3>
-                                        <a href="<?php echo base_url(); ?>Projects/All_Projects" class="text-muted m-b-0">View Details</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                         <div class="card-body">
-                             <div class="d-flex flex-row">
-                               <div class="round align-self-center round-megna"><i class="ti-money"></i></div> <div class="m-l-10 align-self-center">
-                                     <h3 class="m-b-0">
-                                       <?php
-                                        $this->db->from("pay_salary");
-                                         echo $this->db->count_all_results();
-                                        ?> Payslips 
-                                      </h3>
-                                  <a href="<?php echo base_url('payroll/salary_list'); ?>" class="text-muted m-b-0">View Details</a> </div>
-                              </div>
-                         </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
                 </div>
-                <div class="row ">
+
+                <hr class="thicker-hr mt-4 mb-4" />
+
+                <!-- Start of the new row with four combined cards -->
+                <div class="row">
+                    <!-- Combined Employees Card -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-row">
+                            <div class="round align-self-center round-primary"><i class="ti-user"></i></div>
+                            <div class="m-l-10 align-self-center">
+                                <h3 class="m-b-0">
+                                    <?php
+                                    $this->db->where('status','ACTIVE');
+                                    $this->db->from("employee");
+                                    echo $this->db->count_all_results();
+                                    ?> Employees
+                                </h3>
+                                <a href="<?php echo base_url(); ?>employee/Employees" class="text-muted m-b-0">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Combined Leaves Card -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-row">
+                            <div class="round align-self-center round-info"><i class="ti-file"></i></div>
+                            <div class="m-l-10 align-self-center">
+                                <h3 class="m-b-0">
+                                    <?php
+                                    $this->db->where('leave_status','Approve');
+                                    $this->db->from("emp_leave");
+                                    echo $this->db->count_all_results();
+                                    ?> Leaves
+                                </h3>
+                                <a href="<?php echo base_url(); ?>leave/Application" class="text-muted m-b-0">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Combined Projects Card -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-row">
+                            <div class="round align-self-center round-danger"><i class="ti-calendar"></i></div>
+                            <div class="m-l-10 align-self-center">
+                                <h3 class="m-b-0">
+                                    <?php
+                                    $this->db->where('pro_status','running');
+                                    $this->db->from("project");
+                                    echo $this->db->count_all_results();
+                                    ?> Projects
+                                </h3>
+                                <a href="<?php echo base_url(); ?>Projects/All_Projects" class="text-muted m-b-0">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Combined Payslips Card -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-row">
+                            <div class="round align-self-center round-warning"><i class="ti-money"></i></div>
+                            <div class="m-l-10 align-self-center">
+                                <h3 class="m-b-0">
+                                    <?php
+                                    $this->db->from("pay_salary");
+                                    echo $this->db->count_all_results();
+                                    ?> Payslips
+                                </h3>
+                                <a href="<?php echo base_url('payroll/salary_list'); ?>" class="text-muted m-b-0">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of the new row with four combined cards -->
+            </div>
+        </div>
+        <!-- End of combined card -->
+
+        <div class="row ">
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card card-inverse ">
                             <div class="box text-center">
@@ -224,6 +210,10 @@
                         </div>
                     </div>
                 </div>
+  
+
+    
+
 
                 <?php $notice = $this->notice_model->GetNoticelimit();
                 $running = $this->dashboard_model->GetRunningProject();
