@@ -230,6 +230,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Running Projects</h4>
+                                <h6 class="card-subtitle">Projects currently in progress</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive" style="height:600px;overflow-y:scroll">
@@ -260,7 +261,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">To Do list</h4>
                                 <h6 class="card-subtitle">List of your task to complete</h6>
-                                <div class="to-do-widget m-t-20" style="height:572px;overflow-y:scroll">
+                                <div class="to-do-widget m-t-20" style="height:597px;overflow-y:scroll">
                                         <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
                                             <?php foreach($todolist as $value): ?>
                                             <li class="list-group-item" data-role="task">
@@ -301,6 +302,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Notice Board</h4>
+                                <h6 class="card-subtitle">All important announcements and updates</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive slimScrollDiv" style="height:600px;overflow-y:scroll">
@@ -333,6 +335,7 @@
                                 <h4 class="card-title">
                                     Upcoming Dates
                                 </h4>
+                                <h6 class="card-subtitle">Important dates and holidays</h6>                      
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive" style="height:600px;overflow-y:scroll">
