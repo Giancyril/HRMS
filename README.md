@@ -55,9 +55,6 @@ Follow these steps to set up and run the project on your local machine.
     ```
     git clone [your-repository-url]
     
-    
-    
-    
     ```
 
 2.  **Move to Web Server Directory:**
