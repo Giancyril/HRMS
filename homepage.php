@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Optima HR</title>
 
+    <link rel="icon" type="image/ico" sizes="16x16" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="assets/css/styles.css" />
 
     <link
@@ -13,6 +14,7 @@
         rel="stylesheet"
     />
 
+    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 </head>
 <body>

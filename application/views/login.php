@@ -4,30 +4,21 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.ico">
     <title>Optima HR</title>
-    <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">
-    <!-- You can change the theme colors from here -->
     <link href="<?php echo base_url(); ?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
     
     <link rel="icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
-    
-
-    
 
     <style>
         body {
@@ -44,8 +35,7 @@
         .login-box {
             width: 100%;
             max-width: 400px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            border-radius: 15px;
             background-color: #fff;
         }
 
@@ -55,8 +45,8 @@
         }
 
         .card-body img {
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             display: block;
             margin: 0 auto 2px auto;
         }
@@ -64,7 +54,7 @@
         /* Adjust padding to accommodate icon on the right */
         .form-control {
             border-radius: 6px;
-            padding: 10px 40px 10px 12px; /* Top, Right (for icon), Bottom, Left (original padding) */
+            padding: 10px 40px 10px 12px;
             font-size: 15px;
             font-family: 'Montserrat', sans-serif;
             position: relative;
@@ -78,8 +68,35 @@
 
         .form-group {
             margin-bottom: 20px;
-            position: relative; /* Essential for positioning icons inside */
+            position: relative;
         }
+        
+        /* SHAKE EFFECT CSS START */
+        .form-group.shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+            20% {
+                transform: translateX(-10px);
+            }
+            40% {
+                transform: translateX(10px);
+            }
+            60% {
+                transform: translateX(-10px);
+            }
+            80% {
+                transform: translateX(10px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        /* SHAKE EFFECT CSS END */
 
         /* Icon Styling - Placed on the right */
         .form-group .form-control-feedback {
@@ -104,15 +121,95 @@
             color: white;
             padding: 12px;
             font-size: 16px;
-            border-radius: 6px;
+            border-radius: 16px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
             transition: background 0.3s ease;
         }
 
-        .btn-login:hover {
-            background-color: #0056b3;
+        /* New Social Login CSS */
+        .divider {
+            text-align: center;
+            margin: 16px 0;
+            position: relative;
         }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e1e1e1;
+        }
+
+        .divider span {
+            background: #ffffff;
+            color: #727272;
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .social-btn {
+            width: 100%;
+            background: #ffffff;
+            color: #191414;
+            border: 1px solid #d9d9d9;
+            border-radius: 50px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+            min-height: 44px;
+        }
+
+        .social-btn:hover {
+            border-color: #191414;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn:active {
+            transform: translateY(0);
+        }
+
+        .signup-link {
+            text-align: center;
+        }
+
+        .signup-link p {
+            color: #727272;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #1DB954;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .signup-link a:hover {
+            color: #1ed760;
+            text-decoration: underline;
+        }
+        /* End of new CSS */
 
         /* The original flash message div - hide it by default now that SweetAlert handles display */
         .message {
@@ -134,7 +231,8 @@
             text-align: center;
             padding-bottom: 1em;
             margin-bottom: 1em;
-            border-bottom: 3px solid #e9ecef;
+            border-bottom: 2px solid #e9ecef;
+            
         }
 
         .swal2-html-container {
@@ -192,14 +290,33 @@
                     <span class="form-control-feedback"><i class="fa fa-lock"></i></span>
                 </div>
 
-                <div class="form-group text-center m-t-20" style="margin-top: 30px;border-radius: 5px;">
+                <div class="form-group text-center m-t-20" style="margin-top: 35px; margin-bottom: 16px; border-radius: 40px;">
                     <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit">
                         Log In
                     </button>
                 </div>
-                <div class="text-center mt-3">
-                    <a href="<?php echo base_url('homepage.php'); ?>" style="color: #2C5C8E; font-weight: 550; text-decoration: none;">Visit Homepage</a>
+
+                <!-- Added divider and social login buttons -->
+                <div class="divider">
+                    <span>or</span>
                 </div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn google-btn">
+                        <svg width="18" height="18" viewBox="0 0 18 18">
+                            <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 002.38-5.88c0-.57-.05-.66-.15-1.18z"/>
+                            <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2.04a4.8 4.8 0 01-2.7.75 4.8 4.8 0 01-4.52-3.36H1.83v2.07A8 8 0 008.98 17z"/>
+                            <path fill="#FBBC05" d="M4.46 10.41a4.8 4.8 0 010-2.82V5.52H1.83a8 8 0 000 7.16l2.63-2.07z"/>
+                            <path fill="#EA4335" d="M8.98 3.58c1.32 0 2.5.45 3.44 1.35l2.54-2.59A8 8 0 001.83 5.52l2.63 2.07c.7-2.07 2.67-3.36 4.52-3.36z"/>
+                        </svg>
+                        Continue with Google
+                    </button>
+                </div>
+
+                <div class="signup-link">
+                    <p>For more information, <a href="<?php echo base_url('homepage.php'); ?>" style="color: #4285F4; font-weight: 550; text-decoration: none;">visit our homepage</a>
+                </div>
+
             </form>
         </div>
     </div>
@@ -219,72 +336,80 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
     <script>
-        console.log("Document ready event fired.");
+    console.log("Document ready event fired.");
 
-        $(document).ready(function() {
-            console.log("jQuery ready function entered.");
+    $(document).ready(function() {
+        console.log("jQuery ready function entered.");
 
-            var flashMessageContainer = $('#flashMessageContainer');
-            console.log("Flash message container found:", flashMessageContainer.length > 0);
+        var flashMessageContainer = $('#flashMessageContainer');
+        console.log("Flash message container found:", flashMessageContainer.length > 0);
 
-            if (flashMessageContainer.length) {
-                var fullMessageText = flashMessageContainer.text().trim();
-                var feedbackContent = fullMessageText.replace(/^Notice: /, '').trim();
+        if (flashMessageContainer.length) {
+            var fullMessageText = flashMessageContainer.text().trim();
+            var feedbackContent = fullMessageText.replace(/^Notice: /, '').trim();
 
-                console.log("Full message text from flashdata:", fullMessageText);
-                console.log("Cleaned feedback content:", feedbackContent);
+            console.log("Full message text from flashdata:", fullMessageText);
+            console.log("Cleaned feedback content:", feedbackContent);
 
-                // Define expected messages from your PHP backend
-                var wrongPasswordMessage = "Wrong password, please try again.";
-                var invalidUsernameMessage = "Invalid Username.";
-                var validationErrorMessage = "Please enter a valid username and password (min 6 chars for password, 7 for email).";
-                var invalidCredentialsMessage = "UserEmail or Password is Invalid";
+            var emailField = $('#email').closest('.form-group');
+            var passwordField = $('input[name="password"]').closest('.form-group');
 
-                let title = 'Error';
-                let text = 'An unexpected error occurred. Please try again.';
-                let icon = false; // Set to false to remove the icon
+            let title = 'Error';
+            let text = 'An unexpected error occurred. Please try again.';
+            let icon = 'error'; // Use a standard icon for better clarity in top-right alerts
 
-                if (feedbackContent === wrongPasswordMessage) {
-                    title = 'Login Failed';
-                    text = 'Wrong password, please try again.';
-                } else if (feedbackContent === invalidUsernameMessage) {
-                    title = 'Login Failed';
-                    text = 'The username you entered is not recognized.';
-                } else if (feedbackContent === validationErrorMessage) {
-                    title = 'Validation Error';
-                    text = 'Please ensure your email is at least 7 characters and password is at least 6 characters.';
-                } else if (feedbackContent === invalidCredentialsMessage) {
-                    title = 'Login Failed';
-                    text = 'The username or password you entered is incorrect.';
-                } else {
-                    title = 'Login Notice';
-                    text = feedbackContent || 'An unexpected login issue occurred. Please try again.';
-                }
+            // --- SHAKE EFFECT LOGIC ---
+            emailField.removeClass('shake');
+            passwordField.removeClass('shake');
 
-                // Show the SweetAlert2 modal
-                Swal.fire({
-                    title: title,
-                    text: text,
-                    icon: icon, // This is key to remove the icon
-                    confirmButtonText: 'OK',
-                    confirmButtonColor: '#007bff', // Set button color directly
-                    customClass: {
-                        popup: 'square-modal', // Apply the custom class for square size
-                    },
-                    allowOutsideClick: false, // Prevents closing by clicking outside
-                    allowEscapeKey: false,   // Prevents closing by pressing Escape key
-                    allowEnterKey: true,     // Allows closing by pressing Enter key on the button
-                });
-
-                // Hide the original flash message container AFTER processing
-                flashMessageContainer.hide();
-
+            if (feedbackContent === "Wrong password, please try again.") {
+                title = 'Login Failed';
+                text = 'Wrong password, please try again.';
+                passwordField.addClass('shake');
+            } else if (feedbackContent === "Invalid Username.") {
+                title = 'Login Failed';
+                text = 'The username you entered is not recognized.';
+                emailField.addClass('shake');
+            } else if (feedbackContent === "Please enter a valid username and password (min 6 chars for password, 7 for email).") {
+                title = 'Validation Error';
+                text = 'Please ensure your email is at least 7 characters and password is at least 6 characters.';
+                emailField.addClass('shake');
+                passwordField.addClass('shake');
+            } else if (feedbackContent === "UserEmail or Password is Invalid") {
+                title = 'Login Failed';
+                text = 'The username or password you entered is incorrect.';
+                emailField.addClass('shake');
+                passwordField.addClass('shake');
             } else {
-                console.log("No flash message container found, or flashdata is empty.");
+                title = 'Login Notice';
+                text = feedbackContent || 'An unexpected login issue occurred. Please try again.';
             }
-        });
-    </script>
 
+            // Show the SweetAlert2 modal at the top-right
+            Swal.fire({
+                position: 'top', // This positions the modal
+                    // Using a standard icon
+                title: title,
+                text: text,
+                showConfirmButton: false, // Hides the OK button
+                timer: 2000, // Closes the modal after 2 seconds
+                backdrop: false, // Makes the background transparent
+                customClass: {
+                    container: 'top-right-alert'
+                },
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+
+            // Hide the original flash message container AFTER processing
+            flashMessageContainer.hide();
+        } else {
+            console.log("No flash message container found, or flashdata is empty.");
+        }
+    });
+</script>
 </body>
 
 </html>
