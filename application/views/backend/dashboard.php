@@ -142,74 +142,89 @@
         </div>
         <!-- End of combined card -->
 
-        <div class="row ">
-                    <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card card-inverse ">
-                            <div class="box text-center">
-                                <h1 class="font-light text-black">
-                                    <?php
-                                        $this->db->where('status','INACTIVE');
-                                        $this->db->from("employee");
-                                        echo $this->db->count_all_results();
-                                    ?>
-                                </h1>
-                                <h6 class=" text-black">Former Employees</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card card-inverse">
-                            <div class="box text-center">
-                                <h1 class="font-light text-black">
-                                                <?php
-                                                    $this->db->where('leave_status','Not Approve');
-                                                    $this->db->from("emp_leave");
-                                                    echo $this->db->count_all_results();
-                                                ?>
-                                </h1>
-                                <h6 class="text-black">Pending Leave Application</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card card-inverse">
-                            <div class="box text-center">
-                                <h1 class="font-light text-black">
-                                                <?php
-                                                    $this->db->where('pro_status','upcoming');
-                                                    $this->db->from("project");
-                                                    echo $this->db->count_all_results();
-                                                ?>
-                                </h1>
-                                <h6 class="text-black">Upcoming Project</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card card-inverse ">
-                           <div class="box text-center">
-                                            <h1 class="font-light text-black">
-                                            <?php
-                                            // 1. Get total number of employees
-                                                $this->db->from("employee"); // Replace "employees" with your actual employee table name
-                                                $total_employees = $this->db->count_all_results();
+        
 
-                                            // 2. Get number of generated payslips
-                                                $this->db->from("pay_salary");
-                                                $generated_payslips = $this->db->count_all_results();
-
-                                            // 3. Calculate payslips pending
-                                                $payslips_pending = $total_employees - $generated_payslips;
-
-                                            // 4. Display the result
-                                                echo $payslips_pending;
-                                            ?>
-                                            </h1>
-                                            <h6 class="text-black">Payslips Pending</h6>
-                           </div>
-                        </div>
-                    </div>
+        <div class="row">
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+        <div class="card card-custom card-border-primary" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease-in-out; border-left: 5px solid #5c4ac7;">
+            <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
+                <div class="card-text flex-grow-1" style="flex-grow: 1;">
+                    <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Former Employees</h6>
+                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                        <?php
+                        $this->db->where('status','INACTIVE');
+                        $this->db->from("employee");
+                        echo $this->db->count_all_results();
+                        ?>
+                    </h1>
                 </div>
+                <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
+                    <i class="fas fa-user-slash"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+        <div class="card card-custom card-border-info" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease-in-out; border-left: 5px solid #1976d2;">
+            <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
+                <div class="card-text flex-grow-1" style="flex-grow: 1;">
+                    <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Leave Applications</h6>
+                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                        <?php
+                        $this->db->where('leave_status','Not Approve');
+                        $this->db->from("emp_leave");
+                        echo $this->db->count_all_results();
+                        ?>
+                    </h1>
+                </div>
+                <div class="icon-lg" style="font-size: 1.60em; color: #ccc;">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+        <div class="card card-custom card-border-success" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease-in-out; border-left: 5px solid #ef5350;">
+            <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
+                <div class="card-text flex-grow-1" style="flex-grow: 1;">
+                    <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Upcoming Project</h6>
+                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                        <?php
+                        $this->db->where('pro_status','upcoming');
+                        $this->db->from("project");
+                        echo $this->db->count_all_results();
+                        ?>
+                    </h1>
+                </div>
+                <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+        <div class="card card-custom card-border-danger" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease-in-out; border-left: 5px solid #ffb22b;">
+            <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
+                <div class="card-text flex-grow-1" style="flex-grow: 1;">
+                    <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Payslips Pending</h6>
+                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                        <?php
+                        $this->db->from("employee");
+                        $total_employees = $this->db->count_all_results();
+                        $this->db->from("pay_salary");
+                        $generated_payslips = $this->db->count_all_results();
+                        $payslips_pending = $total_employees - $generated_payslips;
+                        echo $payslips_pending;
+                        ?>
+                    </h1>
+                </div>
+                <div class="icon-lg" style="font-size: 1.60em; color: #ccc;">
+                    <i class="fas fa-money-bill-alt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
   
 
     
