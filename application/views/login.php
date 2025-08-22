@@ -23,7 +23,7 @@
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(115deg, #62cff4, rgb(52, 109, 242));
+            background-color: #3D74B6;
             margin: 0;
             min-height: 100vh;
             display: flex;
@@ -116,7 +116,7 @@
         }
 
         .btn-login {
-            background-color: #007bff;
+            background-color: #3D74B6;
             border: none;
             color: white;
             padding: 12px;
@@ -127,10 +127,14 @@
             transition: background 0.3s ease;
         }
 
+        .btn-login:hover {
+            background-color: #33A1E0 ;
+        }
+
         /* New Social Login CSS */
         .divider {
             text-align: center;
-            margin: 16px 0;
+            margin: 14px 0;
             position: relative;
         }
 
@@ -157,15 +161,15 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
 
         .social-btn {
             width: 100%;
             background: #ffffff;
             color: #191414;
-            border: 1px solid #d9d9d9;
-            border-radius: 50px;
+            border: 1.5px solid #d9d9d9;
+            border-radius: 8px;
             padding: 12px 20px;
             cursor: pointer;
             font-family: inherit;
@@ -181,7 +185,6 @@
 
         .social-btn:hover {
             border-color: #191414;
-            transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
@@ -190,7 +193,9 @@
         }
 
         .signup-link {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            margin-bottom: -5px;
         }
 
         .signup-link p {
@@ -199,14 +204,14 @@
         }
 
         .signup-link a {
-            color: #1DB954;
+            color: #00a9e0;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 300;
             transition: color 0.2s ease;
         }
 
         .signup-link a:hover {
-            color: #1ed760;
+            color: #00a9e0;
             text-decoration: underline;
         }
         /* End of new CSS */
@@ -290,11 +295,11 @@
                     <span class="form-control-feedback"><i class="fa fa-lock"></i></span>
                 </div>
 
-                <div class="form-group text-center m-t-20" style="margin-top: 35px; margin-bottom: 16px; border-radius: 40px;">
-                    <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit">
-                        Log In
-                    </button>
-                </div>
+                <div class="form-group text-center m-t-20" style="margin-top: 35px; margin-bottom: 14px; border-radius: 8px;">
+                        <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit">
+                            Login
+                        </button>
+                    </div>
 
                 <!-- Added divider and social login buttons -->
                 <div class="divider">
@@ -314,12 +319,11 @@
                 </div>
 
                 <div class="signup-link">
-                    <p>For more information, <a href="<?php echo base_url('homepage.php'); ?>" style="color: #4285F4; font-weight: 550; text-decoration: none;">visit our homepage</a>
-                </div>
-
-            </form>
+                        <p>For more information, <a href="<?php echo base_url('homepage.php'); ?>">visit our homepage</a></p>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
 
     <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/popper.min.js"></script>
