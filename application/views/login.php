@@ -128,13 +128,13 @@
         }
 
         .btn-login:hover {
-            background-color: #33A1E0 ;
+            background-color: #33A1E0;
         }
 
         /* New Social Login CSS */
         .divider {
             text-align: center;
-            margin: 14px 0;
+            margin: 10px 0;
             position: relative;
         }
 
@@ -167,14 +167,14 @@
         .social-btn {
             width: 100%;
             background: #ffffff;
-            color: #191414;
+            color: #727272;
             border: 1.5px solid #d9d9d9;
             border-radius: 8px;
             padding: 12px 20px;
             cursor: pointer;
             font-family: inherit;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -184,7 +184,7 @@
         }
 
         .social-btn:hover {
-            border-color: #191414;
+            border-color: #686D76;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
@@ -267,6 +267,33 @@
         .swal2-confirm.swal2-styled:hover {
             background-color: #0056b3 !important;
         }
+
+        .security-notice {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+    
+    /* New styles for top-right positioning */
+            position: fixed; 
+            top: 10px;       
+            right: 10px;     
+            z-index: 1000; 
+        }
+
+        .security-notice span {
+            color: #166534;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .security-notice.hidden {
+            display: none;
+        }
+
     </style>
 </head>
 
@@ -295,9 +322,9 @@
                     <span class="form-control-feedback"><i class="fa fa-lock"></i></span>
                 </div>
 
-                <div class="form-group text-center m-t-20" style="margin-top: 35px; margin-bottom: 14px; border-radius: 8px;">
+                <div class="form-group text-center m-t-20" style="margin-top: 35px; margin-bottom: 10px; border-radius: 8px;">
                         <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit">
-                            Login
+                            Log In
                         </button>
                     </div>
 
@@ -324,6 +351,14 @@
                 </form>
             </div>
         </div>
+
+        <div class="security-notice hidden">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 1L3 3v4.5c0 2.89 2 5.5 5 6 3-0.5 5-3.11 5-6V3l-5-2z" stroke="#10B981" stroke-width="1.5" fill="none"/>
+                    <path d="M6 8l1.5 1.5L11 6" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Your login is secured with industry-standard encryption.</span>
+            </div>
 
     <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/popper.min.js"></script>
@@ -412,6 +447,27 @@
         } else {
             console.log("No flash message container found, or flashdata is empty.");
         }
+
+        
+
+        // Select the input fields and the security notice
+        const $emailInput = $('#email');
+        const $passwordInput = $('input[name="password"]');
+        const $securityNotice = $('.security-notice');
+
+        // Function to check if either input has a value
+        function checkInputs() {
+            // .val().trim() gets the value and removes any leading/trailing whitespace
+            if ($emailInput.val().trim() !== '' || $passwordInput.val().trim() !== '') {
+                $securityNotice.removeClass('hidden'); // Show the notice
+            } else {
+                $securityNotice.addClass('hidden'); // Hide the notice
+            }
+        }
+
+        // Listen for typing events on both input fields
+        $emailInput.on('input', checkInputs);
+        $passwordInput.on('input', checkInputs);
     });
 </script>
 </body>
