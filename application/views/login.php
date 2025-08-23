@@ -35,7 +35,7 @@
         .login-box {
             width: 100%;
             max-width: 400px;
-            border-radius: 15px;
+            border-radius: 8px;
             background-color: #fff;
         }
 
@@ -116,7 +116,7 @@
         }
 
         .btn-login {
-            background-color: #3D74B6;
+            background-color:  #33A1E0;
             border: none;
             color: white;
             padding: 12px;
@@ -128,7 +128,7 @@
         }
 
         .btn-login:hover {
-            background-color: #33A1E0;
+            background-color: #3D74B6;
         }
 
         /* New Social Login CSS */
@@ -169,7 +169,7 @@
             background: #ffffff;
             color: #727272;
             border: 1.5px solid #d9d9d9;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 12px 20px;
             cursor: pointer;
             font-family: inherit;
@@ -322,7 +322,7 @@
                     <span class="form-control-feedback"><i class="fa fa-lock"></i></span>
                 </div>
 
-                <div class="form-group text-center m-t-20" style="margin-top: 35px; margin-bottom: 10px; border-radius: 8px;">
+                <div class="form-group text-center m-t-20" style="margin-top: 35px; margin-bottom: 10px; border-radius: 6px;">
                         <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit">
                             Log In
                         </button>
@@ -448,7 +448,7 @@
             console.log("No flash message container found, or flashdata is empty.");
         }
 
-        
+
 
         // Select the input fields and the security notice
         const $emailInput = $('#email');

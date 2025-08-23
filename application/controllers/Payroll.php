@@ -365,7 +365,7 @@ class Payroll extends CI_Controller {
                     <td>$value->total</td>
                     <td>$hourrate</td>
                     <td>$totalmonthhour</td>
-                    <td><a href='' data-id='$value->em_id' class='btn btn-sm btn-danger waves-effect waves-light salaryGenerateModal' data-toggle='modal' data-target='#SalaryTypemodel' data-hour='$totalmonthhour'>Generate Salary</a></td>
+                    <td><a href='' data-id='$value->em_id' class='btn btn-sm btn-info waves-effect waves-light salaryGenerateModal' data-toggle='modal' data-target='#SalaryTypemodel' data-hour='$totalmonthhour'>Generate Salary</a></td>
                 </tr>";
         }
         
@@ -1075,7 +1075,7 @@ $obj_merged = (object) array_merge((array) $employee_info, (array) $salaryvalueb
                                 data-month='$month' 
                                 data-year='$year' 
                                 data-has_loan='$has_loan' 
-                                class='btn btn-sm btn-danger waves-effect waves-light salaryGenerateModal' 
+                                class='btn btn-sm btn-info waves-effect waves-light salaryGenerateModal' 
                                 data-toggle='modal'
                                 data-target='#salaryGenerateModal'>
                         Generate Salary</a></td>
