@@ -116,5 +116,11 @@ class Organization_model extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function get_all_designations() {
+    $this->db->order_by('des_name', 'ASC');
+    $query = $this->db->get('designation');
+    return $query->result();
+}
 }
 ?>

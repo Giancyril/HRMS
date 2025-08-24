@@ -83,7 +83,16 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="control-label">Job Title</label>
-                                            <input type="text" name="title" class="form-control" placeholder="e.g., Senior Web Developer" required>
+                                            <select name="title" class="form-control" required>
+                                                <option value="">Select a Job Title</option>
+                                                <?php if (isset($designations) && is_array($designations)): ?>
+                                                    <?php foreach ($designations as $designation): ?>
+                                                        <option value="<?php echo html_escape($designation->des_name); ?>">
+                                                            <?php echo html_escape($designation->des_name); ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

@@ -9,15 +9,24 @@ class Recruitment extends CI_Controller {
         $this->load->model('settings_model');
         $this->load->model('employee_model');
         $this->load->model('leave_model');
+        // Load the correct model: Organization_model, not Designation_model
+        $this->load->model('Organization_model'); 
         $this->load->library('form_validation');
         $this->load->library('upload');
         $this->load->helper(['url', 'form']);
     }
 
     public function index() {
+        // Fetch all job postings from the database
         $data['jobs'] = $this->Recruitment_model->get_all_jobs();
+        // Call the correct model to get designations
+        $data['designations'] = $this->Organization_model->get_all_designations(); 
+        
+        // Pass both sets of data to the jobs_list view
         $this->load->view('backend/jobs_list', $data);
     }
+    
+    // ... rest of your controller code remains the same ...
 
     public function job_details($job_id) {
         $data['job'] = $this->Recruitment_model->get_job_by_id($job_id);
@@ -79,22 +88,21 @@ class Recruitment extends CI_Controller {
     public function application_success() {
         $this->load->view('backend/application_success');
     }
-
-    // New method to load the job creation form
+    
     public function add_job() {
-        $this->load->view('backend/jobs_list');
+        // No code needed here since the index method already loads the necessary data.
     }
     
-    // New method to save a new job posting
     public function save_job() {
+        // Server-side validation
         $this->form_validation->set_rules('title', 'Job Title', 'required');
         $this->form_validation->set_rules('description', 'Job Description', 'required');
         $this->form_validation->set_rules('requirements', 'Job Requirements', 'required');
         
         if ($this->form_validation->run() === FALSE) {
-            // If validation fails, return an error message to the AJAX call
+            // If validation fails, return an error message
             echo "Validation failed. Please fill out all required fields.";
-            exit(); // Exit to prevent further execution
+            exit();
         } else {
             $data = array(
                 'title' => $this->input->post('title'),
@@ -104,7 +112,7 @@ class Recruitment extends CI_Controller {
                 'is_active' => 1
             );
             $this->Recruitment_model->save_job($data);
-            // Instead of redirecting, return a success message
+            // Return a success message for the AJAX call
             echo "Job posted successfully!";
         }
     }
