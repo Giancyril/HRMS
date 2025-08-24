@@ -30,7 +30,9 @@
                                                 <th>Email</th>
                                                 <th>Phone</th>
                                                 <th>Applied At</th>
+                                                <?php if ($this->session->userdata('user_type') != 'EMPLOYEE'): ?>
                                                 <th>Action</th>
+                                                <?php endif; ?>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -46,10 +48,12 @@
                                                     <td><?php echo html_escape($application['email']); ?></td>
                                                     <td><?php echo html_escape($application['phone']); ?></td>
                                                     <td><?php echo html_escape(date('F j, Y', strtotime($application['applied_at']))); ?></td>
+                                                    <?php if ($this->session->userdata('user_type') != 'EMPLOYEE'): ?>
                                                     <td class="jsgrid-align-center">
                                                         <a href="<?php echo site_url('recruitment/view_application/' . $application['id']); ?>" class="btn btn-sm btn-info" title="View Details"> View</a>
                                                         <a href="<?php echo site_url('recruitment/delete_application/' . $application['id']); ?>" class="btn btn-sm btn-danger waves-effect waves-light" title="Delete" onclick="return confirm('Are you sure to delete this application?');"><i class="fa fa-trash-o"></i></a>
                                                     </td>
+                                                    <?php endif; ?>
                                                 </tr>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
