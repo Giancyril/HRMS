@@ -227,39 +227,39 @@
 </div>
   
 
-<div class="card">
- <div class="card-header">
-  <h4 class="m-b-0 text-black">Latest Job Postings</h4>
- </div>
- <div class="card-body">
-  <div class="table-responsive">
-   <table class="table table-hover table-striped">
-    <thead>
-     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Posted Date</th>
-     </tr>
-    </thead>
-    <tbody>
-     <?php if (!empty($jobs)): ?>
-      <?php foreach ($jobs as $job): ?>
-       <tr>
-        <td><?php echo html_escape($job['title']); ?></td>
-        <td><?php echo html_escape(substr($job['description'], 0, 75)) . '...'; ?></td>
-        <td><?php echo html_escape(date('F j, Y', strtotime($job['posted_at']))); ?></td>
-       </tr>
-      <?php endforeach; ?>
-     <?php else: ?>
-      <tr>
-       <td colspan="3" class="text-center">No jobs are currently posted.</td>
-      </tr>
-     <?php endif; ?>
-    </tbody>
-   </table>
-  </div>
- </div>
-</div>
+ <div class="card">
+         <div class="card-header">
+          <h4 class="m-b-0 text-black">Latest Job Postings</h4>
+         </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Posted Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (isset($jobs) && is_array($jobs) && count($jobs) > 0): ?>
+                        <?php foreach ($jobs as $job): ?>
+                            <tr>
+                                <td><?= html_escape($job['title']); ?></td>
+                                <td><?= html_escape(substr($job['description'], 0, 75)) . '...'; ?></td>
+                                <td><?= html_escape(date('F j, Y', strtotime($job['posted_at']))); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="3" class="text-center">No jobs are currently posted.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
 
     
 

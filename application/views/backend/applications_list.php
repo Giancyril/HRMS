@@ -1,9 +1,6 @@
 <?php $this->load->view('backend/header'); ?>
 <?php $this->load->view('backend/sidebar'); ?>
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
                     <h3 class="text-themecolor">Job Applications</h3>
@@ -50,7 +47,8 @@
                                                     <td><?php echo html_escape($application['phone']); ?></td>
                                                     <td><?php echo html_escape(date('F j, Y', strtotime($application['applied_at']))); ?></td>
                                                     <td class="jsgrid-align-center">
-                                                        <a href="<?php echo base_url('uploads/resumes/' . basename($application['resume_path'])); ?>" title="View Resume" class="btn btn-sm btn-primary waves-effect waves-light" target="_blank"><i class="fa fa-file-text-o"></i> View Resume</a>
+                                                        <a href="<?php echo site_url('recruitment/view_application/' . $application['id']); ?>" class="btn btn-sm btn-info" title="View Details"> View</a>
+                                                        <a href="<?php echo site_url('recruitment/delete_application/' . $application['id']); ?>" class="btn btn-sm btn-danger waves-effect waves-light" title="Delete" onclick="return confirm('Are you sure to delete this application?');"><i class="fa fa-trash-o"></i></a>
                                                     </td>
                                                 </tr>
                                                 <?php endforeach; ?>

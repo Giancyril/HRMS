@@ -9,7 +9,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                         <li class="breadcrumb-item"><a href="<?php echo site_url('recruitment'); ?>">Recruitment</a></li>
-                        <li class="breadcrumb-item active"><?php echo html_escape($job['title']); ?></li>
+                        <li class="breadcrumb-item active"><?php echo html_escape($job_details->job_title); ?></li>
                     </ol>
                 </div>
             </div>
@@ -18,18 +18,18 @@
                     <div class="col-12">
                         <div class="card card-outline-info">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white"><?php echo html_escape($job['title']); ?></h4>
+                                <h4 class="m-b-0 text-white"><?php echo html_escape($job_details->job_title); ?></h4>
                             </div>
                             <div class="card-body">
                                 <h3>Job Description</h3>
-                                <p><?php echo nl2br(html_escape($job['description'])); ?></p>
+                                <p><?php echo nl2br(html_escape($job_details->job_description)); ?></p>
 
                                 <h3>Requirements</h3>
-                                <p><?php echo nl2br(html_escape($job['requirements'])); ?></p>
+                                <p><?php echo nl2br(html_escape($job_details->requirements)); ?></p>
 
-                                <p><strong>Posted:</strong> <?php echo html_escape(date('F j, Y', strtotime($job['posted_at']))); ?></p>
+                                <p><strong>Posted:</strong> <?php echo html_escape(date('F j, Y', strtotime($job_details->posted_at))); ?></p>
                                 <br>
-                                <a href="<?php echo site_url('recruitment/apply/' . $job['job_id']); ?>" class="btn btn-info"> Apply for this Job</a>
+                                <a href="<?php echo site_url('recruitment/apply/' . $job_details->job_id); ?>" class="btn btn-info"> Apply for this Job</a>
                             </div>
                         </div>
                     </div>
