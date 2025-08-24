@@ -15,6 +15,7 @@ class Dashboard extends CI_Controller {
         $this->load->model('project_model');    
         $this->load->model('organization_model');
         $this->load->model('leave_model');    
+        $this->load->model('Recruitment_model');
 
     }
     
@@ -27,13 +28,17 @@ class Dashboard extends CI_Controller {
             #$data['settingsvalue'] = $this->dashboard_model->GetSettingsValue();
 			$this->load->view('login');
 	}
-    function Dashboard(){
+       function Dashboard(){
         if($this->session->userdata('user_login_access') != False) {
-        $this->load->view('backend/dashboard');
+            // Call the correct method to get jobs from today
+            $data['jobs'] = $this->Recruitment_model->get_jobs_today(); 
+            
+            // Pass the data to the dashboard view
+            $this->load->view('backend/dashboard', $data);
         }
-    else{
-		redirect(base_url() , 'refresh');
-	}            
+        else{
+            redirect(base_url() , 'refresh');
+        }               
     }
     public function add_todo(){
         $userid = $this->input->post('userid');

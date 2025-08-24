@@ -37,4 +37,14 @@ class Recruitment_model extends CI_Model {
     public function save_job($data) {
         return $this->db->insert('jobs', $data);
     }
+
+    // Corrected method to return an array of arrays
+    public function get_jobs_today() {
+        $today = date('Y-m-d');
+        $this->db->like('posted_at', $today);
+        $query = $this->db->get('jobs');
+        // Change result() to result_array() for consistency
+        return $query->result_array(); 
+    }
+    
 }

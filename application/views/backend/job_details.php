@@ -21,10 +21,10 @@
                                 <h4 class="m-b-0 text-white"><?php echo html_escape($job['title']); ?></h4>
                             </div>
                             <div class="card-body">
-                                <h2>Job Description</h2>
+                                <h3>Job Description</h3>
                                 <p><?php echo nl2br(html_escape($job['description'])); ?></p>
 
-                                <h2>Requirements</h2>
+                                <h3>Requirements</h3>
                                 <p><?php echo nl2br(html_escape($job['requirements'])); ?></p>
 
                                 <p><strong>Posted:</strong> <?php echo html_escape(date('F j, Y', strtotime($job['posted_at']))); ?></p>
