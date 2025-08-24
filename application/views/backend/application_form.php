@@ -67,8 +67,8 @@
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Submit Application</button>
-                                        <a href="<?php echo site_url('recruitment'); ?>" class="btn btn-inverse">Cancel</a>
+                                        <button type="submit" class="btn btn-info">Submit</button>
+                                        <a href="<?php echo site_url('recruitment'); ?>" class="btn btn-danger">Cancel</a>
                                     </div>
                                 <?php echo form_close(); ?>
                             </div>

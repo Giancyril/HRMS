@@ -29,7 +29,7 @@
 
                                 <p><strong>Posted:</strong> <?php echo html_escape(date('F j, Y', strtotime($job['posted_at']))); ?></p>
                                 <br>
-                                <a href="<?php echo site_url('recruitment/apply/' . $job['job_id']); ?>" class="btn btn-success"><i class="fa fa-paper-plane"></i> Apply for this Job</a>
+                                <a href="<?php echo site_url('recruitment/apply/' . $job['job_id']); ?>" class="btn btn-info"> Apply for this Job</a>
                             </div>
                         </div>
                     </div>
