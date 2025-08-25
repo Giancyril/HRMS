@@ -9,10 +9,12 @@ class Recruitment_model extends CI_Model {
     }
 
     public function get_all_jobs() {
-        $this->db->where('is_active', 1);
-        $query = $this->db->get('jobs');
-        return $query->result_array();
-    }
+    $this->db->select('jobs.*'); // Select all columns from the jobs table
+    $this->db->from('jobs');
+    $this->db->where('jobs.is_active', 1);
+    $query = $this->db->get();
+    return $query->result_array();
+}
 
     public function get_job_by_id($job_id) {
         $this->db->where('job_id', $job_id);
@@ -80,6 +82,14 @@ public function delete_application($id)
     public function add_application($data) {
         return $this->db->insert('applications', $data);
     }
+
+    // In your Recruitment_model.php
+public function get_designations() {
+    $this->db->select('id, des_name');
+    $this->db->from('designation');
+    $query = $this->db->get();
+    return $query->result_array();
+}
 
     
     
