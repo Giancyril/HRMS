@@ -26,11 +26,12 @@ class Recruitment_model extends CI_Model {
         return $this->db->insert('applicants', $data);
     }
 
-    public function get_all_applications()
+    // In your Recruitment_model.php model
+public function get_all_applications()
 {
-    $this->db->select('applications.id, applications.first_name, applications.last_name, applications.email, applications.phone, applications.applied_at, jobs.title as job_title');
+    $this->db->select('applications.id, applications.first_name, applications.last_name, applications.email, applications.phone, applications.applied_at, applications.status, jobs.title as job_title');
     $this->db->from('applications');
-    $this->db->join('jobs', 'applications.job_id = jobs.job_id');
+    $this->db->join('jobs', 'applications.job_id = jobs.job_id', 'left'); // Use a left join to be safe
     $query = $this->db->get();
     return $query->result_array();
 }

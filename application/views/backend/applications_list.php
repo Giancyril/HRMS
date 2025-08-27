@@ -66,3 +66,14 @@
                 </div>
             </div>
 <?php $this->load->view('backend/footer'); ?>
+
+<script>
+    $(document).ready(function () {
+        // Ensure this ID matches the <table> ID in your HTML
+        $('#applications_list').DataTable({ 
+            "aaSorting": [[4, 'desc']], // This sorts the "Applied At" column
+            dom: 'Bfrtip',
+            buttons: ['csv', 'excel', 'pdf', 'print']
+        });
+    });
+</script>

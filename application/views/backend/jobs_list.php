@@ -94,11 +94,11 @@
                                         <?php foreach ($jobs as $job): ?>
                                             <tr>
                                                 <td><?php echo html_escape($job['title']); ?></td>
-                                                <td><?php echo html_escape(substr($job['description'], 0, 100)) . '...'; ?></td>
+                                                <td><?php echo html_escape(substr($job['description'], 0, 70)) . '...'; ?></td>
                                                 <td><?php echo html_escape(date('F j, Y', strtotime($job['posted_at']))); ?></td>
                                                 <td class="jsgrid-align-center">
                                                     <a href="<?php echo site_url('recruitment/job_details/' . $job['job_id']); ?>"
-                                                        class="btn btn-sm btn-primary">View</a>
+                                                       class="btn btn-sm btn-primary">View</a>
                                                     <button type="button" class="btn btn-sm btn-info apply-job-btn"
                                                             data-toggle="modal"
                                                             data-target="#applyModal"
@@ -146,12 +146,12 @@
                             <div class="form-group">
                                 <label>Job Description</label>
                                 <textarea name="description" class="form-control" rows="5"
-                                            placeholder="Detailed description..." required></textarea>
+                                                placeholder="Detailed description..." required></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Requirements</label>
                                 <textarea name="requirements" class="form-control" rows="5"
-                                            placeholder="Skills, qualifications..." required></textarea>
+                                                placeholder="Skills, qualifications..." required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -173,13 +173,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="alert modal-message text-center" style="display:none;"></div>
-                    <form id="applyForm" action="<?php echo site_url('recruitment/apply_ajax/'); ?>" method="post" enctype="multipart/form-data">
+                    <form id="applyForm" action="<?php echo site_url('recruitment/apply_ajax/'); ?>" method="post">
                         <input type="hidden" name="job_id" id="apply-job-id">
                         <div class="form-body">
-                            <div class="form-group">
-                                <label>Job Title</label>
-                                <input type="text" id="apply-job-title" class="form-control" readonly>
-                            </div>
                             <div class="form-group">
                                 <label>First Name</label>
                                 <input type="text" name="first_name" class="form-control" required>
@@ -196,15 +192,10 @@
                                 <label>Phone</label>
                                 <input type="text" name="phone" class="form-control" required>
                             </div>
-                            <div class="form-group">
-                                <label>Resume</label>
-                                <input type="file" name="resume" class="form-control" required>
-                                <small class="form-text text-muted">Please upload your resume in PDF or DOCX format.</small>
-                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-info">Submit Application</button>
+                            <button type="submit" class="btn btn-info">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -212,10 +203,9 @@
         </div>
     </div>
 </div>
-<?php $this->load->view('backend/footer'); ?>
 
 <script>
-    $(function () {
+    $(document).ready(function () {
         // Initialize DataTable
         $('#job_postings').DataTable({
             "aaSorting": [[2, 'desc']],
@@ -223,146 +213,82 @@
             buttons: ['csv', 'excel', 'pdf', 'print']
         });
 
-        // ------------------
-        // AJAX for Add Job Form
-        // ------------------
-        $('#addJobForm').on('submit', function (e) {
-            e.preventDefault();
-            const $form = $(this);
-            const $modal = $($form.data('modal-id'));
-            const $modalMsg = $modal.find('.modal-message');
+        // Event listener for when the 'Apply' button is clicked
+        $('.apply-job-btn').on('click', function() {
+            var jobId = $(this).data('job-id');
+            var jobTitle = $(this).data('job-title');
 
-            // Hide any message inside the modal
-            $modalMsg.hide();
-
-            $.ajax({
-                url: $form.attr('action'),
-                method: 'POST',
-                data: $form.serialize(),
-                dataType: 'json',
-            }).done(function (response) {
-                if (response.status === 'success') {
-                    // Show the top-right success message
-                    const $topMsg = $('.success-message');
-                    const $topMsgAlert = $topMsg.find('.alert-success');
-
-                    // Apply styles directly using .css()
-                    $topMsg.css({
-                        'background-color': '#4CAF50',
-                        'color': 'white',
-                        'border': 'none',
-                        'borderRadius': 'none',
-                        'z-index': '1060',
-                        'text-align': 'center'
-                    });
-                    
-                    // The inner alert div should also have transparent background and no border
-                    $topMsgAlert.css({
-                        'background-color': 'transparent',
-                        'border': 'none',
-                        'borderRadius': 'none',
-                        'color': 'white'
-                    });
-
-                    // Set the message text
-                    $topMsgAlert.text('Successfully Added');
-                    $topMsg.fadeIn();
-
-                    // Hide the message and modal after a delay
-                    setTimeout(function () {
-                        $topMsg.fadeOut();
-                        $modal.modal('hide');
-                    }, 2000);
-
-                    // Clear the form and refresh the table
-                    $form[0].reset();
-                    refreshJobsTable();
-
-                } else {
-                    $modalMsg.removeClass('alert-info').addClass('alert-danger').html(response.message).fadeIn().delay(3000).fadeOut();
-                }
-            }).fail(function () {
-                $modalMsg.removeClass('alert-info alert-success').addClass('alert-danger').html('Something went wrong. Please try again.').fadeIn().delay(3000).fadeOut();
-            });
+            // Set the value of the hidden input field in the modal form
+            $('#apply-job-id').val(jobId);
+            
+            // Update the modal title to show the specific job
+            $('#applyModalLabel').text('Apply for: ' + jobTitle);
         });
 
-        // ------------------
-        // Function to dynamically refresh the job postings table
-        // ------------------
-        function refreshJobsTable() {
+        // AJAX form submission for the application form
+$('#applyForm').on('submit', function(e) {
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var formData = form.serialize();
+    var messageBox = form.closest('.modal-content').find('.modal-message');
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: formData,
+        dataType: "json",
+        success: function(response) {
+            if (response.status === 'success') {
+                // The following two lines were removed to prevent the success message and modal from being handled
+                // messageBox.removeClass('alert-danger').addClass('alert-success').text(response.message).show();
+                // setTimeout(function() {
+                //     $('#applyModal').modal('hide');
+                //     messageBox.hide();
+                // }, 2000); 
+                
+                // You can add other actions here if needed
+                // For example, if you want the form to clear after submission, you can add:
+                // form[0].reset();
+                
+                // The form will remain open, so you might want to show a message or just keep it as is.
+                
+            } else {
+                messageBox.removeClass('alert-success').addClass('alert-danger').text(response.message).show();
+            }
+        },
+        error: function() {
+            messageBox.removeClass('alert-success').addClass('alert-danger').text('An error occurred. Please try again.').show();
+        }
+    });
+});
+
+        // This section for job editing is from your original code and can be left as is.
+        $(".edit-job-btn").click(function (e) {
+            e.preventDefault();
+            var jobId = $(this).attr('data-job-id');
+            $('#jobEditForm').find('input, textarea, select').val('');
+            $('#editJobModal').modal('show');
             $.ajax({
-                url: '<?php echo site_url('recruitment/get_jobs_data'); ?>',
+                url: 'JobByID?id=' + jobId,
                 method: 'GET',
                 dataType: 'json',
-                success: function(data) {
-                    const table = $('#job_postings').DataTable();
-                    
-                    // Clear existing data and redraw
-                    table.clear().draw();
-                    
-                    // Add the new data row by row
-                    $.each(data, function(index, job) {
-                        table.row.add([
-                            job.title,
-                            job.description,
-                            job.posted_date,
-                            job.action_buttons
-                        ]).draw(false);
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error("Failed to fetch job data: " + error);
-                }
-            });
-        }
-
-        // ------------------
-        // Setup for Apply Modal
-        // ------------------
-        $('#applyModal').on('show.bs.modal', function (event) {
-            const button = $(event.relatedTarget);
-            const jobId = button.data('job-id');
-            const jobTitle = button.data('job-title');
-            const modal = $(this);
-
-            modal.find('.modal-title').text('Apply for ' + jobTitle);
-            modal.find('#apply-job-id').val(jobId);
-            modal.find('#apply-job-title').val(jobTitle);
-            modal.find('#applyForm')[0].reset();
-            modal.find('.modal-message').hide().text('');
-        });
-
-        // ------------------
-        // AJAX for Apply Form
-        // ------------------
-        $('#applyForm').on('submit', function (e) {
-            e.preventDefault();
-            const $form = $(this);
-            const $msg = $form.closest('.modal-content').find('.modal-message');
-
-            // Show a temporary "loading" message
-            $msg.removeClass('alert-success alert-danger').addClass('alert-info').text('Submitting your application...').fadeIn();
-
-            $.ajax({
-                url: $form.attr('action'),
-                method: 'POST',
-                data: new FormData(this),
-                dataType: 'json',
-                processData: false,
-                contentType: false,
             }).done(function (response) {
-                $msg.removeClass('alert-info alert-success alert-danger');
-                if (response.status === 'success') {
-                    $msg.addClass('alert-success').html(response.message).fadeIn();
-                    setTimeout(function () {
-                        $('#applyModal').modal('hide');
-                    }, 3000);
+                console.log(response);
+                if (response && response.job) {
+                    $('#jobEditForm').find('[name="job_id"]').val(response.job.job_id);
+                    $('#jobEditForm').find('[name="job_title"]').val(response.job.title);
+                    $('#jobEditForm').find('[name="description"]').val(response.job.description);
+                    $('#jobEditForm').find('[name="requirements"]').val(response.job.requirements);
                 } else {
-                    $msg.addClass('alert-danger').html(response.message).fadeIn().delay(3000).fadeOut();
+                    console.error("No job data returned from the server.");
                 }
-            }).fail(function () {
-                $msg.removeClass('alert-info alert-success').addClass('alert-danger').html('An error occurred. Please try again.').fadeIn().delay(3000).fadeOut();
+            }).fail(function() {
+                console.error("Error fetching job data.");
             });
         });
+
     });
 </script>
+
+<?php $this->load->view('backend/footer'); ?>
