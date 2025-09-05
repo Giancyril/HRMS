@@ -71,7 +71,7 @@ public function apply_ajax()
     $job_id = $this->input->post('job_id', TRUE);
     $email = $this->input->post('email', TRUE);
     
-    // Check for duplicate applications by calling the model method
+    // This is the correct logic to check for an existing application.
     if ($this->recruitment_model->is_application_exists($job_id, $email)) {
         echo json_encode([
             'status' => 'error',
