@@ -34,8 +34,7 @@
         <p><?php echo nl2br(html_escape($job_details->requirements)); ?></p>
     </div>
 </div>
-                        
-                        
+                                          
                     </div>
                 </div>
             </div>

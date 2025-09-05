@@ -167,7 +167,7 @@
                      <li><a href="<?php echo base_url(); ?>Recruitment/Applications">View Applications</a></li>
                     </ul>
                 </li>
-
+    
                  <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cube"></i><span class="hide-menu">Assets </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url(); ?>Logistice/All_Assets"> Asset List </a></li>

@@ -142,7 +142,7 @@ class Recruitment extends CI_Controller
         }
 
         $data = [
-            'title'        => $this->input->post('job_title', TRUE),
+            'job_title'        => $this->input->post('job_title', TRUE),
             'description'  => $this->input->post('description', TRUE),
             'requirements' => $this->input->post('requirements', TRUE),
             'posted_at'    => date('Y-m-d H:i:s'),
