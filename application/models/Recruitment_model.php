@@ -44,6 +44,15 @@ class Recruitment_model extends CI_Model {
         return $query->row_array();
     }
 
+    public function is_application_exists($job_id, $email)
+    {
+        $this->db->where('job_id', $job_id);
+        $this->db->where('email', $email);
+        $query = $this->db->get('applications'); // Use your actual applications table name
+        
+        return $query->num_rows() > 0;
+    }
+
     public function delete_application($id)
     {
         $this->db->where('id', $id);
@@ -86,4 +95,15 @@ class Recruitment_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function get_applications_by_user($user_id)
+{
+    $this->db->select('applications.*, jobs.job_title');
+    $this->db->from('applications');
+    $this->db->join('jobs', 'jobs.job_id = applications.job_id', 'left');
+    $this->db->where('applications.user_id', $user_id); // Make sure this column exists
+    $query = $this->db->get();
+    return $query->result_array();
+}
+
 }

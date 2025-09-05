@@ -47,52 +47,72 @@ class Recruitment extends CI_Controller
         $this->load->view('backend/application_form', $data);
     }
 
-    /**
-     * This method handles the AJAX form submission for a new job application.
-     * It no longer handles resume uploads.
-     */
-    public function apply_ajax()
-    {
-        $this->output->set_content_type('application/json');
 
-        $this->form_validation->set_error_delimiters('', '');
-        $this->form_validation->set_rules('job_id', 'Job ID', 'trim|required|numeric|xss_clean');
-        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[2]|max_length[50]|xss_clean');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[2]|max_length[50]|xss_clean');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
-        $this->form_validation->set_rules('phone', 'Phone', 'trim|required|min_length[8]|max_length[20]|xss_clean');
 
-        if ($this->form_validation->run() === FALSE) {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Validation failed. ' . validation_errors()
-            ]);
-            return;
-        }
+public function apply_ajax()
+{
+    $this->output->set_content_type('application/json');
 
-        $appData = [
-            'job_id'       => $this->input->post('job_id', TRUE),
-            'first_name'   => $this->input->post('first_name', TRUE),
-            'last_name'    => $this->input->post('last_name', TRUE),
-            'email'        => $this->input->post('email', TRUE),
-            'phone'        => $this->input->post('phone', TRUE),
-            'status'       => 'Pending',
-            'applied_at'   => date('Y-m-d H:i:s'),
-        ];
+    $this->form_validation->set_error_delimiters('', '');
+    $this->form_validation->set_rules('job_id', 'Job ID', 'trim|required|numeric|xss_clean');
+    $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[2]|max_length[50]|xss_clean');
+    $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[2]|max_length[50]|xss_clean');
+    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
+    $this->form_validation->set_rules('phone', 'Phone', 'trim|required|min_length[8]|max_length[20]|xss_clean');
 
-        $saved = $this->recruitment_model->add_application($appData);
-        if (!$saved) {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Could not save application. Please try again.'
-            ]);
-            return;
-        }
-
+    if ($this->form_validation->run() === FALSE) {
         echo json_encode([
-            'status' => 'success',
-            'message' => 'Your application has been submitted successfully!'
+            'status' => 'error',
+            'message' => 'Validation failed. ' . validation_errors()
         ]);
+        return;
+    }
+
+    $job_id = $this->input->post('job_id', TRUE);
+    $email = $this->input->post('email', TRUE);
+    
+    // Check for duplicate applications by calling the model method
+    if ($this->recruitment_model->is_application_exists($job_id, $email)) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'You have already applied for this job with this email address.'
+        ]);
+        return;
+    }
+
+    $appData = [
+        'job_id'      => $job_id,
+        'first_name'  => $this->input->post('first_name', TRUE),
+        'last_name'   => $this->input->post('last_name', TRUE),
+        'email'       => $email,
+        'phone'       => $this->input->post('phone', TRUE),
+        'status'      => 'Pending',
+        'applied_at'  => date('Y-m-d H:i:s'),
+    ];
+
+    $saved = $this->recruitment_model->add_application($appData);
+
+    if (!$saved) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Could not save application. Please try again.'
+        ]);
+        return;
+    }
+
+    echo json_encode([
+        'status' => 'success',
+        'message' => 'Your application has been submitted successfully!',
+    ]);
+}
+
+    public function is_application_exists($job_id, $email)
+    {
+        $this->db->where('job_id', $job_id);
+        $this->db->where('email', $email);
+        $query = $this->db->get('applications'); // Replace 'applications' with your actual table name
+        
+        return $query->num_rows() > 0;
     }
 
     public function add_job() {
@@ -192,22 +212,40 @@ class Recruitment extends CI_Controller
     
     public function Applications()
 {
-    // Check if the user is logged in
     if ($this->session->userdata('user_login_access') != False) {
-        
-        // This is a crucial step: fetch applications from the database
-        // Assuming your recruitment_model has a method to get all applications
-        $data['applications'] = $this->recruitment_model->get_all_applications(); 
-
-        // Load the view and pass the data
-        $this->load->view('backend/applications_list', $data);
-
+        $this->load->view('backend/applications_list');
     } else {
-        // Redirect to the login page if not logged in
         redirect(base_url(), 'refresh');
     }
 }
 
+public function get_applications_data()
+{
+    $this->output->set_content_type('application/json');
+
+    if ($this->session->userdata('user_login_access') == FALSE) {
+        $this->output->set_status_header(401);
+        echo json_encode(['data' => []]);
+        return;
+    }
+
+    $applications = $this->recruitment_model->get_all_applications();
+    $data = [];
+    foreach ($applications as $app) {
+        $row = [
+            'applicant_name' => html_escape($app['first_name'] . ' ' . $app['last_name']),
+            'job_title'      => html_escape($app['job_title']),
+            'email'          => html_escape($app['email']),
+            'phone'          => html_escape($app['phone']),
+            'applied_at'     => html_escape(date('F j, Y', strtotime($app['applied_at']))),
+            'action'         => '<a href="' . site_url('recruitment/view_application/' . $app['id']) . '" class="btn btn-sm btn-info" title="View Details">View</a> ' .
+                                '<a href="' . site_url('recruitment/delete_application/' . $app['id']) . '" class="btn btn-sm btn-danger delete-application" title="Delete"><i class="fa fa-trash-o"></i></a>'
+        ];
+        $data[] = $row;
+    }
+
+    echo json_encode(['data' => $data]);
+}
     public function view_application($id)
     {
         if ($this->session->userdata('user_login_access') != False) {

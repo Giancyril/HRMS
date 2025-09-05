@@ -1,31 +1,6 @@
 <?php $this->load->view('backend/header'); ?>
 <?php $this->load->view('backend/sidebar'); ?>
 
-<style>
-    /* Custom CSS to style the floating success message */
-.success-message {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1060; /* Higher than typical modal z-indices */
-    width: 200px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    /* New styles to match the image */
-    background-color: #4CAF50; /* Green background */
-    border: none;
-    padding: 15px;
-    text-align: center;
-    color: white; /* White text */
-}
-.success-message .alert {
-    background-color: #4CAF50;
-    border: none;
-    padding: 0;
-    margin-bottom: 0;
-    color: white; /* Ensure alert text is also white */
-}
-</style>
-
 <div class="page-wrapper">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">

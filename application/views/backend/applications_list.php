@@ -1,5 +1,6 @@
 <?php $this->load->view('backend/header'); ?>
 <?php $this->load->view('backend/sidebar'); ?>
+
 <div class="page-wrapper">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
@@ -36,27 +37,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (empty($applications)): ?>
-                                        <tr>
-                                            <td colspan="6" class="text-center">No applications have been submitted yet.</td>
-                                        </tr>
-                                    <?php else: ?>
-                                        <?php foreach ($applications as $application): ?>
-                                        <tr>
-                                            <td><?php echo html_escape($application['first_name'] . ' ' . $application['last_name']); ?></td>
-                                            <td><?php echo isset($application['job_title']) ? html_escape($application['job_title']) : 'N/A'; ?></td>
-                                            <td><?php echo html_escape($application['email']); ?></td>
-                                            <td><?php echo html_escape($application['phone']); ?></td>
-                                            <td><?php echo html_escape(date('F j, Y', strtotime($application['applied_at']))); ?></td>
-                                            <?php if ($this->session->userdata('user_type') != 'EMPLOYEE'): ?>
-                                            <td class="jsgrid-align-center">
-                                                <a href="<?php echo site_url('recruitment/view_application/' . $application['id']); ?>" class="btn btn-sm btn-info" title="View Details"> View</a>
-                                                <a href="<?php echo site_url('recruitment/delete_application/' . $application['id']); ?>" class="btn btn-sm btn-danger waves-effect waves-light delete-application" title="Delete"><i class="fa fa-trash-o"></i></a>
-                                            </td>
-                                            <?php endif; ?>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
+                                    <!-- This tbody is intentionally left empty. DataTables will populate it via AJAX. -->
                                 </tbody>
                             </table>
                         </div>
@@ -68,89 +49,50 @@
 </div>
 <?php $this->load->view('backend/footer'); ?>
 
-<style>
-    /* Basic modal styling */
-    .confirm-modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: none; /* Hidden by default */
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
-    .confirm-modal-content {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        width: 300px;
-    }
-    .confirm-modal-content h4 {
-        margin-top: 0;
-        margin-bottom: 20px;
-        color: #333;
-    }
-    .confirm-modal-content button {
-        margin: 0 10px;
-        padding: 8px 16px;
-        cursor: pointer;
-        border-radius: 4px;
-        border: none;
-    }
-    .confirm-modal-content .btn-yes {
-        background-color: #d9534f;
-        color: white;
-    }
-    .confirm-modal-content .btn-no {
-        background-color: #f0f0f0;
-        color: #333;
-    }
-</style>
-
-<div class="confirm-modal-overlay">
-    <div class="confirm-modal-content">
-        <h4>Are you sure you want to delete this application?</h4>
-        <button class="btn-yes">Yes</button>
-        <button class="btn-no">No</button>
-    </div>
-</div>
-
 <script>
-    $(document).ready(function () {
-        // Ensure this ID matches the <table> ID in your HTML
-        $('#applications_list').DataTable({
-            "aaSorting": [[4, 'desc']], // This sorts the "Applied At" column
-            dom: 'Bfrtip',
-            buttons: ['csv', 'excel', 'pdf', 'print']
+    $(document).ready(function() {
+        // Initialize your DataTables
+        var applicationsTable = $('#applications_list').DataTable({
+            "processing": false, // This line hides the "Processing..." message
+            "serverSide": false,
+            "ajax": {
+                "url": "<?php echo site_url('recruitment/get_applications_data'); ?>",
+                "type": "POST",
+                "dataSrc": "data"
+            },
+            "columns": [
+                { "data": "applicant_name" },
+                { "data": "job_title" },
+                { "data": "email" },
+                { "data": "phone" },
+                { "data": "applied_at" }
+                <?php if ($this->session->userdata('user_type') != 'EMPLOYEE'): ?>
+                , {
+                    "data": "action",
+                    "orderable": false,
+                    "searchable": true
+                }
+                <?php endif; ?>
+            ],
+            
+            "dom": 'Bfrtip',
+            "buttons": [
+                'csv',
+                'excel',
+                'pdf',
+                'print'
+            ],
+            "lengthChange": false,
         });
 
-        // Custom modal logic
-        const modalOverlay = $('.confirm-modal-overlay');
-        const btnYes = modalOverlay.find('.btn-yes');
-        const btnNo = modalOverlay.find('.btn-no');
-        let deleteUrl = '';
-
-        // Handle delete button clicks
+        // Event delegation for delete links within the table
         $('#applications_list').on('click', '.delete-application', function(e) {
             e.preventDefault();
-            deleteUrl = $(this).attr('href');
-            modalOverlay.css('display', 'flex');
-        });
-
-        // Handle 'Yes' click in the modal
-        btnYes.on('click', function() {
-            window.location.href = deleteUrl;
-        });
-
-        // Handle 'No' click in the modal
-        btnNo.on('click', function() {
-            modalOverlay.css('display', 'none');
-            deleteUrl = ''; // Clear the URL
+            var deleteUrl = $(this).attr('href');
+            
+            if (confirm("Are you sure you want to delete this application?")) {
+                window.location.href = deleteUrl;
+            }
         });
     });
 </script>

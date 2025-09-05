@@ -236,16 +236,16 @@
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Posted Date</th>
+                        <th style="width: 25%;">Title</th>
+                        <th style="width: 50%;">Description</th>
+                        <th style="width: 25%;">Posted Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (isset($jobs) && is_array($jobs) && count($jobs) > 0): ?>
                         <?php foreach ($jobs as $job): ?>
                             <tr>
-                                <td><?= html_escape($job['title']); ?></td>
+                                <td><?= html_escape($job['job_title']); ?></td>
                                 <td><?= html_escape(substr($job['description'], 0, 75)) . '...'; ?></td>
                                 <td><?= html_escape(date('F j, Y', strtotime($job['posted_at']))); ?></td>
                             </tr>
