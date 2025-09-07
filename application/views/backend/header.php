@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-// Set the default timezone for date functions
+
 date_default_timezone_set('Asia/Manila');
 ?>
 <head>
@@ -69,12 +69,6 @@ date_default_timezone_set('Asia/Manila');
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         
-                        <li class="nav-item hidden-sm-down search-box"> 
-                            <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search" action="<?php echo base_url('search/employees'); ?>" method="GET">
-                                <input type="text" class="form-control" name="query" placeholder="Search..."> <a class="srh-btn"><i class="ti-close"></i></a> 
-                            </form>
-                        </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-bell"></i>
@@ -108,36 +102,44 @@ date_default_timezone_set('Asia/Manila');
                         <?php if ($this->session->userdata('user_type') === 'ADMIN' || $this->session->userdata('user_type') === 'HR'): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Quick Actions">
-                                    <i class="fas fa-bars"></i> <span class="hidden-xs-down"></span>
+                                    <i class="fas fa-plus-circle"></i> <span class="hidden-xs-down"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right scale-up"> 
                                     <a class="dropdown-item" href="<?php echo base_url('employee/Add_employee'); ?>">
-                                        <i class="fas fa-user-plus"></i> Add Employee
-                                    </a>
-                                    <a class="dropdown-item" href="<?php echo base_url('dashboard/analytics_view'); ?>">
-                                        <i class="fas fa-chart-bar"></i> Reports
+                                        <i class="fas fa-user-plus" style="width: 25px;"></i> Add Employee
                                     </a>
                                     <a class="dropdown-item" href="<?php echo base_url('Payroll/Salary_List'); ?>">
-                    <i class="fas fa-file-invoice-dollar"></i> Payroll
-                </a>
+                                        <i class="fas fa-file-invoice-dollar" style="width: 25px;"></i> Payroll
+                                    </a>
+                                    <a class="dropdown-item" href="<?php echo base_url('dashboard/analytics_view'); ?>">
+                                        <i class="fas fa-chart-bar" style="width: 25px;"></i> Reports
+                                    </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">
-                                        <i class="fas fa-file-alt"></i> Manage Documents
+                                        <i class="fas fa-folder" style="width: 25px;"></i> Manage Documents
                                     </a>
                                 </div>
                             </li>
                         <?php else: ?>
-                            <li class="nav-item">
-                                <a class="nav-link text-muted waves-effect waves-dark" href="<?php echo base_url('leave/Leave'); ?>" title="Apply Leave">
-                                    <i class="fa fa-calendar-alt"></i> <span class="hidden-xs-down">Apply Leave</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-muted waves-effect waves-dark" href="<?php echo base_url('attendance/My_attendance'); ?>" title="My Attendance">
-                                    <i class="fa fa-clipboard-check"></i> <span class="hidden-xs-down">My Attendance</span>
-                                </a>
-                            </li>
-                        <?php endif; ?>
+                            <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="My Actions">
+                                    <i class="fas fa-plus-circle"></i> <span class="hidden-xs-down"></span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right scale-up">
+                                    <a class="dropdown-item" href="<?php echo base_url('attendance/Save_Attendance'); ?>">
+                                        <i class="fas fa-calendar-check" style="width: 25px;"></i> Add Attendance
+                                    </a>
+                                    <a class="dropdown-item" href="<?php echo base_url('leave/Application'); ?>">
+                                        <i class="fa fa-calendar-alt" style="width: 25px;"></i> Leave Application
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-folder" style="width: 25px;"></i> Manage Documents
+                                    </a>
+                                    </div>
+                                    </li>
+                     <?php endif; ?>
+            
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>assets/images/users/<?php echo $basicinfo->em_image; ?>" alt="Genit" class="profile-pic" style="height:40px;width:40px;border-radius:50px;" /></a>
