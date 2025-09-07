@@ -25,6 +25,8 @@
                             <div class="card-body">
                                     <form method="post" action="Add_Attendance" id="holidayform" enctype="multipart/form-data">
                                     <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
 			                                    <div class="form-group">
 			                                        <label>Employee</label>
                                                 <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="emid" required>
@@ -39,6 +41,8 @@
                                                     <?php } ?>
                                                 </select>
 			                                    </div>
+                                               </div>
+                                               <div class="col-md-6">
                                             <label>Select Date: </label>
                                             <div id="" class="input-group date" >
                                                 <input name="attdate" class="form-control mydatetimepickerFull" value="<?php if(!empty($attval->atten_date)) { 
@@ -46,17 +50,23 @@
                                                 $new_date = date('Y-m-d', $old_date_timestamp);    
                                                 echo $new_date; } ?>" required>
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                             </div>
                                             </div>
+                                            <div class="col-md-6">
                                         <div class="form-group" >
                                            <label class="m-t-20">Sign In Time</label>
                                             <input class="form-control" name="signin" id="single-input" value="<?php if(!empty($attval->signin_time)) { echo  $attval->signin_time;} ?>" placeholder="Now" required>
                                         </div>
+                                        </div>
+                                        <div class="col-md-6">
                                         <div class="form-group">
                                         <label class="m-t-20">Sign Out Time</label>
                                         <div class="input-group clockpicker">
                                             <input type="text" name="signout" class="form-control" value="<?php if(!empty($attval->signout_time)) { echo  $attval->signout_time;} ?>">
                                         </div>
                                         </div> 
+                                        </div>
+                                        </div>
                                         <div class="form-group">
                                                     <label>Place</label>
                                                 <select class="form-control custom-select" data-placeholder="" tabindex="1" name="place" required>
