@@ -14,10 +14,8 @@ date_default_timezone_set('Asia/Manila');
     <link rel="icon" type="image/ico" sizes="16x16" href="<?php echo base_url(); ?>assets/images/favicon.ico">
     <title><?php echo $settingsvalue->sitetitle; ?></title>
 
-    <!-- Bootstrap CSS -->
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- All necessary Font Awesome, Material Design icons, and other CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" xintegrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/2.0.46/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/plugins/morrisjs/morris.css" rel="stylesheet">
@@ -33,30 +31,24 @@ date_default_timezone_set('Asia/Manila');
     <link href="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/plugins/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
     
-    <!-- FullCalendar CSS (consolidated into a single CDN link) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
     
-    <!-- JavaScript Libraries -->
-    <!-- JQuery and jQuery Validation (consolidated) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-    <!-- Moment.js and FullCalendar JS (consolidated) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 </head>
 
-
 <body class="fix-header fix-sidebar card-no-border">
-        <?php 
-            $id = $this->session->userdata('user_login_id');
-            $basicinfo = $this->employee_model->GetBasic($id); 
-            $settingsvalue = $this->settings_model->GetSettingsValue();
-            $year =  date('y');
-            $y = substr( $year, -2);
-            $date = date("m/d/$y");
-    #echo $date;
-            $leavetoday = $this->leave_model->GetLeaveToday($date); 
-        ?>
+    <?php 
+        $id = $this->session->userdata('user_login_id');
+        $basicinfo = $this->employee_model->GetBasic($id); 
+        $settingsvalue = $this->settings_model->GetSettingsValue();
+        $year =  date('y');
+        $y = substr( $year, -2);
+        $date = date("m/d/$y");
+        $leavetoday = $this->leave_model->GetLeaveToday($date); 
+    ?>
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
@@ -76,8 +68,16 @@ date_default_timezone_set('Asia/Manila');
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        
+                        <li class="nav-item hidden-sm-down search-box"> 
+                            <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+                            <form class="app-search" action="<?php echo base_url('search/employees'); ?>" method="GET">
+                                <input type="text" class="form-control" name="query" placeholder="Search..."> <a class="srh-btn"><i class="ti-close"></i></a> 
+                            </form>
+                        </li>
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell"></i>
+                            <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-bell"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
                             <div class="dropdown-menu mailbox scale-up-left">
@@ -99,11 +99,46 @@ date_default_timezone_set('Asia/Manila');
                                     <li>
                                         <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
                                     </li>
-                                 </ul>
+                                </ul>
                             </div>
                         </li>
                     </ul>
+
                     <ul class="navbar-nav my-lg-0">
+                        <?php if ($this->session->userdata('user_type') === 'ADMIN' || $this->session->userdata('user_type') === 'HR'): ?>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Quick Actions">
+                                    <i class="fas fa-bars"></i> <span class="hidden-xs-down"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right scale-up"> 
+                                    <a class="dropdown-item" href="<?php echo base_url('employee/Add_employee'); ?>">
+                                        <i class="fas fa-user-plus"></i> Add Employee
+                                    </a>
+                                    <a class="dropdown-item" href="<?php echo base_url('dashboard/analytics_view'); ?>">
+                                        <i class="fas fa-chart-bar"></i> Reports
+                                    </a>
+                                    <a class="dropdown-item" href="<?php echo base_url('Payroll/Salary_List'); ?>">
+                    <i class="fas fa-file-invoice-dollar"></i> Payroll
+                </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-file-alt"></i> Manage Documents
+                                    </a>
+                                </div>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted waves-effect waves-dark" href="<?php echo base_url('leave/Leave'); ?>" title="Apply Leave">
+                                    <i class="fa fa-calendar-alt"></i> <span class="hidden-xs-down">Apply Leave</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted waves-effect waves-dark" href="<?php echo base_url('attendance/My_attendance'); ?>" title="My Attendance">
+                                    <i class="fa fa-clipboard-check"></i> <span class="hidden-xs-down">My Attendance</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>assets/images/users/<?php echo $basicinfo->em_image; ?>" alt="Genit" class="profile-pic" style="height:40px;width:40px;border-radius:50px;" /></a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">
