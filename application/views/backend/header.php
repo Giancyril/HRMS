@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-
 date_default_timezone_set('Asia/Manila');
 ?>
 <head>
@@ -13,10 +12,9 @@ date_default_timezone_set('Asia/Manila');
     <?php $settingsvalue = $this->settings_model->GetSettingsValue(); ?>
     <link rel="icon" type="image/ico" sizes="16x16" href="<?php echo base_url(); ?>assets/images/favicon.ico">
     <title><?php echo $settingsvalue->sitetitle; ?></title>
-
-    <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" xintegrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/2.0.46/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/plugins/morrisjs/morris.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
@@ -30,7 +28,6 @@ date_default_timezone_set('Asia/Manila');
     <link href="<?php echo base_url(); ?>assets/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/plugins/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -58,18 +55,17 @@ date_default_timezone_set('Asia/Manila');
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?php echo base_url(); ?>"><b>
-                            <img src="<?php echo base_url();?>assets/images/hricn.png" alt="DRI" class="DRI-logo" style="width:55px;margin-top: 10px;"/>
-                            </b>
-                            <span>
-                             <img src="<?php echo base_url(); ?>assets/images/<?php echo $settingsvalue->sitelogo; ?>" alt="homepage" class="dark-logo" height="105px" width="105px" style="margin-top: 22px;" />
-                             </span> </a>
+                                <img src="<?php echo base_url();?>assets/images/hricn.png" alt="DRI" class="DRI-logo" style="width:55px;margin-top: 10px;"/>
+                                </b>
+                                <span>
+                                <img src="<?php echo base_url(); ?>assets/images/<?php echo $settingsvalue->sitelogo; ?>" alt="homepage" class="dark-logo" height="105px" width="105px" style="margin-top: 22px;" />
+                                </span> </a>
                 </div>
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-bell"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
@@ -96,15 +92,13 @@ date_default_timezone_set('Asia/Manila');
                                 </ul>
                             </div>
                         </li>
-                    </ul>
 
-                    <ul class="navbar-nav my-lg-0">
                         <?php if ($this->session->userdata('user_type') === 'ADMIN' || $this->session->userdata('user_type') === 'HR'): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Quick Actions">
                                     <i class="fas fa-plus-circle"></i> <span class="hidden-xs-down"></span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right scale-up"> 
+                                <div class="dropdown-menu mailbox scale-up-left" style="width: 250px;">
                                     <a class="dropdown-item" href="<?php echo base_url('employee/Add_employee'); ?>">
                                         <i class="fas fa-user-plus" style="width: 25px;"></i> Add Employee
                                     </a>
@@ -122,10 +116,10 @@ date_default_timezone_set('Asia/Manila');
                             </li>
                         <?php elseif ($this->session->userdata('user_type') === 'HR-MANAGER'): ?>
                             <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="My Actions">
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="My Actions">
                                     <i class="fas fa-plus-circle"></i> <span class="hidden-xs-down"></span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right scale-up">
+                                </a>
+                                <div class="dropdown-menu mailbox scale-up-left" style="width: 250px;">
                                     <a class="dropdown-item" href="<?php echo base_url('attendance/Save_Attendance'); ?>">
                                         <i class="fas fa-calendar-check" style="width: 25px;"></i> Add Attendance
                                     </a>
@@ -136,29 +130,30 @@ date_default_timezone_set('Asia/Manila');
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-folder" style="width: 25px;"></i> Manage Documents
                                     </a>
-                                    </div>
-                                    </li>
-                     <?php elseif ($this->session->userdata('user_type') === 'EMPLOYEE'): ?>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Employee Actions">
-                <i class="fas fa-plus-circle"></i> <span class="hidden-xs-down"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right scale-up">
-                <a class="dropdown-item" href="<?php echo base_url('payroll/Payslip_Report'); ?>">
-                    <i class="fas fa-file-invoice" style="width: 25px;"></i> View Payslips
-                </a>
-                <a class="dropdown-item" href="<?php echo base_url('leave/EmApplication'); ?>">
-                    <i class="fas fa-calendar-plus" style="width: 25px;"></i> Request Leave
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?php echo base_url('Recruitment'); ?>">
-                    <i class="fas fa-bullhorn" style="width: 25px;"></i> Job Postings
-                </a>
-            </div>
-        </li>
-    <?php endif; ?>
-            
+                                </div>
+                            </li>
+                        <?php elseif ($this->session->userdata('user_type') === 'EMPLOYEE'): ?>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Employee Actions">
+                                    <i class="fas fa-plus-circle"></i> <span class="hidden-xs-down"></span>
+                                </a>
+                                <div class="dropdown-menu mailbox scale-up-left" style="width: 250px;">
+                                    <a class="dropdown-item" href="<?php echo base_url('payroll/Payslip_Report'); ?>">
+                                        <i class="fas fa-file-invoice" style="width: 25px;"></i> View Payslips
+                                    </a>
+                                    <a class="dropdown-item" href="<?php echo base_url('leave/EmApplication'); ?>">
+                                        <i class="fas fa-calendar-plus" style="width: 25px;"></i> Request Leave
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="<?php echo base_url('Recruitment'); ?>">
+                                        <i class="fas fa-bullhorn" style="width: 25px;"></i> Job Postings
+                                    </a>
+                                </div>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
 
+                    <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>assets/images/users/<?php echo $basicinfo->em_image; ?>" alt="Genit" class="profile-pic" style="height:40px;width:40px;border-radius:50px;" /></a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">

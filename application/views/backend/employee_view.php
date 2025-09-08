@@ -202,9 +202,9 @@
 				                        <div class="card-body">
 			                        		<h3 class="col-md-12">Permanent Contact Information</h3>
 			                                <form class="row" action="Parmanent_Address" method="post" enctype="multipart/form-data">
-			                                    <div class="form-group col-md-12 m-t-5">
+			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Address</label>
-			                                        <textarea name="paraddress" value="<?php if(!empty($permanent->address)) echo $permanent->address  ?>" class="form-control" rows="3" minlength="7" required><?php if(!empty($permanent->address)) echo $permanent->address  ?></textarea>
+			                                        <input type="text" name="paraddress" value="<?php if(!empty($permanent->address)) echo $permanent->address ?>" class="form-control" minlength="7" required>
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>City</label>
@@ -229,13 +229,13 @@
 			                                    </div>
 			                                    
 			                                <form class="row" action="Present_Address" method="post" enctype="multipart/form-data">			                                    
-			                                    <div class="form-group col-md-12 m-t-5">
+			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Address</label>
-			                                        <textarea name="presaddress" value="<?php if(!empty($present->address)) echo $present->address  ?>"  class="form-control" rows="3" minlength="7" required><?php if(!empty($present->address)) echo $present->address  ?></textarea>
+			                                        <input type="text" name="presaddress" value="<?php if(!empty($present->address)) echo $present->address ?>" class="form-control" minlength="7" required>
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>City</label>
-			                                        <input type="text" name="prescity" class="form-control form-control-line" value="<?php if(!empty($present->address)) echo $present->city  ?>" placeholder=" City name" minlength="2" required> 
+			                                        <input type="text" name="prescity" class="form-control form-control-line" value="<?php if(!empty($present->address)) echo $present->city  ?>" placeholder=" " minlength="2" required> 
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Country</label>
@@ -305,19 +305,19 @@
 			                                	<span id="error"></span>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Degree Title</label>
-			                                        <input type="text" name="name" class="form-control form-control-line" placeholder=" Degree Title"  minlength="1" required> 
+			                                        <input type="text" name="name" class="form-control form-control-line" placeholder=" "  minlength="1" required> 
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Institute Name</label>
-			                                        <input type="text" name="institute" class="form-control form-control-line" placeholder=" Institute Name"  minlength="3" required> 
+			                                        <input type="text" name="institute" class="form-control form-control-line" placeholder=" "  minlength="3" required> 
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Result</label>
-			                                        <input type="text" name="result" class="form-control form-control-line" placeholder=" Result" minlength="2"  required> 
+			                                        <input type="text" name="result" class="form-control form-control-line" placeholder=" " minlength="2"  required> 
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Passing Year</label>
-			                                        <input type="text" name="year"  class="form-control form-control-line" placeholder="Passing Year"> 
+			                                        <input type="text" name="year"  class="form-control form-control-line" placeholder=" "> 
 			                                    </div>
 			                                  
 			                                    <div class="form-actions col-md-6">
@@ -375,19 +375,19 @@
 			                                <form class="row" action="Add_Experience" method="post" enctype="multipart/form-data">
 			                                    	<div class="form-group col-md-6 m-t-5">
 			                                    	    <label> Company Name</label>
-			                                    	    <input type="text" name="company_name" class="form-control form-control-line company_name"  placeholder="Company Name" minlength="2" required> 
+			                                    	    <input type="text" name="company_name" class="form-control form-control-line company_name"  placeholder=" " minlength="2" required> 
 			                                    	</div>
 			                                    	<div class="form-group col-md-6 m-t-5">
 			                                    	    <label>Position</label>
-			                                    	    <input type="text" name="position_name" class="form-control form-control-line position_name" placeholder="Position" minlength="3" required> 
+			                                    	    <input type="text" name="position_name" class="form-control form-control-line position_name" placeholder=" " minlength="3" required> 
 			                                    	</div>
 			                                    	<div class="form-group col-md-6 m-t-5">
 			                                    	    <label>Address</label>
-			                                    	    <input type="text" name="address" class="form-control form-control-line duty" placeholder="Address"  minlength="7" required> 
+			                                    	    <input type="text" name="address" class="form-control form-control-line duty" placeholder=" "  minlength="7" required> 
 			                                    	</div>
 			                                    	<div class="form-group col-md-6 m-t-5">
 			                                    	    <label>Working Duration</label>
-			                                    	    <input type="text" name="work_duration" class="form-control form-control-line working_period"  placeholder="Working Duration" required> 
+			                                    	    <input type="text" name="work_duration" class="form-control form-control-line working_period"  placeholder=" " required> 
 			                                    	</div>
 			                                 
 		                                    	<div class="form-actions col-md-12">
@@ -405,15 +405,15 @@
 			                                <form class="row" action="Add_bank_info" method="post" enctype="multipart/form-data">
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label> Bank Holder Name</label>
-			                                        <input type="text" name="holder_name" value="<?php if(!empty($bankinfo->holder_name)) echo $bankinfo->holder_name  ?>" class="form-control form-control-line" placeholder="Bank Holder Name" minlength="5" required> 
+			                                        <input type="text" name="holder_name" value="<?php if(!empty($bankinfo->holder_name)) echo $bankinfo->holder_name  ?>" class="form-control form-control-line" placeholder=" " minlength="5" required> 
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Bank Name</label>
-			                                        <input type="text" name="bank_name" value="<?php if(!empty($bankinfo->bank_name)) echo $bankinfo->bank_name  ?>" class="form-control form-control-line" placeholder="Bank Name" minlength="5" required> 
+			                                        <input type="text" name="bank_name" value="<?php if(!empty($bankinfo->bank_name)) echo $bankinfo->bank_name  ?>" class="form-control form-control-line" placeholder=" " minlength="5" required> 
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Branch Name</label>
-			                                        <input type="text" name="branch_name" value="<?php if(!empty($bankinfo->branch_name)) echo $bankinfo->branch_name  ?>" class="form-control form-control-line" placeholder=" Branch Name"> 
+			                                        <input type="text" name="branch_name" value="<?php if(!empty($bankinfo->branch_name)) echo $bankinfo->branch_name  ?>" class="form-control form-control-line" placeholder=" "> 
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Bank Account Number</label>
@@ -421,7 +421,7 @@
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Bank Account Type</label>
-			                                        <input type="text" name="account_type" value="<?php if(!empty($bankinfo->account_type)) echo $bankinfo->account_type ?>" class="form-control form-control-line" placeholder="Bank Account Type"> 
+			                                        <input type="text" name="account_type" value="<?php if(!empty($bankinfo->account_type)) echo $bankinfo->account_type ?>" class="form-control form-control-line" placeholder=" "> 
 			                                    </div>
 			                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="emid" value="<?php echo $basic->em_id; ?>">
@@ -509,7 +509,7 @@
 				                                <form class="row" action="Save_Social" method="post" enctype="multipart/form-data">
 				                                    <div class="form-group col-md-6 m-t-20">
 				                                        <label>Facebook</label>
-				                                        <input type="url" class="form-control"  name="facebook" value="<?php if(!empty($socialmedia->facebook)) echo $socialmedia->facebook ?>" placeholder="www.facebook.com"> 
+				                                        <input type="url" class="form-control"  name="facebook" value="<?php if(!empty($socialmedia->facebook)) echo $socialmedia->facebook ?>" placeholder=" "> 
 				                                    </div>
 				                                    <div class="form-group col-md-6 m-t-20">
 				                                        <label>Twitter</label>
