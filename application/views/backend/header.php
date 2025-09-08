@@ -138,7 +138,25 @@ date_default_timezone_set('Asia/Manila');
                                     </a>
                                     </div>
                                     </li>
-                     <?php endif; ?>
+                     <?php elseif ($this->session->userdata('user_type') === 'EMPLOYEE'): ?>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Employee Actions">
+                <i class="fas fa-plus-circle"></i> <span class="hidden-xs-down"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right scale-up">
+                <a class="dropdown-item" href="<?php echo base_url('payroll/Payslip_Report'); ?>">
+                    <i class="fas fa-file-invoice" style="width: 25px;"></i> View Payslips
+                </a>
+                <a class="dropdown-item" href="<?php echo base_url('leave/EmApplication'); ?>">
+                    <i class="fas fa-calendar-plus" style="width: 25px;"></i> Request Leave
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="<?php echo base_url('Recruitment'); ?>">
+                    <i class="fas fa-bullhorn" style="width: 25px;"></i> Job Postings
+                </a>
+            </div>
+        </li>
+    <?php endif; ?>
             
 
                         <li class="nav-item dropdown">
