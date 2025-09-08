@@ -120,7 +120,7 @@ date_default_timezone_set('Asia/Manila');
                                     </a>
                                 </div>
                             </li>
-                        <?php else: ?>
+                        <?php elseif ($this->session->userdata('user_type') === 'HR-MANAGER'): ?>
                             <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="My Actions">
                                     <i class="fas fa-plus-circle"></i> <span class="hidden-xs-down"></span>

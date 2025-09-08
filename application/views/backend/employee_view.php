@@ -645,7 +645,7 @@
                             <input type="hidden" name="did" value="<?php echo $salaryvalue->de_id; ?>">
                             <?php } ?>
                             <input type="hidden" name="typeid" value="<?php echo isset($salaryvalue->type_id) ? $salaryvalue->type_id : ''; ?>">
-                            <button type="submit" style="float: right" class="btn btn-info">Save</button>
+                            <button type="submit" class="btn btn-info pull-right"><i class="fa fa-check"></i> Save</button>
                         </div>
                     </div>
                 </form>
