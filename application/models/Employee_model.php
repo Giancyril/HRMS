@@ -308,6 +308,16 @@
             return [];
         }
     }
+    // In Employee_model.php
+public function update_designation($em_id, $dep_id, $des_id)
+{
+    $data = array(
+        'dep_id' => $dep_id,
+        'des_id' => $des_id
+    );
+    $this->db->where('em_id', $em_id);
+    $this->db->update('employee', $data);
+}
 
     }
 ?>

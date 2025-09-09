@@ -122,5 +122,43 @@ class Organization_model extends CI_Model{
     $query = $this->db->get('designation');
     return $query->result();
 }
+
+//promotion related functions
+
+public function get_all_employees() {
+    $this->db->select('id, first_name, last_name, des_id');
+    $this->db->from('employee');
+    $query = $this->db->get();
+    return $query->result(); // Change from result_array() to result()
+}
+
+public function get_designations() {
+    $this->db->select('*');
+    $this->db->from('designation');
+    $query = $this->db->get();
+    // Change this line:
+    // return $query->result_array();
+    // To this:
+    return $query->result(); 
+}
+
+public function get_designation_by_id($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('designation');
+        return $query->row_array();
+    }
+
+public function get_employee_by_id($em_id) {
+    $this->db->select('*');
+    $this->db->from('employee');
+    $this->db->where('id', $em_id);
+    $query = $this->db->get();
+    return $query->row_array();
+}
+
+public function update_employee_designation($em_id, $new_des_id) {
+    $this->db->where('id', $em_id);
+    $this->db->update('employee', ['des_id' => $new_des_id]);
+}
 }
 ?>

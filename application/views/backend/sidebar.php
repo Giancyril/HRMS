@@ -99,6 +99,14 @@
                     </ul>
                 </li>
 
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-elevation-rise"></i><span class="hide-menu">Promotion</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                    
+                            <li><a href="<?php echo base_url(); ?>Promotion/promotion_list">Promotion</a></li>
+                            <li><a href="<?php echo base_url(); ?>Promotion/add_promotion">Add Promotion</a></li>
+                        </ul>
+                    </li>
+
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bank"></i><span class="hide-menu">Loan </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url(); ?>Loan/View"> Grand Loan </a></li>
@@ -167,6 +175,14 @@
                      <li><a href="<?php echo base_url(); ?>Recruitment/Applications">View Applications</a></li>
                     </ul>
                 </li>
+
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-elevation-rise"></i><span class="hide-menu">Promotion</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                    
+                            <li><a href="<?php echo base_url(); ?>Promotion/promotion_list">Promotion</a></li>
+                            <li><a href="<?php echo base_url(); ?>Promotion/add_promotion">Add Promotion</a></li>
+                        </ul>
+                    </li>
     
                  <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cube"></i><span class="hide-menu">Assets </span></a>
                             <ul aria-expanded="false" class="collapse">
