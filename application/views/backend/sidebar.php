@@ -178,6 +178,17 @@
                             </ul>
                         </li>
 
+                        <li> 
+    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+        <i class="mdi mdi-target"></i>
+        <span class="hide-menu">Goals </span>
+    </a>
+    <ul aria-expanded="false" class="collapse">
+        <li><a href="<?php echo base_url(); ?>goals">Goals List</a></li>
+        <li><a href="<?php echo base_url(); ?>goals/goals_type">Goal Types</a></li>
+    </ul>
+</li>
+
                 <li> <a href="<?php echo base_url(); ?>Promotion/promotion_list" ><i class="mdi mdi-trophy"></i><span class="hide-menu">Promotion <span class="hide-menu"></a></li>       
                 <li> <a href="<?php echo base_url(); ?>dashboard/analytics_view" ><i class="mdi mdi-poll"></i><span class="hide-menu">Analytics <span class="hide-menu"></a></li>
                 <li> <a href="<?php echo base_url(); ?>settings/Settings" ><i class="mdi mdi-settings"></i><span class="hide-menu">Settings <span class="hide-menu"></a></li>
