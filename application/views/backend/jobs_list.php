@@ -69,7 +69,7 @@
                                         <?php foreach ($jobs as $job): ?>
                                             <tr>
                                                 <td><?php echo html_escape($job['job_title']); ?></td>
-                                                <td><?php echo html_escape(substr($job['description'], 0, 70)) . '...'; ?></td>
+                                                <td><?php echo html_escape(substr($job['description'], 0, 60)) . '...'; ?></td>
                                                 <td><?php echo html_escape(date('F j, Y', strtotime($job['posted_at']))); ?></td>
                                                 <td class="jsgrid-align-center">
                                                     <a href="<?php echo site_url('recruitment/job_details/' . $job['job_id']); ?>"

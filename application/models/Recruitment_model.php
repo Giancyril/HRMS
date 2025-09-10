@@ -45,13 +45,15 @@ class Recruitment_model extends CI_Model {
     }
 
     public function is_application_exists($job_id, $email)
-    {
-        $this->db->where('job_id', $job_id);
-        $this->db->where('email', $email);
-        $query = $this->db->get('applications'); // Use your actual applications table name
-        
-        return $query->num_rows() > 0;
-    }
+{
+    // Use LIKE with case-insensitive comparison, or convert both to lowercase.
+    // Using LOWER() is generally more reliable across different database systems.
+    $this->db->where('job_id', $job_id);
+    $this->db->where('LOWER(email)', strtolower($email)); // Convert both to lowercase for comparison
+    $query = $this->db->get('applications'); // Use your actual applications table name
+    
+    return $query->num_rows() > 0;
+}
 
     public function delete_application($id)
     {
