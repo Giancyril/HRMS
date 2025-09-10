@@ -32,7 +32,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive ">
-                            <table id="promotionsTable" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="promotionsTable" class="display table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Employee</th>
@@ -53,7 +53,7 @@
                                             <td><?php echo $promo['promotion_date']; ?></td>
                                             <td class="jsgrid-align-center">
                                                 <a href="#" title="Delete" class="btn btn-sm btn-danger waves-effect waves-light promotion_delete" data-id="<?php echo $promo['promotion_id']; ?>">
-                                                    <i class="fa fa-trash"></i>
+                                                    <i class="fa fa-trash"></i> </a>
                                                 </a>
                                             </td>
                                         </tr>
@@ -83,17 +83,12 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                  <label class="m-t-20">Employee</label>
-<select class="form-control custom-select" data-placeholder="Choose a Employee" tabindex="1" name="em_id" id="em_id" required>
-
-<option value="">Select Here</option>
-
-<?php foreach ($employees as $employee) : ?>
-
-<option value="<?php echo $employee->id ?>"><?php echo $employee->first_name . ' ' . $employee->last_name ?></option>
-
-<?php endforeach; ?>
-
-</select>
+                                    <select class="form-control custom-select" data-placeholder="Choose a Employee" tabindex="1" name="em_id" id="em_id" required>
+                                    <option value="">Select Here</option>
+                                    <?php foreach ($employees as $employee) : ?>
+                                    <option value="<?php echo $employee->id ?>"><?php echo $employee->first_name . ' ' . $employee->last_name ?></option>
+                                  <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-12">

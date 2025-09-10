@@ -99,14 +99,6 @@
                     </ul>
                 </li>
 
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-elevation-rise"></i><span class="hide-menu">Promotion</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                    
-                            <li><a href="<?php echo base_url(); ?>Promotion/promotion_list">Promotion</a></li>
-                            <li><a href="<?php echo base_url(); ?>Promotion/add_promotion">Add Promotion</a></li>
-                        </ul>
-                    </li>
-
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bank"></i><span class="hide-menu">Loan </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url(); ?>Loan/View"> Grand Loan </a></li>
@@ -114,6 +106,7 @@
                             </ul>
                         </li>
                 <li> <a href="<?php echo base_url()?>notice/All_notice" ><i class="mdi mdi-clipboard"></i><span class="hide-menu">Notice <span class="hide-menu"></a></li>
+                <li> <a href="<?php echo base_url(); ?>Promotion/promotion_list" ><i class="mdi mdi-trophy"></i><span class="hide-menu">Promotion <span class="hide-menu"></a></li>       
                 <li> <a href="<?php echo base_url(); ?>dashboard/analytics_view" ><i class="mdi mdi-poll"></i><span class="hide-menu">Analytics <span class="hide-menu"></a></li>
                 <li> <a href="<?php echo base_url(); ?>settings/Settings" ><i class="mdi mdi-settings"></i><span class="hide-menu">Settings <span class="hide-menu"></a></li>
 
@@ -175,14 +168,6 @@
                      <li><a href="<?php echo base_url(); ?>Recruitment/Applications">View Applications</a></li>
                     </ul>
                 </li>
-
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-elevation-rise"></i><span class="hide-menu">Promotion</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                    
-                            <li><a href="<?php echo base_url(); ?>Promotion/promotion_list">Promotion</a></li>
-                            <li><a href="<?php echo base_url(); ?>Promotion/add_promotion">Add Promotion</a></li>
-                        </ul>
-                    </li>
     
                  <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cube"></i><span class="hide-menu">Assets </span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -193,7 +178,7 @@
                             </ul>
                         </li>
 
-                        
+                <li> <a href="<?php echo base_url(); ?>Promotion/promotion_list" ><i class="mdi mdi-trophy"></i><span class="hide-menu">Promotion <span class="hide-menu"></a></li>       
                 <li> <a href="<?php echo base_url(); ?>dashboard/analytics_view" ><i class="mdi mdi-poll"></i><span class="hide-menu">Analytics <span class="hide-menu"></a></li>
                 <li> <a href="<?php echo base_url(); ?>settings/Settings" ><i class="mdi mdi-settings"></i><span class="hide-menu">Settings <span class="hide-menu"></a></li>
                 
