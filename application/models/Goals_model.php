@@ -70,10 +70,14 @@ class Goals_model extends CI_Model {
     }
 
     // Check for existing goal by subject and type
-    public function get_goal_by_subject_and_type($subject, $goal_type_id) {
-        $this->db->where('subject', $subject);
-        $this->db->where('goal_type_id', $goal_type_id);
-        $query = $this->db->get('goals');
-        return $query->row();
-    }
+    // In your Goals_model.php
+
+public function get_goal_by_subject_and_type($subject, $goal_type_id) {
+    $this->db->where('subject', $subject);
+    $this->db->where('goal_type_id', $goal_type_id);
+    $query = $this->db->get('goals'); // Replace 'goals' with your actual table name
+
+    // Change: Return the number of rows found.
+    return $query->num_rows(); 
+}
 }

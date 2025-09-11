@@ -221,8 +221,9 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 
-    <?php $this->load->view('backend/footer'); ?>
+    
 
     <script>
         $(document).ready(function () {
@@ -231,38 +232,47 @@
                 "aaSorting": [[1, 'desc']],
                 dom: 'Bfrtip',
                 buttons: ['csv', 'excel', 'pdf', 'print']
-            });
+            });       
 
+            // Handle form submission for both Add and Update
+        $('#addgoalForm').on('submit', function(e) {
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
 
-            // Handle Add Goal Form Submission (AJAX)
-            $('#addGoalForm').on('submit', function(e) {
-                e.preventDefault();
-                var form = $(this);
-                var url = form.attr('action');
-                var formData = form.serialize();
-                var messageBox = form.closest('.modal-content').find('.modal-message');
-
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData,
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            messageBox.removeClass('alert-danger').addClass('alert-success').text(response.message).show();
-                            setTimeout(function() {
-                                $('#addGoalModal').modal('hide');
-                                location.reload(); 
-                            }, 2000); 
-                        } else {
-                            messageBox.removeClass('alert-success').addClass('alert-danger').text(response.message).show();
-                        }
-                    },
-                    error: function() {
-                        messageBox.removeClass('alert-success').addClass('alert-danger').text('An error occurred. Please try again.').show();
-                    }
-                });
-            });
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: form.serialize(),
+        dataType: 'json', // Specify that the server will return JSON
+        success: function(response) {
+            // Check the status from the JSON response
+            if (response.status === 'success') {
+                // Set the success message from the response
+                $('#successMessage').text(response.message);
+                
+                // Hide the form modal and show the success modal
+                $('#addgoalModal').modal('hide');
+                $('#successModal').modal('show');
+                
+                // Reload the page after a short delay
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
+            } else {
+                // Handle error case, if the server sends back an error status
+                // You can display the error message in the form modal
+                console.log("Error: " + response.message);
+                // Optionally display an error message to the user here
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            // Handle AJAX request errors
+            console.error("AJAX Error: " + textStatus, errorThrown);
+            // Optionally display a generic error message
+        }
+    });
+});
 
             // Handle Edit Goal Button Click (AJAX)
             $(document).on('click', '.edit-goal-btn', function() {
@@ -334,3 +344,5 @@
             });
         });
     </script>
+
+    <?php $this->load->view('backend/footer'); ?>
