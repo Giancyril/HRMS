@@ -152,7 +152,7 @@
                 $('#successMessage').text(response.message);
                 
                 // Hide the form modal and show the success modal
-                $('#addPromotionModal').modal('hide');
+                $('#addgoaltypeModal').modal('hide');
                 $('#successModal').modal('show');
                 
                 // Reload the page after a short delay

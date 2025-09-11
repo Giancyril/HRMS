@@ -56,6 +56,14 @@ class Goals_model extends CI_Model {
         $query = $this->db->get('goal_types');
         return $query->row();
     }
+
+    public function get_goal_type_by_name($type_name) {
+      $this->db->where('type_name', $type_name);
+      $query = $this->db->get('goal_types'); // Replace 'goal_types' with your actual table name
+    
+    // Return the number of rows to check for existence
+     return $query->num_rows();
+    }
     
     // Update a goal type
     public function update_goal_type($id, $data) {

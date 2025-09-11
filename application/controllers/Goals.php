@@ -177,35 +177,40 @@ class Goals extends CI_Controller {
     
     // Add this new function to handle the form submission for adding a goal type
     public function save_goal_type() {
-        if ($this->input->post()) {
-            $this->form_validation->set_rules('type_name', 'Goal Type Name', 'required');
+    if ($this->input->post()) {
+        $this->form_validation->set_rules('type_name', 'Goal Type Name', 'required');
 
-            if ($this->form_validation->run() == TRUE) {
-                $type_name = $this->input->post('type_name');
+        if ($this->form_validation->run() == TRUE) {
+            $type_name = $this->input->post('type_name');
 
-                // Check for existing goal type to prevent duplicates
-                $existing_type = $this->goals_model->get_goal_type_by_name($type_name);
-                if ($existing_type) {
-                    echo json_encode(['status' => 'error', 'message' => 'This goal type already exists.']);
-                    return;
-                }
+            // Check for existing goal type using the model method
+            $existing_type_count = $this->goals_model->get_goal_type_by_name($type_name);
+            
+            // Explicitly check if the count is greater than 0
+            if ($existing_type_count > 0) {
+                echo json_encode(['status' => 'error', 'message' => 'This goal type already exists.']);
+                return;
+            }
 
-                $goal_type_data = [
-                    'type_name' => $type_name
-                ];
+            $goal_type_data = [
+                'type_name' => $type_name
+            ];
 
-                if ($this->goals_model->add_goal_type($goal_type_data)) {
-                    echo json_encode(['status' => 'success', 'message' => 'Goal type added successfully!']);
-                } else {
-                    echo json_encode(['status' => 'error', 'message' => 'Failed to add goal type. Please try again.']);
-                }
+            if ($this->goals_model->add_goal_type($goal_type_data)) {
+                echo "Successfully Added!";
             } else {
-                echo json_encode(['status' => 'error', 'message' => validation_errors()]);
+                // Change: Echo a simple error string
+                echo "Failed to update goal type. Please try again.";
             }
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Invalid request.']);
+            // Change: Echo validation errors directly
+            echo validation_errors();
         }
+    } else {
+        // Change: Echo a simple error string
+        echo "Invalid request.";
     }
+}
 
     public function update_goal_type() {
     if ($this->input->post()) {
