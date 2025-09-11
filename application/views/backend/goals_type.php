@@ -55,12 +55,12 @@
                                                             data-toggle="modal"
                                                             data-target="#goaltypemodel"
                                                             data-goal-type-id="<?php echo html_escape($type->id); ?>">
-                                                        <i class="fa fa-pencil"></i> Edit
+                                                        <i class="fa fa-pencil-square-o"></i>
                                                     </button>
                                                     <a href="<?php echo site_url('goals/delete_goal_type/' . $type->id); ?>"
                                                        class="btn btn-sm btn-danger delete-goal-type-btn"
                                                        onclick="return confirm('Are you sure you want to delete this goal type?');">
-                                                        <i class="fa fa-trash"></i> Delete
+                                                        <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -174,14 +174,8 @@
     });
 });
 
-        // Delete Goal Type (client-side confirmation)
-        $(".delete-goal-type-btn").click(function (e) {
-            var confirmation = confirm('Are you sure you want to delete this goal type?');
-            if (!confirmation) {
-                e.preventDefault();
-            }
+        
         });
-    });
 </script>
 
 <?php $this->load->view('backend/footer'); ?>
