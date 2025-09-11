@@ -227,10 +227,10 @@
 </div>
   
 
- <div class="card">
-         <div class="card-header">
-          <h4 class="m-b-0 text-black">Latest Job Postings</h4>
-         </div>
+<div class="card">
+    <div class="card-header">
+        <h4 class="m-b-0 text-black">Latest Job Postings</h4>
+    </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-hover table-striped">
@@ -242,12 +242,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (isset($jobs) && is_array($jobs) && count($jobs) > 0): ?>
-                        <?php foreach ($jobs as $job): ?>
+                    <?php if (isset($latest_jobs) && is_array($latest_jobs) && count($latest_jobs) > 0): ?>
+                        <?php foreach ($latest_jobs as $job): ?>
                             <tr>
-                                <td><?= html_escape($job['job_title']); ?></td>
-                                <td><?= html_escape(substr($job['description'], 0, 75)) . '...'; ?></td>
-                                <td><?= html_escape(date('F j, Y', strtotime($job['posted_at']))); ?></td>
+                                <td><?= html_escape($job->job_title); ?></td>
+                                <td><?= html_escape(substr($job->description, 0, 60)) . '...'; ?></td>
+                                <td><?= html_escape(date('F j, Y', strtotime($job->posted_at))); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -258,8 +258,8 @@
                 </tbody>
             </table>
         </div>
-      </div>
     </div>
+</div>
 
     
 

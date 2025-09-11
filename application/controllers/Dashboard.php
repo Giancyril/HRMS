@@ -37,6 +37,8 @@ class Dashboard extends CI_Controller {
 
             // Populate $data with the information needed for the dashboard view
             // For example, if you need settings, employee data, etc.
+            // Fetch latest job postings and pass to the view
+            $data['latest_jobs'] = $this->recruitment_model->get_latest_job_postings();
             // $data['settingsvalue'] = $this->dashboard_model->GetSettingsValue();
             // $data['employee_count'] = $this->employee_model->getEmployeeCount();
             // Add any other data you need for your dashboard

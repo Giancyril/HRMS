@@ -71,6 +71,23 @@ class Recruitment_model extends CI_Model {
         $query = $this->db->get('jobs');
         return $query->result_array(); 
     }
+
+    public function get_latest_job_postings() {
+    // Get the current date in Y-m-d format
+    $today = date('Y-m-d');
+    
+    $this->db->select('job_title, description, posted_at'); // Select the necessary columns
+    $this->db->from('jobs'); // Your jobs table name
+    
+    // Add a WHERE clause to filter by today's date
+    $this->db->where("DATE(posted_at) = '$today'"); 
+    
+    $this->db->order_by('posted_at', 'DESC'); // Order by the time they were posted
+    $this->db->limit(5); // You can still limit the number of results, even for today's jobs
+    $query = $this->db->get();
+    
+    return $query->result(); // Returns an array of objects
+}
     
     public function getJobDetails($job_id)
     {
