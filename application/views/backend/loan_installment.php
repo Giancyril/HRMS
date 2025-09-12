@@ -109,7 +109,10 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="message-text" class="control-label">Date</label>
-                                                <input type="text" name="appdate" class="form-control mydatetimepickerFull" id="recipient-name1" required>
+                                                <div class="input-group date">
+                                                <input type="text" name="appdate" class="form-control mydatetimepickerFull" id="recipient-name1" placeholder="" required>
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="message-text" class="control-label">Receiver</label>

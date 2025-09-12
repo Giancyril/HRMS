@@ -184,4 +184,29 @@
                 }
             });
         });
+
+
+        // Logic for deleting a Designation via AJAX
+                $('.delete-designation').on('click', function(e) {
+                    e.preventDefault(); // Prevent the default button action
+                    var designationId = $(this).data('id');
+                    var confirmDelete = confirm('Are you sure to delete this data?');
+
+                    if (confirmDelete) {
+                        $.ajax({
+                            url: '<?php echo base_url("organization/des_delete/"); ?>' + designationId,
+                            type: 'POST', // Use POST for deletion as it's a modifying action
+                            // dataType: 'json', // If your controller returns JSON after delete, uncomment this
+                            success: function(response) {
+                                console.log("Delete response from server:", response);
+                                location.reload(); // Reload the page to show the flashdata message
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("AJAX error deleting designation: " + status + " - " + error);
+                                location.reload(); // Reload even on error to update list and potentially show error flashdata
+                            }
+                        });
+                    }
+                });
+            
             </script>

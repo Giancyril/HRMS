@@ -141,11 +141,17 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" id="hourlyFix">Date</label>
-                                <input type="date" name="startdate" class="form-control" id="recipient-name1" required>
+                                <div class="input-group date">
+                                <input type="text" name="startdate" class="form-control" id="recipient-name1" required>
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
                             </div>
                             <div class="form-group" id="enddate" style="display:none">
                                 <label class="control-label">End Date</label>
-                                <input type="date" name="enddate" class="form-control" id="recipient-name1">
+                                <div class="input-group date">
+                                <input type="text" name="enddate" class="form-control" id="recipient-name1">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
                             </div>
 
                             <div class="form-group" id="hourAmount">

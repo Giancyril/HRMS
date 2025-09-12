@@ -99,11 +99,17 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">Project Start Date</label>
+                                                <div class="input-group date">
                                                 <input type="text" name="startdate" class="form-control datepicker" id="recipient-name1" placeholder="">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">Project End Date</label>
+                                                <div class="input-group date">
                                                 <input type="text" name="enddate" class="form-control datepicker" id="recipient-name1" required placeholder="">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="message-text" class="control-label">Summary</label>

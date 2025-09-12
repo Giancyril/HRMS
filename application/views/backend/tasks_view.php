@@ -129,10 +129,16 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label class="control-label col-md-3">Task Start Date</label>
-                                                <input type="text" name="startdate" class="form-control col-md-3 mydatetimepickerFull" id="recipient-name1">
-                                                
+                                                <div class="col-md-3 input-group date">
+                                                <input type="text" name="startdate" class="form-control mydatetimepickerFull" id="recipient-name1">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+
                                                 <label class="control-label col-md-2">Task End Date</label>
-                                                <input type="text" name="enddate" class="form-control col-md-3 mydatetimepickerFull" id="recipient-name1">
+                                                <div class="col-md-3 input-group date">
+                                                <input type="text" name="enddate" class="form-control mydatetimepickerFull" id="recipient-name1">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="message-text" class="control-label col-md-3">Details</label>

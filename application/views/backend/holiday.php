@@ -142,11 +142,17 @@ https://www.patchesoft.com/fullcalendar-with-php-and-codeigniter/
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">Start Date</label>
-                                                <input type="text" name="startdate" class="form-control mydatetimepickerFull" id="recipient-name1"  value="">
+                                                <div class="input-group date">
+                                                <input type="text" name="startdate" class="form-control mydatetimepickerFull" id="recipient-name1" value="">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">End Date</label>
+                                                <div class="input-group date">
                                                 <input type="text" name="enddate" class="form-control mydatetimepickerFull" id="recipient-name1" value="">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
                                             </div><!--
                                             <div class="form-group">
                                                 <label class="control-label">Number of Days</label>

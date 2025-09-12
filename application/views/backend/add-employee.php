@@ -108,15 +108,24 @@
                                     </div>
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Date Of Birth </label>
-                                        <input type="date" name="dob" id="example-email2" name="example-email" class="form-control" placeholder="" required> 
+                                        <div class="input-group date">
+                                        <input type="text" name="dob" class="form-control mydatetimepickerFull" placeholder="yyyy/mm/dd" required>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
                                     </div>
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Date Of Joining </label>
-                                        <input type="date" name="joindate" id="example-email2" name="example-email" class="form-control" placeholder=""> 
+                                        <div class="input-group date">
+                                        <input type="text" name="joindate" class="form-control mydatetimepickerFull" placeholder="yyyy/mm/dd">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
                                     </div>
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Date Of Leaving </label>
-                                        <input type="date" name="leavedate" id="example-email2" name="example-email" class="form-control" placeholder=""> 
+                                        <div class="input-group date">
+                                        <input type="text" name="leavedate" class="form-control mydatetimepickerFull" placeholder="yyyy/mm/dd">
+                                       <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
                                     </div>
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Username </label>
@@ -124,7 +133,7 @@
                                     </div>
                                     <div class="form-group col-md-3 m-t-20">
                                         <label>Email </label>
-                                        <input type="email" id="example-email2" name="email" class="form-control" placeholder="email@mail.com" minlength="7" required > 
+                                        <input type="email" id="example-email2" name="email" class="form-control" placeholder="Email@gmail.com" minlength="7" required > 
                                     </div>
                                    
                                     <div class="form-group col-md-3 m-t-20">

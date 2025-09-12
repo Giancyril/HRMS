@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Optima HR</title>
 
-    <link rel="icon" type="image/ico" sizes="16x16" href="assets/images/favicon.ico">
+    <link rel="icon" type="image/ico" sizes="16x16" href="assets/images/favicon/favicon-1.ico">
     <link rel="stylesheet" href="assets/css/styles.css" />
 
     <link

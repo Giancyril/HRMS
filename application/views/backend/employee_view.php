@@ -129,9 +129,12 @@
                                                     </div>
                                                     				                                    
 				                                    <div class="form-group col-md-4 m-t-10">
-				                                        <label>Date Of Birth </label>
-				                                        <input type="date" id="example-email2" name="dob" class="form-control" placeholder="" value="<?php echo $basic->em_birthday; ?>" required> 
-				                                    </div>
+                                                        <label>Date Of Birth </label>
+                                                        <div class="input-group date">
+                                                        <input type="text" name="dob" class="form-control mydatetimepickerFull" placeholder="YYYY/MM/DD" value="<?php echo $basic->em_birthday; ?>" required>
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                    </div>
 				                                    <div class="form-group col-md-4 m-t-10">
 				                                        <label>NID Number </label>
 				                                        <input type="text" class="form-control"placeholder="NID Number" name="nid" value="<?php echo $basic->em_nid; ?>" minlength="10" required>
@@ -163,13 +166,19 @@
 				                                    </div>
 				                                    
 				                                    <div class="form-group col-md-4 m-t-10">
-				                                        <label>Date Of Joining </label>
-				                                        <input type="date" id="example-email2" name="joindate" class="form-control" value="<?php echo $basic->em_joining_date; ?>" placeholder="">
-				                                    </div>
+                                                        <label>Date Of Joining </label>
+                                                        <div class="input-group date">
+                                                        <input type="text" name="joindate" class="form-control mydatetimepickerFull" placeholder="YYYY/MM/DD" value="<?php echo $basic->em_joining_date; ?>">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                    </div>
 				                                    <div class="form-group col-md-4 m-t-10">
-				                                        <label>Contract End Date</label>
-				                                        <input type="date" id="example-email2" name="leavedate" class="form-control" value="<?php echo $basic->em_contact_end; ?>" placeholder="">
-				                                    </div>
+                                                        <label>Contract End Date</label>
+                                                        <div class="input-group date">
+                                                        <input type="text" name="leavedate" class="form-control mydatetimepickerFull" placeholder="YYYY/MM/DD" value="<?php echo $basic->em_contact_end; ?>">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                    </div>
 				                                    <div class="form-group col-md-4 m-t-10">
 				                                        <label>Email </label>
 				                                        <input type="email" id="example-email2" name="email" class="form-control" value="<?php echo $basic->em_email; ?>" placeholder="email@mail.com" minlength="7" required>

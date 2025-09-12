@@ -224,15 +224,20 @@
                </div>
                <div class="form-group">
                   <label class="control-label">Approximate Start Date</label>
+                  <div class="input-group date">
                   <input type="text" name="startdate" class="form-control mydatetimepickerFull" id="recipient-name1" required>
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+               </div>
                </div>
                </div>
                <div class="col-md-6">
                <div class="form-group" id="enddate">
-                  <label class="control-label">Approximate End Date
-                  </label>
+                  <label class="control-label">Approximate End Date</label>
+                  <div class="input-group date">
                   <input type="text" name="enddate" class="form-control mydatetimepickerFull" id="recipient-name1">
-               </div>               
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+               </div>
+               </div>             
                <div class="form-group" id="totalDays">
                   <label class="control-label">Total Days
                   </label>

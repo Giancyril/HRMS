@@ -81,7 +81,10 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="message-text" class="control-label">Published Date</label>
-                                                <input type="date" name="nodate" class="form-control" id="recipient-name1" required>
+                                                <div class="input-group date">
+                                                <input type="text" name="nodate" class="form-control mydatetimepickerFull" id="recipient-name1" placeholder="" required>
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
                                             </div>
                                     </div>
                                     <div class="modal-footer">
