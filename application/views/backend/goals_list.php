@@ -83,7 +83,7 @@
     </div>
 
     <div class="modal fade" id="addGoalModal" tabindex="-1" role="dialog" aria-labelledby="addGoalModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addGoalModalLabel">Add New Goal</h5>
@@ -151,7 +151,7 @@
     </div>
 
     <div class="modal fade" id="editGoalModal" tabindex="-1" role="dialog" aria-labelledby="editGoalModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editGoalModalLabel">Edit Goal</h5>
@@ -244,32 +244,24 @@
         type: "POST",
         url: url,
         data: form.serialize(),
-        dataType: 'json', // Specify that the server will return JSON
+        // Keep the dataType setting if your PHP always returns JSON, otherwise remove it to handle plain text.
+        // dataType: 'json', 
         success: function(response) {
-            // Check the status from the JSON response
-            if (response.status === 'success') {
-                // Set the success message from the response
-                $('#successMessage').text(response.message);
-                
-                // Hide the form modal and show the success modal
+            // In this case, 'response' will be the plain text string.
+            if (response.trim() === 'Successfully Added!') {
+                $('#successMessage').text(response);
                 $('#addgoalModal').modal('hide');
                 $('#successModal').modal('show');
-                
-                // Reload the page after a short delay
                 setTimeout(function() {
                     location.reload();
                 }, 2000);
             } else {
-                // Handle error case, if the server sends back an error status
-                // You can display the error message in the form modal
-                console.log("Error: " + response.message);
-                // Optionally display an error message to the user here
+                // This block would handle any other plain text as an error
+                console.log("Error: " + response);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            // Handle AJAX request errors
             console.error("AJAX Error: " + textStatus, errorThrown);
-            // Optionally display a generic error message
         }
     });
 });

@@ -19,7 +19,10 @@
 	return $result;
 	}
     public function emselect(){
-    $sql = "SELECT * FROM `employee` WHERE `status`='ACTIVE'";
+    $sql = "SELECT employee.*, designation.des_name 
+            FROM employee 
+            LEFT JOIN designation ON employee.des_id = designation.id 
+            WHERE employee.status='ACTIVE'";
     $query=$this->db->query($sql);
   	$result = $query->result();
   	return $result;

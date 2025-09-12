@@ -10,7 +10,7 @@ date_default_timezone_set('Asia/Manila');
     <meta name="description" content="">
     <meta name="author" content="GenIT">
     <?php $settingsvalue = $this->settings_model->GetSettingsValue(); ?>
-    <link rel="icon" type="image/ico" sizes="16x16" href="<?php echo base_url(); ?>assets/images/favicon.ico">
+    <link rel="icon" type="image/ico" sizes="16x16" href="<?php echo base_url(); ?>assets/images/favicon/favicon-1.ico">
     <title><?php echo $settingsvalue->sitetitle; ?></title>
     
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -55,7 +55,7 @@ date_default_timezone_set('Asia/Manila');
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?php echo base_url(); ?>"><b>
-                                <img src="<?php echo base_url();?>assets/images/hricn.png" alt="DRI" class="DRI-logo" style="width:55px;margin-top: 10px;"/>
+                                <img src="<?php echo base_url();?>assets/images/hricn-1.png" alt="DRI" class="DRI-logo" style="width:55px;margin-top: 25px;"/>
                                 </b>
                                 <span>
                                 <img src="<?php echo base_url(); ?>assets/images/<?php echo $settingsvalue->sitelogo; ?>" alt="homepage" class="dark-logo" height="105px" width="105px" style="margin-top: 22px;" />

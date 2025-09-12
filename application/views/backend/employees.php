@@ -39,6 +39,7 @@
                                                 <th>Email </th>
                                                 <th>Contact </th>
                                                 <th>User Type</th>
+                                                <th>Designation</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -60,6 +61,7 @@
                                                 <td><?php echo $value->em_email; ?></td>
                                                 <td><?php echo $value->em_phone; ?></td>
                                                 <td><?php echo $value->em_role; ?></td>
+                                                <td><?php echo $value->des_name; ?></td>
                                                 <td class="jsgrid-align-center ">
                                                     <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($value->em_id); ?>" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light"><i class="fa fa-pencil-square-o"></i></a>
                                                 </td>

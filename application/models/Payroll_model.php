@@ -287,4 +287,62 @@ public function getPinFromID($employeeID){
       $result = $query->result();
       return $result;
     }   
+
+    // In Leads model
+
+public function GetProjectsWithTeamHeads() {
+    // Assuming you have 'projects' and 'employees' tables
+    // And a column in 'projects' table like 'team_head_id' that references employees.id
+    // And a table like 'project_assignments' linking employees to projects (for assigned employees)
+
+    $this->db->select('p.*, th.name as team_head_name, th.email as team_head_email, th.phone as team_head_phone');
+    $this->db->from('projects p');
+    $this->db->join('employees th', 'p.team_head_id = th.id', 'left'); // Adjust table and column names
+    // You might need another join for assigned employees if not directly on the project table
+    // $this->db->join('project_assignments pa', 'p.id = pa.project_id', 'left');
+    // $this->db->join('employees assigned_emp', 'pa.employee_id = assigned_emp.id', 'left');
+
+    $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
+        $projects_data = $query->result();
+        // If you need to group assigned employees per project, you'll need additional processing here.
+        // For now, this example assumes direct team head info is sufficient or can be fetched separately.
+        return $projects_data;
+    } else {
+        return [];
+    }
+}
+
+// A more complex example that tries to get assigned employees too
+public function GetProjectsWithDetails() {
+    $this->db->select('p.*, th.name as team_head_name, th.email as team_head_email, th.phone as team_head_phone');
+    $this->db->from('projects p');
+    $this->db->join('employees th', 'p.team_head_id = th.id', 'left');
+    $query = $this->db->get();
+    $projects = $query->result();
+
+    $results = [];
+    if (!empty($projects)) {
+        foreach ($projects as $project) {
+            // Get assigned employees for this project
+            $this->db->select('e.name');
+            $this->db->from('project_assignments pa'); // Your assignment table
+            $this->db->join('employees e', 'pa.employee_id = e.id');
+            $this->db->where('pa.project_id', $project->id); // Assuming 'id' is the primary key for projects
+            $assigned_query = $this->db->get();
+            $project->assigned_employees = $assigned_query->result();
+
+            // Map team head details from the join
+            $project->team_head = (object) [
+                'name' => $project->team_head_name,
+                'email' => $project->team_head_email,
+                'phone' => $project->team_head_phone
+            ];
+
+            $results[] = $project;
+        }
+    }
+    return $results;
+}
 }
