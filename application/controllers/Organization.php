@@ -27,7 +27,9 @@ class Organization extends CI_Controller {
     // --- Department Management ---
     public function Department(){
         if($this->session->userdata('user_login_access') != False) { 
-            $data['department'] = $this->organization_model->depselect();
+            // This function call retrieves the department data with the employee count.
+            // This is the data that the view should be using.
+            $data['department'] = $this->organization_model->getDepartmentsEmployeeCount();
             $this->load->view('backend/department',$data); 
         } else {
             redirect(base_url() , 'refresh');

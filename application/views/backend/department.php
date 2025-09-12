@@ -33,6 +33,7 @@
                                 <thead>
                                     <tr>
                                         <th>Department Name</th>
+                                        <th>Employee Count</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -40,6 +41,7 @@
                                     <?php foreach ($department as $value) : ?>
                                         <tr>
                                             <td><?php echo $value->dep_name; ?></td>
+                                            <td><?php echo $value->employee_count; ?></td>
                                             <td class="jsgrid-align-center">
                                                 <button type="button" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light edit-department" data-id="<?php echo $value->id; ?>"><i class="fa fa-pencil-square-o"></i></button>
                                                 <a onclick="return confirm('Are you sure to delete this data?')" href="<?php echo base_url(); ?>organization/Delete_dep/<?php echo $value->id; ?>" title="Delete" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-trash-o"></i></a>

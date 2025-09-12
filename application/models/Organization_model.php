@@ -100,6 +100,15 @@ class Organization_model extends CI_Model{
         return $query->result();
     }
 
+    public function getDepartmentsEmployeeCount() {
+        $this->db->select('d.id, d.dep_name, COUNT(e.id) as employee_count');
+        $this->db->from('department d');
+        $this->db->join('employee e', 'd.id = e.dep_id', 'left');
+        $this->db->group_by('d.id, d.dep_name');
+        $this->db->order_by('d.dep_name', 'ASC');
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     /**
      * Fetches the count of employees per designation.
