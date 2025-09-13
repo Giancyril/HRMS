@@ -59,6 +59,9 @@
     ?>
 </td>
                                             <td class="jsgrid-align-center">
+                                                <button type="button" title="View" class="btn btn-sm btn-info waves-effect waves-light view-designation" data-id="<?php echo $value->id; ?>" data-toggle="modal" data-target="#viewDesignationModal">
+                                                      <i class="fa fa-eye"></i>
+                                                </button>
                                                 <button type="button" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light edit-designation" data-id="<?php echo $value->id; ?>">
                                                     <i class="fa fa-pencil-square-o"></i>
                                                 </button>
@@ -133,6 +136,26 @@
                     <button type="submit" class="btn btn-info">Update</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewDesignationModal" tabindex="-1" role="dialog" aria-labelledby="viewDesignationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewDesignationModalLabel">Designation Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="viewDesignationBody">
+                <h4 id="viewDesignationName"></h4>
+                <p id="viewJobDescription"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
@@ -233,5 +256,46 @@
                         });
                     }
                 });
+
+                // Handles opening the view modal and populating it with data
+$('.view-designation').on('click', function() {
+    var designationId = $(this).data('id');
+    
+    // Use the same getDesignationById URL from the edit modal
+    $.ajax({
+        url: '<?php echo base_url("organization/getDesignationById/"); ?>' + designationId,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            if (response && response.id && response.des_name) {
+                // Populate the modal fields with full data
+                $('#viewDesignationName').text(response.des_name);
+                $('#viewJobDescription').html(nl2br(html_escape(response.job_description)));
+                $('#viewDesignationModal').modal('show');
+            } else {
+                console.error("Error fetching designation data or invalid response.", response);
+                alert('Could not load designation details. Please try again.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error fetching designation: " + status + " - " + error);
+            alert('An error occurred while fetching designation details. Please try again.');
+        }
+    });
+});
+
+// Helper function to convert newlines to <br> for HTML display
+function nl2br (str, is_xhtml) {
+    if (typeof str === 'undefined' || str === null) {
+        return '';
+    }
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+}
+
+// Helper function for HTML escaping, similar to CodeIgniter's html_escape
+function html_escape(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
             
             </script>
