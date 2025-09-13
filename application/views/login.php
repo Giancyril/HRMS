@@ -32,6 +32,14 @@
             align-items: center;
         }
 
+        .login-header {
+            font-size: 30px;
+            font-weight: 700;
+            color: #33A1E0;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
         .login-box {
             width: 100%;
             max-width: 400px;
@@ -121,7 +129,7 @@
             color: white;
             padding: 12px;
             font-size: 16px;
-            border-radius: 16px;
+            border-radius: none;
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
             transition: background 0.3s ease;
@@ -169,7 +177,7 @@
             background: #ffffff;
             color: #727272;
             border: 1.5px solid #d9d9d9;
-            border-radius: 6px;
+            border-radius: 50px;
             padding: 12px 20px;
             cursor: pointer;
             font-family: inherit;
@@ -309,7 +317,7 @@
 
             <form class="form-horizontal form-material" method="post" id="loginform" action="<?php echo base_url(); ?>login/Login_Auth">
                 <a href="javascript:void(0)" class="text-center db">
-                    <img src="<?php echo base_url(); ?>assets/images/optima-logo.png" alt="Home" />
+                    <div class="login-header">Optima HR</div>
                 </a>
 
                 <div class="form-group">
@@ -322,7 +330,7 @@
                     <span class="form-control-feedback"><i class="fa fa-lock"></i></span>
                 </div>
 
-                <div class="form-group text-center m-t-20" style="margin-top: 35px; margin-bottom: 10px; border-radius: 6px;">
+                <div class="form-group text-center m-t-20" style= "width: 100%; margin-top: 25px; margin-bottom: 10px; border-radius: 50px;">
                         <button class="btn btn-login btn-block text-uppercase waves-effect waves-light" type="submit">
                             Log In
                         </button>
