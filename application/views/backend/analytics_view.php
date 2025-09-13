@@ -17,63 +17,92 @@
         </div>
     </div>
 
-    <div class="container-fluid" style="padding-right: 30px;">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body" style="background-color: white; color: black;">
-                        <h4 class="card-title">Employee Attendance Chart</h4>
-                        <div style="overflow-x: auto; max-height: 400px; padding-bottom: 15px;">
-                            <canvas id="attendanceChart" style="height: 300px;"></canvas>
-                        </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+    <div class="card-body" style="background-color: white; color: black;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="card-title">Employee Attendance Chart</h4>
+            <div class="d-flex align-items-center">
+                <select id="attendanceMonth" class="form-control" style="width: 150px; margin-right: 10px;">
+                    <?php
+                    $months = [
+                        '01' => 'January', '02' => 'February', '03' => 'March', '04' => 'April',
+                        '05' => 'May', '06' => 'June', '07' => 'July', '08' => 'August',
+                        '09' => 'September', '10' => 'October', '11' => 'November', '12' => 'December'
+                    ];
+                    $currentMonth = date('m');
+                    foreach ($months as $num => $name): ?>
+                        <option value="<?php echo $num; ?>" <?php echo ($num == $currentMonth) ? 'selected' : ''; ?>>
+                            <?php echo $name; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <select id="attendanceChartYear" class="form-control" style="width: 100px;">
+                    <?php $currentYear = date('Y'); ?>
+                    <?php for ($y = $currentYear; $y >= 2020; $y--): ?>
+                        <option value="<?php echo $y; ?>" <?php echo ($y == $currentYear) ? 'selected' : ''; ?>>
+                            <?php echo $y; ?>
+                        </option>
+                    <?php endfor; ?>
+                </select>
+            </div>
+        </div>
+        <div style="overflow-x: auto; max-height: 400px; padding-bottom: 15px;">
+            <canvas id="attendanceChart" style="height: 300px;"></canvas>
+            <div id="noAttendanceDataMessage" style="display: none; text-align: center; padding-top: 150px; color: black;">
+                No attendance data available for the selected month.
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body" style="background-color: white; color: black;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="card-title">Monthly Attendance Report</h4>
+                        <select id="attendanceYear" class="form-control" style="width: 120px;">
+                            <?php $currentYear = date('Y'); ?>
+                            <?php for ($y = $currentYear; $y >= 2020; $y--): ?>
+                                <option value="<?php echo $y; ?>" <?php echo ($y == $currentYear) ? 'selected' : ''; ?>>
+                                    <?php echo $y; ?>
+                                </option>
+                            <?php endfor; ?>
+                        </select>
+                    </div>
+                    <div style="height: 400px;">
+                        <canvas id="monthlyAttendanceChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body" style="background-color: white; color: black;">
-                        <h4 class="card-title">Monthly Attendance Report
-                            <select id="attendanceYear" class="form-control pull-right" style="width: 120px;">
-                                <?php $currentYear = date('Y'); ?>
-                                <?php for ($y = $currentYear; $y >= 2020; $y--): ?>
-                                    <option value="<?php echo $y; ?>" <?php echo ($y == $currentYear) ? 'selected' : ''; ?>>
-                                        <?php echo $y; ?>
-                                    </option>
-                                <?php endfor; ?>
-                            </select>
-                        </h4>
-                        <div style="height: 400px;">
-                            <canvas id="monthlyAttendanceChart"></canvas>
-                        </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Employees by Department</h4>
+                    <div style="overflow-x: auto; max-height: 400px; padding-bottom: 15px;">
+                        <canvas id="departmentChart" style="height: 300px;"></canvas>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Employees by Department</h4>
-                        <div style="overflow-x: auto; max-height: 400px; padding-bottom: 15px;">
-                            <canvas id="departmentChart" style="height: 300px;"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Employees by Designation</h4>
-                        <div style="overflow-x: auto; max-height: 400px; padding-bottom: 15px;">
-                            <canvas id="designationChart" style="height: 300px;"></canvas>
-                        </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Employees by Designation</h4>
+                    <div style="overflow-x: auto; max-height: 400px; padding-bottom: 15px;">
+                        <canvas id="designationChart" style="height: 300px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -83,11 +112,27 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // --- Employee Attendance Chart ---
+    var attendanceChartInstance;
+    const noDataMessage = document.getElementById('noAttendanceDataMessage');
     const attendanceCanvasElement = document.getElementById('attendanceChart');
-    if (attendanceCanvasElement) {
+
+    function loadAttendanceChart(year, month) {
+        // Always hide the message and show the canvas before fetching
+        if (noDataMessage) noDataMessage.style.display = 'none';
+        if (attendanceCanvasElement) attendanceCanvasElement.style.display = 'block';
+
+        if (attendanceChartInstance) {
+            attendanceChartInstance.destroy();
+        }
+
+        if (!attendanceCanvasElement) {
+            console.error("Critical error: Canvas element 'attendanceChart' not found.");
+            return;
+        }
         const ctx = attendanceCanvasElement.getContext('2d');
-        const apiUrl = '<?php echo base_url(); ?>attendance/getAttendanceChartData';
+
+        // Use your base_url helper for constructing the API URL
+        const apiUrl = `<?php echo base_url(); ?>attendance/getAttendanceChartData?year=${year}&month=${month}`;
 
         fetch(apiUrl)
             .then(response => {
@@ -97,42 +142,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                if (data.error) {
-                    console.error('Error fetching attendance data:', data.error);
-                    const parentDiv = attendanceCanvasElement.parentElement;
-                    if (parentDiv) {
-                        parentDiv.innerHTML = '<p class="text-danger text-center" style="padding-top: 150px;">Error: ' + data.error + '</p>';
-                    }
+                // Check if data is empty and show message
+                if (!Array.isArray(data) || data.length === 0) {
+                    if (attendanceCanvasElement) attendanceCanvasElement.style.display = 'none';
+                    if (noDataMessage) noDataMessage.style.display = 'block';
                     return;
                 }
 
-                if (!Array.isArray(data) || data.length === 0) {
-                    console.warn('No attendance data available for the chart.');
-                    const parentDiv = attendanceCanvasElement.parentElement;
-                    if (parentDiv) {
-                        parentDiv.innerHTML = '<p class="text-center" style="padding-top: 150px; color: black;">No attendance data available for chart.</p>';
-                    }
-                    return;
-                }
+                // If data exists, hide the message and show the chart
+                if (noDataMessage) noDataMessage.style.display = 'none';
+                if (attendanceCanvasElement) attendanceCanvasElement.style.display = 'block';
 
                 const labels = data.map(item => item.full_name);
-                const totalHours = data.map(item => item.total_seconds / 3600);
+                const totalHours = data.map(item => item.total_seconds / 3600); // Assuming total_seconds is available
 
-                // Dynamic Canvas Width Calculation for Attendance Chart
-                const baseWidthPerBar = 150; // Adjust this value based on desired bar width + spacing
-                const minChartContentWidth = labels.length * baseWidthPerBar;
-
-                // Get the width of the immediate parent container (the one with overflow-x: auto)
-                const parentContainer = attendanceCanvasElement.parentElement;
-                // Use clientWidth for the actual inner width of the element, excluding scrollbars
-                const parentWidth = parentContainer ? parentContainer.clientWidth : (window.innerWidth * 0.9); // Fallback to 90% of window if parent not found
-
-                // Set canvas width: either the required content width or the parent's full width, whichever is greater
-                const finalCanvasWidth = Math.max(minChartContentWidth, parentWidth);
-                attendanceCanvasElement.style.width = `${finalCanvasWidth}px`;
-                attendanceCanvasElement.style.height = `300px`; // Ensure height is applied
-
-                new Chart(ctx, {
+                // Initialize the chart
+                attendanceChartInstance = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: labels,
@@ -145,66 +170,31 @@ document.addEventListener('DOMContentLoaded', function() {
                         }]
                     },
                     options: {
-                        responsive: false,           // Keep false for horizontal scroll
-                        maintainAspectRatio: false,  // Keep false for horizontal scroll
+                        responsive: true,
+                        maintainAspectRatio: false,
                         scales: {
                             y: {
                                 beginAtZero: true,
                                 title: {
                                     display: true,
-                                    text: 'Total Working Hours',
-                                    color: 'rgba(73, 80, 87, 1)'
-                                },
-                                ticks: {
-                                    color: 'rgba(82, 98, 107, 1)'
-                                },
-                                grid: {
-                                    color: 'rgba(0, 0, 0, 0.1)',
-                                    drawBorder: false,
-                                    drawOnChartArea: true,
-                                    drawTicks: false
+                                    text: 'Hours'
                                 }
                             },
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Employee Name',
-                                    color: 'rgba(73, 80, 87, 1)',
-                                    padding: { top: 20 }
-                                },
-                                ticks: {
-                                    color: 'rgba(82, 98, 107, 1)',
-                                    maxRotation: 45, // Allow some rotation for long labels
-                                    minRotation: 0,
-                                    autoSkip: false // Display all labels, rely on scroll
-                                },
-                                grid: {
-                                    display: false,
-                                    drawBorder: false
+                                    text: 'Employee Name'
                                 }
                             }
                         },
                         plugins: {
                             legend: {
                                 display: true,
-                                position: 'top',
-                                labels: {
-                                    color: 'rgba(73, 80, 87, 1)',
-                                }
+                                position: 'top'
                             },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.dataset.label || '';
-                                        if (label) {
-                                            label += ': ';
-                                        }
-                                        if (context.parsed.y !== null) {
-                                            label += context.parsed.y.toFixed(2) + ' hours';
-                                        }
-                                        return label;
-                                    }
-                                }
+                            title: {
+                                display: true,
+                                text: `Attendance for ${document.getElementById('attendanceMonth').options[document.getElementById('attendanceMonth').selectedIndex].text} ${year}`
                             }
                         }
                     }
@@ -212,15 +202,32 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error loading attendance chart data:', error);
-                const errorMessage = 'Failed to load attendance chart data.';
-                const parentDiv = attendanceCanvasElement.parentElement;
-                if (parentDiv) {
-                    parentDiv.innerHTML = `<p class="text-danger text-center" style="padding-top: 150px;">${errorMessage}</p>`;
+                if (attendanceCanvasElement) attendanceCanvasElement.style.display = 'none';
+                if (noDataMessage) {
+                    noDataMessage.style.display = 'block';
+                    noDataMessage.innerHTML = `<p class="text-danger text-center" style="padding-top: 0;">Failed to load attendance chart data.</p>`;
                 }
             });
-    } else {
-        console.warn("Canvas element 'attendanceChart' not found. Chart will not be rendered.");
     }
+
+    // Event listeners for month and year changes for Attendance Chart
+    const attendanceMonthSelect = document.getElementById('attendanceMonth');
+    const attendanceYearSelect = document.getElementById('attendanceChartYear');
+
+    if (attendanceMonthSelect && attendanceYearSelect) {
+        attendanceMonthSelect.addEventListener('change', () => {
+            loadAttendanceChart(attendanceYearSelect.value, attendanceMonthSelect.value);
+        });
+        attendanceYearSelect.addEventListener('change', () => {
+            loadAttendanceChart(attendanceYearSelect.value, attendanceMonthSelect.value);
+        });
+    }
+
+    // Initial load of the employee attendance chart
+    if (attendanceMonthSelect && attendanceYearSelect) {
+        loadAttendanceChart(attendanceYearSelect.value, attendanceMonthSelect.value);
+    }
+
 
     // --- Monthly Attendance Report Chart ---
     var monthlyAttendanceChartInstance; // Variable to hold the chart instance
@@ -245,30 +252,34 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        $.ajax({
-            url: '<?php echo base_url("attendance/getMonthlyAttendanceData"); ?>',
-            type: 'GET',
-            dataType: 'json',
-            data: { year: year },
-            success: function(data) {
+        // Using fetch for consistency
+        const monthlyApiUrl = `<?php echo base_url("attendance/getMonthlyAttendanceData"); ?>?year=${year}`;
+        fetch(monthlyApiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
                 console.log("Monthly Attendance Data Received:", data);
 
                 if (!Array.isArray(data) || data.length === 0) {
                     console.warn('No monthly attendance data available for the chart for year ' + year);
                     const parentDivForMessage = monthlyAttendanceCanvas.parentElement;
                     if (parentDivForMessage) {
-                        parentDivForMessage.innerHTML = '<p class="text-center" style="padding-top: 150px; color: black;">No monthly attendance data available for chart for ' + year + '.</p>';
+                        parentDivForMessage.innerHTML = `<p class="text-center" style="padding-top: 150px; color: black;">No monthly attendance data available for chart for ${year}.</p>`;
                     }
                     return;
                 }
 
-                const labels = data.map(item => item.month);
-                const ontimeData = data.map(item => parseInt(item.ontime));
-                const lateData = data.map(item => parseInt(item.late));
+                const labels = data.map(item => item.month); // Assuming 'month' is the key for month names
+                const ontimeData = data.map(item => parseInt(item.ontime)); // Assuming 'ontime' is the key
+                const lateData = data.map(item => parseInt(item.late)); // Assuming 'late' is the key
 
-                // FOR MONTHLY CHART: Let Chart.js handle responsiveness for fixed 12 months
-                // No explicit width setting on canvas for this chart to allow responsiveness
-                // monthlyAttendanceCanvas.style.width = `100%`; // REMOVED
+                // Chart.js responsiveness will handle the width/height based on parent container
+                monthlyAttendanceCanvas.style.width = '100%'; // Ensure it takes full width of parent
+                monthlyAttendanceCanvas.style.height = '100%'; // Ensure it takes full height of parent
 
                 monthlyAttendanceChartInstance = new Chart(ctxMonthly, {
                     type: 'bar',
@@ -292,8 +303,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         ]
                     },
                     options: {
-                        responsive: true,            // Set to true for fitting to page width
-                        maintainAspectRatio: false,  // false can be useful to control height independently
+                        responsive: true,
+                        maintainAspectRatio: false,
                         scales: {
                             x: {
                                 stacked: true,
@@ -302,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     text: 'Month'
                                 },
                                 ticks: {
-                                    autoSkip: true, // Let Chart.js auto-skip if labels overlap
+                                    autoSkip: true,
                                     maxRotation: 0,
                                     minRotation: 0,
                                 }
@@ -319,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         plugins: {
                             title: {
                                 display: true,
-                                text: 'Monthly Attendance Overview'
+                                text: `Monthly Attendance Overview for ${year}`
                             },
                             legend: {
                                 display: true,
@@ -328,25 +339,27 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 });
-            },
-            error: function(xhr, status, error) {
+            })
+            .catch(error => {
                 console.error("Error fetching monthly attendance data:", status, error, xhr.responseText);
                 const parentDivForMessage = monthlyAttendanceCanvas.parentElement;
                 if (parentDivForMessage) {
                     parentDivForMessage.innerHTML = '<p class="text-danger">Failed to load monthly attendance chart. Please try again.</p>';
                 }
-            }
-        });
+            });
     }
 
     // Initial load of the monthly attendance chart for the default selected year
-    loadMonthlyAttendanceChart($('#attendanceYear').val());
+    const attendanceYearSelectMonthly = document.getElementById('attendanceYear');
+    if (attendanceYearSelectMonthly) {
+        loadMonthlyAttendanceChart(attendanceYearSelectMonthly.value);
 
-    // Event listener for year change
-    $('#attendanceYear').on('change', function() {
-        var selectedYear = $(this).val();
-        loadMonthlyAttendanceChart(selectedYear);
-    });
+        // Event listener for year change
+        attendanceYearSelectMonthly.addEventListener('change', function() {
+            var selectedYear = $(this).val();
+            loadMonthlyAttendanceChart(selectedYear);
+        });
+    }
 
 
     // --- Chart: Employees by Department ---
@@ -356,12 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const departmentApiUrl = '<?php echo base_url(); ?>dashboard/getDepartmentChartData';
 
         fetch(departmentApiUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 if (!Array.isArray(data) || data.length === 0) {
                     console.warn('No department data available for the chart.');
@@ -410,7 +418,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }]
                     },
                     options: {
-                        responsive: false,
+                        responsive: false, // Set to false as we are manually controlling width
                         maintainAspectRatio: false,
                         scales: {
                             y: {
@@ -479,12 +487,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const designationApiUrl = '<?php echo base_url(); ?>dashboard/getDesignationChartData';
 
         fetch(designationApiUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 if (!Array.isArray(data) || data.length === 0) {
                     console.warn('No designation data available for the chart.');
@@ -533,7 +536,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }]
                     },
                     options: {
-                        responsive: false,
+                        responsive: false, // Set to false as we are manually controlling width
                         maintainAspectRatio: false,
                         scales: {
                             y: {

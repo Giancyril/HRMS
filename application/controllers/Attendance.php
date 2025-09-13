@@ -279,24 +279,22 @@ class Attendance extends CI_Controller
 
     // NEW FUNCTION TO FETCH ATTENDANCE DATA FOR CHART
     public function getAttendanceChartData() {
-        if ($this->session->userdata('user_login_access') != False) {
-            $start_date = $this->input->get('start_date');
-            $end_date = $this->input->get('end_date');
+    if ($this->session->userdata('user_login_access') != False) {
+        // Get the selected year and month from the GET request.
+        // If not provided, default to the current year and month.
+        $year = $this->input->get('year') ? $this->input->get('year') : date('Y');
+        $month = $this->input->get('month') ? $this->input->get('month') : date('m');
 
-            // If dates are not provided, default to the last 30 days
-            if (empty($start_date)) {
-                $start_date = date('Y-m-d', strtotime('-30 days'));
-            }
-            if (empty($end_date)) {
-                $end_date = date('Y-m-d');
-            }
+        // Calculate the start and end dates for the selected month.
+        $start_date = date('Y-m-01', strtotime("$year-$month-01"));
+        $end_date = date('Y-m-t', strtotime("$year-$month-01"));
 
-            $attendance_data = $this->attendance_model->getMonthlyAttendanceSummary($start_date, $end_date);
-            echo json_encode($attendance_data);
-        } else {
-            echo json_encode(['error' => 'Unauthorized access']);
-        }
+        $attendance_data = $this->attendance_model->getMonthlyAttendanceSummary($start_date, $end_date);
+        echo json_encode($attendance_data);
+    } else {
+        echo json_encode(['error' => 'Unauthorized access']);
     }
+}
     public function getMonthlyAttendanceData() {
     // Set content type to JSON
     header('Content-Type: application/json');
