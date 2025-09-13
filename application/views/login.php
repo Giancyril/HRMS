@@ -287,8 +287,8 @@
     
     /* New styles for top-right positioning */
             position: fixed; 
-            top: 10px;       
-            right: 10px;     
+            top: 10px;   
+            right: 10px;        
             z-index: 1000; 
         }
 
@@ -463,15 +463,31 @@
         const $passwordInput = $('input[name="password"]');
         const $securityNotice = $('.security-notice');
 
+        // Store the timer ID so we can clear it if needed
+        let securityNoticeTimer;
+        // New flag to track if the notice has been shown
+        let noticeShown = false;
+
         // Function to check if either input has a value
-        function checkInputs() {
-            // .val().trim() gets the value and removes any leading/trailing whitespace
-            if ($emailInput.val().trim() !== '' || $passwordInput.val().trim() !== '') {
-                $securityNotice.removeClass('hidden'); // Show the notice
-            } else {
-                $securityNotice.addClass('hidden'); // Hide the notice
-            }
+            function checkInputs() {
+        // Check if the notice has already been shown
+            if (noticeShown) {
+            return; // Exit the function if it has already appeared
         }
+
+    // .val().trim() gets the value and removes any leading/trailing whitespace
+            if ($emailInput.val().trim() !== '' || $passwordInput.val().trim() !== '') {
+        $securityNotice.removeClass('hidden'); // Show the notice
+        noticeShown = true; // Set the flag to true so it won't appear again
+
+        // Start a new timer to hide the notice after 4 seconds
+        securityNoticeTimer = setTimeout(function() {
+            $securityNotice.addClass('hidden');
+        }, 4000); 
+        } else {
+            $securityNotice.addClass('hidden'); // Hide the notice if inputs are empty
+        }
+    }
 
         // Listen for typing events on both input fields
         $emailInput.on('input', checkInputs);

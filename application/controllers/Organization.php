@@ -120,26 +120,31 @@ class Organization extends CI_Controller {
     }
 
     public function Save_des(){
-        if($this->session->userdata('user_login_access') != False) { 
-            $des = $this->input->post('designation');
+        if($this->session->userdata('user_login_access') != False) {
+            $des_name = $this->input->post('designation');
+            $job_description = $this->input->post('job_description'); // New line to get description
             $this->load->library('form_validation');
             $this->form_validation->set_error_delimiters();
-            $this->form_validation->set_rules('designation','designation','trim|required|xss_clean');
+            $this->form_validation->set_rules('designation', 'Designation Name', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('job_description', 'Job Description', 'trim|xss_clean'); // Add validation for description
 
             if ($this->form_validation->run() == FALSE) {
-                echo validation_errors(); // Consider returning JSON for AJAX
+                echo validation_errors();
             } else {
-                $data = array('des_name' => $des);
-                $success = $this->organization_model->Add_Designation($data); // Assuming Add_Designation returns boolean or ID
+                $data = array(
+                    'des_name' => $des_name,
+                    'job_description' => $job_description // Add to the data array
+                );
+                $success = $this->organization_model->Add_Designation($data);
                 if ($success) {
-                    echo "Successfully Added"; // Consider returning JSON for AJAX
+                    echo "Successfully Added";
                 } else {
-                    echo "Failed to add designation"; // Consider returning JSON for AJAX
+                    echo "Failed to add designation";
                 }
             }
         } else {
             redirect(base_url() , 'refresh');
-        }           
+        }
     }
 
     public function des_delete($des_id){
@@ -181,14 +186,17 @@ class Organization extends CI_Controller {
     // This is the correct and only Update_des function now.
     public function Update_des(){
         if($this->session->userdata('user_login_access') != False) {
-        $id = $this->input->post('id');
-        $designation = $this->input->post('designation');
-        $data =  array('des_name' => $designation );
-        $this->organization_model->Update_Designation($id, $data);
-        echo "Successfully Updated";
+            $id = $this->input->post('id');
+            $designation = $this->input->post('designation');
+            $job_description = $this->input->post('job_description'); // New line to get description
+            $data = array(
+                'des_name' => $designation,
+                'job_description' => $job_description // Add to the data array
+            );
+            $this->organization_model->Update_Designation($id, $data);
+            echo "Successfully Updated";
+        } else {
+            redirect(base_url() , 'refresh');
         }
-    else{
-		redirect(base_url() , 'refresh');
-	}        
     }
 }

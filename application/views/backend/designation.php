@@ -35,6 +35,7 @@
                                 <thead>
                                     <tr>
                                         <th>Designation Name</th>
+                                        <th>Description</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -42,6 +43,21 @@
                                     <?php foreach ($designation as $value) { ?>
                                         <tr>
                                             <td><?php echo $value->des_name; ?></td>
+                                            <td>
+    <?php 
+    // Get the full job description
+    $job_description = $value->job_description;
+    
+    // Check if the description is longer than 60 characters
+    if (strlen($job_description) > 60) {
+        // If it's too long, display the first 60 characters followed by an ellipsis (...)
+        echo substr($job_description, 0, 60) . '...';
+    } else {
+        // If it's short enough, display the full description
+        echo $job_description;
+    }
+    ?>
+</td>
                                             <td class="jsgrid-align-center">
                                                 <button type="button" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light edit-designation" data-id="<?php echo $value->id; ?>">
                                                     <i class="fa fa-pencil-square-o"></i>
@@ -73,10 +89,14 @@
             </div>
             <form method="post" action="<?php echo base_url('organization/Save_des'); ?>" id="addDesignationForm" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="control-label">Designation Name</label>
-                        <input type="text" name="designation" id="newDesignationName" class="form-control" placeholder="Enter designation name" minlength="3" required>
-                    </div>
+                <div class="form-group">
+                   <label class="control-label">Designation Name</label>
+                   <input type="text" name="designation" id="newDesignationName" class="form-control" placeholder="Enter designation name" minlength="3" required>
+                </div>
+                <div class="form-group">
+                   <label class="control-label">Job Description</label>
+                 <textarea name="job_description" id="newJobDescription" class="form-control" placeholder="Enter job description"></textarea>
+                </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -98,11 +118,15 @@
             </div>
             <form method="post" action="<?php echo base_url(); ?>organization/Update_des" id="editDesignationForm">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="control-label">Designation Name</label>
-                        <input type="text" name="designation" id="editDesignationNameModal" class="form-control" placeholder="" required>
-                        <input type="hidden" name="id" id="editDesignationIdModal">
-                    </div>
+                <div class="form-group">
+                   <label class="control-label">Designation Name</label>
+                   <input type="text" name="designation" id="editDesignationNameModal" class="form-control" placeholder="" required>
+                   <input type="hidden" name="id" id="editDesignationIdModal">
+                </div>
+                <div class="form-group">
+                   <label class="control-label">Job Description</label>
+                   <textarea name="job_description" id="editJobDescriptionModal" class="form-control" placeholder=""></textarea>
+                </div>
                     <div id="designation-form-messages" class="mt-2"></div> </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -142,6 +166,7 @@
                     if (response && response.id && response.des_name) {
                         $('#editDesignationIdModal').val(response.id);
                         $('#editDesignationNameModal').val(response.des_name);
+                        $('#editJobDescriptionModal').val(response.job_description);
                         $('#editDesignationModal').modal('show');
                     } else {
                         console.error("Error fetching designation data or invalid response.", response);
