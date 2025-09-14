@@ -18,23 +18,21 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        
-                       <div class="card mb-4">
-    <div class="card-header">
-        <h2 class="text-themecolor"><?php echo html_escape($job_details->job_title); ?></h2>
-                            <p class="text-muted"><i class="fa fa-clock"></i> Posted: <?php echo html_escape(date('F j, Y', strtotime($job_details->posted_at))); ?></p>
-    </div>
-    <div class="card-body">
-        <h5 class="m-0">Job Description</h5>
-        <p><?php echo nl2br(html_escape($job_details->job_description)); ?></p>
-        
-        <hr class="my-4">
-        
-        <h5 class="m-0">Requirements</h5>
-        <p><?php echo nl2br(html_escape($job_details->requirements)); ?></p>
-    </div>
-</div>
-                                          
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h2 class="text-themecolor"><?php echo html_escape($job_details->job_title); ?></h2>
+                                <p class="text-muted"><i class="fa fa-clock"></i> Posted: <?php echo html_escape(date('F j, Y', strtotime($job_details->posted_at))); ?></p>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="m-0">Job Description</h5>
+                                <p><?php echo nl2br(html_escape($job_details->job_description)); ?></p>
+
+                                <hr class="my-4">
+
+                                <h5 class="m-0">Requirements</h5>
+                                <p><?php echo nl2br(html_escape($job_details->requirements)); ?></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

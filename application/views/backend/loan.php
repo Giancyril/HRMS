@@ -114,7 +114,16 @@
                             </div>-->                                                         
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Approve Date</label>
-                                <input type="text" name="appdate" class="form-control col-md-8 mydatetimepickerFull" id="recipient-name1" value="" required>
+                                <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="text" name="appdate" class="form-control mydatetimepickerFull" id="recipient-name1" value="" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                <i class="fa fa-calendar-alt"></i>
+                            </span>
+                            </div>
+                            </div>
+                            </div>
                             </div>
                             <div class="form-group row">
                                 <label for="message-text" class="control-label col-md-3">Install Period</label>

@@ -44,23 +44,23 @@
                                         <tr>
                                             <td><?php echo $value->des_name; ?></td>
                                             <td>
-    <?php 
-    // Get the full job description
-    $job_description = $value->job_description;
+                                                 <?php 
+                                                // Get the full job description
+                                                 $job_description = $value->job_description;
     
-    // Check if the description is longer than 60 characters
-    if (strlen($job_description) > 60) {
-        // If it's too long, display the first 60 characters followed by an ellipsis (...)
-        echo substr($job_description, 0, 60) . '...';
-    } else {
-        // If it's short enough, display the full description
-        echo $job_description;
-    }
-    ?>
-</td>
+                                                // Check if the description is longer than 60 characters
+                                                  if (strlen($job_description) > 60) {
+                                                // If it's too long, display the first 60 characters followed by an ellipsis (...)
+                                                  echo substr($job_description, 0, 60) . '...';
+                                                } else {
+                                                // If it's short enough, display the full description
+                                                echo $job_description;
+                                               }
+                                              ?>
+                                            </td>
                                             <td class="jsgrid-align-center">
                                                 <button type="button" title="View" class="btn btn-sm btn-info waves-effect waves-light view-designation" data-id="<?php echo $value->id; ?>" data-toggle="modal" data-target="#viewDesignationModal">
-                                                      <i class="fa fa-eye"></i>
+                                                      View
                                                 </button>
                                                 <button type="button" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light edit-designation" data-id="<?php echo $value->id; ?>">
                                                     <i class="fa fa-pencil-square-o"></i>
@@ -133,7 +133,7 @@
                     <div id="designation-form-messages" class="mt-2"></div> </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-info">Update</button>
+                    <button type="submit" class="btn btn-info">Submit</button>
                 </div>
             </form>
         </div>

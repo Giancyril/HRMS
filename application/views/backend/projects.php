@@ -49,7 +49,9 @@
                                                 <th>Status </th>
                                                 <th>Start Date </th>
                                                 <th>End Date </th>
+                                                <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                                 <th>Action </th>
+                                                <?php } ?>
                                             </tr>
                                         </thead>
                                         <!-- <tfoot>
@@ -68,10 +70,12 @@
                                                 <td><?php echo $value->pro_status ?></td>
                                                 <td><?php echo date('jS \of F Y',strtotime($value->pro_start_date)); ?></td>
                                                 <td><?php echo date('jS \of F Y',strtotime($value->pro_end_date)) ?></td>
+                                                <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                                 <td class="jsgrid-align-center ">
                                                     <a href="view?P=<?php echo base64_encode($value->id); ?>" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light"><i class="fa fa-pencil-square-o"></i></a> &nbsp; 
                                                     <a href="pDelet?D=<?php echo base64_encode($value->id); ?>" title="Delete" onclick="alert('Are You Sure To Delete This Project?')" class="btn btn-sm btn-danger waves-effect waves-light projectdelet"><i class="fa fa-trash-o"></i></a>
                                                 </td>
+                                                <?php } ?>
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>

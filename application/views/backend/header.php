@@ -102,15 +102,21 @@ date_default_timezone_set('Asia/Manila');
                                     <a class="dropdown-item" href="<?php echo base_url('employee/Add_employee'); ?>">
                                         <i class="fas fa-user-plus" style="width: 25px;"></i> Add Employee
                                     </a>
-                                    <a class="dropdown-item" href="<?php echo base_url('Payroll/Salary_List'); ?>">
-                                        <i class="fas fa-file-invoice-dollar" style="width: 25px;"></i> Payroll
-                                    </a>
-                                    <a class="dropdown-item" href="<?php echo base_url('dashboard/analytics_view'); ?>">
-                                        <i class="fas fa-chart-bar" style="width: 25px;"></i> Reports
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="<?php echo base_url('Payroll/Generate_salary'); ?>">
+                                        <i class="fas fa-file-invoice-dollar" style="width: 25px;"></i> Generate Payslip
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-folder" style="width: 25px;"></i> Manage Documents
+                                    <a class="dropdown-item" href="<?php echo base_url('Recruitment'); ?>">
+                                        <i class="fas fa-bullhorn" style="width: 25px;"></i> Manage Job Postings
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="<?php echo base_url('Loan/View'); ?>">
+                                        <i class="fas fa-hand-holding-usd" style="width: 25px;"></i> View Loan Requests
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="<?php echo base_url('dashboard/analytics_view'); ?>">
+                                        <i class="fas fa-chart-bar" style="width: 25px;"></i> Analytics Reports
                                     </a>
                                 </div>
                             </li>
@@ -123,12 +129,17 @@ date_default_timezone_set('Asia/Manila');
                                     <a class="dropdown-item" href="<?php echo base_url('attendance/Save_Attendance'); ?>">
                                         <i class="fas fa-calendar-check" style="width: 25px;"></i> Add Attendance
                                     </a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="<?php echo base_url('leave/Application'); ?>">
                                         <i class="fa fa-calendar-alt" style="width: 25px;"></i> Leave Application
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-folder" style="width: 25px;"></i> Manage Documents
+                                    <a class="dropdown-item" href="<?php echo base_url('Recruitment/Applications'); ?>">
+                                        <i class="fas fa-file-alt" style="width: 25px;"></i> View Applications
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="<?php echo base_url('notice/All_notice'); ?>">
+                                        <i class="fa fa-clipboard" style="width: 25px;"></i> View Notices
                                     </a>
                                 </div>
                             </li>
@@ -141,6 +152,7 @@ date_default_timezone_set('Asia/Manila');
                                     <a class="dropdown-item" href="<?php echo base_url('payroll/Payslip_Report'); ?>">
                                         <i class="fas fa-file-invoice" style="width: 25px;"></i> View Payslips
                                     </a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="<?php echo base_url('leave/EmApplication'); ?>">
                                         <i class="fas fa-calendar-plus" style="width: 25px;"></i> Request Leave
                                     </a>
