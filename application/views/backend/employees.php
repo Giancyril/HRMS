@@ -19,8 +19,12 @@
             <div class="container-fluid">
                 <div class="row m-b-10"> 
                     <div class="col-12">
+
+                    <?php if($this->session->userdata('user_type')=='EMPLOYEE'){ ?>
+
+                    <?php } else { ?>
                         <button type="button" class="btn btn-info"><i class="fa fa-plus"></i><a href="<?php echo base_url(); ?>employee/Add_employee" class="text-white"><i class="" aria-hidden="true"></i> Add Employee</a></button>
-                        
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="row">
@@ -40,7 +44,10 @@
                                                 <th>Contact </th>
                                                 <th>User Type</th>
                                                 <th>Designation</th>
+                                                <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
+                                                
                                                 <th>Action</th>
+                                                <?php } ?>
                                             </tr>
                                         </thead>
                                         <!-- <tfoot>
@@ -62,9 +69,11 @@
                                                 <td><?php echo $value->em_phone; ?></td>
                                                 <td><?php echo $value->em_role; ?></td>
                                                 <td><?php echo $value->des_name; ?></td>
+                                                <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                                 <td class="jsgrid-align-center ">
                                                     <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($value->em_id); ?>" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light"><i class="fa fa-pencil-square-o"></i></a>
                                                 </td>
+                                                <?php } ?>
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>

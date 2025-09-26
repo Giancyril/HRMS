@@ -26,10 +26,11 @@
                 <div class="card card-outline-info">
                     <div class="card-header">
                         <h4 class="m-b-0 text-white">Department List</h4>
+                        
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <table class="table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="departmentTable">
                                 <thead>
                                     <tr>
                                         <th>Department Name</th>
@@ -115,14 +116,14 @@
             <script>
 
                 $(document).ready(function() {
-                    $('#departmentTable').DataTable({
-                      "aaSorting": [[0, 'asc']], // Sort by the first column by default
-                      dom: 'Bfrtip',
-                      buttons: [
-                     'csv', 'excel', 'pdf', 'print'
-                  ]
-               });
-            });
+        $('#departmentTable').DataTable({
+            "aaSorting": [[0, 'asc']], // Sort by the first column by default
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf', 'print'
+            ]
+       });
+    });
 
 
             $(document).ready(function() {

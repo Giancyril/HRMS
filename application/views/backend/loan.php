@@ -87,80 +87,69 @@
         </div>       
                         <!-- sample modal content -->
         <div class="modal fade" id="loanmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content ">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLabel1">Loan</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <form role="form" method="post" action="Add_Loan" id="btnSubmit" enctype="multipart/form-data">
-                    <div class="modal-body">
-                             <div class="form-group row">
-                                <label class="control-label col-md-3">Assign To</label>
-                                <select class="form-control custom-select col-md-8" data-placeholder="Choose a Category" tabindex="1" name="emid" required>
-                                  <option value="">Select Here</option>
-                                   <?php foreach($employee as $value): ?>
-                                    <option value="<?php echo $value->em_id; ?>"><?php echo $value->first_name.' '.$value->last_name; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group row">
-                                <label for="message-text" class="control-label col-md-3">Amount</label>
-                                <input type="text" name="amount" value="" class="form-control col-md-8 amount" id="recipient-name1" required>
-                            </div> 
-<!--                            <div class="form-group row">
-                                <label for="message-text" class="control-label col-md-3">Interest Percentage</label>
-                                <input type="number" name="interest" value="" class="form-control col-md-8" id="recipient-name1" required>
-                            </div>-->                                                         
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">Approve Date</label>
-                                <div class="col-md-8">
-                            <div class="input-group">
-                                <input type="text" name="appdate" class="form-control mydatetimepickerFull" id="recipient-name1" value="" required>
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                <i class="fa fa-calendar-alt"></i>
-                            </span>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="message-text" class="control-label col-md-3">Install Period</label>
-                                <input type="number" name="install" value="" class="form-control col-md-8 period" id="recipient-name1" required>
-                            </div>
-                            <div class="form-group row">
-                                <label for="message-text" class="control-label col-md-3">Install Amount</label>
-                                <input type="number" name="installment" value="" class="form-control col-md-8 installment" id="recipient-name1" readonly>
-                            </div>
-                            <div class="form-group row">
-                                <label for="message-text" class="control-label col-md-3"> Loan No</label>
-                                <input type="text" name="loanno" value="<?php echo rand(100000,56000000)?>" class="form-control col-md-8" id="recipient-name1" readonly>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">Status</label>
-                                <select class="form-control custom-select col-md-8" data-placeholder="Choose a Category" tabindex="1" name="status" value="" required>
-                                    <option value="">Select here</option>
-                                    <option value="Granted">Granted</option>
-                                    <option value="Deny">Deny</option>
-                                    <option value="Done">Done</option>
-                                </select>
-                            </div>
-                            <div class="form-group row">
-                                <label for="message-text" class="control-label col-md-3">Loan Details</label>
-                                <textarea class="form-control col-md-8" name="details" value="" id="message-text1"></textarea>
-                            </div>                                                                        
-                        
-                    </div>
-                    <div class="modal-footer">
-                       <input type="hidden" name="id" value="">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info">Submit</button>
-                    </div>
-                    </form>
-                </div>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Loan</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
+            <form role="form" method="post" action="Add_Loan" id="btnSubmit" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">Assign To</label>
+                        <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="emid" required>
+                            <option value="">Select Here</option>
+                             <?php foreach($employee as $value): ?>
+                             <option value="<?php echo $value->em_id; ?>"><?php echo $value->first_name.' '.$value->last_name; ?></option>
+                             <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Amount</label>
+                        <input type="text" name="amount" value="" class="form-control amount" id="recipient-name1" required>
+                    </div> 
+                    <div class="form-group">
+                        <label class="control-label">Approve Date</label>
+                        <div class="input-group date">
+                        <input type="text" name="appdate" class="form-control mydatetimepickerFull" id="recipient-name1" value="" required>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Install Period</label>
+                        <input type="number" name="install" value="" class="form-control period" id="recipient-name1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Install Amount</label>
+                        <input type="number" name="installment" value="" class="form-control installment" id="recipient-name1" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Loan No</label>
+                        <input type="text" name="loanno" value="<?php echo rand(100000,56000000)?>" class="form-control" id="recipient-name1" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Status</label>
+                        <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="status" value="" required>
+                            <option value="">Select here</option>
+                            <option value="Granted">Granted</option>
+                            <option value="Deny">Deny</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Loan Details</label>
+                        <textarea class="form-control" name="details" value="" id="message-text1"></textarea>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" value="">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
                         <!-- /.modal --> 
           <script type="text/javascript">
           $('.amount, .period').on('input',function() {

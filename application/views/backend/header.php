@@ -34,6 +34,7 @@ date_default_timezone_set('Asia/Manila');
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -103,16 +104,12 @@ date_default_timezone_set('Asia/Manila');
                                         <i class="fas fa-user-plus" style="width: 25px;"></i> Add Employee
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?php echo base_url('Payroll/Generate_salary'); ?>">
-                                        <i class="fas fa-file-invoice-dollar" style="width: 25px;"></i> Generate Payslip
+                                    <a class="dropdown-item" href="<?php echo base_url('Projects/All_Projects'); ?>">
+                                         <i class="fas fa-rocket" style="width: 25px;"></i> Manage Projects
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="<?php echo base_url('Recruitment'); ?>">
-                                        <i class="fas fa-bullhorn" style="width: 25px;"></i> Manage Job Postings
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?php echo base_url('Loan/View'); ?>">
-                                        <i class="fas fa-hand-holding-usd" style="width: 25px;"></i> View Loan Requests
+                                        <i class="fas fa-bullhorn" style="width: 25px;"></i> Job Postings
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="<?php echo base_url('dashboard/analytics_view'); ?>">
@@ -134,12 +131,8 @@ date_default_timezone_set('Asia/Manila');
                                         <i class="fa fa-calendar-alt" style="width: 25px;"></i> Leave Application
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?php echo base_url('Recruitment/Applications'); ?>">
-                                        <i class="fas fa-file-alt" style="width: 25px;"></i> View Applications
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?php echo base_url('notice/All_notice'); ?>">
-                                        <i class="fa fa-clipboard" style="width: 25px;"></i> View Notices
+                                    <a class="dropdown-item" href="<?php echo base_url('Payroll/Generate_salary'); ?>">
+                                        <i class="fas fa-money-check-alt" style="width: 25px;"></i> Generate Payslip
                                     </a>
                                 </div>
                             </li>
@@ -164,6 +157,7 @@ date_default_timezone_set('Asia/Manila');
                             </li>
                         <?php endif; ?>
                     </ul>
+
 
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">

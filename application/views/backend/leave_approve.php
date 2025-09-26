@@ -19,8 +19,11 @@
         <div class="row m-b-10">
             <?php // if($this->session->userdata('user_type')=='EMPLOYEE'){ ?> 
                 <div class="col-12">
-                    <button type="button" class="btn btn-info"><i class="fa fa-plus"></i><a data-toggle="modal" data-target="#appmodel" data-whatever="@getbootstrap" class="text-white"><i class="" aria-hidden="true"></i> Add Application </a></button>
+                    <?php if($this->session->userdata('user_type')=='EMPLOYEE'){ ?>
 
+                        <?php } else { ?>
+                    <button type="button" class="btn btn-info"><i class="fa fa-plus"></i><a data-toggle="modal" data-target="#appmodel" data-whatever="@getbootstrap" class="text-white"><i class="" aria-hidden="true"></i> Add Application </a></button>
+                        <?php } ?>
                 </div>                       
             <?php // } ?> 
         </div> 
