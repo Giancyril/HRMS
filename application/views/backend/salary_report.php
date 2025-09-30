@@ -40,16 +40,40 @@ $this->load->view('backend/sidebar');
                             <div class="card-body">
                                 <form method="post" action="" id="salaryform" class="form-material row">
                                     <div class="form-group col-md-3">
-                                        <select class="form-control custom-select"  tabindex="1" name="emid" id="emid" style="margin-top: 23px" required>
-                                        <option>Employee</option>
-                                         <?php foreach($employee as $value): ?>
-                                         <option value="<?php echo $value->em_id; ?>">
-                                            <?php echo $value->first_name ?>
-                                            <?php echo $value->last_name ?>
-                                         </option>
-                                         <?php endforeach; ?>
-                                        </select>
-                                    </div>
+    <select class="form-control custom-select" tabindex="1" name="emid" id="emid" style="margin-top: 23px" required>
+        <option value="">Employee</option>
+        
+        <?php 
+        // 1. Define the user type and get the logged-in user's ID
+        $user_is_employee = ($this->session->userdata('user_type') == 'EMPLOYEE');
+        
+        // *** This is the correct session variable based on your controller ***
+        $current_employee_id = $this->session->userdata('user_login_id'); 
+        
+        // IF the user is an EMPLOYEE: strictly limit the dropdown to only their name
+        if ($user_is_employee) :
+            foreach($employee as $value):
+                // Check if the employee ID in the list matches the logged-in user's ID
+                if($value->em_id == $current_employee_id): ?>
+                
+                <option value="<?php echo $value->em_id; ?>" selected>
+                    <?php echo $value->first_name ?> <?php echo $value->last_name ?>
+                </option>
+                
+                <?php endif;
+            endforeach;
+        
+        // ELSE (ADMIN/HR-MANAGER): display ALL employees
+        else :
+            foreach($employee as $value): ?>
+            <option value="<?php echo $value->em_id; ?>">
+                <?php echo $value->first_name ?> <?php echo $value->last_name ?>
+            </option>
+            <?php endforeach;
+        endif; 
+        ?>
+    </select>
+</div>
                                     <div class="form-group col-md-4">
                                       <label>
                                       </label>
