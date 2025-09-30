@@ -38,14 +38,18 @@
                                                 <th>PIN </th>
                                                 <th>Employee </th>
                                                 <th>Month </th>
+                                                     <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                                 <th>Salary </th>
                                                 <th>Loan </th>
                                                 <th>Hours </th>
                                                 <th>Deduction</th>
                                                 <th>Total Paid</th>
+                                                     <?php } ?>
                                                 <th>Pay Date</th>
                                                 <th>Status</th>
+                                                     <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                                 <th class="jsgrid-align-center">Action</th>
+                                                     <?php } ?>
                                             </tr>
                                         </thead>
                                         <!-- <tfoot>
@@ -73,17 +77,21 @@
                                                 <td><?php echo $individual_info->em_code; ?></td>
                                                 <td><?php echo $individual_info->first_name.' '.$individual_info->last_name; ?></td>
                                                 <td><?php echo $individual_info->month.' '.$individual_info->year; ?></td>
+                                                    <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                                 <td><?php echo '₱'.$individual_info->basic; ?></td>
                                                 <td><?php echo '₱'.$individual_info->loan; ?></td>
                                                 <td><?php echo $individual_info->total_days; ?></td>
                                                 <!--<td><?php echo $individual_info->addition; ?></td>-->
                                                 <td><?php echo '₱'.$individual_info->diduction; ?></td>
                                                 <td><?php echo '₱'.$individual_info->total_pay; ?></td>
+                                                    <?php } ?>
                                                 <td><?php echo $individual_info->paid_date; ?></td>
                                                 <td><?php echo $individual_info->status; ?></td>
+                                                    <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                                 <td class="jsgrid-align-center ">
                                                     <a href="<?php echo base_url(); ?>payroll/invoice?Id=<?php echo $individual_info->pay_id; ?>&em=<?php echo $individual_info->emp_id; ?>" title="Edit" class="btn btn-sm btn-info waves-effect waves-light"><i class="fa fa-print"></i></a>
                                                 </td>
+                                                    <?php } ?>
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -216,9 +224,10 @@ var m = months[d.getMonth()];
 var y = d.getFullYear();    
 //document.write(today);    
    var table = $('#example123').DataTable( {
-        "aaSorting": [[9,'desc']],
+        "aaSorting": [[1,'desc']],
         dom: 'Bfrtip',
         buttons: [
+            'csv', 'excel', 'pdf',
             {
                 extend: 'print',
                 title: 'Salary List'+'<br>'+ m +' '+ y,

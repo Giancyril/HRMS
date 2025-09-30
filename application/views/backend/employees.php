@@ -40,8 +40,10 @@
                                             <tr>
                                                 <th>Employee Name</th>
                                                 <th>PIN</th>
+                                                <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                                 <th>Email </th>
                                                 <th>Contact </th>
+                                                <?php } ?>
                                                 <th>User Type</th>
                                                 <th>Designation</th>
                                                 <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
@@ -65,11 +67,13 @@
                                             <tr>
                                                 <td title="<?php echo $value->first_name .' '.$value->last_name; ?>"><?php echo $value->first_name .' '.$value->last_name; ?></td>
                                                                                 <td><?php echo $value->em_code; ?></td>
+                                                    <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>                                
                                                 <td><?php echo $value->em_email; ?></td>
                                                 <td><?php echo $value->em_phone; ?></td>
+                                                    <?php } ?>
                                                 <td><?php echo $value->em_role; ?></td>
                                                 <td><?php echo $value->des_name; ?></td>
-                                                <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
+                                                    <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                                 <td class="jsgrid-align-center ">
                                                     <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($value->em_id); ?>" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light"><i class="fa fa-pencil-square-o"></i></a>
                                                 </td>

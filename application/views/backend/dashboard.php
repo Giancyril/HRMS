@@ -144,6 +144,10 @@
 
         
 
+        <?php 
+// This checks if the logged-in user's type is NOT 'EMPLOYEE'
+if($this->session->userdata('user_type') != 'EMPLOYEE'){ 
+?>
         
         <div class="row">
     <div class="col-md-6 col-lg-3 col-xlg-3">
@@ -229,17 +233,17 @@
     <div class="card card-custom card-border-cyan" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease-in-out; border-left: 5px solid #C562AF;">
         <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
             <div class="card-text flex-grow-1" style="flex-grow: 1;">
-                <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Designations</h6>
+                <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Active Goals</h6>
                 <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
                     <?php
-                    $this->db->from("employee");
-                    $this->db->where("des_id is not null");
+                    $this->db->from("goals"); 
+                    $this->db->where('Status', 'In Progress');
                     echo $this->db->count_all_results();
                     ?>
                 </h1>
             </div>
             <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
-                <i class="fas fa-user-tag"></i>
+                <i class="fas fa-tasks"></i>
             </div>
         </div>
     </div>
@@ -248,7 +252,7 @@
     <div class="card card-custom card-border-info" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease-in-out; border-left: 5px solid #EF7722;">
         <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
             <div class="card-text flex-grow-1" style="flex-grow: 1;">
-                <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Departments</h6>
+                <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;"> Total Departments</h6>
                 <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
                     <?php
                     $this->db->from("department");
@@ -257,7 +261,7 @@
                 </h1>
             </div>
             <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
-                <i class="fas fa-building"></i>
+                <i class="fas fa-layer-group"></i>
             </div>
         </div>
     </div>
@@ -266,17 +270,17 @@
     <div class="card card-custom card-border-dark" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease-in-out; border-left: 5px solid #7ADAA5;">
         <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
             <div class="card-text flex-grow-1" style="flex-grow: 1;">
-                <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Completed Projects</h6>
+                <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Job Vacancies</h6>
                 <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
                     <?php
-                    $this->db->where('pro_status', 'complete');
-                    $this->db->from("project");
+                    $this->db->from("jobs"); 
+                    $this->db->where('is_active', 1);
                     echo $this->db->count_all_results();
                     ?>
                 </h1>
             </div>
             <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
-                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-user-plus"></i>
             </div>
         </div>
     </div>
@@ -301,6 +305,11 @@
         </div>
     </div>
 </div>
+
+<?php 
+// This closes the IF condition
+} 
+?>
   
 
 <div class="card">

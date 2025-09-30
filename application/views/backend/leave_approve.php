@@ -43,11 +43,13 @@
                                         <th>PIN</th>
                                         <th>Leave Type</th>
                                         <th>Apply Date</th>
+                                        <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                         <th>Start Date</th>
                                         <th>End Date</th>
                                         <th>Duration</th>
                                         <th>Leave Status</th>
                                         <th>Action</th>
+                                        <?php } ?>
                                     </tr>
                                 </thead>
                                 <!-- <tfoot>
@@ -63,71 +65,57 @@
                                         <th>Action</th>
                                     </tr>
                                 </tfoot> -->
-                                <tbody>
-                                    <?php foreach($application as $value): ?>
-                                    <tr style="vertical-align:top">
-                                        <td><span><?php echo $value->first_name.' '.$value->last_name ?></span></td>
-                                        <td><?php echo $value->em_code; ?></td>
-                                        <td><?php echo $value->name; ?></td>
-                                        <td><?php echo date('jS \of F Y',strtotime($value->apply_date)); ?></td>
-                                        <td><?php echo $value->start_date; ?></td>
-                                        <td><?php echo $value->end_date; ?></td>
-                                        <td>
-                                            
-                                            <!-- Duration filtering -->
-                                            <?php
-                                                if($value->leave_duration > 8) {
-                                                    $originalDays = $value->leave_duration;
-                                                    $days = $originalDays / 8;
-                                                    $hour = 0;
-                                                    // 120 / 8 = 15 // 15 day
-                                                    // 13 - (1*8) = 5 hour
+                    <tbody>
+                         <?php foreach($application as $value): ?>
+                            <tr style="vertical-align:top">
+                             <td><span><?php echo $value->first_name.' '.$value->last_name ?></span></td>
+                             <td><?php echo $value->em_code; ?></td>
+                             <td><?php echo $value->name; ?></td>
+                             <td><?php echo date('jS \of F Y',strtotime($value->apply_date)); ?></td>
 
-                                                    if(is_float($days)) {
-                                                        
-                                                        $days = floor($days); // 1
-                                                        $hour = $value->leave_duration - ($days * 8); // 5
-                                                    }
-                                                } else {
-                                                    $days = 0;
-                                                    $hour = $value->leave_duration;
-                                                }
-                                                
+                             <?php if($this->session->userdata('user_type')!='EMPLOYEE'): // Columns visible only to non-employees ?>
+                             <td><?php echo $value->start_date; ?></td>
+                             <td><?php echo $value->end_date; ?></td>
+                             <td>
+                             <?php
+                                 if($value->leave_duration > 8) {
+                                    $originalDays = $value->leave_duration;
+                                    $days = floor($originalDays / 8); // Calculate whole days
+                                    $hour = $value->leave_duration - ($days * 8); // Calculate remaining hours
+                                     } else {
+                                 $days = 0;
+                                 $hour = $value->leave_duration;
+                                     }
+                
+                                  $daysDenom = ($days == 1) ? " day " : " days ";
+                                  $hourDenom = ($hour == 1) ? " hour " : " hours ";
 
-                                                $daysDenom = ($days == 1) ? " day " : " days ";
-                                                $hourDenom = ($hour == 1) ? " hour " : " hours ";
+                                 if($days > 0 && $hour > 0) {
+                            echo $days . $daysDenom . $hour . $hourDenom;
+                                     } else if($days > 0) {
+                             echo $days . $daysDenom;
+                                     } else {
+                                        echo $hour . $hourDenom;
+                                     }
+                                ?>
+                                </td>
+                                <td><?php echo $value->leave_status; ?></td>
 
-                                                if($days > 0) {
-                                                    echo $days . $daysDenom;
-                                                } else {
-                                                    echo $hour . $hourDenom;
-                                                }
-                                            ?>
-
-                                        </td>
-                                        <td><?php echo $value->leave_status; ?></td>
-                                        <?php if($this->session->userdata('user_type')=='EMPLOYEE'){ ?> 
-                                        
-                                         <?php } else { ?> 
-                                        <td class="jsgrid-align-center">
-                                            
-                                           <?php if($value->leave_status =='Approve'){ ?>
-                                           
-                                             <?php } elseif($value->leave_status =='Not Approve'){ ?>
-                                                <a href="" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light leaveapp" data-id="<?php echo $value->id; ?>" ><i class="fa fa-pencil-square-o"></i></a> 
-                                            <a href="" title="Edit" class="btn btn-sm btn-info waves-effect waves-light Status" data-employeeId=<?php echo $value->em_id; ?>  data-id="<?php echo $value->id; ?>" data-value="Approve" data-duration="<?php echo $value->leave_duration; ?>" data-type="<?php echo $value->typeid; ?>">Approve</a>       
-                                            <a href="" title="Edit" class="btn btn-sm btn-danger waves-effect waves-light  Status" data-id = "<?php echo $value->id; ?>" data-value="Rejected" >Reject</a>
-                                             
-
-                                            <?php } elseif($value->leave_status =='Rejected'){ ?>
-                                            <?php } ?>
-                                            
-                                            
-                                        </td>
-                                        <?php } ?>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
+                                <td class="jsgrid-align-center">
+                                  <?php if($value->leave_status =='Not Approve'): // Action buttons visible only when status is 'Not Approve' ?>
+                                  <a href="#" title="Edit" class="btn btn-sm btn-primary waves-effect waves-light leaveapp" data-id="<?php echo $value->id; ?>" ><i class="fa fa-pencil-square-o"></i></a> 
+                                  <a href="#" title="Approve" class="btn btn-sm btn-info waves-effect waves-light Status" 
+                                  data-employeeId="<?php echo $value->em_id; ?>" data-id="<?php echo $value->id; ?>" 
+                                  data-value="Approve" data-duration="<?php echo $value->leave_duration; ?>" 
+                                  data-type="<?php echo $value->typeid; ?>">Approve</a>      
+                                  <a href="#" title="Reject" class="btn btn-sm btn-danger waves-effect waves-light Status" 
+                                  data-id="<?php echo $value->id; ?>" data-value="Rejected" >Reject</a>
+                                <?php endif; ?>
+                                </td>
+                                    <?php endif; // End check for !EMPLOYEE ?>
+                                 </tr>
+                                 <?php endforeach; ?>
+                                </tbody>    
                             </table>
                         </div>
                     </div>
