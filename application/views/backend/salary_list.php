@@ -46,10 +46,9 @@
                                                 <th>Total Paid</th>
                                                      <?php } ?>
                                                 <th>Pay Date</th>
-                                                <th>Status</th>
-                                                     <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
+                                                <th>Status</th>                  
                                                 <th class="jsgrid-align-center">Action</th>
-                                                     <?php } ?>
+                                                     
                                             </tr>
                                         </thead>
                                         <!-- <tfoot>
@@ -71,30 +70,66 @@
                                         </tfoot> -->
                                         <tbody>
 
-                                           <?php $i =0; foreach($salary_info as $individual_info): ?>
-                                            <tr>
-                                                <td class="hide"><?php $i++; echo $i;?></td>
-                                                <td><?php echo $individual_info->em_code; ?></td>
-                                                <td><?php echo $individual_info->first_name.' '.$individual_info->last_name; ?></td>
-                                                <td><?php echo $individual_info->month.' '.$individual_info->year; ?></td>
-                                                    <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
-                                                <td><?php echo '₱'.$individual_info->basic; ?></td>
-                                                <td><?php echo '₱'.$individual_info->loan; ?></td>
-                                                <td><?php echo $individual_info->total_days; ?></td>
-                                                <!--<td><?php echo $individual_info->addition; ?></td>-->
-                                                <td><?php echo '₱'.$individual_info->diduction; ?></td>
-                                                <td><?php echo '₱'.$individual_info->total_pay; ?></td>
-                                                    <?php } ?>
-                                                <td><?php echo $individual_info->paid_date; ?></td>
-                                                <td><?php echo $individual_info->status; ?></td>
-                                                    <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
-                                                <td class="jsgrid-align-center ">
-                                                    <a href="<?php echo base_url(); ?>payroll/invoice?Id=<?php echo $individual_info->pay_id; ?>&em=<?php echo $individual_info->emp_id; ?>" title="Edit" class="btn btn-sm btn-info waves-effect waves-light"><i class="fa fa-print"></i></a>
-                                                </td>
-                                                    <?php } ?>
-                                            </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
+    <?php 
+    // Get session data once for efficiency
+    $user_type = $this->session->userdata('user_type');
+    $employee_id = $this->session->userdata('user_login_id');
+
+    $i = 0; 
+    foreach($salary_info as $individual_info): 
+        
+        // 1. Check if the user is an EMPLOYEE
+        $is_employee = ($user_type == 'EMPLOYEE');
+        
+        // 2. Determine if the current row belongs to the logged-in employee
+        // The salary list data has a column named 'emp_id' which must match 'user_login_id'
+        $is_my_data = ($individual_info->emp_id == $employee_id);
+
+        // 3. Conditional display logic:
+        //    - IF not an employee (Admin/HR/Manager, etc.), SHOW all data.
+        //    - IF an employee, SHOW only their data.
+        
+        if (!$is_employee || ($is_employee && $is_my_data)) :
+        $i++;
+    ?>
+    
+        <tr>
+            <td class="hide"><?php echo $i; ?></td>
+            <td><?php echo $individual_info->em_code; ?></td>
+            <td><?php echo $individual_info->first_name.' '.$individual_info->last_name; ?></td>
+            <td><?php echo $individual_info->month.' '.$individual_info->year; ?></td>
+            
+            <?php if($user_type != 'EMPLOYEE'){ ?>
+            <td><?php echo '₱'.$individual_info->basic; ?></td>
+            <td><?php echo '₱'.$individual_info->loan; ?></td>
+            <td><?php echo $individual_info->total_days; ?></td>
+            <td><?php echo '₱'.$individual_info->diduction; ?></td>
+            <td><?php echo '₱'.$individual_info->total_pay; ?></td>
+            <?php } else { 
+                // Display salary details for the employee user on their row
+                // The `<th>` for these columns are already hidden in the table header,
+                // but if you wanted to display them here, you would need to adjust the <th> section as well.
+                // For now, we only print the remaining columns
+            }?>
+            
+            <td><?php echo $individual_info->paid_date; ?></td>
+            <td><?php echo $individual_info->status; ?></td>
+            
+            <?php if($user_type != 'EMPLOYEE'){ ?>
+            <td class="jsgrid-align-center ">
+                <a href="<?php echo base_url(); ?>payroll/invoice?Id=<?php echo $individual_info->pay_id; ?>&em=<?php echo $individual_info->emp_id; ?>" title="Edit" class="btn btn-sm btn-info waves-effect waves-light"><i class="fa fa-print"></i></a>
+            </td>
+            <?php } else { ?>
+            <td class="jsgrid-align-center ">
+                <a href="<?php echo base_url(); ?>payroll/invoice?Id=<?php echo $individual_info->pay_id; ?>&em=<?php echo $individual_info->emp_id; ?>" title="Print Payslip" class="btn btn-sm btn-info waves-effect waves-light"><i class="fa fa-print"></i></a>
+            </td>
+            <?php } ?>
+        </tr>
+    <?php 
+        endif; // End of the display condition
+    endforeach; 
+    ?>
+</tbody>
                                     </table>
                                 </div>
                             </div>

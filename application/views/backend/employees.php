@@ -40,8 +40,9 @@
                                             <tr>
                                                 <th>Employee Name</th>
                                                 <th>PIN</th>
-                                                <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
+                                                
                                                 <th>Email </th>
+                                                <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                                 <th>Contact </th>
                                                 <?php } ?>
                                                 <th>User Type</th>
@@ -67,8 +68,9 @@
                                             <tr>
                                                 <td title="<?php echo $value->first_name .' '.$value->last_name; ?>"><?php echo $value->first_name .' '.$value->last_name; ?></td>
                                                                                 <td><?php echo $value->em_code; ?></td>
-                                                    <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>                                
+                                                                                   
                                                 <td><?php echo $value->em_email; ?></td>
+                                                <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?> 
                                                 <td><?php echo $value->em_phone; ?></td>
                                                     <?php } ?>
                                                 <td><?php echo $value->em_role; ?></td>
