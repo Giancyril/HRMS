@@ -174,12 +174,12 @@ date_default_timezone_set('Asia/Manila');
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($basicinfo->em_id); ?>"><i class="ti-user"></i> My Profile</a></li>
+                                    <li><a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($basicinfo->em_id); ?>"><i class="ti-user"></i>&nbsp; My Profile</a></li>
                                     <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
                                     
-                                    <li><a href="<?php echo base_url(); ?>settings/Settings"><i class="ti-settings"></i> Settings</a></li>
+                                    <li><a href="<?php echo base_url(); ?>settings/Settings"><i class="ti-settings"></i>&nbsp; Settings</a></li>
                                     <?php } ?>
-                                    <li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="ti-power-off"></i>&nbsp; Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -192,15 +192,15 @@ date_default_timezone_set('Asia/Manila');
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm Sign Out</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-body">Are you sure you want to end your session? Confirm to securely end your current session.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-info" href="<?php echo base_url(); ?>login/logout">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-danger" href="<?php echo base_url(); ?>login/logout">Sign Out</a>
                     </div>
                 </div>
             </div>

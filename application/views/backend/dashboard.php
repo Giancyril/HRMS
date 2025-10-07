@@ -92,7 +92,7 @@
                     <!-- Combined Leaves Card -->
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-row">
-                            <div class="round align-self-center round-info"><i class="ti-file"></i></div>
+                            <div class="round align-self-center round-info"><i class="ti-calendar"></i></div>
                             <div class="m-l-10 align-self-center">
                                 <h3 class="m-b-0">
                                     <?php
@@ -108,7 +108,7 @@
                     <!-- Combined Projects Card -->
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-row">
-                            <div class="round align-self-center round-danger"><i class="ti-calendar"></i></div>
+                            <div class="round align-self-center round-danger"><i class="ti-clipboard"></i></div>
                             <div class="m-l-10 align-self-center">
                                 <h3 class="m-b-0">
                                     <?php
@@ -164,7 +164,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                     </h1>
                 </div>
                 <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
-                    <i class="fas fa-user-slash"></i>
+                    <i class="fas fa-sign-out"></i>
                 </div>
             </div>
         </div>
@@ -183,7 +183,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                     </h1>
                 </div>
                 <div class="icon-lg" style="font-size: 1.60em; color: #ccc;">
-                    <i class="fas fa-file-alt"></i>
+                    <i class="fas fa-calendar-check-o"></i>
                 </div>
             </div>
         </div>
@@ -243,7 +243,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                 </h1>
             </div>
             <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
-                <i class="fas fa-tasks"></i>
+                <i class="fas fa-bullseye"></i>
             </div>
         </div>
     </div>
@@ -280,7 +280,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                 </h1>
             </div>
             <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
-                <i class="fas fa-user-plus"></i>
+                <i class="fas fa-bullhorn"></i>
             </div>
         </div>
     </div>

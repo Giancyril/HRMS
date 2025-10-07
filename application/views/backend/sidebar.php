@@ -15,14 +15,14 @@
                         <li> <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($basicinfo->em_id); ?>" aria-expanded="false"><span class="hide-menu">View Profile </span></a> </li>
                 </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-off"></i><span class="hide-menu">Leave </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-airplane"></i><span class="hide-menu">Leave </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>leave/Holidays"> Holiday </a></li>
                         <li><a href="<?php echo base_url(); ?>leave/EmApplication"> Leave Application </a></li>
                         <li><a href="<?php echo base_url(); ?>leave/EmLeavesheet"> Leave Sheet </a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-briefcase-check"></i><span class="hide-menu">Projects </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-briefcase"></i><span class="hide-menu">Projects </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Projects/All_Projects">Projects </a></li>
                         <li><a href="<?php echo base_url(); ?>Projects/All_Tasks"> Task List </a></li>
@@ -35,7 +35,7 @@
                 </li>
                 <li>
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                        <i class="mdi mdi-account-card-details"></i><span class="hide-menu">Recruitment</span>
+                        <i class="mdi mdi-account-plus"></i><span class="hide-menu">Recruitment</span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
                     <li><a href="<?php echo base_url(); ?>Recruitment">Job Postings</a></li>
@@ -58,7 +58,7 @@
                     </ul>
                 </li>
 
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Attendance </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-clock"></i><span class="hide-menu">Attendance </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>attendance/Attendance">Attendance List </a></li>
                         <li><a href="<?php echo base_url(); ?>attendance/Save_Attendance">Add Attendance </a></li>
@@ -66,7 +66,7 @@
                     </ul>
                 </li>
 
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-off"></i><span class="hide-menu">Leave </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-airplane"></i><span class="hide-menu">Leave </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>leave/Holidays"> Holiday </a></li>
                         <li><a href="<?php echo base_url(); ?>leave/leavetypes"> Leave Type</a></li>
@@ -74,7 +74,7 @@
                         <li><a href="<?php echo base_url(); ?>leave/Leave_report"> Leave Report </a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-briefcase-check"></i><span class="hide-menu">Project </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-briefcase"></i><span class="hide-menu">Project </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Projects/All_Projects">Projects </a></li>
                         <li><a href="<?php echo base_url(); ?>Projects/All_Tasks"> Task List </a></li>
@@ -91,7 +91,7 @@
 
                 <li>
                      <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                          <i class="mdi mdi-account-card-details"></i><span class="hide-menu">Recruitment</span>
+                          <i class="mdi mdi-account-plus"></i><span class="hide-menu">Recruitment</span>
                      </a>
                      <ul aria-expanded="false" class="collapse">
                      <li><a href="<?php echo base_url(); ?>Recruitment">Job Postings</a></li>
@@ -126,14 +126,14 @@
                     </ul>
                 </li>
 
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Attendance </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-clock"></i><span class="hide-menu">Attendance </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>attendance/Attendance">Attendance List </a></li>
                         <li><a href="<?php echo base_url(); ?>attendance/Attendance_Report">Attendance Report </a></li>
                     </ul>
                 </li>
 
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-off"></i><span class="hide-menu">Leave </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-airplane"></i><span class="hide-menu">Leave </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>leave/Holidays"> Holiday </a></li>
                         <li><a href="<?php echo base_url(); ?>leave/leavetypes"> Leave Type</a></li>
@@ -143,7 +143,7 @@
                     </ul>
                 </li>
                
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-briefcase-check"></i><span class="hide-menu">Project </span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-briefcase"></i><span class="hide-menu">Project </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Projects/All_Projects">Projects </a></li>
                         <li><a href="<?php echo base_url(); ?>Projects/All_Tasks"> Task List </a></li>
@@ -159,14 +159,14 @@
                     </ul>
                 </li>
                 
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">Recruitment</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-plus"></i><span class="hide-menu">Recruitment</span></a>
                      <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Recruitment">Job Postings</a></li>
                         <li><a href="<?php echo base_url(); ?>Recruitment/Applications">View Applications</a></li>
                     </ul>
                 </li>
     
-                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cube"></i><span class="hide-menu">Assets </span></a>
+                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cube-outline"></i><span class="hide-menu">Assets </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url(); ?>Logistice/All_Assets"> Asset List </a></li>
                                 <li><a href="<?php echo base_url(); ?>Logistice/Assets_Category"> Assets Category </a></li>

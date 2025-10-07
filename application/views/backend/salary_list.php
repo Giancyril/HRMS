@@ -38,13 +38,13 @@
                                                 <th>PIN </th>
                                                 <th>Employee </th>
                                                 <th>Month </th>
-                                                     <?php if($this->session->userdata('user_type')!='EMPLOYEE'){ ?>
+                                                     
                                                 <th>Salary </th>
                                                 <th>Loan </th>
                                                 <th>Hours </th>
                                                 <th>Deduction</th>
                                                 <th>Total Paid</th>
-                                                     <?php } ?>
+                                                     
                                                 <th>Pay Date</th>
                                                 <th>Status</th>                  
                                                 <th class="jsgrid-align-center">Action</th>
@@ -99,18 +99,15 @@
             <td><?php echo $individual_info->first_name.' '.$individual_info->last_name; ?></td>
             <td><?php echo $individual_info->month.' '.$individual_info->year; ?></td>
             
-            <?php if($user_type != 'EMPLOYEE'){ ?>
+            
             <td><?php echo '₱'.$individual_info->basic; ?></td>
             <td><?php echo '₱'.$individual_info->loan; ?></td>
             <td><?php echo $individual_info->total_days; ?></td>
             <td><?php echo '₱'.$individual_info->diduction; ?></td>
             <td><?php echo '₱'.$individual_info->total_pay; ?></td>
-            <?php } else { 
-                // Display salary details for the employee user on their row
-                // The `<th>` for these columns are already hidden in the table header,
-                // but if you wanted to display them here, you would need to adjust the <th> section as well.
-                // For now, we only print the remaining columns
-            }?>
+            
+                
+            
             
             <td><?php echo $individual_info->paid_date; ?></td>
             <td><?php echo $individual_info->status; ?></td>
