@@ -4,7 +4,7 @@
     <div class="message"></div>
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-themecolor">Dashboard</h3>
+            <h3 class="text-themecolor">Dashboard <span class="badge badge-pill badge-info ml-2">HR Management</span></h3>
         </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
@@ -56,20 +56,31 @@
                 // --- END OF OPTIMIZED DATA FETCHING ---
                 ?>
 
-                <div class="d-flex flex-row align-items-center mb-4">
-                    <div class="round-img mr-3">
-                        <img src="<?php echo $user_image_path; ?>" alt="user" width="60" height="60" class="img-circle">
-                    </div>
-                    <div class="m-l-4">
-                        <h4 class="m-t-0 m-b-0">
-                            Welcome Back, <?php echo $this->session->userdata('name'); ?>
-                            <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($this->session->userdata('user_login_id')); ?>" class="text-muted">&nbsp;<i class="fa fa-pencil"></i></a>
-                        </h4>
-                        <h6 class="text-muted m-t-5 m-b-0"><?php echo $designation_name; ?></h6>
-                    </div>
-                </div>
+<div class="d-flex flex-row align-items-center mb-4">
+    <div class="round-img mr-4" style="flex-shrink: 0;">
+        <img src="<?php echo $user_image_path; ?>" alt="user" width="65" height="65" class="img-circle">
+    </div>
+    <div class="m-l-10">
+        <h3 class="m-t-0 m-b-0 font-weight-bold text-dark">
+            Welcome Back, <?php echo $this->session->userdata('name'); ?>
+        </h3>
+        
+        <div class="d-flex align-items-center text-muted m-t-5 m-b-0">
+            <span class="mr-3 font-weight-medium"><i class="fa fa-briefcase m-r-5"></i> <?php echo $designation_name; ?></span>
+            
+            <?php if ($employee_data && !empty($employee_data->em_joining_date)): ?>
+                <span class="mr-3 tex-black">|</span>
+                <span class="text-black small"><i class="fa fa-calendar-alt m-r-5"></i> Started at: <?php echo date('F j, Y', strtotime($employee_data->em_joining_date)); ?></span>
+            <?php endif; ?>
+            
+            <a href="<?php echo base_url(); ?>employee/view?I=<?php echo base64_encode($this->session->userdata('user_login_id')); ?>" class="text-primary ml-4 small font-weight-medium">
+                <i class="fa fa-edit m-r-5"></i> Update Profile
+            </a>
+        </div>
+    </div>
+</div>
 
-                <hr class="thicker-hr mt-4 mb-4" />
+<hr class="thicker-hr mt-4 mb-4" />
 
                 <!-- Start of the new row with four combined cards -->
                 <div class="row">
@@ -314,7 +325,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
 
 <div class="card">
     <div class="card-header">
-        <h4 class="m-b-0 text-black">Latest Job Postings</h4>
+        <h5 class="m-b-0 text-black">Latest Job Postings</h5>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -346,6 +357,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
     </div>
 </div>
 
+
     
 
 
@@ -360,42 +372,48 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                 $holiday = $this->db->get()->result();
                 ?>
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Running Projects</h4>
-                                <h6 class="card-subtitle">Projects currently in progress</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive" style="height:600px;overflow-y:scroll">
-                                    <table class="table table-bordered table-hover earning-box">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           <?php foreach($running AS $value): ?>
-                                            <tr style="vertical-align:top;">
-                                                <td><a href="<?php echo base_url(); ?>Projects/view?P=<?php echo base64_encode($value->id); ?>"><?php echo substr("$value->pro_name",0,25).'...'; ?></a></td>
-                                                <td><?php echo $value->pro_start_date; ?></td>
-                                                <td><?php echo $value->pro_end_date; ?></td>
-                                            </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+            <div class="col-lg-7 mb-4">
+                <div class="card h-100">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-b-0 text-black">Running Projects</h5>
+                        <a href="<?php echo base_url(); ?>Projects/All_Projects" class="text-primary small">View All &rarr;</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="height:400px;overflow-y:scroll">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th style="width: 20%;">Start Date</th>
+                                        <th style="width: 20%;">End Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $running = $this->dashboard_model->GetRunningProject(); ?>
+                                    <?php if ($running): ?>
+                                        <?php foreach($running as $value): ?>
+                                        <tr>
+                                            <td><a href="<?php echo base_url(); ?>Projects/view?P=<?php echo base64_encode($value->id); ?>" class="font-weight-bold"><?php echo html_escape(substr($value->pro_name, 0, 35)).(strlen($value->pro_name) > 35 ? '...' : ''); ?></a></td>
+                                            <td><?php echo date('M j, Y', strtotime($value->pro_start_date)); ?></td>
+                                            <td><?php echo date('M j, Y', strtotime($value->pro_end_date)); ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr><td colspan="3" class="text-center text-muted">No running projects found.</td></tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">To Do list</h4>
-                                <h6 class="card-subtitle">List of your task to complete</h6>
-                                <div class="to-do-widget m-t-20" style="height:597px;overflow-y:scroll">
+                </div>
+            </div>
+                    <div class="col-lg-5 mb-4">
+    <div class="card h-100">
+        <div class="card-header py-3">
+            <h5 class="m-b-0 text-black">Task Tracker</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive" style="height:400px;overflow-y:scroll">
                                         <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
                                             <?php foreach($todolist as $value): ?>
                                             <li class="list-group-item" data-role="task">
@@ -415,85 +433,101 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                                             <?php endforeach; ?>
                                         </ul>
                                 </div>
-                                <div class="new-todo">
-                                        <form method="post" action="add_todo" enctype="multipart/form-data" id="add_todo" >
-                                         <div class="input-group">
-                                                <input type="text" name="todo_data" class="form-control" style="border: 1px solid #fff !IMPORTANT;" placeholder="Add a new task...">
-                                                <span class="input-group-btn">
-                                                <input type="hidden" name="userid" value="<?php echo $this->session->userdata('user_login_id'); ?>">
-                                                <button type="submit" class="btn btn-info todo-submit"><i class="fa fa-plus"></i></button>
-                                                </span>
-                                            </div>
-                                         </form>
-                                </div>
-                            </div>
-                        </div>
+            
+            <div class="new-todo pt-3 border-top">
+                <form method="post" action="add_todo" enctype="multipart/form-data" id="add_todo" >
+                <div class="input-group">
+                <input type="text" name="todo_data" class="form-control" style="border: 1px solid #fff !IMPORTANT;" placeholder="Add new task">
+                 <span class="input-group-btn">
+                  <input type="hidden" name="userid" value="<?php echo $this->session->userdata('user_login_id'); ?>">
+                  <button type="submit" class="btn btn-info todo-submit"><i class="fa fa-plus"></i></button>
+                  </span>
+                       </div>
                     </div>
-                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <div class="row">
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Notice Board</h4>
-                                <h6 class="card-subtitle">All important announcements and updates</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive slimScrollDiv" style="height:600px;overflow-y:scroll">
-                                    <table class="table table-hover table-bordered earning-box ">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>File</th>
-                                                <th>Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           <?php foreach($notice AS $value): ?>
-                                            <tr class="scrollbar" style="vertical-align:top">
-                                                <td><?php echo $value->title ?></td>
-                                                <td><mark><a href="<?php echo base_url(); ?>assets/images/notice/<?php echo $value->file_url ?>" target="_blank"><?php echo $value->file_url ?></a></mark>
-                                                </td>
-                                                <td style="width:100px"><?php echo $value->date ?></td>
-                                            </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    Upcoming Dates
-                                </h4>
-                                <h6 class="card-subtitle">Important dates and holidays</h6>                      
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive" style="height:600px;overflow-y:scroll">
-                                    <table class="table table-hover table-bordered earning-box">
-                                       <thead>
-                                            <tr>
-                                                <th>Holiday Name</th>
-                                                <th>Date</th>
-                                            </tr>
-                                       </thead>
-                                       <tbody>
-                                            <?php foreach($holiday as $value): ?>
-                                                <tr>
-                                                    <td><?php echo $value->holiday_name ?></td>
-                                                    <td><?php echo $value->from_date; ?></td>
-                                                </tr>
-                                            <?php endforeach ?>
-                                       </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                    <div class="col-lg-7 mb-4">
+    <div class="card h-100">
+        <div class="card-header py-3">
+            <h5 class="m-b-0 text-black">Notice Board <span class="badge badge-secondary badge-pill ml-2"><?php echo count($this->notice_model->GetNoticelimit() ?? []); ?></span></h5>
+        </div>
+        <div class="card-body">
+            <?php $notice = $this->notice_model->GetNoticelimit(); ?>
+            <div class="table-responsive slimScrollDiv" style="height:400px;overflow-y:scroll"> 
+                <table class="table table-hover table-md">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">Title</th>
+                            <th style="width: 25%;">File</th>
+                            <th style="width: 25%;">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($notice): ?>
+                            <?php foreach($notice as $value): ?>
+                            <tr>
+                                <td><?php echo html_escape($value->title) ?></td>
+                                <td>
+                                    <a href="<?php echo base_url(); ?>assets/images/notice/<?php echo $value->file_url ?>" target="_blank" class="text-info small"><i class="fa fa-file-alt"></i> View File</a>
+                                </td>
+                                <td><?php echo date('M j, Y', strtotime($value->date)); ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr><td colspan="3" class="text-center text-muted">No recent announcements.</td></tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-5 mb-4">
+    <div class="card h-100">
+        <div class="card-header py-3">
+            <h5 class="m-b-0 text-black">Upcoming Holidays</h5>
+        </div>
+        <div class="card-body">
+            <?php 
+            $this->db->select('*');
+            $this->db->from('holiday');
+            $this->db->where('from_date >=', date('Y-m-d'));
+            $this->db->order_by('from_date', 'ASC');
+            $this->db->limit(10); // Limit to top 10
+            $holiday = $this->db->get()->result();
+            ?>
+            <div class="table-responsive" style="height:400px;overflow-y:scroll">
+                <table class="table table-hover table-md">
+                    <thead>
+                        <tr>
+                            <th>Holiday Name</th>
+                            <th style="width: 40%;">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($holiday): ?>
+                            <?php foreach($holiday as $value): ?>
+                                <tr>
+                                    <td><span class="font-weight-bold"><?php echo html_escape($value->holiday_name); ?></span></td>
+                                    <td><span class="badge badge-pill badge-info"><?php echo date('l, M j', strtotime($value->from_date)); ?></span></td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php else: ?>
+                            <tr><td colspan="2" class="text-center text-muted">No upcoming holidays scheduled.</td></tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
                
 <script>

@@ -89,7 +89,7 @@
                                         <a class="dropdown-item" href="#">Schedule Interview</a>
                                         <a class="dropdown-item" href="#">Extend Offer</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-success" href="#">Mark as Hired</a>
+                                        <a class="dropdown-item text-info" href="#">Mark as Hired</a>
                                         <a class="dropdown-item text-danger" href="#">Mark as Rejected</a>
                                     </div>
                                 </div>
