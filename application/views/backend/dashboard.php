@@ -61,7 +61,7 @@
         <img src="<?php echo $user_image_path; ?>" alt="user" width="65" height="65" class="img-circle">
     </div>
     <div class="m-l-10">
-        <h3 class="m-t-0 m-b-0 font-weight-bold text-dark">
+        <h3 class="m-t-0 m-b-0 font-weight-medium text-dark">
             Welcome Back, <?php echo $this->session->userdata('name'); ?>
         </h3>
         
@@ -166,7 +166,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
             <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
                 <div class="card-text flex-grow-1" style="flex-grow: 1;">
                     <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Former Employees</h6>
-                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 500; color: #54667a;">
                         <?php
                         $this->db->where('status','INACTIVE');
                         $this->db->from("employee");
@@ -174,7 +174,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                         ?>
                     </h1>
                 </div>
-                <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
+                <div class="icon-lg" style="font-size: 1.50em; color: #5c4ac7;">
                     <i class="fas fa-sign-out"></i>
                 </div>
             </div>
@@ -185,7 +185,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
             <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
                 <div class="card-text flex-grow-1" style="flex-grow: 1;">
                     <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Leave Applications</h6>
-                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 500; color: #54667a;">
                         <?php
                         $this->db->where('leave_status','Not Approve');
                         $this->db->from("emp_leave");
@@ -193,7 +193,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                         ?>
                     </h1>
                 </div>
-                <div class="icon-lg" style="font-size: 1.60em; color: #ccc;">
+                <div class="icon-lg" style="font-size: 1.60em; color: #1976d2;">
                     <i class="fas fa-calendar-check-o"></i>
                 </div>
             </div>
@@ -204,7 +204,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
             <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
                 <div class="card-text flex-grow-1" style="flex-grow: 1;">
                     <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Upcoming Project</h6>
-                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 500; color: #54667a;">
                         <?php
                         $this->db->where('pro_status','upcoming');
                         $this->db->from("project");
@@ -212,7 +212,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                         ?>
                     </h1>
                 </div>
-                <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
+                <div class="icon-lg" style="font-size: 1.50em; color: #ef5350;">
                     <i class="fas fa-project-diagram"></i>
                 </div>
             </div>
@@ -223,7 +223,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
             <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
                 <div class="card-text flex-grow-1" style="flex-grow: 1;">
                     <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Payslips Pending</h6>
-                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 500; color: #54667a;">
                         <?php
                         $this->db->from("employee");
                         $total_employees = $this->db->count_all_results();
@@ -234,7 +234,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                         ?>
                     </h1>
                 </div>
-                <div class="icon-lg" style="font-size: 1.60em; color: #ccc;">
+                <div class="icon-lg" style="font-size: 1.60em; color: #ffb22b;">
                     <i class="fas fa-money-bill-alt"></i>
                 </div>
             </div>
@@ -245,7 +245,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
         <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
             <div class="card-text flex-grow-1" style="flex-grow: 1;">
                 <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Active Goals</h6>
-                <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 500; color: #54667a;">
                     <?php
                     $this->db->from("goals"); 
                     $this->db->where('Status', 'In Progress');
@@ -253,7 +253,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                     ?>
                 </h1>
             </div>
-            <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
+            <div class="icon-lg" style="font-size: 1.50em; color: #C562AF;">
                 <i class="fas fa-bullseye"></i>
             </div>
         </div>
@@ -264,14 +264,14 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
         <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
             <div class="card-text flex-grow-1" style="flex-grow: 1;">
                 <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;"> Total Departments</h6>
-                <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 500; color: #54667a;">
                     <?php
                     $this->db->from("department");
                     echo $this->db->count_all_results();
                     ?>
                 </h1>
             </div>
-            <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
+            <div class="icon-lg" style="font-size: 1.50em; color: #EF7722;">
                 <i class="fas fa-layer-group"></i>
             </div>
         </div>
@@ -282,7 +282,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
         <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
             <div class="card-text flex-grow-1" style="flex-grow: 1;">
                 <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Job Vacancies</h6>
-                <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 500; color: #54667a;">
                     <?php
                     $this->db->from("jobs"); 
                     $this->db->where('is_active', 1);
@@ -290,7 +290,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                     ?>
                 </h1>
             </div>
-            <div class="icon-lg" style="font-size: 1.50em; color: #ccc;">
+            <div class="icon-lg" style="font-size: 1.50em; color: #7ADAA5;">
                 <i class="fas fa-bullhorn"></i>
             </div>
         </div>
@@ -301,7 +301,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
             <div class="card-body d-flex flex-row align-items-center" style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem;">
                 <div class="card-text flex-grow-1" style="flex-grow: 1;">
                     <h6 class="card-title" style="margin: 0; font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;">Granted Loans</h6>
-                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 400; color: #54667a;">
+                    <h1 class="card-value" style="margin: 5px 0 0; font-size: 1.5rem; font-weight: 500; color: #54667a;">
                         <?php
                         $this->db->where('status', 'Granted');
                         $this->db->from("loan");
@@ -309,7 +309,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                         ?>
                     </h1>
                 </div>
-                <div class="icon-lg" style="font-size: 1.60em; color: #ccc;">
+                <div class="icon-lg" style="font-size: 1.60em; color: #17a2b8;">
                     <i class="fas fa-hand-holding-usd"></i>
                 </div>
             </div>
@@ -323,32 +323,36 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
 ?>
   
 
-<div class="card">
-    <div class="card-header">
-        <h5 class="m-b-0 text-black">Latest Job Postings</h5>
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white border-bottom">
+        <h5 class="mb-0 text-black font-weight-medium">
+            <i class="fas fa-briefcase mr-2"></i> Latest Job Postings
+        </h5>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover table-striped">
-                <thead>
+            <table class="table table-hover table-striped align-middle">
+                <thead class="thead-light">
                     <tr>
                         <th style="width: 25%;">Title</th>
-                        <th style="width: 50%;">Description</th>
-                        <th style="width: 25%;">Posted Date</th>
+                        <th style="width: 60%;">Description</th>
+                        <th style="width: 15%;">Posted Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (isset($latest_jobs) && is_array($latest_jobs) && count($latest_jobs) > 0): ?>
+                    <?php if (!empty($latest_jobs)): ?>
                         <?php foreach ($latest_jobs as $job): ?>
                             <tr>
-                                <td><?= html_escape($job->job_title); ?></td>
-                                <td><?= html_escape(substr($job->description, 0, 60)) . '...'; ?></td>
-                                <td><?= html_escape(date('F j, Y', strtotime($job->posted_at))); ?></td>
+                                <td class="text-dark font-weight-semibold"><?= html_escape($job->job_title); ?></td>
+                                <td class="text-muted"><?= html_escape(substr($job->description, 0, 60)) . '...'; ?></td>
+                                <td class="text-secondary"><?= html_escape(date('M d, Y', strtotime($job->posted_at))); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="3" class="text-center">No jobs are currently posted.</td>
+                            <td colspan="3" class="text-center text-muted py-4">
+                                <i class="fas fa-info-circle mr-1"></i> No jobs are currently posted.
+                            </td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -356,6 +360,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
         </div>
     </div>
 </div>
+
 
 
     
@@ -373,15 +378,15 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                 ?>
                 <div class="row">
             <div class="col-lg-7 mb-4">
-                <div class="card h-100">
+                <div class="card shadow-sm border-0 h-100">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h5 class="m-b-0 text-black">Running Projects</h5>
+                        <h5 class="m-b-0 text-black"> <i class="fas fa-rocket mr-2"></i>Running Projects</h5>
                         <a href="<?php echo base_url(); ?>Projects/All_Projects" class="text-primary small">View All &rarr;</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" style="height:400px;overflow-y:scroll">
-                            <table class="table table-striped table-sm">
-                                <thead>
+                            <table class="table table-hover table-sm mb-0">
+                    <thead class="thead-light">
                                     <tr>
                                         <th>Title</th>
                                         <th style="width: 20%;">Start Date</th>
@@ -393,7 +398,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                                     <?php if ($running): ?>
                                         <?php foreach($running as $value): ?>
                                         <tr>
-                                            <td><a href="<?php echo base_url(); ?>Projects/view?P=<?php echo base64_encode($value->id); ?>" class="font-weight-bold"><?php echo html_escape(substr($value->pro_name, 0, 35)).(strlen($value->pro_name) > 35 ? '...' : ''); ?></a></td>
+                                            <td><a href="<?php echo base_url(); ?>Projects/view?P=<?php echo base64_encode($value->id); ?>" class="text-primary font-weight-semibold"><?php echo html_escape(substr($value->pro_name, 0, 35)).(strlen($value->pro_name) > 35 ? '...' : ''); ?></a></td>
                                             <td><?php echo date('M j, Y', strtotime($value->pro_start_date)); ?></td>
                                             <td><?php echo date('M j, Y', strtotime($value->pro_end_date)); ?></td>
                                         </tr>
@@ -407,61 +412,64 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                     </div>
                 </div>
             </div>
-                    <div class="col-lg-5 mb-4">
-    <div class="card h-100">
-        <div class="card-header py-3">
-            <h5 class="m-b-0 text-black">Task Tracker</h5>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive" style="height:400px;overflow-y:scroll">
-                                        <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
-                                            <?php foreach($todolist as $value): ?>
-                                            <li class="list-group-item" data-role="task">
-                                                <?php if($value->value == '1'){ ?>
-                                                <div class="checkbox checkbox-info">
-                                                    <input class="to-do" data-id="<?php echo $value->id?>" data-value="0" type="checkbox" id="<?php echo $value->id?>" >
-                                                    <label for="<?php echo $value->id?>"><span><?php echo $value->to_dodata; ?></span></label>
-                                                </div>
-                                                <?php } else { ?>
-                                                <div class="checkbox checkbox-info">
-                                                    <input class="to-do" data-id="<?php echo $value->id?>" data-value="1" type="checkbox" id="<?php echo $value->id?>" checked>
-                                                    <label class="task-done" for="<?php echo $value->id?>"><span><?php echo $value->to_dodata; ?></span></label>
-                                                </div>
-                                                <?php } ?>
-                                            </li>
 
-                                            <?php endforeach; ?>
-                                        </ul>
+    <!-- Task Tracker -->
+    <div class="col-lg-5 mb-4">
+        <div class="card h-100">
+            <div class="card-header py-3">
+            <h5 class="m-b-0 text-black"> <i class="fas fa-check-square mr-2"></i> Task Tracker</h5>
+        </div>
+            <div class="card-body">
+                <div class="table-responsive" style="max-height:400px; overflow-y:auto;">
+                    <ul class="list-group list-task todo-list m-0" data-role="tasklist">
+                        <?php foreach($todolist as $value): ?>
+                            <li class="list-group-item d-flex align-items-center" data-role="task">
+                                <div class="form-check">
+                                    <input class="form-check-input to-do" type="checkbox"
+                                           data-id="<?= $value->id ?>"
+                                           data-value="<?= $value->value == '1' ? '0' : '1' ?>"
+                                           id="task_<?= $value->id ?>"
+                                           <?= $value->value != '1' ? 'checked' : '' ?>>
+                                    <label class="form-check-label <?= $value->value != '1' ? 'task-done text-muted' : '' ?>"
+                                           for="task_<?= $value->id ?>">
+                                        <?= $value->to_dodata; ?>
+                                    </label>
                                 </div>
-            
-            <div class="new-todo pt-3 border-top">
-                <form method="post" action="add_todo" enctype="multipart/form-data" id="add_todo" >
-                <div class="input-group">
-                <input type="text" name="todo_data" class="form-control" style="border: 1px solid #fff !IMPORTANT;" placeholder="Add new task">
-                 <span class="input-group-btn">
-                  <input type="hidden" name="userid" value="<?php echo $this->session->userdata('user_login_id'); ?>">
-                  <button type="submit" class="btn btn-info todo-submit"><i class="fa fa-plus"></i></button>
-                  </span>
-                       </div>
-                    </div>
-                </form>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+
+                <!-- Add New Task -->
+                <div class="new-todo pt-3 border-top">
+                    <form method="post" action="add_todo" enctype="multipart/form-data" id="add_todo">
+                        <div class="input-group">
+                            <input type="text" name="todo_data" class="form-control" placeholder="Add new task">
+                            <input type="hidden" name="userid" value="<?= $this->session->userdata('user_login_id'); ?>">
+                            <button type="submit" class="btn btn-info todo-submit">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
                 <div class="row">
 
                     <div class="col-lg-7 mb-4">
     <div class="card h-100">
         <div class="card-header py-3">
-            <h5 class="m-b-0 text-black">Notice Board <span class="badge badge-secondary badge-pill ml-2"><?php echo count($this->notice_model->GetNoticelimit() ?? []); ?></span></h5>
+            <h5 class="m-b-0 text-black"> <i class="fas fa-bullhorn mr-2"></i> Notice Board <span class="badge badge-secondary badge-pill ml-2"><?php echo count($this->notice_model->GetNoticelimit() ?? []); ?></span></h5>
         </div>
         <div class="card-body">
             <?php $notice = $this->notice_model->GetNoticelimit(); ?>
             <div class="table-responsive slimScrollDiv" style="height:400px;overflow-y:scroll"> 
-                <table class="table table-hover table-md">
-                    <thead>
+                <table class="table table-hover table-md mb-0">
+                        <thead class="thead-light">
                         <tr>
                             <th style="width: 50%;">Title</th>
                             <th style="width: 25%;">File</th>
@@ -492,7 +500,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
 <div class="col-lg-5 mb-4">
     <div class="card h-100">
         <div class="card-header py-3">
-            <h5 class="m-b-0 text-black">Upcoming Holidays</h5>
+            <h5 class="m-b-0 text-black"> <i class="fas fa-calendar-alt mr-2"></i>  Upcoming Holidays</h5>
         </div>
         <div class="card-body">
             <?php 
@@ -504,8 +512,8 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
             $holiday = $this->db->get()->result();
             ?>
             <div class="table-responsive" style="height:400px;overflow-y:scroll">
-                <table class="table table-hover table-md">
-                    <thead>
+                <table class="table table-hover table-md mb-0">
+                        <thead class="thead-light">
                         <tr>
                             <th>Holiday Name</th>
                             <th style="width: 40%;">Date</th>
