@@ -384,7 +384,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                         <a href="<?php echo base_url(); ?>Projects/All_Projects" class="text-primary small">View All &rarr;</a>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive" style="height:400px;overflow-y:scroll">
+                        <div class="table-responsive" style="height:400px;overflow-y:auto">
                             <table class="table table-hover table-sm mb-0">
                     <thead class="thead-light">
                                     <tr>
@@ -398,7 +398,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                                     <?php if ($running): ?>
                                         <?php foreach($running as $value): ?>
                                         <tr>
-                                            <td><a href="<?php echo base_url(); ?>Projects/view?P=<?php echo base64_encode($value->id); ?>" class="text-primary font-weight-semibold"><?php echo html_escape(substr($value->pro_name, 0, 35)).(strlen($value->pro_name) > 35 ? '...' : ''); ?></a></td>
+                                            <td><a href="<?php echo base_url(); ?>Projects/view?P=<?php echo base64_encode($value->id); ?>" class="text-dark font-weight-semibold"><?php echo html_escape(substr($value->pro_name, 0, 35)).(strlen($value->pro_name) > 35 ? '...' : ''); ?></a></td>
                                             <td><?php echo date('M j, Y', strtotime($value->pro_start_date)); ?></td>
                                             <td><?php echo date('M j, Y', strtotime($value->pro_end_date)); ?></td>
                                         </tr>
@@ -444,10 +444,10 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                 <div class="new-todo pt-3 border-top">
                     <form method="post" action="add_todo" enctype="multipart/form-data" id="add_todo">
                         <div class="input-group">
-                            <input type="text" name="todo_data" class="form-control" placeholder="Add new task">
+                            <input type="text" name="todo_data" class="form-control" placeholder="Add a new task">
                             <input type="hidden" name="userid" value="<?= $this->session->userdata('user_login_id'); ?>">
                             <button type="submit" class="btn btn-info todo-submit">
-                                <i class="fa fa-plus"></i>
+                                Add</i>
                             </button>
                         </div>
                     </form>
@@ -467,7 +467,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
         </div>
         <div class="card-body">
             <?php $notice = $this->notice_model->GetNoticelimit(); ?>
-            <div class="table-responsive slimScrollDiv" style="height:400px;overflow-y:scroll"> 
+            <div class="table-responsive slimScrollDiv" style="height:400px;overflow-y:auto"> 
                 <table class="table table-hover table-md mb-0">
                         <thead class="thead-light">
                         <tr>
@@ -482,7 +482,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                             <tr>
                                 <td><?php echo html_escape($value->title) ?></td>
                                 <td>
-                                    <a href="<?php echo base_url(); ?>assets/images/notice/<?php echo $value->file_url ?>" target="_blank" class="text-info small"><i class="fa fa-file-alt"></i> View File</a>
+                                    <a href="<?php echo base_url(); ?>assets/images/notice/<?php echo $value->file_url ?>" target="_blank" class="text-info small"><i class="fas fa-file-alt"></i> View File</a>
                                 </td>
                                 <td><?php echo date('M j, Y', strtotime($value->date)); ?></td>
                             </tr>
@@ -500,7 +500,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
 <div class="col-lg-5 mb-4">
     <div class="card h-100">
         <div class="card-header py-3">
-            <h5 class="m-b-0 text-black"> <i class="fas fa-calendar-alt mr-2"></i>  Upcoming Holidays</h5>
+            <h5 class="m-b-0 text-black"> <i class="fas fa-calendar-day mr-2"></i>  Upcoming Holidays</h5>
         </div>
         <div class="card-body">
             <?php 
@@ -511,7 +511,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
             $this->db->limit(10); // Limit to top 10
             $holiday = $this->db->get()->result();
             ?>
-            <div class="table-responsive" style="height:400px;overflow-y:scroll">
+            <div class="table-responsive" style="height:400px;overflow-y:auto">
                 <table class="table table-hover table-md mb-0">
                         <thead class="thead-light">
                         <tr>
@@ -524,7 +524,7 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                             <?php foreach($holiday as $value): ?>
                                 <tr>
                                     <td><span class="font-weight-bold"><?php echo html_escape($value->holiday_name); ?></span></td>
-                                    <td><span class="badge badge-pill badge-info"><?php echo date('l, M j', strtotime($value->from_date)); ?></span></td>
+                                    <td><span class="badge badge-info"><?php echo date('l, M j', strtotime($value->from_date)); ?></span></td>
                                 </tr>
                             <?php endforeach ?>
                         <?php else: ?>

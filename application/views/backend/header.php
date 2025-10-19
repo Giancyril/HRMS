@@ -34,7 +34,132 @@ date_default_timezone_set('Asia/Manila');
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+    <style>
+    :root {
+        --first-color: #1976d2; 
+        --title-color: hsl(222, 8%, 8%);
+        --text-color-light: hsl(222, 8%, 65%);
+        --white-color: #fff;
+        --body-color: hsl(222, 100%, 99%);
+        --body-font: "Poppins", sans-serif;
+        --small-font-size: .813rem;
+    }
     
+    @media screen and (min-width: 968px) {
+        :root {
+            --small-font-size: .875rem;
+        }
+    }
+    
+    .navbar-nav.mr-auto.mt-md-0 {
+        display: flex;
+        align-items: center; 
+    }
+
+    .nav-item.search-container {
+        display: flex;
+        align-items: center; 
+    }
+
+    .header-search-form {
+        position: relative;
+        width: 40px; 
+        height: 40px; 
+        background-color: var(--first-color); 
+        border-radius: 20px; 
+        padding: 0; 
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        transition: width 0.5s cubic-bezier(0.9, 0, 0.3, 0.9), background-color 0.5s;
+        max-width: 400px; 
+    }
+    
+    .header-search-form.show-search {
+        background-color: var(--white-color);
+        width: 250px; 
+    }
+
+    .header-search-input {
+        border: none;
+        outline: none;
+        width: calc(100% - 40px); 
+        height: 100%;
+        border-radius: 20px; 
+        padding-left: 10px; 
+        font-family: var(--body-font);
+        font-size: var(--small-font-size);
+        font-weight: 500;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s 0.2s; 
+        background-color: transparent;
+        color: var(--title-color); 
+    }
+    
+    .header-search-form.show-search .header-search-input {
+        opacity: 1;
+        pointer-events: initial;
+        background-color: var(--white-color); 
+    }
+
+    .header-search-input::placeholder {
+        color: var(--text-color-light); 
+    }
+
+    .header-search-button {
+        width: 30px;
+        height: 30px;
+        background-color: var(--first-color);
+        border-radius: 50%;
+        position: absolute;
+        top: 5px; 
+        right: 5px; 
+        margin: auto;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        border: none; 
+        transition: transform 0.6s cubic-bezier(0.9, 0, 0.3, 0.9);
+        z-index: 10;
+    }
+    
+    .header-search-button:focus {
+        outline: none; 
+        box-shadow: none; 
+    }
+
+    .search__icon, .search__close {
+        color: var(--white-color);
+        font-size: 1rem; 
+        position: absolute;
+        transition: opacity 0.3s cubic-bezier(0.9, 0, 0.3, 0.9);
+    }
+
+    .search__close {
+        opacity: 0;
+    }
+
+    .header-search-form.show-search .header-search-button {
+        transform: rotate(90deg);
+    }
+
+    .header-search-form.show-search .search__icon {
+        opacity: 0;
+    }
+    
+    .header-search-form.show-search .search__close {
+        opacity: 1;
+    }
+
+    @media screen and (max-width: 575px) {
+        .header-search-form.show-search {
+            width: 90%; 
+        }
+    }
+</style>
+
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -51,21 +176,23 @@ date_default_timezone_set('Asia/Manila');
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
-    <div id="main-wrapper">
+   <div id="main-wrapper">
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?php echo base_url(); ?>"><b>
-                                <img src="<?php echo base_url();?>assets/images/hricn-1.png" alt="DRI" class="DRI-logo" style="width:55px;margin-top: 25px;"/>
-                                </b>
-                                <span>
-                                <img src="<?php echo base_url(); ?>assets/images/<?php echo $settingsvalue->sitelogo; ?>" alt="homepage" class="dark-logo" height="105px" width="105px" style="margin-top: 22px;" />
-                                </span> </a>
+                            <img src="<?php echo base_url();?>assets/images/hricn-1.png" alt="DRI" class="DRI-logo" style="width:55px;margin-top: 25px;"/>
+                            </b>
+                            <span>
+                            <img src="<?php echo base_url(); ?>assets/images/<?php echo $settingsvalue->sitelogo; ?>" alt="homepage" class="dark-logo" height="105px" width="105px" style="margin-top: 22px;" />
+                            </span> </a>
                 </div>
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        
+                        
                         
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-bell"></i>
@@ -156,8 +283,19 @@ date_default_timezone_set('Asia/Manila');
                                 </div>
                             </li>
                         <?php endif; ?>
-                    </ul>
+                    
 
+                        <li class="nav-item hidden-sm-down search-container">
+                            <div class="header-search-form" id="search-bar"> 
+                             <input type="text" class="header-search-input" placeholder="Search" value="">      
+                            <button type="button" class="header-search-button" id="search-button" aria-label="Toggle Search">
+                              <i class="fas fa-search search__icon"></i> 
+                              <i class="fas fa-times search__close"></i> 
+                            </button>
+                            </div>
+                        </li>
+                    </ul>
+                    
 
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
@@ -205,3 +343,34 @@ date_default_timezone_set('Asia/Manila');
                 </div>
             </div>
         </div>
+
+    <script>
+    const toggleSearch = (search, button) => {
+        // searchBar is now a <div>, not a <form>
+        const searchBar = document.getElementById(search); 
+        const searchButton = document.getElementById(button);
+        const searchInput = searchBar.querySelector('input'); 
+
+        if (!searchBar || !searchButton) {
+            console.error('Search bar elements not found. Check your IDs.');
+            return;
+        }
+
+        // KEEP: Button click to toggle/collapse the search bar
+        searchButton.addEventListener('click', () => {
+            searchBar.classList.toggle('show-search');
+            
+            if (searchBar.classList.contains('show-search')) {
+                setTimeout(() => {
+                    searchInput.focus(); 
+                }, 500); 
+            } else {
+                searchInput.blur();
+            }
+        });
+ 
+    };
+
+    // Initialize the toggle function
+    toggleSearch('search-bar', 'search-button');
+</script>
