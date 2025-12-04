@@ -58,9 +58,9 @@
 
 <div class="d-flex flex-row align-items-center mb-4">
     <div class="round-img mr-4" style="flex-shrink: 0;">
-        <img src="<?php echo $user_image_path; ?>" alt="user" width="65" height="65" class="img-circle">
+        <img src="<?php echo $user_image_path; ?>" alt="user" width="80" height="80" class="img-circle">
     </div>
-    <div class="m-l-10">
+    <div class="m-l-8">
         <h3 class="m-t-0 m-b-0 font-weight-medium text-dark">
             Welcome Back, <?php echo $this->session->userdata('name'); ?>
         </h3>
@@ -413,49 +413,54 @@ if($this->session->userdata('user_type') != 'EMPLOYEE'){
                 </div>
             </div>
 
-    <!-- Task Tracker -->
-    <div class="col-lg-5 mb-4">
+    <!-- Task tracker -->
+      <div class="col-lg-5 mb-4">
         <div class="card h-100">
-            <div class="card-header py-3">
-            <h5 class="m-b-0 text-black"> <i class="fas fa-check-square mr-2"></i> Task Tracker</h5>
-        </div>
-            <div class="card-body">
-                <div class="table-responsive" style="max-height:400px; overflow-y:auto;">
-                    <ul class="list-group list-task todo-list m-0" data-role="tasklist">
-                        <?php foreach($todolist as $value): ?>
-                            <li class="list-group-item d-flex align-items-center" data-role="task">
-                                <div class="form-check">
-                                    <input class="form-check-input to-do" type="checkbox"
-                                           data-id="<?= $value->id ?>"
-                                           data-value="<?= $value->value == '1' ? '0' : '1' ?>"
-                                           id="task_<?= $value->id ?>"
-                                           <?= $value->value != '1' ? 'checked' : '' ?>>
-                                    <label class="form-check-label <?= $value->value != '1' ? 'task-done text-muted' : '' ?>"
-                                           for="task_<?= $value->id ?>">
-                                        <?= $value->to_dodata; ?>
-                                    </label>
-                                </div>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-
-                <!-- Add New Task -->
-                <div class="new-todo pt-3 border-top">
-                    <form method="post" action="add_todo" enctype="multipart/form-data" id="add_todo">
-                        <div class="input-group">
-                            <input type="text" name="todo_data" class="form-control" placeholder="Add a new task">
-                            <input type="hidden" name="userid" value="<?= $this->session->userdata('user_login_id'); ?>">
-                            <button type="submit" class="btn btn-info todo-submit">
-                                Add</i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+          <div class="card-header py-3 d-flex align-items-center justify-content-between">
+            <h5 class="m-b-0"><i class="fas fa-check-square mr-2"></i> Task Tracker</h5>
+            <small class="text-muted">Click to toggle completion</small>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive sticky-400">
+              <ul class="list-group list-task todo-list m-0" data-role="tasklist">
+                <?php foreach($todolist as $value): ?>
+                  <li class="list-group-item d-flex align-items-center" data-role="task">
+                    <div class="form-check">
+                      <input class="form-check-input to-do"
+                             type="checkbox"
+                             data-id="<?php echo $value->id; ?>"
+                             data-value="<?php echo ($value->value == '1' ? '0' : '1'); ?>"
+                             id="task_<?php echo $value->id; ?>"
+                             <?php echo ($value->value != '1' ? 'checked' : ''); ?>>
+                      <label class="form-check-label <?php echo ($value->value != '1' ? 'task-done text-muted' : ''); ?>"
+                             for="task_<?php echo $value->id; ?>">
+                        <?php echo html_escape($value->to_dodata); ?>
+                      </label>
+                    </div>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
             </div>
+
+            <!-- Add new task -->
+            <div class="new-todo pt-3 border-top">
+              <form method="post" action="add_todo" enctype="multipart/form-data" id="add_todo">
+                <div class="input-group">
+                  <input type="text" name="todo_data" class="form-control" placeholder="Add a new task">
+                  <input type="hidden" name="userid" value="<?php echo $this->session->userdata('user_login_id'); ?>">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <small class="text-muted d-block mt-2">Keep tasks short and actionable.</small>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
 
                 <div class="row">

@@ -2,6 +2,13 @@
 <html lang="en">
 <?php
 date_default_timezone_set('Asia/Manila');
+
+$id = $this->session->userdata('user_login_id');
+$basicinfo = $this->employee_model->GetBasic($id); 
+$settingsvalue = $this->settings_model->GetSettingsValue();
+
+$current_date = date('m/d/y');
+$leavetoday = $this->leave_model->GetLeaveToday($current_date); 
 ?>
 <head>
     <meta charset="utf-8">
@@ -38,7 +45,7 @@ date_default_timezone_set('Asia/Manila');
     <style>
     :root {
         --first-color: #1976d2; 
-        --title-color: hsl(222, 8%, 8%);
+        --title-color: hsla(220, 7%, 8%, 1.00);
         --text-color-light: hsl(222, 8%, 65%);
         --white-color: #fff;
         --body-color: hsl(222, 100%, 99%);
@@ -158,19 +165,46 @@ date_default_timezone_set('Asia/Manila');
             width: 90%; 
         }
     }
+    
+    .dropdown-menu.calendar-dropdown {
+        padding: 10px;
+        width: 320px; 
+        max-width: 90vw; 
+        height: auto;
+        overflow: visible; 
+    }
+    .calendar-container {
+        font-size: 12px; 
+    }
+
+    /* FIX 1: Remove top/bottom list padding */
+    .calendar-dropdown ul li {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    
+    /* FIX 2: TIGHTENED title padding to remove space above and below the date text */
+    .calendar-dropdown .drop-title {
+        padding: 3px 20px 3px 20px; /* Reduced all padding to tighten it up */
+        margin: 0; /* Ensure no external margin */
+    }
+    
+    /* FIX 3: Remove FullCalendar internal header bottom margin */
+    .calendar-container .fc-toolbar.fc-header-toolbar {
+        margin-bottom: 0 !important; /* Forces the month text closer to the days */
+        padding-bottom: 0;
+    }
+    .calendar-container .fc-day-header {
+        font-size: 10px;
+    }
 </style>
 
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
     <?php 
-        $id = $this->session->userdata('user_login_id');
-        $basicinfo = $this->employee_model->GetBasic($id); 
-        $settingsvalue = $this->settings_model->GetSettingsValue();
-        $year =  date('y');
-        $y = substr( $year, -2);
-        $date = date("m/d/$y");
-        $leavetoday = $this->leave_model->GetLeaveToday($date); 
+        // Variables defined at the top of the file
+        // $id, $basicinfo, $settingsvalue, $current_date, $leavetoday are now available
     ?>
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
@@ -181,16 +215,17 @@ date_default_timezone_set('Asia/Manila');
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?php echo base_url(); ?>"><b>
-                            <img src="<?php echo base_url();?>assets/images/hricn-1.png" alt="DRI" class="DRI-logo" style="width:55px;margin-top: 25px;"/>
-                            </b>
-                            <span>
-                            <img src="<?php echo base_url(); ?>assets/images/<?php echo $settingsvalue->sitelogo; ?>" alt="homepage" class="dark-logo" height="105px" width="105px" style="margin-top: 22px;" />
-                            </span> </a>
+                                <img src="<?php echo base_url();?>assets/images/hricn-1.png" alt="DRI" class="DRI-logo" style="width:55px;margin-top: 25px;"/>
+                                </b>
+                                <span>
+                                <img src="<?php echo base_url(); ?>assets/images/<?php echo $settingsvalue->sitelogo; ?>" alt="homepage" class="dark-logo" height="105px" width="105px" style="margin-top: 22px;" />
+                                </span> </a>
                 </div>
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        
                         
                         
                         
@@ -221,6 +256,20 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Calendar"> 
+                                <i class="fas fa-calendar-alt"></i>
+                            </a>
+                            <div class="dropdown-menu mailbox scale-up-left calendar-dropdown">
+                                <ul>
+                                    <li>
+                                        <div class="calendar-container">
+                                            <div id="header-calendar"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                         <?php if ($this->session->userdata('user_type') === 'ADMIN' || $this->session->userdata('user_type') === 'HR'): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Quick Actions">
@@ -287,10 +336,10 @@ date_default_timezone_set('Asia/Manila');
 
                         <li class="nav-item hidden-sm-down search-container">
                             <div class="header-search-form" id="search-bar"> 
-                             <input type="text" class="header-search-input" placeholder="Search" value="">      
+                               <input type="text" class="header-search-input" placeholder="Search" value="">      
                             <button type="button" class="header-search-button" id="search-button" aria-label="Toggle Search">
-                              <i class="fas fa-search search__icon"></i> 
-                              <i class="fas fa-times search__close"></i> 
+                                <i class="fas fa-search search__icon"></i> 
+                                <i class="fas fa-times search__close"></i> 
                             </button>
                             </div>
                         </li>
@@ -343,10 +392,10 @@ date_default_timezone_set('Asia/Manila');
                 </div>
             </div>
         </div>
-
+    
     <script>
+    // Existing Search Toggle Logic
     const toggleSearch = (search, button) => {
-        // searchBar is now a <div>, not a <form>
         const searchBar = document.getElementById(search); 
         const searchButton = document.getElementById(button);
         const searchInput = searchBar.querySelector('input'); 
@@ -356,7 +405,6 @@ date_default_timezone_set('Asia/Manila');
             return;
         }
 
-        // KEEP: Button click to toggle/collapse the search bar
         searchButton.addEventListener('click', () => {
             searchBar.classList.toggle('show-search');
             
@@ -368,9 +416,62 @@ date_default_timezone_set('Asia/Manila');
                 searchInput.blur();
             }
         });
- 
     };
 
     // Initialize the toggle function
     toggleSearch('search-bar', 'search-button');
-</script>
+
+    // ⭐️ FIX: Stop clicks inside the calendar dropdown from closing it ⭐️
+    $(document).ready(function() {
+        // Target the specific dropdown menu for the calendar
+        $('.dropdown-menu.calendar-dropdown').on('click', function(e) {
+            // This stops the click from propagating up and prevents the dropdown from closing
+            e.stopPropagation();
+        });
+
+        // FullCalendar Initialization Logic 
+        // Initialize FullCalendar when the calendar dropdown is opened
+        $('.nav-item.dropdown').on('show.bs.dropdown', function(e) {
+            // Check if the calendar icon triggered the dropdown
+            if ($(e.target).find('.fas.fa-calendar-alt').length > 0) {
+                // Check if the calendar has already been initialized (prevents re-initialization)
+                if ($('#header-calendar').hasClass('fc')) {
+                    // If initialized, just force it to re-render to show correctly
+                    $('#header-calendar').fullCalendar('render');
+                } else {
+                    // Initialize FullCalendar
+                    $('#header-calendar').fullCalendar({
+                        header: {
+                            left: 'prev',
+                            center: 'title',
+                            right: 'next'
+                        },
+                        defaultView: 'month', 
+                        editable: false,
+                        eventLimit: true, // allow "more" link when too many events
+                        
+                        // Adjust size for dropdown view
+                        height: 300,
+                        contentHeight: 'auto',
+                        aspectRatio: 1.5,
+                        
+                        // Small customization for compact view
+                        dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                        // Optional: load events if needed, e.g., from an API
+                        // events: '<?php //echo base_url("calendar/getEvents"); ?>',
+                    });
+                }
+            }
+        });
+        
+        // Ensure the calendar re-renders correctly when the dropdown becomes visible
+        $('.nav-item.dropdown').on('shown.bs.dropdown', function(e) {
+            if ($(e.target).find('.fas.fa-calendar-alt').length > 0) {
+                $('#header-calendar').fullCalendar('render');
+            }
+        });
+    });
+    // ⭐️ END FIX: Stop clicks inside the calendar dropdown from closing it ⭐️
+    </script>
+    </body>
+</html>
