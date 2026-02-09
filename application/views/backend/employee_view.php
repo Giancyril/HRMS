@@ -64,8 +64,8 @@
                                 <small class="text-muted p-t-30 db">Social Profile</small>
                                 <br/>
                                 <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->facebook)) echo $socialmedia->facebook ?>" target="_blank"><i class="fab fa-facebook"></i></a>
-                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->twitter)) echo $socialmedia->twitter ?>" target="_blank"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->instagram)) echo $socialmedia->instagram ?>" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->twitter)) echo $socialmedia->twitter ?>" target="_blank"><i class="fab fa-twitter"></i></a>                             
+                                <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->linkedin)) echo $socialmedia->linkedin ?>" target="_blank"><i class="fab fa-linkedin"></i></a>
                                 <a class="btn btn-circle btn-secondary" href="<?php if(!empty($socialmedia->google_Plus)) echo $socialmedia->google_Plus ?>" target="_blank"><i class="fab fa-google"></i></a>
                             </div>
                         </div>                                                    
@@ -529,8 +529,8 @@
 				                                        <input type="text" id="" name="google"  class="form-control " value="<?php if(!empty($socialmedia->google_plus)) echo $socialmedia->google_plus ?>"> 
 				                                    </div>
 				                                    <div class="form-group col-md-6 m-t-20">
-				                                        <label>Instagram</label>
-				                                        <input type="text" id="" name="instagram"  class="form-control " value="<?php if(!empty($socialmedia->instagram)) echo $socialmedia->instagram ?>"> 
+				                                        <label>LinkedIn</label>
+				                                        <input type="text" id="" name="linkedin"  class="form-control " value="<?php if(!empty($socialmedia->linkedin)) echo $socialmedia->linkedin ?>"> 
 				                                    </div>
 				                               
 				                                    <div class="form-actions col-md-12">

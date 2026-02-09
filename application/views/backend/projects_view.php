@@ -331,7 +331,7 @@
 			                                	<span id="error"></span>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>File Name</label>
-			                                        <input type="text" class="form-control form-control-line" placeholder=" File description" name="details" required minlength="12"> 
+			                                        <input type="text" class="form-control form-control-line" placeholder=" " name="details" required minlength="12"> 
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Assign To</label>
@@ -350,7 +350,7 @@
 			                                        <label>File</label>
 			                                        <input type="file" name="img_url" class="form-control form-control-line" placeholder=" Result" required> 
 			                                    </div>
-			                                    <div class="form-actions col-md-6">
+			                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="proid" value="<?php echo $details->id; ?>">
 			                                        <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Save</button>
 			                                        <button type="button" class="btn btn-danger">Cancel</button>
@@ -397,8 +397,8 @@
                     </div>	                                    
 			                                <form class="row" action="Add_Pro_Notes" method="post" enctype="multipart/form-data" id="notesform">
 			                                    	<div class="form-group col-md-6 m-t-5">
-			                                    	    <label> notes</label>
-			                                    	    <input type="text" name="details" class="form-control form-control-line company_name" placeholder="Notes details"> 
+			                                    	    <label> Notes</label>
+			                                    	    <input type="text" name="details" class="form-control form-control-line company_name" placeholder=" "> 
 			                                    	</div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Assign To</label>
@@ -468,7 +468,7 @@
 			                                <form class="row" action="Add_Expenses" method="post" enctype="multipart/form-data" id="expenseform">
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Details</label>
-			                                        <input type="text" class="form-control form-control-line" placeholder="details..." name="details"> 
+			                                        <input type="text" class="form-control form-control-line" placeholder=" " name="details"> 
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Assign To</label>
@@ -486,11 +486,14 @@
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Amount</label>
-			                                        <input type="number" class="form-control form-control-line" placeholder=" amount.." name="amount"> 
+			                                        <input type="number" class="form-control form-control-line" placeholder=" " name="amount"> 
 			                                    </div>
 			                                    <div class="form-group col-md-6 m-t-5">
 			                                        <label>Date</label>
-			                                        <input type="text" class="form-control form-control-line mydatetimepickerFull" placeholder="" name="date" value> 
+			                                        <div class="input-group date">
+			                                            <input type="text" class="form-control form-control-line mydatetimepickerFull" placeholder="" name="date" value>
+			                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			                                        </div>
 			                                    </div>
 			                                    <div class="form-actions col-md-12">
                                                     <input type="hidden" name="id" value="">                                                
