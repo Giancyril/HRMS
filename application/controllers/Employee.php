@@ -47,6 +47,74 @@ class Employee extends CI_Controller {
 		redirect(base_url() , 'refresh');
 	}        
     }
+    
+    /**
+     * Global Search Function for HRMS
+     * Searches across multiple employee fields: Name, ID, Department, Job Title, Email
+     * Returns JSON with matching employees
+     */
+    public function global_search() {
+        header('Content-Type: application/json');
+        
+        try {
+            // Check authorization
+            if ($this->session->userdata('user_login_access') != 1) {
+                echo json_encode([]);
+                return;
+            }
+
+            $rawSearch = $this->input->get('search');
+
+            if (empty($rawSearch) || strlen($rawSearch) < 2) {
+                echo json_encode([]);
+                return;
+            }
+
+            // Escape the raw search term for LIKE, but let the Query Builder add the % wildcards
+            $searchTerm = $this->db->escape_like_str($rawSearch);
+
+            // Use CodeIgniter Query Builder for safer queries
+            $this->db->select('e.em_id, e.first_name, e.last_name, e.em_code, e.status, d.des_name, dp.dep_name, e.em_email');
+            $this->db->from('employee e');
+            $this->db->join('designation d', 'd.id = e.des_id', 'left');
+            $this->db->join('department dp', 'dp.id = e.dep_id', 'left');
+            
+            // Build search conditions
+            $this->db->where('e.status', 'ACTIVE');
+            $this->db->group_start();
+                $this->db->like('e.first_name', $searchTerm, 'both');
+                $this->db->or_like('e.last_name', $searchTerm, 'both');
+                $this->db->or_like('e.em_code', $searchTerm, 'both');
+                $this->db->or_like('e.em_email', $searchTerm, 'both');
+                $this->db->or_like('d.des_name', $searchTerm, 'both');
+                $this->db->or_like('dp.dep_name', $searchTerm, 'both');
+            $this->db->group_end();
+            
+            $this->db->limit(10);
+            $this->db->order_by('e.first_name', 'ASC');
+
+            $query = $this->db->get();
+            
+            if ($query->num_rows() > 0) {
+                $results = $query->result_array();
+                // Ensure no NULL values in output
+                foreach ($results as &$row) {
+                    $row['des_name'] = $row['des_name'] ?: 'N/A';
+                    $row['dep_name'] = $row['dep_name'] ?: 'N/A';
+                }
+                echo json_encode($results);
+            } else {
+                echo json_encode([]);
+            }
+
+        } catch (Exception $e) {
+            // Log error for debugging
+            log_message('error', 'Global Search Error: ' . $e->getMessage());
+            log_message('error', 'DB Error: ' . $this->db->error()['message']);
+            echo json_encode(['error' => 'Search failed', 'message' => $e->getMessage()]);
+        }
+    }
+
     public function Add_employee(){
         if($this->session->userdata('user_login_access') != False) { 
         $this->load->view('backend/add-employee');

@@ -76,7 +76,7 @@ $leavetoday = $this->leave_model->GetLeaveToday($current_date);
         background-color: var(--first-color); 
         border-radius: 20px; 
         padding: 0; 
-        overflow: hidden;
+        overflow: visible;
         display: flex;
         align-items: center;
         transition: width 0.5s cubic-bezier(0.9, 0, 0.3, 0.9), background-color 0.5s;
@@ -197,6 +197,108 @@ $leavetoday = $this->leave_model->GetLeaveToday($current_date);
     .calendar-container .fc-day-header {
         font-size: 10px;
     }
+
+    /* Advanced Search Bar Styles */
+    .search-results-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        margin-top: 5px;
+    }
+
+    .search-results-dropdown ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .search-results-dropdown li {
+        padding: 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .search-results-dropdown li:last-child {
+        border-bottom: none;
+    }
+
+    .search-result-item {
+        padding: 12px 15px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .search-result-item:hover {
+        background-color: #f5f5f5;
+    }
+
+    .search-result-item a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .search-status-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .status-active {
+        background-color: #4caf50;
+    }
+
+    .status-leave {
+        background-color: #ff9800;
+    }
+
+    .status-inactive {
+        background-color: #ccc;
+    }
+
+    .search-result-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        flex: 1;
+    }
+
+    .search-result-name {
+        font-weight: 500;
+        font-size: 13px;
+        color: #333;
+    }
+
+    .search-result-meta {
+        font-size: 12px;
+        color: #666;
+    }
+
+    .search-no-results {
+        padding: 20px;
+        text-align: center;
+        color: #999;
+        font-size: 13px;
+    }
+
+    #search-bar {
+        position: relative;
+    }
+
 </style>
 
 </head>
@@ -336,11 +438,15 @@ $leavetoday = $this->leave_model->GetLeaveToday($current_date);
 
                         <li class="nav-item hidden-sm-down search-container">
                             <div class="header-search-form" id="search-bar"> 
-                               <input type="text" class="header-search-input" placeholder="Search" value="">      
+                               <input type="text" class="header-search-input" id="global-search-input" placeholder="Search" value="" autocomplete="off">      
                             <button type="button" class="header-search-button" id="search-button" aria-label="Toggle Search">
                                 <i class="fas fa-search search__icon"></i> 
                                 <i class="fas fa-times search__close"></i> 
                             </button>
+                            <!-- AJAX Search Results Dropdown -->
+                            <div id="search-results-dropdown" class="search-results-dropdown" style="display: none;">
+                                <ul id="search-results-list"></ul>
+                            </div>
                             </div>
                         </li>
                     </ul>
@@ -414,12 +520,124 @@ $leavetoday = $this->leave_model->GetLeaveToday($current_date);
                 }, 500); 
             } else {
                 searchInput.blur();
+                // Clear input and hide results when closing the search
+                try {
+                    searchInput.value = '';
+                    const resultsDropdownEl = document.getElementById('search-results-dropdown');
+                    const resultsListEl = document.getElementById('search-results-list');
+                    if (resultsListEl) resultsListEl.innerHTML = '';
+                    if (resultsDropdownEl) resultsDropdownEl.style.display = 'none';
+                    if (window.globalSearchTimeout) {
+                        clearTimeout(window.globalSearchTimeout);
+                        window.globalSearchTimeout = null;
+                    }
+                } catch (e) {
+                    // ignore
+                }
             }
         });
     };
 
     // Initialize the toggle function
     toggleSearch('search-bar', 'search-button');
+
+    // AJAX Global Search Functionality
+    $(document).ready(function() {
+        const searchInput = $('#global-search-input');
+        const resultsDropdown = $('#search-results-dropdown');
+        const resultsList = $('#search-results-list');
+        // make timeout globally accessible so toggleSearch can cancel it
+        window.globalSearchTimeout = null;
+
+        // Perform search on input
+        searchInput.on('keyup', function() {
+            const searchTerm = $(this).val().trim();
+
+            // Clear previous timeout
+            if (window.globalSearchTimeout) {
+                clearTimeout(window.globalSearchTimeout);
+                window.globalSearchTimeout = null;
+            }
+
+            // Hide dropdown if search is empty
+            if (searchTerm.length < 2) {
+                resultsDropdown.hide();
+                resultsList.html('');
+                return;
+            }
+
+            // Debounce the search request (wait 300ms after user stops typing)
+            window.globalSearchTimeout = setTimeout(function() {
+                performGlobalSearch(searchTerm);
+                window.globalSearchTimeout = null;
+            }, 300);
+        });
+
+        // Hide dropdown when clicking outside
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('#search-bar').length) {
+                resultsDropdown.hide();
+            }
+        });
+
+        // Perform AJAX search
+        function performGlobalSearch(searchTerm) {
+            $.ajax({
+                url: '<?php echo base_url("employee/global_search"); ?>',
+                type: 'GET',
+                data: { search: searchTerm },
+                dataType: 'json',
+                success: function(response) {
+                    displaySearchResults(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Search error:', error);
+                    console.error('Status:', status);
+                    console.error('Response:', xhr.responseText);
+                    resultsList.html('<li class="search-no-results">Error performing search. Please try again.</li>');
+                    resultsDropdown.show();
+                }
+            });
+        }
+
+        // Display search results in dropdown
+        function displaySearchResults(results) {
+            resultsList.html('');
+
+            if (!results || results.length === 0) {
+                resultsList.html('<li class="search-no-results">No data found</li>');
+                resultsDropdown.show();
+                return;
+            }
+
+            results.forEach(function(employee) {
+                const statusClass = getStatusClass(employee.status);
+                const resultHtml = `
+                    <li>
+                        <a href="<?php echo base_url('employee/view'); ?>?I=${btoa(employee.em_id)}" class="search-result-item">
+                            <div class="search-status-indicator ${statusClass}" title="${employee.status}"></div>
+                            <div class="search-result-info">
+                                <div class="search-result-name">${employee.first_name} ${employee.last_name}</div>
+                                <div class="search-result-meta">
+                                    ID: ${employee.em_code} | ${employee.des_name} | ${employee.dep_name}
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                `;
+                resultsList.append(resultHtml);
+            });
+
+            resultsDropdown.show();
+        }
+
+        // Determine status class based on employee status
+        function getStatusClass(status) {
+            if (status === 'ACTIVE') return 'search-status-indicator status-active';
+            if (status === 'LEAVE') return 'search-status-indicator status-leave';
+            return 'search-status-indicator status-inactive';
+        }
+    });
 
     // ⭐️ FIX: Stop clicks inside the calendar dropdown from closing it ⭐️
     $(document).ready(function() {
