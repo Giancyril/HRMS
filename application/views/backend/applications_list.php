@@ -9,6 +9,7 @@
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo site_url('recruitment'); ?>">Recruitment</a></li>
                 <li class="breadcrumb-item active">Applications</li>
             </ol>
         </div>
@@ -51,13 +52,16 @@
 
 <script>
     $(document).ready(function() {
+        // Get job_id from URL if present
+        var jobId = '<?php echo isset($job_id) ? $job_id : ''; ?>';
+        
         // Initialize your DataTables
         var applicationsTable = $('#applications_list').DataTable({
             "processing": false, // This line hides the "Processing..." message
             "serverSide": false,
             "ajax": {
-                "url": "<?php echo site_url('recruitment/get_applications_data'); ?>",
-                "type": "POST",
+                "url": "<?php echo site_url('recruitment/get_applications_data'); ?>" + (jobId ? '?job_id=' + jobId : ''),
+                "type": "GET",
                 "dataSrc": "data"
             },
             "columns": [

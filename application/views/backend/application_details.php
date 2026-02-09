@@ -78,27 +78,25 @@
                             <div class="col-md-6">
                                 <h5><i class="fa fa-cogs"></i> Application Actions</h5>
                                 <hr>
-                                <button type="button" class="btn btn-info"><i class="fa fa-download"></i> Download Resume</button>
+                                <button type="button" class="btn btn-info download-resume-btn" data-app-id="<?php echo html_escape($application['id']); ?>"><i class="fa fa-download"></i> Download Resume</button>
                                 
                                 <div class="btn-group m-l-10">
                                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Update Status
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Mark as Reviewed</a>
-                                        <a class="dropdown-item" href="#">Schedule Interview</a>
-                                        <a class="dropdown-item" href="#">Extend Offer</a>
+                                        <a class="dropdown-item update-status-btn" href="#" data-status="Reviewed" data-app-id="<?php echo html_escape($application['id']); ?>">Mark as Reviewed</a>
+                                        <a class="dropdown-item update-status-btn" href="#" data-status="Interview" data-app-id="<?php echo html_escape($application['id']); ?>">Schedule Interview</a>
+                                        <a class="dropdown-item update-status-btn" href="#" data-status="Offer" data-app-id="<?php echo html_escape($application['id']); ?>">Extend Offer</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-info" href="#">Mark as Hired</a>
-                                        <a class="dropdown-item text-danger" href="#">Mark as Rejected</a>
+                                        <a class="dropdown-item text-info update-status-btn" href="#" data-status="Hired" data-app-id="<?php echo html_escape($application['id']); ?>">Mark as Hired</a>
+                                        <a class="dropdown-item text-danger update-status-btn" href="#" data-status="Rejected" data-app-id="<?php echo html_escape($application['id']); ?>">Mark as Rejected</a>
                                     </div>
                                 </div>
                                 
-                                <a href="<?php echo base_url('recruitment/delete_application/' . $application['id']); ?>" 
-                                    class="btn btn-danger m-l-10 delete-application" 
-                                    title="Delete Application">
+                                <button type="button" class="btn btn-danger m-l-10 delete-application-btn" data-app-id="<?php echo html_escape($application['id']); ?>" title="Delete Application">
                                     <i class="fa fa-trash-o"></i> Delete
-                                </a>
+                                </button>
                             </div>
 
                             <div class="col-md-6 border-left">
@@ -117,3 +115,113 @@
     </div>
 </div>
 <?php $this->load->view('backend/footer'); ?>
+
+<script>
+$(document).ready(function() {
+    // Download Resume
+    $('.download-resume-btn').on('click', function(e) {
+        e.preventDefault();
+        var appId = $(this).data('app-id');
+        if (appId) {
+            window.location.href = '<?php echo base_url('recruitment/download_resume/'); ?>' + appId;
+        } else {
+            alert('Invalid application ID.');
+        }
+    });
+
+    // Update Status
+    $('.update-status-btn').on('click', function(e) {
+        e.preventDefault();
+        var appId = $(this).data('app-id');
+        var newStatus = $(this).data('status');
+        var statusText = $(this).text();
+
+        if (!appId || !newStatus) {
+            alert('Missing required data. Please refresh the page and try again.');
+            return;
+        }
+
+        if (confirm('Are you sure you want to ' + statusText.toLowerCase() + '?')) {
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('recruitment/update_application_status'); ?>',
+                data: {
+                    app_id: appId,
+                    status: newStatus
+                },
+                dataType: 'json',
+                timeout: 10000,
+                success: function(response) {
+                    console.log('Status update response:', response);
+                    if (response && response.status === 'success') {
+                        alert('Status updated successfully!');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + (response && response.message ? response.message : 'Unknown error'));
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error, xhr);
+                    var errorMsg = 'An error occurred while updating the status.';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMsg = xhr.responseJSON.message;
+                    } else if (xhr.responseText) {
+                        try {
+                            var resp = JSON.parse(xhr.responseText);
+                            errorMsg = resp.message || errorMsg;
+                        } catch(e) {
+                            errorMsg = xhr.responseText;
+                        }
+                    }
+                    alert(errorMsg);
+                }
+            });
+        }
+    });
+
+    // Delete Application
+    $('.delete-application-btn').on('click', function(e) {
+        e.preventDefault();
+        var appId = $(this).data('app-id');
+
+        if (!appId) {
+            alert('Invalid application ID.');
+            return;
+        }
+
+        if (confirm('Are you sure you want to delete this application? This action cannot be undone.')) {
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('recruitment/delete_application_ajax'); ?>',
+                data: { app_id: appId },
+                dataType: 'json',
+                timeout: 10000,
+                success: function(response) {
+                    console.log('Delete response:', response);
+                    if (response && response.status === 'success') {
+                        alert('Application deleted successfully!');
+                        window.location.href = '<?php echo base_url('recruitment/applications'); ?>';
+                    } else {
+                        alert('Error: ' + (response && response.message ? response.message : 'Unknown error'));
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error, xhr);
+                    var errorMsg = 'An error occurred while deleting the application.';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMsg = xhr.responseJSON.message;
+                    } else if (xhr.responseText) {
+                        try {
+                            var resp = JSON.parse(xhr.responseText);
+                            errorMsg = resp.message || errorMsg;
+                        } catch(e) {
+                            errorMsg = xhr.responseText;
+                        }
+                    }
+                    alert(errorMsg);
+                }
+            });
+        }
+    });
+});
+</script>

@@ -12,6 +12,7 @@ class Recruitment_model extends CI_Model {
         $this->db->select('jobs.*');
         $this->db->from('jobs');
         $this->db->where('jobs.is_active', 1);
+        $this->db->order_by('jobs.posted_at', 'DESC'); // Sort by latest posted first
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -29,6 +30,15 @@ class Recruitment_model extends CI_Model {
     public function get_all_applications() {
         $this->db->select('applications.*, jobs.job_title');
         $this->db->from('applications');
+        $this->db->join('jobs', 'jobs.job_id = applications.job_id', 'left');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_applications_by_job($job_id) {
+        $this->db->select('applications.*, jobs.job_title');
+        $this->db->from('applications');
+        $this->db->where('applications.job_id', $job_id);
         $this->db->join('jobs', 'jobs.job_id = applications.job_id', 'left');
         $query = $this->db->get();
         return $query->result_array();

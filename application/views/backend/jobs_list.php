@@ -72,15 +72,14 @@
                                                 <td><?php echo html_escape(substr($job['description'], 0, 60)) . '...'; ?></td>
                                                 <td><?php echo html_escape(date('F j, Y', strtotime($job['posted_at']))); ?></td>
                                                 <td class="jsgrid-align-center">
-                                                    <a href="<?php echo site_url('recruitment/job_details/' . $job['job_id']); ?>"
-                                                       class="btn btn-sm btn-primary">View</a>
-                                                    <button type="button" class="btn btn-sm btn-info apply-job-btn"
-                                                            data-toggle="modal"
-                                                            data-target="#applyModal"
-                                                            data-job-id="<?php echo html_escape($job['job_id']); ?>"
-                                                            data-job-title="<?php echo html_escape($job['job_title']); ?>">
-                                                        <i class="fa fa-paper-plane"></i> Apply
+                                                    <a href="<?php echo site_url('recruitment/job_details/' . $job['job_id']); ?>" class="btn btn-sm btn-primary">View</a>
+                                                    <button type="button" class="btn btn-sm btn-info apply-job-btn" data-toggle="modal" data-target="#applyModal" data-job-id="<?php echo html_escape($job['job_id']); ?>" data-job-title="<?php echo html_escape($job['job_title']); ?>">
+                                                        Apply
                                                     </button>
+                                                    <?php if ($this->session->userdata('user_type') != 'EMPLOYEE'): ?>
+                                                        <button type="button" class="btn btn-sm btn-info edit-job-btn" data-job-id="<?php echo html_escape($job['job_id']); ?>" title="Edit"><i class="fa fa-edit"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger delete-job-btn" data-job-id="<?php echo html_escape($job['job_id']); ?>" title="Delete"><i class="fa fa-trash"></i></button>
+                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -97,19 +96,19 @@
     <div class="modal fade" id="addJobModal" tabindex="-1" role="dialog" aria-labelledby="addJobModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="addJobModalLabel" class="modal-title">Add New Job Posting</h5>
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <div class="modal-header bg-white border-bottom">
+                    <h5 class="modal-title text-dark font-weight-medium" id="addJobModalLabel">Add New Job Posting</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <div class="alert modal-message text-center" style="display:none;"></div>
-                    <form id="addJobForm" data-modal-id="#addJobModal"
-                            action="<?php echo site_url('recruitment/save_job'); ?>"
-                            method="post">
-                        <div class="form-body">
+                <div class="position-relative">
+                    <form id="addJobForm" action="<?php echo site_url('recruitment/save_job'); ?>" method="post">
+                        <div class="modal-body">
+                            <div id="job-form-message" class="alert alert-info text-center" style="display:none;"></div>
                             <div class="form-group">
-                                <label>Job Title</label>
-                                <select name="job_title" class="form-control" required>
+                                <label class="control-label font-weight-medium">Job Title</label>
+                                <select name="job_title" class="form-control form-control-md" required>
                                     <option value="">Select a Job Title</option>
                                     <?php foreach ($designations as $des): ?>
                                         <option value="<?php echo html_escape($des->des_name); ?>">
@@ -119,17 +118,15 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Job Description</label>
-                                <textarea name="description" class="form-control" rows="5"
-                                                placeholder="Detailed description..." required></textarea>
+                                <label class="control-label font-weight-medium">Job Description</label>
+                                <textarea name="description" class="form-control" rows="5" placeholder="Detailed description..." required></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Requirements</label>
-                                <textarea name="requirements" class="form-control" rows="5"
-                                                placeholder="Skills, qualifications..." required></textarea>
+                                <label class="control-label font-weight-medium">Requirements</label>
+                                <textarea name="requirements" class="form-control" rows="5" placeholder="Skills, qualifications..." required></textarea>
                             </div>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer bg-light border-top">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-info">Submit</button>
                         </div>
@@ -142,33 +139,35 @@
     <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="applyModalLabel" class="modal-title">Job Application</h5>
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <div class="modal-header bg-white border-bottom">
+                    <h5 class="modal-title text-dark font-weight-medium" id="applyModalLabel">Job Application</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <div class="alert modal-message text-center" style="display:none;"></div>
+                <div class="position-relative">
                     <form id="applyForm" action="<?php echo site_url('recruitment/apply_ajax/'); ?>" method="post">
                         <input type="hidden" name="job_id" id="apply-job-id">
-                        <div class="form-body">
+                        <div class="modal-body">
+                            <div id="apply-form-message" class="alert alert-info text-center" style="display:none;"></div>
                             <div class="form-group">
-                                <label>First Name</label>
-                                <input type="text" name="first_name" class="form-control" required>
+                                <label class="control-label font-weight-medium">First Name</label>
+                                <input type="text" name="first_name" class="form-control form-control-lg" required>
                             </div>
                             <div class="form-group">
-                                <label>Last Name</label>
-                                <input type="text" name="last_name" class="form-control" required>
+                                <label class="control-label font-weight-medium">Last Name</label>
+                                <input type="text" name="last_name" class="form-control form-control-lg" required>
                             </div>
                             <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" name="email" class="form-control" required>
+                                <label class="control-label font-weight-medium">Email</label>
+                                <input type="email" name="email" class="form-control form-control-lg" required>
                             </div>
                             <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" name="phone" class="form-control" required>
+                                <label class="control-label font-weight-medium">Phone</label>
+                                <input type="text" name="phone" class="form-control form-control-lg" required>
                             </div>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer bg-light border-top">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-info">Submit</button>
                         </div>
@@ -177,92 +176,243 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="editJobModal" tabindex="-1" role="dialog" aria-labelledby="editJobModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-white border-bottom">
+                    <h5 class="modal-title text-dark font-weight-medium" id="editJobModalLabel">Edit Job Posting</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="position-relative">
+                    <form id="editJobForm" action="<?php echo site_url('recruitment/update_job'); ?>" method="post">
+                        <div class="modal-body">
+                            <div id="edit-form-message" class="alert alert-info text-center" style="display:none;"></div>
+                            <input type="hidden" name="job_id">
+                            <div class="form-group">
+                                <label class="control-label font-weight-medium">Job Title</label>
+                                <select name="job_title" class="form-control form-control-md" required>
+                                    <option value="">Select a Job Title</option>
+                                    <?php foreach ($designations as $des): ?>
+                                        <option value="<?php echo html_escape($des->des_name); ?>">
+                                            <?php echo html_escape($des->des_name); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label font-weight-medium">Job Description</label>
+                                <textarea name="description" class="form-control" rows="5" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label font-weight-medium">Requirements</label>
+                                <textarea name="requirements" class="form-control" rows="5" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer bg-light border-top">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-info">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Toast Notifications (Page-level, fixed positioning) -->
+<div id="job-success-toast" class="position-fixed" style="top: 20px; right: 20px; z-index: 2050; display: none;">
+    <div class="alert alert-success mb-0" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 250px;">
+        <i class="fas fa-check-circle mr-2"></i> Successfully Added
+    </div>
+</div>
+
+<div id="edit-success-toast" class="position-fixed" style="top: 20px; right: 20px; z-index: 2050; display: none;">
+    <div class="alert alert-success mb-0" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 250px;">
+        <i class="fas fa-check-circle mr-2"></i> Successfully Updated
+    </div>
+</div>
+
+<div id="apply-success-toast" class="position-fixed" style="top: 20px; right: 20px; z-index: 2050; display: none;">
+    <div class="alert alert-success mb-0" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 250px;">
+        <i class="fas fa-check-circle mr-2"></i> Application Submitted
+    </div>
 </div>
 
 <script>
     $(document).ready(function () {
-        // Initialize DataTable
-        $('#job_postings').DataTable({
-            "aaSorting": [[2, 'desc']],
+        let jobsTable = $('#job_postings').DataTable({
+            "aaSorting": [[2, 'desc']], // Sort by posted date descending (latest first)
+            "order": [[2, 'desc']],
             dom: 'Bfrtip',
-            buttons: ['csv', 'excel', 'pdf', 'print']
+            buttons: ['csv', 'excel', 'pdf', 'print'],
+            "columnDefs": [{
+                "targets": [3],
+                "orderable": false
+            }]
         });
 
         // Event listener for when the 'Apply' button is clicked
         $('.apply-job-btn').on('click', function() {
             var jobId = $(this).data('job-id');
             var jobTitle = $(this).data('job-title');
-
-            // Set the value of the hidden input field in the modal form
             $('#apply-job-id').val(jobId);
-            
-            // Update the modal title to show the specific job
             $('#applyModalLabel').text('Apply for: ' + jobTitle);
         });
 
-        // AJAX form submission for the application form
-$('#applyForm').on('submit', function(e) {
-    e.preventDefault();
-    var form = $(this);
-    var url = form.attr('action');
-    var formData = form.serialize();
-    var messageBox = form.closest('.modal-content').find('.modal-message');
-
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: formData,
-        dataType: "json",
-        success: function(response) {
-            if (response.status === 'success') {
-                // The following two lines were removed to prevent the success message and modal from being handled
-                // messageBox.removeClass('alert-danger').addClass('alert-success').text(response.message).show();
-                // setTimeout(function() {
-                //     $('#applyModal').modal('hide');
-                //     messageBox.hide();
-                // }, 2000); 
-                
-                // You can add other actions here if needed
-                // For example, if you want the form to clear after submission, you can add:
-                // form[0].reset();
-                
-                // The form will remain open, so you might want to show a message or just keep it as is.
-                
-            } else {
-                messageBox.removeClass('alert-success').addClass('alert-danger').text(response.message).show();
-            }
-        },
-        error: function() {
-            messageBox.removeClass('alert-success').addClass('alert-danger').text('An error occurred. Please try again.').show();
-        }
-    });
-});
-
-        // This section for job editing is from your original code and can be left as is.
-        $(".edit-job-btn").click(function (e) {
+        // Handle Edit Job button
+        $(document).on('click', '.edit-job-btn', function(e) {
             e.preventDefault();
-            var jobId = $(this).attr('data-job-id');
-            $('#jobEditForm').find('input, textarea, select').val('');
-            $('#editJobModal').modal('show');
+            var jobId = $(this).data('job-id');
+            $('#editJobForm').find('input[name="job_id"]').val(jobId);
+            
             $.ajax({
-                url: 'JobByID?id=' + jobId,
+                url: '<?php echo site_url('recruitment/JobByID'); ?>?id=' + jobId,
                 method: 'GET',
                 dataType: 'json',
-            }).done(function (response) {
-                console.log(response);
-                if (response && response.job) {
-                    $('#jobEditForm').find('[name="job_id"]').val(response.job.job_id);
-                    $('#jobEditForm').find('[name="job_title"]').val(response.job.title);
-                    $('#jobEditForm').find('[name="description"]').val(response.job.description);
-                    $('#jobEditForm').find('[name="requirements"]').val(response.job.requirements);
-                } else {
-                    console.error("No job data returned from the server.");
+                success: function(response) {
+                    if (response && response.job) {
+                        $('#editJobForm').find('[name="job_title"]').val(response.job.job_title || response.job.title);
+                        $('#editJobForm').find('[name="description"]').val(response.job.description);
+                        $('#editJobForm').find('[name="requirements"]').val(response.job.requirements);
+                        $('#editJobModal').modal('show');
+                    } else {
+                        alert('Error loading job data.');
+                    }
+                },
+                error: function() {
+                    alert('Error fetching job data.');
                 }
-            }).fail(function() {
-                console.error("Error fetching job data.");
             });
         });
 
+        // Handle Delete Job button
+        $(document).on('click', '.delete-job-btn', function(e) {
+            e.preventDefault();
+            var jobId = $(this).data('job-id');
+            if (confirm('Are you sure you want to delete this job posting?')) {
+                $.ajax({
+                    url: '<?php echo site_url('recruitment/delete_job'); ?>',
+                    method: 'POST',
+                    data: { job_id: jobId },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            alert('Job deleted successfully!');
+                            location.reload();
+                        } else {
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('An error occurred while deleting the job.');
+                    }
+                });
+            }
+        });
+
+        // AJAX form submission for adding a new job
+        $('#addJobForm').off('submit').on('submit', function(e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            var formData = form.serialize();
+            var successToast = $('#job-success-toast');
+            var messageBox = $('#job-form-message');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: "json",
+                success: function(response) {
+                    if (response.status === 'success') {
+                        successToast.show();
+                        form[0].reset();
+                        
+                        setTimeout(function() {
+                            successToast.hide();
+                            $('#addJobModal').modal('hide');
+                            // Reload the page to show the new job at the top
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        messageBox.removeClass('alert-success').addClass('alert-danger').text('Error: ' + response.message).show();
+                    }
+                },
+                error: function() {
+                    messageBox.removeClass('alert-success').addClass('alert-danger').text('An error occurred. Please try again.').show();
+                }
+            });
+        });
+
+        // AJAX form submission for editing a job
+        $('#editJobForm').off('submit').on('submit', function(e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            var formData = form.serialize();
+            var successToast = $('#edit-success-toast');
+            var messageBox = $('#edit-form-message');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: "json",
+                success: function(response) {
+                    if (response.status === 'success') {
+                        successToast.show();
+                        
+                        setTimeout(function() {
+                            successToast.hide();
+                            $('#editJobModal').modal('hide');
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        messageBox.removeClass('alert-success').addClass('alert-danger').text('Error: ' + response.message).show();
+                    }
+                },
+                error: function() {
+                    messageBox.removeClass('alert-success').addClass('alert-danger').text('An error occurred. Please try again.').show();
+                }
+            });
+        });
+
+        // AJAX form submission for the application form
+        $('#applyForm').off('submit').on('submit', function(e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            var formData = form.serialize();
+            var successToast = $('#apply-success-toast');
+            var messageBox = $('#apply-form-message');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: "json",
+                success: function(response) {
+                    if (response.status === 'success') {
+                        successToast.show();
+                        form[0].reset();
+                        
+                        setTimeout(function() {
+                            successToast.hide();
+                            $('#applyModal').modal('hide');
+                        }, 2000);
+                    } else {
+                        messageBox.removeClass('alert-success').addClass('alert-danger').text('Error: ' + response.message).show();
+                    }
+                },
+                error: function() {
+                    messageBox.removeClass('alert-success').addClass('alert-danger').text('An error occurred. Please try again.').show();
+                }
+            });
+        });
     });
 </script>
 

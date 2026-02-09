@@ -382,14 +382,7 @@
                     const labels = filteredData.map(item => item.department_name);
                     const employeeCounts = filteredData.map(item => item.employee_count);
 
-                    const baseWidthPerDepartment = 180;
-                    const minChartContentWidth = labels.length * baseWidthPerDepartment;
-
-                    const parentContainer = departmentCanvasElement.parentElement;
-                    const parentWidth = parentContainer ? parentContainer.clientWidth : (window.innerWidth * 0.9);
-
-                    const finalCanvasWidth = Math.max(minChartContentWidth, parentWidth);
-                    departmentCanvasElement.style.width = `${finalCanvasWidth}px`;
+                    // Use a horizontal bar layout for departments and keep chart responsive.
                     departmentCanvasElement.style.height = `300px`;
 
                     new Chart(ctxDepartment, {
@@ -405,10 +398,11 @@
                             }]
                         },
                         options: {
-                            responsive: false,
+                            indexAxis: 'y',
+                            responsive: true,
                             maintainAspectRatio: false,
                             scales: {
-                                y: {
+                                x: {
                                     beginAtZero: true,
                                     title: {
                                         display: true,
@@ -422,26 +416,20 @@
                                     grid: {
                                         color: 'rgba(0, 0, 0, 0.1)',
                                         drawBorder: false,
-                                        drawOnChartArea: true,
-                                        drawTicks: false
+                                        drawOnChartArea: true
                                     }
                                 },
-                                x: {
+                                y: {
                                     title: {
                                         display: true,
                                         text: 'Department',
-                                        color: 'rgba(73, 80, 87, 1)',
-                                        padding: { top: 20 }
+                                        color: 'rgba(73, 80, 87, 1)'
                                     },
                                     ticks: {
-                                        color: 'rgba(82, 98, 107, 1)',
-                                        maxRotation: 45,
-                                        minRotation: 0,
-                                        autoSkip: false
+                                        color: 'rgba(82, 98, 107, 1)'
                                     },
                                     grid: {
-                                        display: false,
-                                        drawBorder: false
+                                        display: false
                                     }
                                 }
                             },
@@ -449,6 +437,13 @@
                                 legend: {
                                     labels: {
                                         color: 'rgba(73, 80, 87, 1)'
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return context.parsed.x + ' employees';
+                                        }
                                     }
                                 }
                             }
@@ -498,14 +493,7 @@
                     const labels = filteredData.map(item => item.designation_name);
                     const employeeCounts = filteredData.map(item => item.employee_count);
 
-                    const baseWidthPerDesignation = 200;
-                    const minChartContentWidth = labels.length * baseWidthPerDesignation;
-
-                    const parentContainer = designationCanvasElement.parentElement;
-                    const parentWidth = parentContainer ? parentContainer.clientWidth : (window.innerWidth * 0.9);
-
-                    const finalCanvasWidth = Math.max(minChartContentWidth, parentWidth);
-                    designationCanvasElement.style.width = `${finalCanvasWidth}px`;
+                    // Use a horizontal bar layout for designations and keep chart responsive.
                     designationCanvasElement.style.height = `300px`;
 
                     new Chart(ctxDesignation, {
@@ -521,10 +509,11 @@
                             }]
                         },
                         options: {
-                            responsive: false,
+                            indexAxis: 'y',
+                            responsive: true,
                             maintainAspectRatio: false,
                             scales: {
-                                y: {
+                                x: {
                                     beginAtZero: true,
                                     title: {
                                         display: true,
@@ -538,26 +527,20 @@
                                     grid: {
                                         color: 'rgba(0, 0, 0, 0.1)',
                                         drawBorder: false,
-                                        drawOnChartArea: true,
-                                        drawTicks: false
+                                        drawOnChartArea: true
                                     }
                                 },
-                                x: {
+                                y: {
                                     title: {
                                         display: true,
                                         text: 'Designation',
-                                        color: 'rgba(73, 80, 87, 1)',
-                                        padding: { top: 20 }
+                                        color: 'rgba(73, 80, 87, 1)'
                                     },
                                     ticks: {
-                                        color: 'rgba(82, 98, 107, 1)',
-                                        maxRotation: 45,
-                                        minRotation: 0,
-                                        autoSkip: false
+                                        color: 'rgba(82, 98, 107, 1)'
                                     },
                                     grid: {
-                                        display: false,
-                                        drawBorder: false
+                                        display: false
                                     }
                                 }
                             },
@@ -565,6 +548,13 @@
                                 legend: {
                                     labels: {
                                         color: 'rgba(73, 80, 87, 1)'
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return context.parsed.x + ' employees';
+                                        }
                                     }
                                 }
                             }

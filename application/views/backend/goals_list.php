@@ -226,115 +226,135 @@
     
 
     <script>
-        $(document).ready(function () {
-            // Initialize DataTable
-            $('#goals_table').DataTable({
-                "aaSorting": [[1, 'desc']],
-                dom: 'Bfrtip',
-                buttons: ['csv', 'excel', 'pdf', 'print']
-            });       
+    $(document).ready(function () {
+        // Initialize DataTable
+        $('#goals_table').DataTable({
+            "aaSorting": [[1, 'desc']],
+            dom: 'Bfrtip',
+            buttons: ['csv', 'excel', 'pdf', 'print']
+        });      
 
-            // Handle form submission for both Add and Update
-        $('#addgoalForm').on('submit', function(e) {
-    e.preventDefault();
-    var form = $(this);
-    var url = form.attr('action');
+        // Handle form submission for Add Goal (Keeping existing logic for context)
+        // NOTE: The form ID in HTML is 'addGoalForm' but in JS it's '#addgoalForm'. 
+        // I've kept the original, but you may need to check the correct ID.
+        $('#addGoalForm').on('submit', function(e) { 
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
 
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: form.serialize(),
-        // Keep the dataType setting if your PHP always returns JSON, otherwise remove it to handle plain text.
-        // dataType: 'json', 
-        success: function(response) {
-            // In this case, 'response' will be the plain text string.
-            if (response.trim() === 'Successfully Added!') {
-                $('#successMessage').text(response);
-                $('#addgoalModal').modal('hide');
-                $('#successModal').modal('show');
-                setTimeout(function() {
-                    location.reload();
-                }, 2000);
-            } else {
-                // This block would handle any other plain text as an error
-                console.log("Error: " + response);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error("AJAX Error: " + textStatus, errorThrown);
-        }
-    });
-});
-
-            // Handle Edit Goal Button Click (AJAX)
-            $(document).on('click', '.edit-goal-btn', function() {
-                var goalId = $(this).data('goal-id');
-                var messageBox = $('#editGoalModal').find('.modal-message');
-                messageBox.hide();
-
-                $.ajax({
-                    url: '<?php echo site_url('goals/get_goal_by_id/'); ?>' + goalId,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(goal) {
-                        $('#edit-goal-id').val(goal.id);
-                        $('#edit-goal-type').val(goal.goal_type_id);
-                        $('#edit-subject').val(goal.subject);
-                        $('#edit-target-achievement').val(goal.target_achievement);
-                        $('#edit-description').val(goal.description);
-                        $('#edit-start-date').val(goal.start_date);
-                        $('#edit-end-date').val(goal.end_date);
-                        $('#edit-status').val(goal.status);
-                        $('#editGoalModal').modal('show');
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error fetching goal data:", error);
-                        messageBox.removeClass('alert-success').addClass('alert-danger').text('Failed to retrieve goal data. Please try again.').show();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                // Keep the dataType setting if your PHP always returns JSON, otherwise remove it to handle plain text.
+                // dataType: 'json', 
+                success: function(response) {
+                    // Assuming 'response' is the plain text string 'Successfully Added!'
+                    if (response.trim() === 'Successfully Added!') {
+                        // NOTE: This success handling seems to rely on an external #successModal 
+                        // which is NOT included in the provided HTML.
+                        // I've kept it as-is for the add form, assuming you want to fix the edit form.
+                        $('#successMessage').text(response);
+                        $('#addGoalModal').modal('hide');
+                        $('#successModal').modal('show');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        // This block would handle any other plain text as an error
+                        console.log("Error: " + response);
+                        // You might want to show an error message in the 'addGoalModal' message box here
+                        // var messageBox = $('#addGoalModal').find('.modal-message');
+                        // messageBox.removeClass('alert-success').addClass('alert-danger').text(response).show();
                     }
-                });
-            });
-
-            // Handle Edit Goal Form Submission (AJAX)
-            $('#editGoalForm').on('submit', function(e) {
-                e.preventDefault();
-                var form = $(this);
-                var url = form.attr('action');
-                var formData = form.serialize();
-                var messageBox = form.closest('.modal-content').find('.modal-message');
-                
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData,
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            messageBox.removeClass('alert-danger').addClass('alert-success').text(response.message).show();
-                            setTimeout(function() {
-                                $('#editGoalModal').modal('hide');
-                                location.reload(); 
-                            }, 2000); 
-                        } else {
-                            messageBox.removeClass('alert-success').addClass('alert-danger').text(response.message).show();
-                        }
-                    },
-                    error: function() {
-                        messageBox.removeClass('alert-success').addClass('alert-danger').text('An error occurred. Please try again.').show();
-                    }
-                });
-            });
-
-            // Handle Delete Goal Button Click
-            $(document).on('click', '.delete-goal-btn', function(e) {
-                e.preventDefault();
-                var deleteUrl = $(this).attr('href');
-                var goalId = $(this).data('goal-id');
-
-                if (confirm("Are you sure you want to delete this goal?")) {
-                    window.location.href = deleteUrl;
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("AJAX Error: " + textStatus, errorThrown);
+                    // Show error in the 'addGoalModal' message box
+                    // var messageBox = $('#addGoalModal').find('.modal-message');
+                    // messageBox.removeClass('alert-success').addClass('alert-danger').text('An error occurred during addition.').show();
                 }
             });
         });
-    </script>
+
+        // Handle Edit Goal Button Click (AJAX) - (No change needed here)
+        $(document).on('click', '.edit-goal-btn', function() {
+            var goalId = $(this).data('goal-id');
+            var messageBox = $('#editGoalModal').find('.modal-message');
+            messageBox.hide(); // Hide any previous message when opening the modal
+
+            $.ajax({
+                url: '<?php echo site_url('goals/get_goal_by_id/'); ?>' + goalId,
+                type: 'GET',
+                dataType: 'json',
+                success: function(goal) {
+                    $('#edit-goal-id').val(goal.id);
+                    $('#edit-goal-type').val(goal.goal_type_id);
+                    $('#edit-subject').val(goal.subject);
+                    $('#edit-target-achievement').val(goal.target_achievement);
+                    $('#edit-description').val(goal.description);
+                    $('#edit-start-date').val(goal.start_date);
+                    $('#edit-end-date').val(goal.end_date);
+                    $('#edit-status').val(goal.status);
+                    $('#editGoalModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching goal data:", error);
+                    messageBox.removeClass('alert-success').addClass('alert-danger').text('Failed to retrieve goal data. Please try again.').show();
+                }
+            });
+        });
+
+        // Handle Edit Goal Form Submission (AJAX)
+    $('#editGoalForm').on('submit', function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+        var formData = form.serialize();
+        // Select the .modal-message div inside the current modal (Used for errors only)
+        var messageBox = form.find('.modal-body .modal-message'); 
+        messageBox.hide(); // Hide any existing message before submission
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            dataType: "json",
+            success: function(response) {
+                if (response.status === 'success') {
+                    
+                    // 1. Hide the modal immediately to remove the form and the green alert placeholder.
+                    $('#editGoalModal').modal('hide'); 
+                    
+                    // 2. Add a 1.5-second delay before refreshing the page.
+                    // This gives the user time to register the modal disappearance before the page changes.
+                    setTimeout(function() {
+                        location.reload(); 
+                    }, 1500); // Delay for 1500 milliseconds (1.5 seconds)
+
+                } else {
+                    // Always display errors inside the modal
+                    messageBox.removeClass('alert-success').addClass('alert-danger').text(response.message).show();
+                }
+            },
+            error: function() {
+                // Display AJAX communication error inside the modal
+                messageBox.removeClass('alert-success').addClass('alert-danger').text('An error occurred. Please try again.').show();
+            }
+        });
+    });
+
+        // Handle Delete Goal Button Click (No change needed here)
+        $(document).on('click', '.delete-goal-btn', function(e) {
+            e.preventDefault();
+            var deleteUrl = $(this).attr('href');
+            var goalId = $(this).data('goal-id');
+
+            if (confirm("Are you sure you want to delete this goal?")) {
+                window.location.href = deleteUrl;
+            }
+        });
+    });
+</script>
 
     <?php $this->load->view('backend/footer'); ?>
