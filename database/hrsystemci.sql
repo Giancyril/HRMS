@@ -71,10 +71,10 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`id`, `emp_id`, `city`, `country`, `address`, `type`) VALUES
-(1, 'Doe1753', 'Muscle Shoals', 'US', '1669 James M Avenue', 'Permanent'),
-(2, 'Doe1753', 'Muscle Shoals', 'US', '1669 James M Avenue', 'Present'),
-(3, 'Soy1332', 'Fordsan', 'US', '778 Blecker Street', 'Permanent'),
-(4, 'Soy1332', 'Fordsan', 'US', '778 Blecker Street', 'Present');
+(1, 'Doe1753', 'Quezon City', 'Philippines', '123 Commonwealth Avenue, Quezon City', 'Permanent'),
+(2, 'Doe1753', 'Quezon City', 'Philippines', '123 Commonwealth Avenue, Quezon City', 'Present'),
+(3, 'Soy1332', 'Makati', 'Philippines', '456 Ayala Avenue, Makati City', 'Permanent'),
+(4, 'Soy1332', 'Makati', 'Philippines', '456 Ayala Avenue, Makati City', 'Present');
 
 -- --------------------------------------------------------
 
@@ -228,16 +228,16 @@ CREATE TABLE `bank_info` (
 --
 
 INSERT INTO `bank_info` (`id`, `em_id`, `holder_name`, `bank_name`, `branch_name`, `account_number`, `account_type`) VALUES
-(1, 'Doe1754', 'John W Greenwood', 'XYZ Bank', 'Bleck St', 'CA0025869690', 'Saving'),
-(2, 'Doe1753', 'Will Williams', 'ABYZ Bank', 'Axis Branch', 'CA6960000142', 'Current'),
-(3, 'Soy1332', 'Thomas Anderson', 'United Bank', 'ABC Branch', 'CA100005696920', 'Salary Account'),
-(4, 'Rob1472', 'Stephany Robs Jr', 'United Bank', 'ABC Branch', 'CA140000000255', 'Savings'),
-(5, 'Tho1044', 'Chris Thompson', 'YTR Bank', 'XY Branch', 'CA7025000026', 'Savings'),
-(6, 'Moo1402', 'Liam Moore', 'IOP Bank', 'AER Branch', 'CA690000250000', 'Salary Account'),
-(7, 'Smi1266', 'Colin Smith', 'IO Bank', 'CVB Branch', 'CA001450006980', 'Salary Account'),
-(8, 'Moo1634', 'Christine Moore', 'RTY Bank', 'ERT Branch', 'CA850000245800', 'Savings'),
-(9, 'Joh1474', 'Michael K Johnson', 'Aexr Bank', 'ERT Branch', 'CA800000256147', 'Salary Account'),
-(10, 'Den1745', 'Emily V Denn', 'Demo Bank', 'XZY Branch', 'CA777000001055', 'Savings');
+(1, 'Doe1754', 'Jose Rizal', 'BDO Unibank', 'Makati Branch', 'PH0025869690', 'Savings'),
+(2, 'Doe1753', 'Juan Dela Cruz', 'BPI', 'Quezon City Branch', 'PH6960000142', 'Current'),
+(3, 'Soy1332', 'Maria Santos', 'Metrobank', 'Ortigas Branch', 'PH100005696920', 'Salary Account'),
+(4, 'Rob1472', 'Ana Garcia', 'Security Bank', 'Bonifacio Global City', 'PH140000000255', 'Savings'),
+(5, 'Tho1044', 'Carlos Mendoza', 'UnionBank', 'Manila Branch', 'PH7025000026', 'Savings'),
+(6, 'Moo1402', 'Miguel Reyes', 'Landbank', 'Pasig Branch', 'PH690000250000', 'Salary Account'),
+(7, 'Smi1266', 'Roberto Aquino', 'Chinabank', 'Binondo Branch', 'PH001450006980', 'Salary Account'),
+(8, 'Moo1634', 'Isabel Torres', 'RCBC', 'Alabang Branch', 'PH850000245800', 'Savings'),
+(9, 'Joh1474', 'Ramon Villanueva', 'PNB', 'Cubao Branch', 'PH800000256147', 'Salary Account'),
+(10, 'Den1745', 'Sofia Cruz', 'Eastwest Bank', 'Taguig Branch', 'PH777000001055', 'Savings');
 
 -- --------------------------------------------------------
 
@@ -403,7 +403,7 @@ CREATE TABLE `education` (
 --
 
 INSERT INTO `education` (`id`, `emp_id`, `edu_type`, `institute`, `result`, `year`) VALUES
-(1, 'Doe1753', 'MSIT', 'Westview University', '71', '2016');
+(1, 'Doe1753', 'BS Information Technology', 'University of the Philippines', '1.75', '2016');
 
 -- --------------------------------------------------------
 
@@ -439,16 +439,16 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `em_id`, `em_code`, `des_id`, `dep_id`, `first_name`, `last_name`, `em_email`, `em_password`, `em_role`, `em_address`, `status`, `em_gender`, `em_phone`, `em_birthday`, `em_blood_group`, `em_joining_date`, `em_contact_end`, `em_image`, `em_nid`) VALUES
-(10, 'Soy1332', '99', 0, 0, 'Thom', 'Anderson', 'thoma@mail.com', '25c2c9afdd83b8d34234aa2881cc341C09689aaa', 'SUPER ADMIN', NULL, 'ACTIVE', 'Female', '7856587870', '1985-12-05', 'B+', '2018-01-06', '2018-01-06', 'userav-min.png', '132154566556'),
-(36, 'Doe1753', '123456', 12, 2, 'Will', 'Williams', 'admin@mail.com', 'cd5ea73cd58f827fa78eef7197b8ee606c99b2e6', 'ADMIN', NULL, 'ACTIVE', 'Male', '999999900', '1990-12-13', 'O+', '2019-02-15', '2019-02-22', 'user.png', '01253568955555'),
-(37, 'Doe1754', '123444', 12, 2, 'John', 'Greenwood', 'employee@mail.com', 'cd5ea73cd58f827fa78eef7197b8ee606c99b2e6', 'EMPLOYEE', NULL, 'ACTIVE', 'Male', '1111110010', '1995-10-30', 'O+', '2019-02-15', '2019-02-22', 'Doe1753.jpg', '01253568955555'),
-(38, 'Moo1402', '6969', 13, 5, 'Liam', 'Moore', 'liam@mail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'EMPLOYEE', NULL, 'ACTIVE', 'Male', '7124589965', '1994-03-23', 'A-', '2021-05-04', '2023-05-17', 'Moo1402.png', '1234567890'),
-(39, 'Rob1472', '1058', 9, 4, 'Stephany', 'Robs', 'stephany@mail.com', '7672fb4033bc7bc14e2e26e5e0679e3c2a1bd514', 'EMPLOYEE', NULL, 'ACTIVE', 'Female', '7850001111', '1992-12-24', 'A+', '2021-04-14', '', 'Rob1472.png', '7000105000'),
-(40, 'Tho1044', '8877', 13, 5, 'Chris', 'Thompson', 'chris@mail.com', '260a678229cde1991cd1ac0d6adb4980c76c5e7f', 'EMPLOYEE', NULL, 'ACTIVE', 'Male', '7852140000', '1993-01-02', 'AB+', '2021-10-01', '', 'Tho1044.png', '0102580010'),
-(41, 'Smi1266', '3008', 23, 8, 'Colin', 'Smith', 'colin@mail.com', '7b4286b09972e2859b718440aa68a2a6eeb869dd', 'EMPLOYEE', NULL, 'ACTIVE', 'Male', '7400001450', '1990-12-12', 'B+', '2021-10-10', '', 'Smi1266.png', '0147000000'),
-(42, 'Moo1634', '6661', 26, 10, 'Christine', 'Moore', 'christine@mail.com', '37219392e904e98b6dca4f729f1d29c642d40e19', 'EMPLOYEE', NULL, 'ACTIVE', 'Female', '1010140000', '1991-04-05', 'A-', '2021-10-10', '', 'Moo1634.png', '147850000144'),
-(43, 'Joh1474', '8829', 22, 7, 'Michael', 'Johnson', 'michael@mail.com', 'd492ed1b1fdfbc9ca9db7c10c7df38d2b488fb14', 'EMPLOYEE', NULL, 'ACTIVE', 'Male', '7801450000', '1986-02-23', 'B-', '2021-02-02', '', 'Joh1474.png', '600254000014'),
-(44, 'Den1745', '6600', 20, 7, 'Emily', 'Denn', 'emily@mail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'EMPLOYEE', NULL, 'ACTIVE', 'Female', '7410144470', '1996-03-03', 'AB+', '2021-10-10', '', 'Den1745.png', '880024520000');
+(10, 'Soy1332', '99', 0, 0, 'Maria', 'Santos', 'thoma@mail.com', '25c2c9afdd83b8d34234aa2881cc341C09689aaa', 'SUPER ADMIN', NULL, 'ACTIVE', 'Female', '09171234567', '1985-12-05', 'B+', '2018-01-06', '2018-01-06', 'userav-min.png', '132154566556'),
+(36, 'Doe1753', '123456', 12, 2, 'Juan', 'Dela Cruz', 'admin@mail.com', 'cd5ea73cd58f827fa78eef7197b8ee606c99b2e6', 'ADMIN', NULL, 'ACTIVE', 'Male', '09182345678', '1990-12-13', 'O+', '2019-02-15', '2019-02-22', 'user.png', '01253568955555'),
+(37, 'Doe1754', '123444', 12, 2, 'Jose', 'Rizal', 'employee@mail.com', 'cd5ea73cd58f827fa78eef7197b8ee606c99b2e6', 'EMPLOYEE', NULL, 'ACTIVE', 'Male', '09193456789', '1995-10-30', 'O+', '2019-02-15', '2019-02-22', 'Doe1753.jpg', '01253568955555'),
+(38, 'Moo1402', '6969', 13, 5, 'Miguel', 'Reyes', 'miguel@mail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'EMPLOYEE', NULL, 'ACTIVE', 'Male', '09204567890', '1994-03-23', 'A-', '2021-05-04', '2023-05-17', 'Moo1402.png', '1234567890'),
+(39, 'Rob1472', '1058', 9, 4, 'Ana', 'Garcia', 'ana@mail.com', '7672fb4033bc7bc14e2e26e5e0679e3c2a1bd514', 'EMPLOYEE', NULL, 'ACTIVE', 'Female', '09215678901', '1992-12-24', 'A+', '2021-04-14', '', 'Rob1472.png', '7000105000'),
+(40, 'Tho1044', '8877', 13, 5, 'Carlos', 'Mendoza', 'carlos@mail.com', '260a678229cde1991cd1ac0d6adb4980c76c5e7f', 'EMPLOYEE', NULL, 'ACTIVE', 'Male', '09226789012', '1993-01-02', 'AB+', '2021-10-01', '', 'Tho1044.png', '0102580010'),
+(41, 'Smi1266', '3008', 23, 8, 'Roberto', 'Aquino', 'roberto@mail.com', '7b4286b09972e2859b718440aa68a2a6eeb869dd', 'EMPLOYEE', NULL, 'ACTIVE', 'Male', '09237890123', '1990-12-12', 'B+', '2021-10-10', '', 'Smi1266.png', '0147000000'),
+(42, 'Moo1634', '6661', 26, 10, 'Isabel', 'Torres', 'isabel@mail.com', '37219392e904e98b6dca4f729f1d29c642d40e19', 'EMPLOYEE', NULL, 'ACTIVE', 'Female', '09248901234', '1991-04-05', 'A-', '2021-10-10', '', 'Moo1634.png', '147850000144'),
+(43, 'Joh1474', '8829', 22, 7, 'Ramon', 'Villanueva', 'ramon@mail.com', 'd492ed1b1fdfbc9ca9db7c10c7df38d2b488fb14', 'EMPLOYEE', NULL, 'ACTIVE', 'Male', '09259012345', '1986-02-23', 'B-', '2021-02-02', '', 'Joh1474.png', '600254000014'),
+(44, 'Den1745', '6600', 20, 7, 'Sofia', 'Cruz', 'sofia@mail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'EMPLOYEE', NULL, 'ACTIVE', 'Female', '09260123456', '1996-03-03', 'AB+', '2021-10-10', '', 'Den1745.png', '880024520000');
 
 -- --------------------------------------------------------
 
